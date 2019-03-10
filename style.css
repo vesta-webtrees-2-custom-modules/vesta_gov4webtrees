@@ -1,0 +1,17 @@
+.govSpinner:after{
+	content:url(images/indicator.gif);
+	margin-left:10px
+}
+
+.govReset:after{
+	content:url(images/ldarrow2.png);
+	cursor: pointer;
+	margin-left:10px;
+	max-height:15px;
+	display:inline-block;
+	overflow:hidden
+}
+
+.govText2{
+	font-size: smaller
+}

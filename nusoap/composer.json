@@ -1,0 +1,21 @@
+{
+  "name": "econea/nusoap",
+  "type": "library",
+  "description": "NuSOAP fixed for PHP 5.5 - 7.0",
+  "keywords": ["soap","nusoap"],
+  "license": "LGPLv2",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc"
+    },
+    {
+      "name": "Martin Macejkou Mates"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}
