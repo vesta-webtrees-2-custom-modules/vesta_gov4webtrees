@@ -1,25 +1,27 @@
 <?php
 
-namespace Cissee\Webtrees\Module\Gov4Webtrees;
+namespace Cissee\Webtrees\Module\Gov4Webtrees; //cannot use original AbstractModule because we override setPreference, setName
+
 
 use Cissee\Webtrees\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
 use Cissee\Webtrees\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
-use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
-use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsPrintGov;
+use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FormatPlaceAdditions;
+use Fisharebest\Webtrees\Carbon;
 use Fisharebest\Webtrees\Individual;
-use Cissee\WebtreesExt\AbstractModule; //cannot use original AbstractModule because we override setPreference, setName
-use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
-use Fisharebest\Webtrees\Webtrees;
+use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
+use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
 use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
 use Vesta\Model\PlaceStructure;
 use Vesta\VestaModuleTrait;
+use function view;
 
 class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface, ModuleConfigInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface {
 
@@ -28,23 +30,16 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   use EmptyIndividualFactsTabExtender;
   use EmptyFunctionsPlace;
 
-  /** @var string The directory where the module is installed */
-  protected $directory;
-
-  public function __construct(string $directory) {
-    $this->directory = $directory;
-
-    //cannot do it here: name not set yet!
-    //$this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 1);
-  }
-
-  public function setName(string $name): void {
-    parent::setName($name);
-
-    //now that we know the name, we may migrate (we need the name to store the setting)
+  protected function onBoot(): void {
+    //cannot do this in constructor: module name not set yet!    
+    //migrate (we need the module name here to store the setting)
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 1);
   }
 
+  public function assetsViaViews(): array {
+    return ['css/style.css' => 'css/style'];
+  }
+  
   public function customModuleAuthorName(): string {
     return 'Richard Cissée';
   }
@@ -72,18 +67,6 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
    */
   public function resourcesFolder(): string {
     return __DIR__ . '/resources/';
-  }
-
-  /**
-   * Additional/updated translations.
-   *
-   * @param string $language
-   *
-   * @return string[]
-   */
-  public function customTranslations(string $language): array {
-    //TODO
-    return [];
   }
 
   //HookInterface: FunctionsPlaceInterface
@@ -189,17 +172,11 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     //TODO: not great because timestamp is added, preventing caching
     //(timestamp because this is loaded via jquery via ajax)
     //not sure this still applies for 2.x
-    $pre = '<script src="' . Webtrees::MODULES_PATH . basename($this->directory) . '/jquery-ui.js"></script>';
-    $pre .= '<script src="' . Webtrees::MODULES_PATH . basename($this->directory) . '/widgets.js"></script>';
-
-    $cssUrl = route('module', [
-        'module' => $this->name(),
-        'action' => 'Css'
-    ]);
-
-    //test only
-    //$html = '<link href="'. $cssUrl . '" type="text/css" rel="stylesheet" />';
-    $html = '<link href="' . Webtrees::MODULES_PATH . basename($this->directory) . '/style.css" type="text/css" rel="stylesheet" />';
+    $pre = '<script src="' . $this->assetUrl('js/jquery-ui.js') . '"></script>';
+    $pre .= '<script src="' . $this->assetUrl('js/widgets.js') . '"></script>';
+    
+    //note: content actually served via style.phtml!
+    $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
 
     return new GenericViewElement($html, $pre);
   }
@@ -217,7 +194,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function hFactsTabGetFormatPlaceAdditions(PlaceStructure $place) {
-    $fpg = new FunctionsPrintGov($this->directory, $this);
+    $fpg = new FunctionsPrintGov($this);
     $gve = $fpg->getGovForFactPlace($place);
     $html = $gve->getMain();
     $script = $gve->getScript();
@@ -229,24 +206,6 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
 
     return new FormatPlaceAdditions('', $ll, $tooltip, $html, '', $script);
   }
-
-  //test only
-  /*
-    public function getCssAction(): Response {
-    //load stylesheet
-    $file = Webtrees::MODULES_PATH . basename($this->directory) . '/style.css';
-    $response = new BinaryFileResponse($file);
-    $response->headers->set('Content-Type', 'text/css');
-    return $response;
-    }
-
-    public function getLdarrow2Action(): Response {
-    //load image
-    $file = Webtrees::MODULES_PATH . basename($this->directory) . '/images/ldarrow2.png';
-    $response = new BinaryFileResponse($file);
-    return $response;
-    }
-   */
 
   public function postExpandAction(Request $request): Response {
     $switchToSlowAjax = boolval($request->get('switchToSlowAjax'));

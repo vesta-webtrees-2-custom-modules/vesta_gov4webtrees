@@ -91,11 +91,11 @@ trait Gov4WebtreesModuleTrait {
 
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Internals (adjusted automatically if necessary)'),
-            array(new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Use fast ajax requests'),
-                /* I18N: Configuration option */ I18N::translate('Execute ajax requests directly (not via the regular webtrees entrypoint url). This won\'t work if your server doesn\'t allow non-standard endpoints (*.php files within the module directory), in which case this option is unchecked automatically. Direct requests are faster because requests via the regular webtrees entrypoint url carry out lots of unnecessary initialization tasks.'),
+            array(/*new ControlPanelCheckbox(
+                I18N::translate('Use fast ajax requests'),
+                I18N::translate('Execute ajax requests directly (not via the regular webtrees entrypoint url). This won\'t work if your server doesn\'t allow non-standard endpoints (*.php files within the module directory), in which case this option is unchecked automatically. Direct requests are faster because requests via the regular webtrees entrypoint url carry out lots of unnecessary initialization tasks.'),
                 'FAST_AJAX',
-                '1'),
+                '1'),*/
         new ControlPanelCheckbox(
                 /* I18N: Configuration option */I18N::translate('Use NuSOAP instead of SoapClient'),
                 /* I18N: Configuration option */ I18N::translate('Execute requests to the GOV server via NuSOAP, rather than using the native php SoapClient. The native SoapClient is usually enabled (you can check this in your php.ini settings), but may not be provided by all hosters. If the native client is not enabled/available, this option is checked automatically.'),

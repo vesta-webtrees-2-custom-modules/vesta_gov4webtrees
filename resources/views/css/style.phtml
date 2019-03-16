@@ -1,10 +1,10 @@
 .govSpinner:after{
-    content:url(images/indicator.gif);
+    content:url(<?= $assetRouter("images/indicator.gif") ?>);
     margin-left:10px
 }
 
 .govReset:after{
-    content:url(images/ldarrow2.png);
+    content:url(<?= $assetRouter("images/ldarrow2.png") ?>);
     cursor: pointer;
     margin-left:10px;
     max-height:15px;

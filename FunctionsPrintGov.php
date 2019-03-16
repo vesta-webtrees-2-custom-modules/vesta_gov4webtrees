@@ -14,12 +14,10 @@ use Vesta\Model\PlaceStructure;
 
 class FunctionsPrintGov {
 
-  protected $directory;
-  //we only need 'getSetting' and 'getName' here!
+  //we need 'getSetting', 'getName', and 'assetUrl()' here!
   protected $module;
 
-  function __construct($directory, $module) {
-    $this->directory = $directory;
+  function __construct($module) {
     $this->module = $module;
   }
 
@@ -194,7 +192,7 @@ class FunctionsPrintGov {
     $str1 = GenericViewElement::createEmpty();
     $str2 = GenericViewElement::createEmpty();
 
-    $fastAjax = boolval($module->getSetting('FAST_AJAX', '1'));
+    $fastAjax = boolval($module->getSetting('FAST_AJAX', '0'));
 
     if ($julianDay1) {
       $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
@@ -238,17 +236,16 @@ class FunctionsPrintGov {
       $idString = ', id:' . json_encode($id) . ', version:' . $version;
     }
 
-    $html = //css loaded elsewhere (once)      
-            //'<link href="'. Webtrees::MODULES_PATH . basename($this->directory) . '/style.css" type="text/css" rel="stylesheet" />'.
-            //'<script src="'. WT_STATIC_URL . WT_MODULES_DIR . 'gov4webtrees/widgets.js"/>'.
-            '<div id="govWidget-' . $uuid . '" class="govWidget"></div>';
+    //css and script loaded elsewhere
+    $html = '<div id="govWidget-' . $uuid . '" class="govWidget"></div>';
 
     $slowUrl = route('module', [
         'module' => $this->module->name(),
         'action' => 'Expand'
     ]);
 
-    $fastUrl = Webtrees::MODULES_PATH . basename($this->directory) . "/ajaxExpand.php";
+    //won't be possible in future webtrees version!
+    $fastUrl = Webtrees::MODULES_PATH . __DIR__ . "/ajaxExpand.php";
 
     $script = '<script>$("#govWidget-' . $uuid . '").gov({' .
             'slowUrl:' . json_encode($slowUrl . "&") . ', ' .
