@@ -21,7 +21,6 @@ use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
 use Vesta\Model\PlaceStructure;
 use Vesta\VestaModuleTrait;
-use function view;
 
 class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface, ModuleConfigInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface {
 
@@ -213,7 +212,12 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
       //auto-adjust
       $this->setPreference('FAST_AJAX', '0');
     }
-    return new Response(AjaxRequests::expand($this, $request), Response::HTTP_OK);
+    $response = new Response(AjaxRequests::expand($this, $request), Response::HTTP_OK);
+    //we can cache here (response is immutable for given version)!
+    $expiry_date = Carbon::now()->addYears(10);
+    $response->setExpires($expiry_date);
+    
+    return $response;
   }
 
   public function setPreference(string $setting_name, string $setting_value): void {

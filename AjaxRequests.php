@@ -23,7 +23,7 @@ class AjaxRequests {
       return '{}';
     }
 
-    //set id		
+    //set id
     if (($placeId) && ($type)) {
       FunctionsGov::setGovId($placeId, $type, $id, $version);
     }

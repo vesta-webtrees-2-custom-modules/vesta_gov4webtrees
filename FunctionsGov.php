@@ -339,8 +339,6 @@ class FunctionsGov {
   public static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 118, 120, 121, 129, 139, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238);
 
   public static function clear() {
-    //keep ids though!
-
     DB::table('gov_objects')
             ->delete();
 
@@ -355,6 +353,11 @@ class FunctionsGov {
 
     DB::table('gov_descriptions')
             ->delete();
+    
+    //keep ids, but re-version (browser caches getExpandAction() responses based on version, so we have to reset here)    
+    DB::table('gov_ids')->update([
+        'version' => time()
+    ]);
   }
 
   public static function getGovId($name, $type) {
