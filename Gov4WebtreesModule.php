@@ -207,7 +207,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return new FormatPlaceAdditions('', $ll, $tooltip, $html, '', $script);
   }
 
-  public function postExpandAction(Request $request): Response {
+  public function getExpandAction(Request $request): Response {
     $switchToSlowAjax = boolval($request->get('switchToSlowAjax'));
     if ($switchToSlowAjax) {
       //auto-adjust

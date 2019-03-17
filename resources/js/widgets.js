@@ -93,16 +93,16 @@ $.widget("custom.gov", {
                         });
                     });
                 };
-                var ajaxPost = fast ? $.post(this.options.fastUrl + offset) : $.post(this.options.slowUrl + offset);
+                var ajaxGet = fast ? $.get(this.options.fastUrl + offset) : $.get(this.options.slowUrl + offset);
                 if (fast) {
-                    ajaxPost.fail(function () {
+                    ajaxGet.fail(function () {
                         //switch to slow requests
                         fast = false;
-                        var ajaxPost2 = $.post(this.options.slowUrl + offset + "&switchToSlowAjax=true");
-                        ajaxPost2.done(onSuccess);
+                        var ajaxGet2 = $.get(this.options.slowUrl + offset + "&switchToSlowAjax=true");
+                        ajaxGet2.done(onSuccess);
                     });
                 }
-                ajaxPost.done(onSuccess);
+                ajaxGet.done(onSuccess);
             }
         });
 
@@ -256,16 +256,16 @@ $.widget("custom.gov", {
             widget._setOptions({"fastAjax": fast, "nextId": json.nextId, "namesAndTypes": namesAndTypes});
         };
 
-        var ajaxPost = fast ? $.post(this.options.fastUrl + offset) : $.post(this.options.slowUrl + offset);
+        var ajaxGet = fast ? $.get(this.options.fastUrl + offset) : $.get(this.options.slowUrl + offset);
         if (fast) {
-            ajaxPost.fail(function () {
+            ajaxGet.fail(function () {
                 //switch to slow requests
                 fast = false;
-                var ajaxPost2 = $.post(this.options.slowUrl + offset + "&switchToSlowAjax=true");
-                ajaxPost2.done(onSuccess);
+                var ajaxGet2 = $.get(this.options.slowUrl + offset + "&switchToSlowAjax=true");
+                ajaxGet2.done(onSuccess);
             });
         }
-        ajaxPost.done(onSuccess);
+        ajaxGet.done(onSuccess);
     }
 });
 //});
