@@ -186,19 +186,19 @@ class FunctionsPrintGov {
     $locale = WT_LOCALE;
 
     $compactDisplay = boolval($module->getSetting('COMPACT_DISPLAY', '1'));
-    $showCurrentDateGov = boolval($module->getSetting('SHOW_CURRENT_DATE', '0'));
+    $showCurrentDateGov = intval($module->getSetting('SHOW_CURRENT_DATE', '0'));
     $allowSettlements = boolval($module->getSetting('ALLOW_SETTLEMENTS', '1'));
 
     $str1 = GenericViewElement::createEmpty();
     $str2 = GenericViewElement::createEmpty();
 
     $fastAjax = boolval($module->getSetting('FAST_AJAX', '0'));
-
-    if ($julianDay1) {
+    
+    if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
       $str1 = $this->widget($fastAjax, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
     }
-    if (!$julianDay1 || $showCurrentDateGov) {
+    if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
       $str2 = $this->widget($fastAjax, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
     }

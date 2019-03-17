@@ -5,6 +5,8 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 use Fisharebest\Webtrees\I18N;
 use Vesta\ControlPanel\Model\ControlPanelCheckbox;
 use Vesta\ControlPanel\Model\ControlPanelPreferences;
+use Vesta\ControlPanel\Model\ControlPanelRadioButton;
+use Vesta\ControlPanel\Model\ControlPanelRadioButtons;
 use Vesta\ControlPanel\Model\ControlPanelSection;
 use Vesta\ControlPanel\Model\ControlPanelSubsection;
 
@@ -65,17 +67,42 @@ trait Gov4WebtreesModuleTrait {
                 '0')));
 
     $factsAndEventsSub[] = new ControlPanelSubsection(
+            /* I18N: Configuration option */I18N::translate('Show GOV hierarchy for'),
+            array(
+        new ControlPanelRadioButtons(
+                true,
+                array(
+            new ControlPanelRadioButton(
+                    I18N::translate('date of event'),
+                    null,
+                    '0'),
+            new ControlPanelRadioButton(
+                    I18N::translate('present time'),
+                    null,
+                    '2'),
+            new ControlPanelRadioButton(
+                   I18N::translate('both'),
+                    null,
+                    '1')),
+                'for events without a date, present time hierarchy will be used regardless of this preference.',
+                'SHOW_CURRENT_DATE',
+                '0')));
+                
+    $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Displayed data'),
-            array(new ControlPanelCheckbox(
+            array(
+        new ControlPanelCheckbox(
                 /* I18N: Configuration option */I18N::translate('Compact display (administrative levels as tooltips)'),
                 null,
                 'COMPACT_DISPLAY',
                 '1'),
-        new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Additionally show GOV hierarchy for present time'),
-                null,
-                'SHOW_CURRENT_DATE',
-                '0'),
+        /*
+          new ControlPanelCheckbox(
+          I18N::translate('Additionally show GOV hierarchy for present time'),
+          null,
+          'SHOW_CURRENT_DATE',
+          '0'),
+         */
         new ControlPanelCheckbox(
                 /* I18N: Configuration option */I18N::translate('Allow objects of type \'settlement\' in hierarchy'),
                 /* I18N: Configuration option */ I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') .
@@ -91,11 +118,11 @@ trait Gov4WebtreesModuleTrait {
 
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Internals (adjusted automatically if necessary)'),
-            array(/*new ControlPanelCheckbox(
-                I18N::translate('Use fast ajax requests'),
-                I18N::translate('Execute ajax requests directly (not via the regular webtrees entrypoint url). This won\'t work if your server doesn\'t allow non-standard endpoints (*.php files within the module directory), in which case this option is unchecked automatically. Direct requests are faster because requests via the regular webtrees entrypoint url carry out lots of unnecessary initialization tasks.'),
-                'FAST_AJAX',
-                '1'),*/
+            array(/* new ControlPanelCheckbox(
+          I18N::translate('Use fast ajax requests'),
+          I18N::translate('Execute ajax requests directly (not via the regular webtrees entrypoint url). This won\'t work if your server doesn\'t allow non-standard endpoints (*.php files within the module directory), in which case this option is unchecked automatically. Direct requests are faster because requests via the regular webtrees entrypoint url carry out lots of unnecessary initialization tasks.'),
+          'FAST_AJAX',
+          '1'), */
         new ControlPanelCheckbox(
                 /* I18N: Configuration option */I18N::translate('Use NuSOAP instead of SoapClient'),
                 /* I18N: Configuration option */ I18N::translate('Execute requests to the GOV server via NuSOAP, rather than using the native php SoapClient. The native SoapClient is usually enabled (you can check this in your php.ini settings), but may not be provided by all hosters. If the native client is not enabled/available, this option is checked automatically.'),
