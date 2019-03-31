@@ -68,6 +68,11 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return __DIR__ . '/resources/';
   }
 
+  public function getHelpAction(Request $request): Response {
+    $topic = $request->get('topic');
+    return new Response(HelpTexts::helpText($topic));
+  }
+  
   //HookInterface: FunctionsPlaceInterface
   public function hPlacesGetLatLon(PlaceStructure $place) {
     $govId = FunctionsPrintGov::getGovId($place);
@@ -214,6 +219,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     }
     $response = new Response(AjaxRequests::expand($this, $request), Response::HTTP_OK);
     //we can cache here (response is immutable for given version)!
+    //$response->headers->set('Cache-Control', 'public,max-age=31536000,immutable');
     $expiry_date = Carbon::now()->addYears(10);
     $response->setExpires($expiry_date);
     

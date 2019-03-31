@@ -7,14 +7,12 @@ function b64EncodeUnicode(str) {
 
 //TODO jquery ui seems obsolete, use something else?
 
-//why wait for document.ready for this? That's too late in 2.x!
-//$(function() {
 $.widget("custom.gov", {
     options: {
         //initial
         fastUrl: null,
         slowUrl: null,
-
+        govResetHtml: "",
         //initial
         fastAjax: true,
         canEdit: false,
@@ -36,6 +34,7 @@ $.widget("custom.gov", {
         nextId: null,
         invalidId: null,
         resetTriggered: false,
+        reloadTriggered: false,
         namesAndTypes: [],
 
         //helper
@@ -43,7 +42,9 @@ $.widget("custom.gov", {
     },
 
     _create: function () {
-        this.options.safeClassName = "govWidgetClass-" + b64EncodeUnicode(this.options.placeId + this.options.type).replace(/=/g, "");
+        //type no longer relevant here!
+        //this.options.safeClassName = "govWidgetClass-" + b64EncodeUnicode(this.options.placeId + this.options.type).replace(/=/g, "");
+        this.options.safeClassName = "govWidgetClass-" + b64EncodeUnicode(this.options.placeId).replace(/=/g, "");
         this.element.addClass(this.options.safeClassName);
 
         //main text
@@ -57,9 +58,9 @@ $.widget("custom.gov", {
                 '</form>');
         this.element.append(form.hide());
 
-        //reset button
+        //reset button (do not add inner html now)
         var reset = $(
-                '<span class="govReset" title="Reset"/>');
+                '<span class="govReset" title="Reset"><span class="govResetIcon"/><span class="govResetHtml"/></span>');
         this.element.append(reset.hide());
 
         //sub text
@@ -89,6 +90,7 @@ $.widget("custom.gov", {
                             "nextId": json.nextId,
                             "invalidId": null,
                             "resetTriggered": false,
+                            "reloadTriggered": true,
                             "namesAndTypes": [{name: json.label, type: json.type, id: id}]
                         });
                     });
@@ -221,12 +223,21 @@ $.widget("custom.gov", {
 
                 if (this.options.canEdit) {
                     this.element.find(".govReset").attr("title", this.options.i18n.resetButton);
-                    this.element.find(".govReset").show();
+                    this.element.find(".govReset").show();                    
+                                        
+                    if (!this.options.reloadTriggered) {
+                      this.element.find(".govResetHtml").show();
+                      this.element.find(".govResetHtml").html(this.options.govResetHtml);
+                    } else {
+                      //cleaned up now - html not required to show anymore. (assuming html is only for this special use case)
+                      this.element.find(".govResetHtml").hide();
+                    }                    
                 }
                 return;
             }
         }
 
+        //TODO spinner doesn't show up reliably in short hierarchies
         span += '<span class="govSpinner"/>';
         this.element.find(".govText").html(span);
         this.element.find(".govText2").html(span2);
@@ -268,4 +279,3 @@ $.widget("custom.gov", {
         ajaxGet.done(onSuccess);
     }
 });
-//});

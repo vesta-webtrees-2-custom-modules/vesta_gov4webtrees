@@ -386,14 +386,26 @@ class FunctionsGov {
   }
 
   public static function setGovId($name, $type, $id, $version) {
+    //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
+    //$type is legacy!
+    
+    //conceptually 3 cases:
+    //1. this is a new id: Always use type 'MAIN'.
+    //2. there is a single existing id: Set type 'MAIN'.
+    //3. there are two existing ids, one for each type:
+    //notify user that this isn't a good idea.
+    //delete both existing and set type 'MAIN'
+    
+    //i.e. in any case, delete all existing and always set type 'MAIN'.
+    
     DB::table('gov_ids')
             ->where('name', '=', $name)
-            ->where('type', '=', $type)
+            //->where('type', '=', $type)
             ->delete();
 
     DB::table('gov_ids')->insert([
         'name' => $name,
-        'type' => $type,
+        'type' => 'MAIN', //$type,
         'gov_id' => $id,
         'version' => $version
     ]);

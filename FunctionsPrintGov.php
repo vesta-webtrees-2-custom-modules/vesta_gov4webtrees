@@ -3,6 +3,7 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
+use Cissee\WebtreesExt\Functions\FunctionsPrintExtHelpLink;
 use DateTime;
 use Fisharebest\ExtCalendar\GregorianCalendar;
 use Fisharebest\Webtrees\Auth;
@@ -54,6 +55,8 @@ class FunctionsPrintGov {
       return null;
     }
 
+    //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
+    //$type is legacy!
     $type = 'MAIN';
     switch ($place->getEventType()) {
       case 'CHR':
@@ -103,6 +106,8 @@ class FunctionsPrintGov {
       return "";
     }
 
+    //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
+    //$type is legacy!
     $type = 'MAIN';
     $fallbackType = 'KSP';
     switch ($place->getEventType()) {
@@ -132,7 +137,8 @@ class FunctionsPrintGov {
     $id = null;
     $version = null;
     $idViaGedcom = false;
-
+    $cleanupRequired = false;
+    
     //supposed to be under 2 PLAC, that's not checked here though!
     $idViaGedcom = self::getValue($place->getGedcom(), 3, '_GOV');
     if ($idViaGedcom) {
@@ -144,6 +150,12 @@ class FunctionsPrintGov {
       if ($idAndVersion) {
         $version = array_pop($idAndVersion);
         $id = array_pop($idAndVersion);
+        
+        //cleanup required? In case fallback is also set.
+        $fallbackAlsoSet = FunctionsGov::getGovId($fullName, $fallbackType);
+        if ($fallbackAlsoSet) {
+          $cleanupRequired = true;
+        }
       } else {
         //fallback
         $idAndVersion = FunctionsGov::getGovId($fullName, $fallbackType);
@@ -189,6 +201,12 @@ class FunctionsPrintGov {
     $showCurrentDateGov = intval($module->getSetting('SHOW_CURRENT_DATE', '0'));
     $allowSettlements = boolval($module->getSetting('ALLOW_SETTLEMENTS', '1'));
 
+    //internally hidden after reload is triggered!
+    $govResetHtml = '';
+    if ($cleanupRequired) {
+      $govResetHtml = I18n::translate('Cleanup Required!').FunctionsPrintExtHelpLink::helpLink($this->module->name(), 'Cleanup Required!');      
+    }
+            
     $str1 = GenericViewElement::createEmpty();
     $str2 = GenericViewElement::createEmpty();
 
@@ -196,11 +214,11 @@ class FunctionsPrintGov {
     
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
-      $str1 = $this->widget($fastAjax, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
+      $str1 = $this->widget($fastAjax, $govResetHtml, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
     }
     if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
-      $str2 = $this->widget($fastAjax, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
+      $str2 = $this->widget($fastAjax, $govResetHtml, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
     }
     return GenericViewElement::implode([$str1, $str2]);
   }
@@ -216,6 +234,7 @@ class FunctionsPrintGov {
 
   public function widget(
           $fastAjax,
+          $govResetHtml,
           $canEdit,
           $idViaGedcom,
           $compactDisplay,
@@ -250,6 +269,7 @@ class FunctionsPrintGov {
     $script = '<script>$("#govWidget-' . $uuid . '").gov({' .
             'slowUrl:' . json_encode($slowUrl . "&") . ', ' .
             'fastUrl:' . json_encode($fastUrl . "?") . ', ' .
+            'govResetHtml:' . json_encode($govResetHtml) . ', ' .
             'fastAjax:' . json_encode($fastAjax) . ', ' .
             'canEdit:' . json_encode($canEdit) . ', ' .
             'idViaGedcom:' . json_encode($idViaGedcom) . ', ' .
