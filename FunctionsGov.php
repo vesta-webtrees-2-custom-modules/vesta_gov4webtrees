@@ -563,7 +563,7 @@ class FunctionsGov {
 
     DB::table('gov_objects')->updateOrInsert([
         'gov_id' => $id,
-            ], [
+    ], [
         'lat' => $govObject->getLat(),
         'lon' => $govObject->getLon(),
         'version' => $govObject->getVersion()

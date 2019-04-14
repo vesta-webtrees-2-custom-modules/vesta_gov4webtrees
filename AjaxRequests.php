@@ -3,18 +3,19 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
-use Symfony\Component\HttpFoundation\Request;
+use Psr\Http\Message\ServerRequestInterface;
+use Cissee\WebtreesExt\Requests;
 
 class AjaxRequests {
 
-  public static function expand($module, Request $request) {
-    $placeId = $request->get('placeId'); //optional (used for set id)
-    $type = $request->get('type'); //optional (used for set id)
-    $id = $request->get('id');
-    $julianDay = $request->get('julianDay');
-    $version = $request->get('version');
-    $locale = $request->get('locale');
-    $allowSettlements = boolval($request->get('allowSettlements'));
+  public static function expand($module, ServerRequestInterface $request) {
+    $placeId = Requests::getStringOrNull($request, 'placeId'); //optional (used for set id)
+    $type = Requests::getStringOrNull($request, 'type'); //optional (used for set id)
+    $id = Requests::getString($request, 'id');
+    $julianDay = Requests::getString($request, 'julianDay');
+    $version = Requests::getString($request, 'version');
+    $locale = Requests::getString($request, 'locale');
+    $allowSettlements = Requests::getBool($request, 'allowSettlements');
 
     $gov = FunctionsGov::retrieveGovObjectSnapshot($module, $julianDay, $id, $version, $locale);
 

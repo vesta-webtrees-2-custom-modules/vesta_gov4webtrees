@@ -13,8 +13,9 @@ use Fisharebest\Webtrees\Carbon;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Cissee\WebtreesExt\Requests;
 use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
 use Vesta\Model\GedcomDateInterval;
@@ -68,9 +69,9 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return __DIR__ . '/resources/';
   }
 
-  public function getHelpAction(Request $request): Response {
-    $topic = $request->get('topic');
-    return new Response(HelpTexts::helpText($topic));
+  public function getHelpAction(ServerRequestInterface $request): ResponseInterface {
+    $topic = Requests::getString($request, 'topic');
+    return response(HelpTexts::helpText($topic));
   }
   
   //HookInterface: FunctionsPlaceInterface
@@ -211,17 +212,20 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return new FormatPlaceAdditions('', $ll, $tooltip, $html, '', $script);
   }
 
-  public function getExpandAction(Request $request): Response {
-    $switchToSlowAjax = boolval($request->get('switchToSlowAjax'));
+  public function getExpandAction(ServerRequestInterface $request): ResponseInterface {
+    $switchToSlowAjax = Requests::getBool($request, 'switchToSlowAjax');
     if ($switchToSlowAjax) {
       //auto-adjust
       $this->setPreference('FAST_AJAX', '0');
     }
-    $response = new Response(AjaxRequests::expand($this, $request), Response::HTTP_OK);
+    
     //we can cache here (response is immutable for given version)!
     //$response->headers->set('Cache-Control', 'public,max-age=31536000,immutable');
-    $expiry_date = Carbon::now()->addYears(10);
-    $response->setExpires($expiry_date);
+    $expiry_date = Carbon::now()->addYears(10)->toDateTimeString();
+    
+    $response = response(AjaxRequests::expand($this, $request), 200, [
+      'Expires' => $expiry_date,
+    ]);
     
     return $response;
   }
