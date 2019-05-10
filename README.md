@@ -1,7 +1,7 @@
 
 # ⚶ Vesta Gov4Webtrees (Webtrees 2 Custom Module)
 
-This [webtrees](https://www.webtrees.net/) custom module hooks provides data to the extended 'Facts and Events' tab, enhancing events with [GOV](http://gov.genealogy.net) (historic gazetteer) data.
+This [webtrees](https://www.webtrees.net/) custom module provides data to an extended 'Facts and Events' tab, enhancing events with [GOV](http://gov.genealogy.net) (historic gazetteer) data.
 The project’s website is [cissee.de](https://cissee.de).
 
 This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its webtrees 1.x counterpart, see [here](https://github.com/ric2016/gov4webtrees).
