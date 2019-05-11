@@ -45,7 +45,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0-beta.1.1';
+    return '2.0.0-beta.2.1';
   }
 
   public function customModuleLatestVersionUrl(): string {
