@@ -9,6 +9,7 @@ class HelpTexts {
   public static function helpText($help) {
     switch ($help) {
 
+      //note: currently nowhere used!
       case 'Cleanup Required!':
         $title = I18N::translate('Cleanup Required!');
         $text = '<p>' .

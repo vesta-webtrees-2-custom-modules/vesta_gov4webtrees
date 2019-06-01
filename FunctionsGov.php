@@ -243,7 +243,7 @@ class GovObjectSnapshot {
     return $this->lon;
   }
 
-  public function getVersion() {
+  public function getVersion(): int {
     return $this->version;
   }
 
@@ -259,7 +259,7 @@ class GovObjectSnapshot {
     return $this->parents;
   }
 
-  public function __construct($lat, $lon, $version, $type, $label, $parents) {
+  public function __construct($lat, $lon, int $version, $type, $label, $parents) {
     $this->lat = $lat;
     $this->lon = $lon;
     $this->version = $version;
@@ -354,10 +354,15 @@ class FunctionsGov {
     DB::table('gov_descriptions')
             ->delete();
     
+    //keep ids!
+    
+    //no longer required
+    /*
     //keep ids, but re-version (browser caches getExpandAction() responses based on version, so we have to reset here)    
     DB::table('gov_ids')->update([
         'version' => time()
     ]);
+    */
   }
 
   public static function getGovId($name, $type) {
@@ -385,7 +390,14 @@ class FunctionsGov {
     return $row->name;
   }
 
-  public static function setGovId($name, $type, $id, $version) {
+  public static function deleteGovId($name) {
+    DB::table('gov_ids')
+            ->where('name', '=', $name)
+            //->where('type', '=', $type)
+            ->delete();
+  }
+  
+  public static function setGovId($name, $id) {
     //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
     //$type is legacy!
     
@@ -393,21 +405,18 @@ class FunctionsGov {
     //1. this is a new id: Always use type 'MAIN'.
     //2. there is a single existing id: Set type 'MAIN'.
     //3. there are two existing ids, one for each type:
-    //notify user that this isn't a good idea.
+    //notify user that this isn't a good idea (elsewhere).
     //delete both existing and set type 'MAIN'
     
     //i.e. in any case, delete all existing and always set type 'MAIN'.
     
-    DB::table('gov_ids')
-            ->where('name', '=', $name)
-            //->where('type', '=', $type)
-            ->delete();
+    FunctionsGov::deleteGovId($name);
 
     DB::table('gov_ids')->insert([
         'name' => $name,
         'type' => 'MAIN', //$type,
         'gov_id' => $id,
-        'version' => $version
+        'version' => 0 //$version is also legacy in this table
     ]);
   }
 
@@ -483,8 +492,7 @@ class FunctionsGov {
     }
 
     //not loaded at all
-    $version = round(microtime(true) * 1000);
-    $gov = FunctionsGov::loadGovObject($module, $id, $version);
+    $gov = FunctionsGov::loadGovObject($module, $id);
     if ($gov == null) {
       return null;
     }
@@ -555,6 +563,13 @@ class FunctionsGov {
     return $props;
   }
 
+  //usually in order to trigger reloading
+  public static function deleteGovObject($id) {
+    DB::table('gov_objects')
+            ->where('gov_id', '=', $id)
+            ->delete();
+  }
+  
   public static function setGovObject($id, GovObject $govObject) {
 
     // Run in a transaction (to prevent concurrent access of delete data)
@@ -631,7 +646,7 @@ class FunctionsGov {
     DB::connection()->commit();
   }
 
-  public static function loadGovObject($module, $id, $version) {
+  public static function loadGovObject($module, $id) {
 
     //first check for existence, maybe use replacement id
     $id = SoapWrapper::checkObjectId($module, $id);
@@ -701,7 +716,8 @@ class FunctionsGov {
         $parents[] = new GovProperty($place->{'part-of'}->ref, null, $from, $to);
       }
     }
-
+    
+    $version = round(microtime(true) * 1000);
     return new GovObject($lat, $lon, $version, $types, $labels, $parents);
   }
 
@@ -717,7 +733,10 @@ class FunctionsGov {
 
     $lat = $row->lat;
     $lon = $row->lon;
-    $version = $row->version;
+    
+    //meh: column is int, why do we have to cast here? Use different driver?
+    //https://stackoverflow.com/questions/38034996/find-on-model-gives-id-as-string-in-one-environment-and-int-in-other
+    $version = (int)$row->version;
 
     $type = FunctionsGov::getTypeSnapshot($julianDay, $id, $lang);
     $label = FunctionsGov::getLabelSnapshot($julianDay, $id, $lang);
@@ -802,7 +821,7 @@ class FunctionsGov {
     return $fallback;
   }
 
-  public static function retrieveGovObjectSnapshot($module, $julianDay, $id, $version, $locale) {
+  public static function retrieveGovObjectSnapshot($module, $julianDay, $id, int $version, $locale) {
     $lang = FunctionsGov::toLang($locale);
 
     $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
@@ -813,7 +832,7 @@ class FunctionsGov {
     }
 
     //version newer (or not loaded at all)
-    $gov = FunctionsGov::loadGovObject($module, $id, $version);
+    $gov = FunctionsGov::loadGovObject($module, $id);
     if ($gov == null) {
       return null;
     }
@@ -839,7 +858,7 @@ class FunctionsGov {
     foreach ($ids as $id) {
       if (!in_array($id, $loadedIds)) {
         //echo "LOAD " . $id . "<br/>";
-        $gov = FunctionsGov::loadGovObject($module, $id, $version);
+        $gov = FunctionsGov::loadGovObject($module, $id);
         if ($gov != null) {
           FunctionsGov::setGovObject($id, $gov);
         }
@@ -935,14 +954,12 @@ class FunctionsGov {
           if (property_exists($end, "precision")) {
             $precision = $end->precision;
           }
-          if ($precision = 2) {
+          if ($precision == 2) {
             return $jd + 1; //next day
           }
 
-          if ($precision = 1) {
-
+          if ($precision == 1) {
             //what a mess
-            //2016_12 UNDEPLOYED BUGFIX
             $ymd = cal_from_jd($jd, CAL_GREGORIAN);
             $dateTime = new DateTime();
             $dateTime->setDate($ymd["year"], $ymd["month"], $ymd["day"]);
@@ -953,9 +970,8 @@ class FunctionsGov {
             return $jd;
           }
 
-          if ($precision = 0) {
+          if ($precision == 0) {
             //what a mess
-            //2016_12 UNDEPLOYED BUGFIX
             $ymd = cal_from_jd($jd, CAL_GREGORIAN);
             $dateTime = new DateTime();
             $dateTime->setDate($ymd["year"], $ymd["month"], $ymd["day"]);

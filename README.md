@@ -16,10 +16,12 @@ This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its web
 
 ### Features<a name="features"/>
 
-* Historic and current GOV data is loaded, cached internally, and displayed for individual events. Map links (to OpenStreetMaps etc) based on geodata obtained from the GOV server are also shown.
+* Historic and current GOV data is loaded from the GOV server, cached internally, and displayed for individual facts and events. 
+* Location data (map coordinates) are also used, if available, for map links and other custom modules.
 
 ![Screenshot](gov.png)
-* GOV ids have to be entered manually, once per place name. Alternatively, ids for specific events may be set via a custom _GOV tag under the respective PLAC tag.
+* GOV ids have to be entered manually, once per place name. Note that the edit controls have been moved: They are now grouped with the other edit controls (circled red in the screenshot).
+* Alternatively, GOV ids may be set via a custom _GOV tag under the respective PLAC tag (for a specific fact or event), or via the Shared Places module. In this case, they are exported via GEDCOM data.
 
 ### Demo<a name="demo"/>
 
@@ -27,7 +29,7 @@ Access a (webtrees 1.x) demo of the module [here](https://cissee.de/gov4webtrees
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.0-beta.2.1
+* Current version: 2.0.0-beta.2.2
 * Based on and tested with webtrees 2.0.0-beta.2. Cannot be used with webtrees 1.x!
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
@@ -45,8 +47,8 @@ Access a (webtrees 1.x) demo of the module [here](https://cissee.de/gov4webtrees
 				
 #### Import/Export
 
-If you want to transfer GOV data between different trees or webtrees instances, you only have to copy the table which maps place names to gov ids (##gov_ids), everything else will be re-created automatically.
-If you use GEDCOM data with _GOV tags for GOV ids, even this step is unnecessary.
+If you want to transfer GOV data between different webtrees instances, you only have to copy the table which maps place names to gov ids (##gov_ids), all other data will be re-created automatically.
+If you use GEDCOM data with _GOV tags for GOV ids (either directly or via the Shared Places module), even this step is unnecessary.
 
 
 ### License<a name="license"/>

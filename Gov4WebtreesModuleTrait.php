@@ -23,10 +23,10 @@ trait Gov4WebtreesModuleTrait {
 
   protected function getFullDescription() {
     $description = array();
-    $description[] = I18N::translate('A module integrating GOV (historic gazetteer) data. Enhances places with GOC data via the extended \'Facts and events\' tab.') . ' ' .
+    $description[] = I18N::translate('A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended \'Facts and events\' tab.') . ' ' .
             I18N::translate('Place hierarchies are displayed historically, i.e. according to the date of the respective event.') . ' ' .
-            I18N::translate('All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved via the GOV web service interface and cached internally.') . ' ' .
-            I18N::translate('Consequently, GOV place hierarchy information can only be changed indirectly, via the GOV website.');
+            I18N::translate('All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved from the GOV server and cached internally.') . ' ' .
+            I18N::translate('Consequently, place hierarchy information can only be changed indirectly, via the GOV website.');
     $description[] = I18N::translate('Requires the \'%1$s Vesta Common\' module, and the \'%1$s Vesta Facts and events\' module.', $this->getVestaSymbol());
     $description[] = I18N::translate('Provides location data to other custom modules.');
     return $description;
@@ -56,13 +56,14 @@ trait Gov4WebtreesModuleTrait {
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Editing'),
             array(new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Visitors may edit GOV ids (not recommended)'),
-                /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers. '),
+                /* I18N: Configuration option */I18N::translate('Anyone, including visitors, may edit GOV ids (not recommended)'),
+                /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers. Has precedence over the following option.'),
                 'VISITORS_MAY_EDIT',
                 '0'),
         new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Nobody may edit GOV ids'),
-                /* I18N: Configuration option */ I18N::translate('Useful to (temporarily) hide the edit controls. If all GOV ids are provided via GEDCOM tags, the edit controls may not be required at all. '),
+                /* I18N: Configuration option */I18N::translate('Nobody may edit GOV ids (outside GEDCOM)'),
+                /* I18N: Configuration option */I18N::translate('Useful to (temporarily) hide the edit controls. If GOV ids are managed via GEDCOM tags or other custom modules, the standard edit controls are usually not required at all. '). ' ' .
+                I18N::translate('In any case, when this option is active, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server.'),
                 'NO_ONE_MAY_EDIT',
                 '0')));
 
@@ -86,6 +87,11 @@ trait Gov4WebtreesModuleTrait {
                     '1')),
                 'for events without a date, present time hierarchy will be used regardless of this preference.',
                 'SHOW_CURRENT_DATE',
+                '0'),
+        new ControlPanelCheckbox(
+                /* I18N: Configuration option */I18N::translate('Show additional info'),
+                /* I18N: Configuration option */I18N::translate('Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging.'),
+                'DEBUG_GOV_SOURCE',
                 '0')));
                 
     $factsAndEventsSub[] = new ControlPanelSubsection(

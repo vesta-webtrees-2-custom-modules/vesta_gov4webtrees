@@ -1,0 +1,53 @@
+<form action="<?=
+e(route('module', [
+    'module' => $moduleName,
+    'action' => "EditGovMapping"
+]))
+?>" id="wt-modal-form" method="POST">
+    <?= csrf_field() ?>
+    <input type="hidden" name="place-name" value="<?= e($placeName) ?>">
+
+    <?= view('modals/header', ['title' => $title]) ?>
+
+    <div class="modal-body">
+        <?= view($moduleName . '::modals/gov-mapping-fields', ['govId' => $govId]) ?>
+    </div>
+
+    <?= view('modals/footer-save-cancel') ?>
+</form>
+
+<script>
+  // Submit the modal form using AJAX
+  //[RC] different from other modals, we just reload on success!
+  document.getElementById('wt-modal-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      let form = event.target;
+      let modal_error = document.querySelector('#edit-gov-id-error');
+
+      $.ajax({
+          url: form.action,
+          type: form.method,
+          data: new FormData(form),
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function () {
+              //$('#wt-ajax-modal').modal('hide'); //no need for this
+              
+              //additionally scroll to top in order to show the flash message
+              window.onbeforeunload = function () {
+                window.scrollTo(0, 0);
+              };
+              document.location.reload();
+          },
+          
+          //TODO: maybe not a good idea to use this for all kinds of errors?
+          //we want to specifically handle only 409 'invalid gov id' here
+          error: function (xhr) {
+              var data = xhr.responseJSON;
+              modal_error.innerHTML = data.html;
+          }
+      });
+  });
+</script>

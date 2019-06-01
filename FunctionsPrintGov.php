@@ -3,14 +3,7 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
-use Cissee\WebtreesExt\Functions\FunctionsPrintExtHelpLink;
-use DateTime;
 use Fisharebest\ExtCalendar\GregorianCalendar;
-use Fisharebest\Webtrees\Auth;
-use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Webtrees;
-use Ramsey\Uuid\Uuid;
-use Vesta\Model\GenericViewElement;
 use Vesta\Model\PlaceStructure;
 
 class FunctionsPrintGov {
@@ -22,17 +15,13 @@ class FunctionsPrintGov {
     $this->module = $module;
   }
 
-  public function getGovForFactPlace(PlaceStructure $place): GenericViewElement {
-    return $this->govForFactPlace($this->module, $place);
-  }
-
   /**
    * Get the value of level n data in the tag
    * Allow for multi-line values
    *
    * @return string|null
    */
-  protected static function getValue($gedcom, $level, $tag) {
+  public static function getValue($gedcom, $level, $tag) {
     if (preg_match('/(?:^|\n)' . $level . ' (?:' . $tag . ') ?(.*(?:(?:\n2 CONT ?.*)*))/', $gedcom, $match)) {
       return preg_replace("/\n" . ($level + 1) . " CONT ?/", "\n", $match[1]);
     } else {
@@ -40,7 +29,7 @@ class FunctionsPrintGov {
     }
   }
 
-  public static function getGovId(PlaceStructure $place) {
+  public static function getGovId(PlaceStructure $place): ?string {
     $name = $place->getPlace()->placeName();
     $fullName = $place->getPlace()->gedcomName();
 
@@ -54,62 +43,13 @@ class FunctionsPrintGov {
     if (!$name) {
       return null;
     }
-
-    //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
-    //$type is legacy!
-    $type = 'MAIN';
-    switch ($place->getEventType()) {
-      case 'CHR':
-      case 'MARR':
-      case 'BAPM':
-      case 'BURI':
-        $type = 'KSP';
-        break;
-      default:
-        break;
-    }
-
-    $id = null;
-    $version = null;
-    $idViaGedcom = false;
-
-    $idViaGedcom = self::getValue($place->getGedcom(), 3, '_GOV');
-    if ($idViaGedcom) {
-      $id = $idViaGedcom;
-      $version = 0;
-      $idViaGedcom = true;
-    } else {
-      $idAndVersion = FunctionsGov::getGovId($fullName, $type);
-      if ($idAndVersion) {
-        $version = array_pop($idAndVersion);
-        $id = array_pop($idAndVersion);
-      }
-    }
-
-    return $id;
-  }
-
-  //TODO refactor use getGovId()
-  protected function govForFactPlace($module, PlaceStructure $place): GenericViewElement {
-    $name = $place->getPlace()->placeName();
-    $fullName = $place->getPlace()->gedcomName();
-
-    $placeId = $place->getPlace()->id();
-
-    //this occurs in case of new place names (respective change not approved yet) 
-    if (!$placeId) {
-      return "";
-    }
-
-    //Filter::escapeHtml($place)
-    if (!$name) {
-      return "";
-    }
-
+      
     //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
     //$type is legacy!
     $type = 'MAIN';
     $fallbackType = 'KSP';
+    /*    
+    //don't even switch for legacy ids - confusing wrt resetting gov id
     switch ($place->getEventType()) {
       case 'CHR':
       case 'MARR':
@@ -121,106 +61,27 @@ class FunctionsPrintGov {
       default:
         break;
     }
-
-    $useMedianDate = boolval($module->getSetting('USE_MEDIAN_DATE', '0'));
-
-    if ($useMedianDate) {
-      $julianDay1 = $place->getEventDateInterval()->getMedian();
-    } else {
-      $julianDay1 = $place->getEventDateInterval()->getMin();
-    }
-
-    $dateTime = new DateTime();
-    $dateTime->format('Y-m-d');
-    $julianDay2 = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
+    */
 
     $id = null;
-    $version = null;
-    $idViaGedcom = false;
-    $cleanupRequired = false;
     
-    //supposed to be under 2 PLAC, that's not checked here though!
-    $idViaGedcom = self::getValue($place->getGedcom(), 3, '_GOV');
-    if ($idViaGedcom) {
-      $id = $idViaGedcom;
-      $version = 0;
-      $idViaGedcom = true;
+    //note: version in id mapping table is nowhere used, i.e. deprecated!
+    $version = null;
+
+    $idAndVersion = FunctionsGov::getGovId($fullName, $type);
+    if ($idAndVersion) {
+      $version = array_pop($idAndVersion);
+      $id = array_pop($idAndVersion);
     } else {
-      $idAndVersion = FunctionsGov::getGovId($fullName, $type);
+      //fallback
+      $idAndVersion = FunctionsGov::getGovId($fullName, $fallbackType);
       if ($idAndVersion) {
         $version = array_pop($idAndVersion);
         $id = array_pop($idAndVersion);
-        
-        //cleanup required? In case fallback is also set.
-        $fallbackAlsoSet = FunctionsGov::getGovId($fullName, $fallbackType);
-        if ($fallbackAlsoSet) {
-          $cleanupRequired = true;
-        }
-      } else {
-        //fallback
-        $idAndVersion = FunctionsGov::getGovId($fullName, $fallbackType);
-        if ($idAndVersion) {
-          $version = array_pop($idAndVersion);
-          $id = array_pop($idAndVersion);
-        }
       }
     }
 
-    $typeHint = "";
-    if ("KSP" === $type) {
-      $typeHint = ' (' . I18N::translate('use separate parish GOV id if appropriate') . ')';
-    }
-
-    $i18nJson = '{' .
-            'setText:' . json_encode(I18N::translate('No GOV id set for \'%1$s\'%2$s!', $name, $typeHint)) . ', ' .
-            'resetText:' . json_encode(I18N::translate('Reset GOV id for \'%1$s\'%2$s and reload the place hierarchy:', $name, $typeHint)) . ', ' .
-            'reloadText:' . json_encode(I18N::translate('GOV id set via GEDCOM and not editable here! Reload the place hierarchy:')) . ', ' .
-            'setCommand:' . json_encode(I18N::translate('Set id')) . ', ' .
-            'resetCommand:' . json_encode(I18N::translate('Reset id')) . ', ' .
-            'reloadCommand:' . json_encode(I18N::translate('Reload')) . ', ' .
-            'invalidIdText:' . json_encode(I18N::translate('Invalid GOV id! Valid ids are e.g. \'EITTZE_W3091\', \'object_1086218\'. See the GOV website.')) . ', ' .
-            'invalidIdViaGedcomText:' . json_encode(I18N::translate('Invalid GOV id set via GEDCOM! Edit the GEDCOM!')) . ', ' .
-            'resetButton:' . json_encode(I18N::translate('Reset')) . ', ' .
-            'adminLevels:' . json_encode(I18N::translate('Administrative levels')) .
-            '}';
-
-    $canEdit = false;
-    $readonly = boolval($module->getSetting('NO_ONE_MAY_EDIT', '0'));
-    if (!$readonly) {
-      $relaxed = boolval($module->getSetting('VISITORS_MAY_EDIT', '0'));
-      if ($relaxed) {
-        $canEdit = true;
-      } else {
-        $canEdit = Auth::isManager($place->getTree()) || Auth::isEditor($place->getTree());
-      }
-    }
-
-    $locale = WT_LOCALE;
-
-    $compactDisplay = boolval($module->getSetting('COMPACT_DISPLAY', '1'));
-    $showCurrentDateGov = intval($module->getSetting('SHOW_CURRENT_DATE', '0'));
-    $allowSettlements = boolval($module->getSetting('ALLOW_SETTLEMENTS', '1'));
-
-    //internally hidden after reload is triggered!
-    $govResetHtml = '';
-    if ($cleanupRequired) {
-      $govResetHtml = I18n::translate('Cleanup Required!').FunctionsPrintExtHelpLink::helpLink($this->module->name(), 'Cleanup Required!');      
-    }
-            
-    $str1 = GenericViewElement::createEmpty();
-    $str2 = GenericViewElement::createEmpty();
-
-    $fastAjax = boolval($module->getSetting('FAST_AJAX', '0'));
-    
-    if (($julianDay1) && ($showCurrentDateGov !== 2)) {
-      $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
-      $str1 = $this->widget($fastAjax, $govResetHtml, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
-    }
-    if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
-      $julianDayText = I18N::translate('today');
-      $str2 = $this->widget($fastAjax, $govResetHtml, $canEdit, $idViaGedcom, $compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $name, $fullName, $type, $i18nJson, $id, $version);
-    }
-    return GenericViewElement::implode([$str1, $str2]);
+    return $id;
   }
 
   //see Date.php
@@ -231,61 +92,4 @@ class FunctionsPrintGov {
     list($year) = $gregorian_calendar->jdToYmd($julianDay);
     return $year;
   }
-
-  public function widget(
-          $fastAjax,
-          $govResetHtml,
-          $canEdit,
-          $idViaGedcom,
-          $compactDisplay,
-          $allowSettlements,
-          $locale,
-          $julianDay,
-          $julianDayText,
-          $name,
-          $fullName,
-          $type,
-          $i18nJson,
-          $id = null,
-          $version = null): GenericViewElement {
-
-    $uuid = Uuid::uuid4();
-    $idString = '';
-    if (($id !== null) && ($version !== null)) {
-      $idString = ', id:' . json_encode($id) . ', version:' . $version;
-    }
-
-    //css and script loaded elsewhere
-    $html = '<div id="govWidget-' . $uuid . '" class="govWidget"></div>';
-
-    $slowUrl = route('module', [
-        'module' => $this->module->name(),
-        'action' => 'Expand'
-    ]);
-
-    //won't be possible in future webtrees version!
-    $fastUrl = Webtrees::MODULES_PATH . __DIR__ . "/ajaxExpand.php";
-
-    $script = '<script>$("#govWidget-' . $uuid . '").gov({' .
-            'slowUrl:' . json_encode($slowUrl . "&") . ', ' .
-            'fastUrl:' . json_encode($fastUrl . "?") . ', ' .
-            'govResetHtml:' . json_encode($govResetHtml) . ', ' .
-            'fastAjax:' . json_encode($fastAjax) . ', ' .
-            'canEdit:' . json_encode($canEdit) . ', ' .
-            'idViaGedcom:' . json_encode($idViaGedcom) . ', ' .
-            'julianDay:' . $julianDay . ', ' .
-            'julianDayText:' . json_encode($julianDayText) . ', ' .
-            'name:' . json_encode($name) . ', ' .
-            'placeId:' . json_encode($fullName) . ', ' .
-            'type:' . json_encode($type) . ', ' .
-            'i18n:' . $i18nJson . ', ' .
-            'locale:' . json_encode($locale) . ', ' .
-            'compactDisplay:' . json_encode($compactDisplay) . ', ' .
-            'allowSettlements:' . json_encode($allowSettlements) .
-            $idString .
-            '});</script>';
-
-    return new GenericViewElement($html, $script);
-  }
-
 }

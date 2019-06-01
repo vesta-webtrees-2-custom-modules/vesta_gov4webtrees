@@ -1,0 +1,17 @@
+<?php
+
+use Fisharebest\Webtrees\I18N; ?>
+
+<div id="edit-gov-id-error"></div>
+<div><?= I18N::translate('Look up a matching GOV id on the GOV server:') ?><a href="http://gov.genealogy.net/search/extended" target="_blank"> <i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true"></i></a></div>
+<div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>
+<div><?= ($govId === null)?'':I18N::translate('Save the current id in order to reload the place hierarchy data from the GOV server.') ?></div>
+<div><?= ($govId === null)?'':I18N::translate('You may also save an empty id in order to remove the mapping.') ?></div>
+    
+<div class="form-group">
+    <label class="col-form-label" for="gov-id">
+        <?= I18N::translate('GOV id') ?>
+    </label>
+    <input class="form-control" type="text" id="gov-id" name="gov-id" value="<?= $govId ?>" <?= ($govId === null)?'required':'' ?>>
+</div>
+

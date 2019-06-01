@@ -1,30 +1,50 @@
 <?php
 
-namespace Cissee\Webtrees\Module\Gov4Webtrees; //cannot use original AbstractModule because we override setPreference, setName
-
+namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\Webtrees\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
 use Cissee\Webtrees\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsPrintGov;
 use Cissee\WebtreesExt\AbstractModule;
-use Cissee\WebtreesExt\FormatPlaceAdditions;
-use Fisharebest\Webtrees\Carbon;
+use Cissee\WebtreesExt\FactPlaceAdditions;
+use Cissee\WebtreesExt\Requests;
+use DateTime;
+use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Fact;
+use Fisharebest\Webtrees\FlashMessages;
+use Fisharebest\Webtrees\Functions\Functions;
+use Fisharebest\Webtrees\Http\Controllers\Admin\ModuleController;
+use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
+use Fisharebest\Webtrees\Session;
+use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Cissee\WebtreesExt\Requests;
+use ReflectionObject;
 use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
+use Vesta\Hook\HookInterfaces\FunctionsPlaceUtils;
 use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
+use Vesta\Model\GovReference;
+use Vesta\Model\MapCoordinates;
 use Vesta\Model\PlaceStructure;
+use Vesta\Model\Trace;
+use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
+use const WT_LOCALE;
+use function redirect;
+use function response;
+use function route;
+use function view;
 
 class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface, ModuleConfigInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface {
-
+  
+  //cannot use original AbstractModule because we override setPreference, setName
+  
   use VestaModuleTrait;
   use Gov4WebtreesModuleTrait;
   use EmptyIndividualFactsTabExtender;
@@ -35,17 +55,13 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     //migrate (we need the module name here to store the setting)
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 1);
   }
-
-  public function assetsViaViews(): array {
-    return ['css/style.css' => 'css/style'];
-  }
   
   public function customModuleAuthorName(): string {
     return 'Richard Cissée';
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0-beta.2.1';
+    return '2.0.0-beta.2.2';
   }
 
   public function customModuleLatestVersionUrl(): string {
@@ -74,20 +90,8 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return response(HelpTexts::helpText($topic));
   }
   
+  //TODO adjust: use plac2gov?
   //HookInterface: FunctionsPlaceInterface
-  public function hPlacesGetLatLon(PlaceStructure $place) {
-    $govId = FunctionsPrintGov::getGovId($place);
-    if ($govId === null) {
-      return null;
-    }
-
-    $gov = FunctionsGov::retrieveGovObject($this, $govId);
-    if ($gov === null) {
-      return null;
-    }
-    return array($gov->getLat(), $gov->getLon());
-  }
-
   public function hPlacesGetParentPlaces(PlaceStructure $place, $typesOfLocation, $recursively = false) {
     $useMedianDate = boolval($this->getSetting('USE_MEDIAN_DATE', '0'));
     $allowSettlements = boolval($this->getSetting('ALLOW_SETTLEMENTS', '1'));
@@ -171,7 +175,16 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return $placeStructures;
   }
 
+  public function assetsViaViews(): array {
+    return [
+        'css/style.css' => 'css/style',
+        'css/webtrees.css' => 'css/webtrees',
+        'css/minimal.css' => 'css/minimal'];
+  }
+  
   public function hFactsTabGetOutputBeforeTab(Individual $person) {
+    /*
+    //legacy
     //load script once
     //
     //TODO: not great because timestamp is added, preventing caching
@@ -179,13 +192,32 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     //not sure this still applies for 2.x
     $pre = '<script src="' . $this->assetUrl('js/jquery-ui.js') . '"></script>';
     $pre .= '<script src="' . $this->assetUrl('js/widgets.js') . '"></script>';
+    */
+    $pre = '';
     
     //note: content actually served via style.phtml!
     $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
 
+    //align with current theme (supporting - for now - the default webtrees themes)
+    $themeName = Session::get('theme');
+    if ('minimal' !== $themeName) {
+      if ('fab' === $themeName) {
+        //fab also uses font awesome icons
+        $themeName = 'minimal';
+      } else {
+        //default
+        $themeName = 'webtrees';
+      }      
+    }
+    
+    //note: content actually served via <theme>.phtml!
+    $html .= '<link href="' . $this->assetUrl('css/'.$themeName.'.css') . '" type="text/css" rel="stylesheet" />';
+
     return new GenericViewElement($html, $pre);
   }
 
+  //legacy
+  /*
   public function hFactsTabGetOutputAfterTab(Individual $person) {
     //refresh (= initially show) all widgets (these are created via FunctionsPrintGov)!
     //(further optimization: could restrict to visible facts here, and refresh others on toggle of 'Events of close relatives')
@@ -229,6 +261,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     
     return $response;
   }
+  */
 
   public function setPreference(string $setting_name, string $setting_value): void {
     if ('RESET' === $setting_name) {
@@ -243,6 +276,376 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   //used in FunctionsGov - refactor?
   public function getSetting($setting_name, $default = '') {
     return $this->getPreference($setting_name, $default);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  public function getEditGovMappingAction(ServerRequestInterface $request, Tree $tree): ResponseInterface {    
+    $controller = new EditGovMappingController($this);
+    return $controller->editGovMapping($request, $tree);
+  }
+
+  public function postEditGovMappingAction(ServerRequestInterface $request): ResponseInterface {
+    $controller = new EditGovMappingController($this);
+    return $controller->editGovMappingAction($request);
+  }
+
+  public function postReloadGovHierarchyAction(ServerRequestInterface $request): ResponseInterface {
+    $placeName = Requests::getString($request, 'place-name');
+    $govId = Requests::getString($request, 'gov-id');
+    
+    //reset in order to reload hierarchy
+    FunctionsGov::deleteGovObject($govId);
+    
+    FlashMessages::addMessage(I18N::translate('GOV hierarchy has been reloaded from GOV server for %1$s.', $placeName));
+    
+    //no need to return data
+    return response();
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  public function hFactsTabGetAdditionalEditControls(
+          Fact $fact): GenericViewElement {
+    
+    $canEdit = false;
+    if (boolval($this->getPreference('VISITORS_MAY_EDIT', '0'))) {
+      $canEdit = true;
+    } else {
+      $canEdit = Auth::isEditor($fact->record()->tree());
+    }
+    
+    if (!$canEdit) {
+      //not editable
+      return new GenericViewElement('', '');
+    }
+    
+    if ($fact->attribute('PLAC') === '') {
+      //no PLAC, doesn't make sense to edit here
+      return new GenericViewElement('', '');
+    }
+    
+    $ps = PlaceStructure::create("2 PLAC " . $fact->place()->gedcomName(), $fact->record()->tree());
+    
+    $readonly = boolval($this->getPreference('NO_ONE_MAY_EDIT', '0'));
+    if ($readonly) {
+      $placerec = Functions::getSubRecord(2, '2 PLAC', $fact->gedcom());
+      if (empty($placerec)) {
+        //nothing to offer here
+        return new GenericViewElement('', '');
+      };
+      
+      //get a gov reference (may be provided by ourselves ultimately)
+      $govReference = FunctionsPlaceUtils::plac2gov($this, $ps, false);
+    
+      if ($govReference === null) {
+        //nothing to offer here
+        return new GenericViewElement('', '');
+      }
+      
+      //allow to reload the gov hierarchy
+      $html = view($this->name() . '::edit/icon-fact-reload-gov', [        
+        'moduleName' => $this->name(),
+        'title' => I18N::translate('reload the GOV place hierarchy'),
+        'route' => route('module', [
+            'module' => $this->name(),
+            'action' => 'ReloadGovHierarchy',
+            'gov-id' => $govReference->getId(),
+            'place-name' => $fact->place()->gedcomName()
+        ])]);
+    
+      return new GenericViewElement($html, '');
+    }
+    
+    //do not use plac2gov here - we're only interested in actual direct mappings at this point!
+    $govId = FunctionsPrintGov::getGovId($ps);
+    
+    //ok to edit
+    if ($govId === null) {
+      $title = I18N::translate('Set GOV id (outside GEDCOM)');
+    } else {
+      $title = I18N::translate('Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy');
+    }
+    
+    $html = view($this->name() . '::edit/icon-fact-map-gov', [
+        'fact' => $fact, 
+        'moduleName' => $this->name(),
+        'title' => $title]);
+    
+    return new GenericViewElement($html, '');
+  }
+  
+  public function plac2Gov(PlaceStructure $ps): ?GovReference {
+    //1. _GOV set directly?
+
+    //previous versions of this module excluded newly created (not yet approved) places,
+    //this seems unnecessary and has been discontinued
+    
+    //supposed to be under 2 PLAC, that's not checked here though!
+    $govId = FunctionsPrintGov::getValue($ps->getGedcom(), 3, '_GOV');
+    if ($govId !== null) {
+      $trace = new Trace('GOV-Id via Gov4Webtrees module (_GOV tag)');
+      return new GovReference($govId, $trace);
+    }
+    
+    //2. id set via mapping table?
+    $govId = FunctionsPrintGov::getGovId($ps);
+    if ($govId !== null) {
+      $trace = new Trace('GOV-Id via Gov4Webtrees module (mapping outside GEDCOM)');
+      return new GovReference($govId, $trace);      
+    }
+    
+    return null;
+  }
+  
+  public function gov2map(GovReference $govReference): ?MapCoordinates {
+    $gov = FunctionsGov::retrieveGovObject($this, $govReference->getId());
+    if ($gov === null) {
+      return null;
+    }
+    if ($gov->getLat() === null) {
+      return null;
+    }
+    if ($gov->getLon() === null) {
+      return null;
+    }
+    
+    $trace = $govReference->getTrace();
+    $trace->add('map coordinates via Gov4Webtrees module (data from GOV server)');
+    return new MapCoordinates($gov->getLat(), $gov->getLon(), $trace);
+  }
+  
+  public function factPlaceAdditions(PlaceStructure $place): ?FactPlaceAdditions {
+    //get a gov reference (may be provided by ourselves ultimately)
+    $govReference = FunctionsPlaceUtils::plac2gov($this, $place, false);
+    
+    if ($govReference === null) {
+      return null;
+    }
+    
+    $govId = $govReference->getId();
+    
+    $locale = WT_LOCALE;
+    $compactDisplay = boolval($this->getSetting('COMPACT_DISPLAY', '1'));
+    $showCurrentDateGov = intval($this->getSetting('SHOW_CURRENT_DATE', '0'));
+    $allowSettlements = boolval($this->getSetting('ALLOW_SETTLEMENTS', '1'));
+    $useMedianDate = boolval($this->getSetting('USE_MEDIAN_DATE', '0'));
+
+    if ($useMedianDate) {
+      $julianDay1 = $place->getEventDateInterval()->getMedian();
+    } else {
+      $julianDay1 = $place->getEventDateInterval()->getMin();
+    }
+    
+    $dateTime = new DateTime();
+    $dateTime->format('Y-m-d');
+    $julianDay2 = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
+
+    $tooltip = null;
+    $debugGovSource = $this->getPreference('DEBUG_GOV_SOURCE', '1');
+    if ($debugGovSource) {
+      $tooltip .= $govReference->getTrace()->getAll();
+    }
+    
+    if (($julianDay1) && ($showCurrentDateGov !== 2)) {
+      $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
+      $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $govId, $tooltip);
+    }
+    if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
+      $julianDayText = I18N::translate('today');
+      $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $govId, $tooltip);
+    }
+    $gve = GenericViewElement::implode([$str1, $str2]);
+    
+    return new FactPlaceAdditions($gve, GenericViewElement::createEmpty());
+  }
+  
+  protected function getHierarchy(
+          bool $compactDisplay, 
+          bool $allowSettlements, 
+          string $locale,
+          string $julianDay, 
+          string $julianDayText, 
+          string $id,
+          ?string $tooltip): GenericViewElement {
+
+    //initialize with placeholder
+    $version = -1;
+    
+    $hierarchy = '';
+    $hierarchy2 = '';
+    
+    $nextId = $id;
+    while ($nextId !== null) {
+      $data = $this->getDataAndNextId($allowSettlements, $locale, $julianDay, $nextId, $version);
+      
+      if ($data === []) {
+        $nextId = null;
+      } else {
+        if ($hierarchy !== '') {
+          $hierarchy .= ', ';
+        }
+
+        $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
+        $hierarchy .= $data['label'];
+        $hierarchy .= '</a>';
+  
+        if (!$compactDisplay) {
+          if ($hierarchy2 !== '') {
+            $hierarchy2 .= ', ';
+          }
+          $hierarchy2 .= $data['type'];
+        }
+        
+        $nextId = $data['nextId'];
+        
+        if ($version === -1) {
+          //replace placeholder version:
+          //after a reset, object is reloaded from server, and now() is used as version (triggering reloading of parents)
+          //otherwise, use version as set on initial object
+          $version = $data['version'];
+        }
+      }
+    }
+    
+    $span = '<div><span class="govText">';
+    $span .= '<a href="http://gov.genealogy.net/" target="_blank">';
+    if ($tooltip) {
+      $span .= '<i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true" title="' . $tooltip . '"></i>';
+    } else {
+      $span .= '<i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true"></i>';
+    }
+    $span .= 'GOV</a> (';
+    $span .= $julianDayText;
+    $span .= '): ';
+    $span .= $hierarchy;
+    $span .= '</span>';
+
+    if (!$compactDisplay) {
+      $span .= '<div><span class="govText2">';
+      $span .= '(Administrative levels: ';
+      $span .= $hierarchy2;
+      $span .= ')</span>';
+    }
+    
+    $span .= '</div>';
+    
+    return GenericViewElement::create($span);
+    
+  }    
+  
+  protected function getDataAndNextId(
+          bool $allowSettlements, 
+          string $locale,
+          string $julianDay, 
+          string $id, 
+          int $version): array {
+    
+    $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale);
+
+    if ($gov == null) {
+      //invalid id!
+      return [];
+    }
+    
+    //data and next id
+    $type = FunctionsGov::retrieveTypeDescription($this, $gov->getType(), $locale);
+    $label = $gov->getLabel();
+
+    //next hierarchy level (if any)
+    $nextId = FunctionsGov::findGovParentOfType($this, $id, $gov, $julianDay, FunctionsGov::$TYPES_ADMINISTRATIVE, $version);
+    if ($allowSettlements && !$nextId) {
+      $nextId = FunctionsGov::findGovParentOfType($this, $id, $gov, $julianDay, FunctionsGov::$TYPES_SETTLEMENT, $version);
+    }
+    
+    return ['type' => $type, 'label' => $label, 'nextId' => $nextId, 'version' => $gov->getVersion()];
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  private function title1(): string {
+    return I18N::translate('Gov4Webtrees Module Location Data Providers');
+  }
+  
+  private function description1(): string {
+    return I18N::translate('Modules listed here are used (in the configured order) to determine GOV Ids of places.');
+  }
+  
+  //hook management - generalize?
+  //adapted from ModuleController (e.g. listFooters)
+  public function getProvidersAction(): ResponseInterface {
+    $modules = FunctionsPlaceUtils::modules($this, true);
+
+    $controller = new VestaAdminController($this->name());
+    return $controller->listHooks(
+                    $modules,
+                    FunctionsPlaceInterface::class,
+                    $this->title1(),
+                    $this->description1(),
+                    true,
+                    true);
+  }
+
+  public function postProvidersAction(ServerRequestInterface $request): ResponseInterface {
+    $modules = FunctionsPlaceUtils::modules($this, true);
+
+    $controller1 = new ModuleController($this->module_service);
+    $reflector = new ReflectionObject($controller1);
+
+    //private!
+    //$controller1->updateStatus($modules, $request);
+
+    $method = $reflector->getMethod('updateStatus');
+    $method->setAccessible(true);
+    $method->invoke($controller1, $modules, $request);
+
+    FunctionsPlaceUtils::updateOrder($this, $request);
+
+    //private!
+    //$controller1->updateAccessLevel($modules, FunctionsPlaceInterface::class, $request);
+
+    $method = $reflector->getMethod('updateAccessLevel');
+    $method->setAccessible(true);
+    $method->invoke($controller1, $modules, FunctionsPlaceInterface::class, $request);
+
+    $url = route('module', [
+        'module' => $this->name(),
+        'action' => 'Providers'
+    ]);
+
+    return redirect($url);
+  }
+
+  protected function editConfigBeforeFaq() {
+    $modules = FunctionsPlaceUtils::modules($this, true);
+
+    $url1 = route('module', [
+        'module' => $this->name(),
+        'action' => 'Providers'
+    ]);
+
+    //cf control-panel.phtml
+    ?>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-9">
+                <ul class="fa-ul">
+                    <li>
+                        <span class="fa-li"><?= view('icons/block') ?></span>
+                        <a href="<?= e($url1) ?>">
+                            <?= $this->title1() ?>
+                        </a>
+                        <?= view('components/badge', ['count' => $modules->count()]) ?>
+                        <p class="small text-muted">
+                          <?= $this->description1() ?>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>		
+
+    <?php
   }
 
 }
