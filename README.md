@@ -17,7 +17,7 @@ This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its web
 ### Features<a name="features"/>
 
 * Historic and current GOV data is loaded from the GOV server, cached internally, and displayed for individual facts and events. 
-* Location data (map coordinates) are also used, if available, for map links and other custom modules.
+* Location data (map coordinates) is also used, if available, for map links and other custom modules.
 
 ![Screenshot](gov.png)
 * GOV ids have to be entered manually, once per place name. Note that the edit controls have been moved: They are now grouped with the other edit controls (circled red in the screenshot).

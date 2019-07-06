@@ -21,4 +21,6 @@ foreach (glob(Webtrees::ROOT_DIR . $modulesPath . '*/autoload.php') as $autoload
   require_once $autoloadFile;
 }
 
-return new Gov4WebtreesModule();
+//app/Application/Container isn't so much about IoC (we're calling 'app', after all, that's no inversion!)
+//but about autowiring dependencies (here: ModuleService)
+return app(Gov4WebtreesModule::class);

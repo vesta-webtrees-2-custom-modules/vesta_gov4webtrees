@@ -19,6 +19,7 @@ use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
+use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\ResponseInterface;
@@ -50,6 +51,12 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   use EmptyIndividualFactsTabExtender;
   use EmptyFunctionsPlace;
 
+  protected $module_service;
+  
+  public function __construct(ModuleService $module_service) {
+    $this->module_service = $module_service;
+  }
+  
   protected function onBoot(): void {
     //cannot do this in constructor: module name not set yet!    
     //migrate (we need the module name here to store the setting)
@@ -447,10 +454,12 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
       $tooltip .= $govReference->getTrace()->getAll();
     }
     
+    $str1 = GenericViewElement::createEmpty();
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
       $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $govId, $tooltip);
     }
+    $str2 = GenericViewElement::createEmpty();
     if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
       $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $govId, $tooltip);
