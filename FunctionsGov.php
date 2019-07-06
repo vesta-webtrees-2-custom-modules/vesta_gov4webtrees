@@ -477,7 +477,7 @@ class FunctionsGov {
     }
 
     $description = FunctionsGov::loadTypeDescription($module, $type, $lang);
-    if ($description == null) {
+    if (($description == null) || ($description == '...')) {
       return $description;
     }
 
