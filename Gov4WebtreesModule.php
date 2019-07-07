@@ -100,8 +100,8 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   //TODO adjust: use plac2gov?
   //HookInterface: FunctionsPlaceInterface
   public function hPlacesGetParentPlaces(PlaceStructure $place, $typesOfLocation, $recursively = false) {
-    $useMedianDate = boolval($this->getSetting('USE_MEDIAN_DATE', '0'));
-    $allowSettlements = boolval($this->getSetting('ALLOW_SETTLEMENTS', '1'));
+    $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
+    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
 
     //$date = $place->getEventDateInterval();
 
@@ -280,11 +280,6 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     parent::setPreference($setting_name, $setting_value);
   }
 
-  //used in FunctionsGov - refactor?
-  public function getSetting($setting_name, $default = '') {
-    return $this->getPreference($setting_name, $default);
-  }
-
   ////////////////////////////////////////////////////////////////////////////////
   
   public function getEditGovMappingAction(ServerRequestInterface $request, Tree $tree): ResponseInterface {    
@@ -433,10 +428,10 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     $govId = $govReference->getId();
     
     $locale = WT_LOCALE;
-    $compactDisplay = boolval($this->getSetting('COMPACT_DISPLAY', '1'));
-    $showCurrentDateGov = intval($this->getSetting('SHOW_CURRENT_DATE', '0'));
-    $allowSettlements = boolval($this->getSetting('ALLOW_SETTLEMENTS', '1'));
-    $useMedianDate = boolval($this->getSetting('USE_MEDIAN_DATE', '0'));
+    $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
+    $showCurrentDateGov = intval($this->getPreference('SHOW_CURRENT_DATE', '0'));
+    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
+    $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
 
     if ($useMedianDate) {
       $julianDay1 = $place->getEventDateInterval()->getMedian();

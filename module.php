@@ -3,6 +3,7 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Fisharebest\Webtrees\Webtrees;
+use function app;
 
 //webtrees major version switch
 if (defined("WT_MODULES_DIR")) {

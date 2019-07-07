@@ -31,12 +31,12 @@ class SoapWrapper {
   public static function getTypeDescription($module, $type, $lang) {
     $wsdl = 'http://gov.genealogy.net/services/SimpleService?wsdl';
 
-    $nusoap = boolval($module->getSetting('USE_NUSOAP', '0'));
+    $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
     if (!$nusoap) {
       if (!extension_loaded('soap')) {
         //use NuSOAP, auto-adjust setting
         $nusoap = true;
-        $module->setSetting('USE_NUSOAP', '1');
+        $module->setPreference('USE_NUSOAP', '1');
       }
     }
 
@@ -54,12 +54,12 @@ class SoapWrapper {
   public static function checkObjectId($module, $id) {
     $wsdl = 'http://gov.genealogy.net/services/ComplexService?wsdl';
 
-    $nusoap = boolval($module->getSetting('USE_NUSOAP', '0'));
+    $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
     if (!$nusoap) {
       if (!extension_loaded('soap')) {
         //use NuSOAP, auto-adjust setting
         $nusoap = true;
-        $module->setSetting('USE_NUSOAP', '1');
+        $module->setPreference('USE_NUSOAP', '1');
       }
     }
 
@@ -76,12 +76,12 @@ class SoapWrapper {
   public static function getObject($module, $id) {
     $wsdl = 'http://gov.genealogy.net/services/ComplexService?wsdl';
 
-    $nusoap = boolval($module->getSetting('USE_NUSOAP', '0'));
+    $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
     if (!$nusoap) {
       if (!extension_loaded('soap')) {
         //use NuSOAP, auto-adjust setting
         $nusoap = true;
-        $module->setSetting('USE_NUSOAP', '1');
+        $module->setPreference('USE_NUSOAP', '1');
       }
     }
 
