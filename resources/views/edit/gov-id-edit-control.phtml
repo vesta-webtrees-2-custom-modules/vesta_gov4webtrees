@@ -1,0 +1,40 @@
+<?php
+use Fisharebest\Webtrees\I18N; 
+?>
+    
+<div class="form-group">
+    <label class="col-form-label" for="<?= $label ?>">
+        <?= I18N::translate('GOV id') ?>
+    </label>
+    
+    <div><i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true">  </i> <a href="http://gov.genealogy.net/search/extended" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    
+    <?php if ($internal): ?>
+      <div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>
+      <div><?= ($govId === null)?'':I18N::translate('Save the current id in order to reload the place hierarchy data from the GOV server.') ?></div>
+      <div><?= ($govId === null)?'':I18N::translate('You may also save an empty id in order to remove the mapping.') ?></div>
+    <?php endif ?>
+
+</div>
+
+
+<!-- "Look up a matching GOV id on the GOV server ..." could be appended to 'Please select ...' -->
+
+<select
+    autocomplete="off"
+    class="form-control select2"
+    data-ajax--delay="350"
+    data-minimum-input-length="12"
+    data-ajax--type="POST"
+    data-ajax--url="<?= e(route('module', [
+        'module' => $moduleName,
+        'action' => 'Select2GovId',
+    ])) ?>"
+    data-allow-clear="true"
+    data-placeholder=""
+    id="<?= $label ?>"
+    name="<?= $label ?>"
+    <?= ($govId === null)?'required':'' ?>>
+    <option></option>
+</select>
+

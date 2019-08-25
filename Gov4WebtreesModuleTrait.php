@@ -56,16 +56,21 @@ trait Gov4WebtreesModuleTrait {
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Editing'),
             array(new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Anyone, including visitors, may edit GOV ids (not recommended)'),
-                /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers. Has precedence over the following option.'),
+                /* I18N: Configuration option */I18N::translate('Anyone, including visitors, may edit GOV ids directly  (outside GEDCOM)'),
+                /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the following option.'),
                 'VISITORS_MAY_EDIT',
                 '0'),
         new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Nobody may edit GOV ids (outside GEDCOM)'),
-                /* I18N: Configuration option */I18N::translate('Useful to (temporarily) hide the edit controls. If GOV ids are managed via GEDCOM tags or other custom modules, the standard edit controls are usually not required at all. '). ' ' .
+                /* I18N: Configuration option */I18N::translate('Nobody may edit GOV ids directly (outside GEDCOM)'),
+                /* I18N: Configuration option */I18N::translate('Useful to (temporarily) hide the direct edit controls. If GOV ids are managed via GEDCOM tags or other custom modules (see below), the standard edit controls are usually not required at all. '). ' ' .
                 I18N::translate('In any case, when this option is active, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server.'),
                 'NO_ONE_MAY_EDIT',
-                '0')));
+                '0'),
+        new ControlPanelCheckbox(
+                /* I18N: Configuration option */I18N::translate('Support editing of GOV ids in other custom modules (within GEDCOM)'),
+                /* I18N: Configuration option */I18N::translate('Particularly useful in order to edit GOV ids via the Shared Places module. The respective ids are stored via GEDCOM tags.'),
+                'SUPPORT_EDITING_ELSEWHERE',
+                '1')));
 
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Show GOV hierarchy for'),

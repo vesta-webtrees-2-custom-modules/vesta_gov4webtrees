@@ -646,6 +646,11 @@ class FunctionsGov {
     DB::connection()->commit();
   }
 
+  public static function checkGovId($module, $id) {
+    //check for existence, maybe return replacement id
+    return SoapWrapper::checkObjectId($module, $id);
+  }
+  
   public static function loadGovObject($module, $id) {
 
     //first check for existence, maybe use replacement id

@@ -10,7 +10,13 @@ e(route('module', [
     <?= view('modals/header', ['title' => $title]) ?>
 
     <div class="modal-body">
-        <?= view($moduleName . '::modals/gov-mapping-fields', ['govId' => $govId]) ?>
+        <div id="edit-gov-id-error"></div>
+        
+        <?= view($moduleName . '::edit/gov-id-edit-control', [
+            'moduleName' => $moduleName, 
+            'label' => 'gov-id', 
+            'internal' => true, 
+            'govId' => $govId]) ?>
     </div>
 
     <?= view('modals/footer-save-cancel') ?>

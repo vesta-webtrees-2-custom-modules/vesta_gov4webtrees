@@ -28,6 +28,7 @@ use ReflectionObject;
 use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceUtils;
+use Vesta\Hook\HookInterfaces\GovIdEditControlsInterface;
 use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
 use Vesta\Model\GovReference;
@@ -42,7 +43,7 @@ use function response;
 use function route;
 use function view;
 
-class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface, ModuleConfigInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface {
+class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface, ModuleConfigInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface, GovIdEditControlsInterface {
   
   //cannot use original AbstractModule because we override setPreference, setName
   
@@ -281,6 +282,30 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   ////////////////////////////////////////////////////////////////////////////////
+  
+  //GovIdEditControlsInterface
+  
+  //we don't care whether it's 'onCreate', we always want this (even in the create modal)
+  public function govIdEditControl(?string $govId, string $label, bool $onCreate): GenericViewElement {
+    if (!boolval($this->getPreference('SUPPORT_EDITING_ELSEWHERE', '1'))) {
+      return new GenericViewElement('', '');
+    }
+    
+    $html = view($this->name() . '::edit/gov-id-edit-control', [
+            'moduleName' => $this->name(), 
+            'label' => $label, 
+            'internal' => false, 
+            'govId' => $govId]);
+    
+    return new GenericViewElement($html, '');
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  public function postSelect2GovIdAction(ServerRequestInterface $request): ResponseInterface {    
+    $controller = new EditGovMappingController($this);
+    return $controller->select2GovId($request);
+  }
   
   public function getEditGovMappingAction(ServerRequestInterface $request, Tree $tree): ResponseInterface {    
     $controller = new EditGovMappingController($this);

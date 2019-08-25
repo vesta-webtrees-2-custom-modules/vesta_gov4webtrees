@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\WebtreesExt\Requests;
-use DateTime;
+use Fig\Http\Message\StatusCodeInterface;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Http\Controllers\AbstractEditController;
 use Fisharebest\Webtrees\I18N;
@@ -17,7 +17,6 @@ use Swoole\Http\Response;
 use Vesta\Model\PlaceStructure;
 use function response;
 use function view;
-use Fig\Http\Message\StatusCodeInterface;
 
 //cf EditRepositoryController
 class EditGovMappingController extends AbstractEditController {
@@ -79,6 +78,8 @@ class EditGovMappingController extends AbstractEditController {
     
     //test whether id is valid
     $gov = FunctionsGov::loadGovObject($this->module, $govId);
+    
+    //unexpected to occur anymore now that we validate via select2GovId
     if ($gov == null) {
       $error = I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.');
       
@@ -97,4 +98,23 @@ class EditGovMappingController extends AbstractEditController {
     return response();
   }
 
+  public function select2GovId(ServerRequestInterface $request): ResponseInterface {
+      //$page  = (int) ($request->getParsedBody()['page'] ?? 1);
+      $govId = $request->getParsedBody()['q'] ?? '';
+      
+      $ret = FunctionsGov::checkGovId($this->module, $govId);
+
+      $results = ($ret !== null)?collect([[
+                    'id'    => $ret,
+                    'text'  => $ret,
+                    'title' => ' ',
+                ]]):collect([]);
+
+      return response([
+          'results'    => $results,
+          'pagination' => [
+              'more' => false,
+          ],
+      ]);
+  }
 }
