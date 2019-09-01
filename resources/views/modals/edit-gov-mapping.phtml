@@ -14,7 +14,8 @@ e(route('module', [
         
         <?= view($moduleName . '::edit/gov-id-edit-control', [
             'moduleName' => $moduleName, 
-            'label' => 'gov-id',
+            'id' => 'gov-id',
+            'name' => 'gov-id',
             'placeName' => $placeName, 
             'internal' => true, 
             'govId' => $govId]) ?>

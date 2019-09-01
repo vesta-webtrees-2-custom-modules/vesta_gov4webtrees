@@ -26,7 +26,9 @@ trait Gov4WebtreesModuleTrait {
     $description[] = I18N::translate('A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended \'Facts and events\' tab.') . ' ' .
             I18N::translate('Place hierarchies are displayed historically, i.e. according to the date of the respective event.') . ' ' .
             I18N::translate('All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved from the GOV server and cached internally.') . ' ' .
-            I18N::translate('Consequently, place hierarchy information can only be changed indirectly, via the GOV website.');
+            I18N::translate('Consequently, place hierarchy information can only be changed indirectly, via the GOV website.') . ' ' .
+            I18N::translate('GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported.') . ' ' .
+            I18N::translate('In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data.');
     $description[] = I18N::translate('Requires the \'%1$s Vesta Common\' module, and the \'%1$s Vesta Facts and events\' module.', $this->getVestaSymbol());
     $description[] = I18N::translate('Provides location data to other custom modules.');
     return $description;
@@ -56,7 +58,7 @@ trait Gov4WebtreesModuleTrait {
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Editing'),
             array(new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Anyone, including visitors, may edit GOV ids directly  (outside GEDCOM)'),
+                /* I18N: Configuration option */I18N::translate('Anyone, including visitors, may edit GOV ids directly (outside GEDCOM)'),
                 /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the following option.'),
                 'VISITORS_MAY_EDIT',
                 '0'),

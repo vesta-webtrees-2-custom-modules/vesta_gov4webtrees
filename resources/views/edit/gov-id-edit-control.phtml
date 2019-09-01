@@ -10,11 +10,13 @@ if (!$thePlace) {
 ?>
     
 <div class="form-group">
-    <label class="col-form-label" for="<?= $label ?>">
-        <?= I18N::translate('GOV id') ?>
-    </label>
+    <?php if ($withLabel): ?>
+      <label class="col-form-label" for="<?= $id ?>">
+          <?= I18N::translate('GOV id') ?>
+      </label>
+    <?php endif ?>
     
-    <div><i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true">  </i> <a href="http://gov.genealogy.net/search/name/?name=<?= $thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <div><i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true">  </i> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     
     <?php if ($internal): ?>
       <div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>
@@ -36,9 +38,15 @@ if (!$thePlace) {
     ])) ?>"
     data-allow-clear="true"
     data-placeholder=""
-    id="<?= $label ?>"
-    name="<?= $label ?>"
+    id="<?= $id ?>"
+    name="<?= $name ?>"
     <?= ($govId === null)?'required':'' ?>>
-    <option></option>
+    <?php if ($govId !== null): ?>
+        <option value="<?= $govId ?>">
+            <?= $govId ?>
+        </option>
+    <?php else: ?>
+        <option></option>
+    <?php endif ?>
 </select>
 

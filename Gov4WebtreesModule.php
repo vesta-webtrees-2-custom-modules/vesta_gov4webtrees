@@ -69,7 +69,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0-beta.3.1';
+    return '2.0.0-beta.4.1';
   }
 
   public function customModuleLatestVersionUrl(): string {
@@ -205,7 +205,14 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     
     //note: content actually served via style.phtml!
     $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
+    
+    //note: content actually served via <theme>.phtml!
+    $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
 
+    return new GenericViewElement($html, $pre);
+  }
+
+  protected function getThemeForCss(): string {
     //align with current theme (supporting - for now - the default webtrees themes)
     $themeName = Session::get('theme');
     if ('minimal' !== $themeName) {
@@ -217,13 +224,9 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
         $themeName = 'webtrees';
       }      
     }
-    
-    //note: content actually served via <theme>.phtml!
-    $html .= '<link href="' . $this->assetUrl('css/'.$themeName.'.css') . '" type="text/css" rel="stylesheet" />';
-
-    return new GenericViewElement($html, $pre);
+    return $themeName;
   }
-
+  
   //legacy
   /*
   public function hFactsTabGetOutputAfterTab(Individual $person) {
@@ -285,15 +288,25 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   
   //GovIdEditControlsInterface
   
-  //we don't care whether it's 'onCreate', we always want this (even in the create modal)
-  public function govIdEditControl(?string $govId, string $label, string $placeName, bool $onCreate): GenericViewElement {
+  //we don't actually care whether it's 'onCreate', we always want this (even in the create modal)
+  public function govIdEditControl(
+          ?string $govId, 
+          string $id, 
+          string $name, 
+          string $placeName,
+          bool $withLabel,
+          bool $onCreate): GenericViewElement {
     if (!boolval($this->getPreference('SUPPORT_EDITING_ELSEWHERE', '1'))) {
       return new GenericViewElement('', '');
     }
     
-    $html = view($this->name() . '::edit/gov-id-edit-control', [
+    $html = '';    
+    $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
+    $html .= view($this->name() . '::edit/gov-id-edit-control', [
             'moduleName' => $this->name(), 
-            'label' => $label, 
+            'withLabel' => $withLabel, 
+            'id' => $id, 
+            'name' => $name, 
             'placeName' => $placeName, 
             'internal' => false, 
             'govId' => $govId]);
@@ -487,7 +500,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     }
     $gve = GenericViewElement::implode([$str1, $str2]);
     
-    return new FactPlaceAdditions($gve, GenericViewElement::createEmpty());
+    return new FactPlaceAdditions(GenericViewElement::createEmpty(), $gve, GenericViewElement::createEmpty());
   }
   
   protected function getHierarchy(
