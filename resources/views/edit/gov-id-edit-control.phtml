@@ -1,5 +1,12 @@
 <?php
-use Fisharebest\Webtrees\I18N; 
+
+use Fisharebest\Webtrees\Gedcom;
+use Fisharebest\Webtrees\I18N;
+
+$thePlace = strstr($placeName, Gedcom::PLACE_SEPARATOR, true);
+if (!$thePlace) {
+  $thePlace = $placeName;
+}
 ?>
     
 <div class="form-group">
@@ -7,7 +14,7 @@ use Fisharebest\Webtrees\I18N;
         <?= I18N::translate('GOV id') ?>
     </label>
     
-    <div><i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true">  </i> <a href="http://gov.genealogy.net/search/extended" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <div><i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true">  </i> <a href="http://gov.genealogy.net/search/name/?name=<?= $thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     
     <?php if ($internal): ?>
       <div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>
@@ -16,9 +23,6 @@ use Fisharebest\Webtrees\I18N;
     <?php endif ?>
 
 </div>
-
-
-<!-- "Look up a matching GOV id on the GOV server ..." could be appended to 'Please select ...' -->
 
 <select
     autocomplete="off"

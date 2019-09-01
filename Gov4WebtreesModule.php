@@ -286,7 +286,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   //GovIdEditControlsInterface
   
   //we don't care whether it's 'onCreate', we always want this (even in the create modal)
-  public function govIdEditControl(?string $govId, string $label, bool $onCreate): GenericViewElement {
+  public function govIdEditControl(?string $govId, string $label, string $placeName, bool $onCreate): GenericViewElement {
     if (!boolval($this->getPreference('SUPPORT_EDITING_ELSEWHERE', '1'))) {
       return new GenericViewElement('', '');
     }
@@ -294,6 +294,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     $html = view($this->name() . '::edit/gov-id-edit-control', [
             'moduleName' => $this->name(), 
             'label' => $label, 
+            'placeName' => $placeName, 
             'internal' => false, 
             'govId' => $govId]);
     
