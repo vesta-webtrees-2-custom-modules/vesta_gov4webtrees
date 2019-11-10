@@ -8,7 +8,7 @@
         'module' => $moduleName,
         'action' => 'EditGovMapping',
         'place-name' => $fact->place()->gedcomName(),
-        'ged' => $fact->record()->tree()->name()
+        'tree' => $fact->record()->tree()->name()
     ]));
     ?>" 
     data-select-id="<?= 'UNUSED' ?>" 

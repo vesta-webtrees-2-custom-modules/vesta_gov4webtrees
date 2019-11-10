@@ -10,6 +10,7 @@ use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
+use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
@@ -20,6 +21,7 @@ use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Fisharebest\Webtrees\Services\ModuleService;
+use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\ResponseInterface;
@@ -37,7 +39,7 @@ use Vesta\Model\PlaceStructure;
 use Vesta\Model\Trace;
 use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
-use const WT_LOCALE;
+use function app;
 use function redirect;
 use function response;
 use function route;
@@ -69,7 +71,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0-beta.4.2';
+    return '2.0.0-beta.5.1';
   }
 
   public function customModuleLatestVersionUrl(): string {
@@ -321,7 +323,11 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     return $controller->select2GovId($request);
   }
   
-  public function getEditGovMappingAction(ServerRequestInterface $request, Tree $tree): ResponseInterface {    
+  public function getEditGovMappingAction(ServerRequestInterface $request): ResponseInterface {
+    //'tree' is handled specifically in Router.php
+    $tree = $request->getAttribute('tree');
+    assert($tree instanceof Tree);
+    
     $controller = new EditGovMappingController($this);
     return $controller->editGovMapping($request, $tree);
   }
@@ -466,7 +472,9 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     
     $govId = $govReference->getId();
     
-    $locale = WT_LOCALE;
+    $locale = app(ServerRequestInterface::class)->getAttribute('locale');
+    assert($locale instanceof LocaleInterface);
+        
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
     $showCurrentDateGov = intval($this->getPreference('SHOW_CURRENT_DATE', '0'));
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
@@ -491,12 +499,12 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     $str1 = GenericViewElement::createEmpty();
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
-      $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale, $julianDay1, $julianDayText, $govId, $tooltip);
+      $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govId, $tooltip);
     }
     $str2 = GenericViewElement::createEmpty();
     if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
-      $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale, $julianDay2, $julianDayText, $govId, $tooltip);
+      $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip);
     }
     $gve = GenericViewElement::implode([$str1, $str2]);
     
@@ -632,7 +640,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   public function postProvidersAction(ServerRequestInterface $request): ResponseInterface {
     $modules = FunctionsPlaceUtils::modules($this, true);
 
-    $controller1 = new ModuleController($this->module_service);
+    $controller1 = new ModuleController($this->module_service, app(TreeService::class));
     $reflector = new ReflectionObject($controller1);
 
     //private!

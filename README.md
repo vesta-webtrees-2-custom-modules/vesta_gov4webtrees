@@ -29,8 +29,8 @@ Access a (webtrees 1.x) demo of the module [here](https://cissee.de/gov4webtrees
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.0-beta.4.2
-* Based on and tested with webtrees 2.0.0-beta.4. Cannot be used with webtrees 1.x!
+* Current version: 2.0.0-beta.5.1
+* Based on and tested with webtrees 2.0.0-beta.5. Cannot be used with webtrees 1.x!
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
 * Provides location data to other custom modules.
