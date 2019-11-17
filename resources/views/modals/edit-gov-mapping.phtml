@@ -1,3 +1,8 @@
+<?php
+
+use Fisharebest\Webtrees\View;
+?>
+
 <form action="<?=
 e(route('module', [
     'module' => $moduleName,
@@ -24,6 +29,9 @@ e(route('module', [
 
     <?= view('modals/footer-save-cancel') ?>
 </form>
+
+<?php /* get script from child view (gov-id-edit-control has adjustment for select2) */ ?>
+<?= View::stack('javascript'); ?>
 
 <script>
   // Submit the modal form using AJAX

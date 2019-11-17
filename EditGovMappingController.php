@@ -79,7 +79,7 @@ class EditGovMappingController extends AbstractEditController {
     //test whether id is valid
     $gov = FunctionsGov::loadGovObject($this->module, $govId);
     
-    //unexpected to occur anymore now that we validate via select2GovId
+    //unexpected to occur anymore now that we validate via select2GovId (where the same I18N string is used)
     if ($gov == null) {
       $error = I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.');
       

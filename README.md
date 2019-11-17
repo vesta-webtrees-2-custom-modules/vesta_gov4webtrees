@@ -21,7 +21,7 @@ This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its web
 
 ![Screenshot](gov.png)
 * GOV ids have to be entered manually, once per place name. Note that the edit controls have been moved: They are now grouped with the other edit controls (circled red in the screenshot).
-* Alternatively, GOV ids may be set via a custom _GOV tag under the respective PLAC tag (for a specific fact or event), or via the Shared Places module. In this case, they are exported via GEDCOM data.
+* Alternatively, GOV ids may be set via a custom _GOV tag under the respective PLAC tag (for a specific fact or event), or via the Shared Places module. In this case, they are exported via GEDCOM data (and the explicit edit control should be disabled via module administration).
 
 ### Demo<a name="demo"/>
 
@@ -29,7 +29,7 @@ Access a (webtrees 1.x) demo of the module [here](https://cissee.de/gov4webtrees
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.0-beta.5.1
+* Current version: 2.0.0-beta.5.2
 * Based on and tested with webtrees 2.0.0-beta.5. Cannot be used with webtrees 1.x!
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
