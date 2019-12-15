@@ -10,7 +10,6 @@ use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
-use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
@@ -24,6 +23,7 @@ use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\View;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ReflectionObject;
@@ -71,7 +71,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0-beta.5.2';
+    return '2.0.0.1';
   }
 
   public function customModuleLatestVersionUrl(): string {
@@ -290,14 +290,14 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   
   //GovIdEditControlsInterface
   
-  //we don't actually care whether it's 'onCreate', we always want this (even in the create modal)
   public function govIdEditControl(
           ?string $govId, 
           string $id, 
           string $name, 
           string $placeName,
-          bool $withLabel,
-          bool $onCreate): GenericViewElement {
+          bool $forModal,
+          bool $withLabel): GenericViewElement {
+    
     if (!boolval($this->getPreference('SUPPORT_EDITING_ELSEWHERE', '1'))) {
       return new GenericViewElement('', '');
     }
@@ -310,10 +310,13 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
             'id' => $id, 
             'name' => $name, 
             'placeName' => $placeName, 
-            'internal' => false, 
+            'internal' => false,
+            'modal' => $forModal,
             'govId' => $govId]);
     
-    return new GenericViewElement($html, '');
+    $script = View::stack('javascript');
+    
+    return new GenericViewElement($html, $script);
   }
   
   ////////////////////////////////////////////////////////////////////////////////
@@ -472,8 +475,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     
     $govId = $govReference->getId();
     
-    $locale = app(ServerRequestInterface::class)->getAttribute('locale');
-    assert($locale instanceof LocaleInterface);
+    $locale = I18N::locale();
         
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
     $showCurrentDateGov = intval($this->getPreference('SHOW_CURRENT_DATE', '0'));
@@ -561,10 +563,11 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     
     $span = '<div><span class="govText">';
     $span .= '<a href="http://gov.genealogy.net/" target="_blank">';
+    //we'd like to use far fa-compass but we'd have to import explicitly
     if ($tooltip) {
-      $span .= '<i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true" title="' . $tooltip . '"></i>';
+      $span .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true" title="' . $tooltip . '"></i></span>';
     } else {
-      $span .= '<i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true"></i>';
+      $span .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
     }
     $span .= 'GOV</a> (';
     $span .= $julianDayText;
@@ -580,9 +583,20 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     }
     
     $span .= '</div>';
+
+    //doesn't work "Error resolving module specifier"
+    //and anyway seems too much effort just for adding another icon
+    /*
+    $script = 
+      '<script type="module">' .
+      'import { dom, library } from "@fortawesome/fontawesome-svg-core";' .
+      'import {faCompass} from "@fortawesome/free-solid-svg-icons";' .
+      'library.add(faCompass);' .
+      'dom.watch();' .
+      '</script>';
+    */
     
-    return GenericViewElement::create($span);
-    
+    return GenericViewElement::create($span);    
   }    
   
   protected function getDataAndNextId(

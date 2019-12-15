@@ -48,12 +48,14 @@ class EditGovMappingController extends AbstractEditController {
       $title = I18N::translate('Reset GOV id for %1$s', $placeName);
     }
     
-    return response(view($this->module->name() . '::modals/edit-gov-mapping', [
+    $html = view($this->module->name() . '::modals/edit-gov-mapping', [
                 'moduleName' => $this->module->name(),
                 'placeName' => $placeName,
                 'title' => $title,
                 'govId' => $govId,
-    ]));
+    ]);
+            
+    return response($html);
   }
 
   /**

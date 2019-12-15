@@ -4,6 +4,7 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Fisharebest\Webtrees\I18N;
 use Vesta\ControlPanel\Model\ControlPanelCheckbox;
+use Vesta\ControlPanel\Model\ControlPanelCheckboxInverted;
 use Vesta\ControlPanel\Model\ControlPanelPreferences;
 use Vesta\ControlPanel\Model\ControlPanelRadioButton;
 use Vesta\ControlPanel\Model\ControlPanelRadioButtons;
@@ -53,27 +54,30 @@ trait Gov4WebtreesModuleTrait {
                 /* I18N: Configuration option */I18N::translate('Mappings of places to GOV ids are not affected.'),
                 'RESET',
                 '0'))); //not a persistent setting, see overridden setSetting/setPreference!
-
-    $factsAndEventsSub = array();
-    $factsAndEventsSub[] = new ControlPanelSubsection(
-            /* I18N: Configuration option */I18N::translate('Editing'),
-            array(new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Anyone, including visitors, may edit GOV ids directly (outside GEDCOM)'),
-                /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the following option.'),
-                'VISITORS_MAY_EDIT',
-                '0'),
+    
+    $editingSub = array();
+    $editingSub[] = new ControlPanelSubsection(
+            /* I18N: Configuration option */I18N::translate('Where to edit and store GOV ids'),
+            array(
         new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Nobody may edit GOV ids directly (outside GEDCOM)'),
-                /* I18N: Configuration option */I18N::translate('Useful to (temporarily) hide the direct edit controls. If GOV ids are managed via GEDCOM tags or other custom modules (see below), the standard edit controls are usually not required at all. '). ' ' .
-                I18N::translate('In any case, when this option is active, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server.'),
+                /* I18N: Configuration option */I18N::translate('Within GEDCOM data (via other custom modules). '),
+                /* I18N: Configuration option */I18N::translate('Particularly useful in order to manage GOV ids via the Shared Places module. Ids are stored and exportable via GEDCOM tags. '). ' ' .
+                /* I18N: Configuration option */I18N::translate('If this option is checked, you usually want to disable the following option. '),
+                'SUPPORT_EDITING_ELSEWHERE',
+                '1'),        
+        new ControlPanelCheckboxInverted(
+                /* I18N: Configuration option */I18N::translate('Outside GEDCOM data'),
+                /* I18N: Configuration option */I18N::translate('In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation. '). ' ' .
+                I18N::translate('When this option is disabled, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server.'),
                 'NO_ONE_MAY_EDIT',
                 '0'),
         new ControlPanelCheckbox(
-                /* I18N: Configuration option */I18N::translate('Support editing of GOV ids in other custom modules (within GEDCOM)'),
-                /* I18N: Configuration option */I18N::translate('Particularly useful in order to edit GOV ids via the Shared Places module. The respective ids are stored via GEDCOM tags.'),
-                'SUPPORT_EDITING_ELSEWHERE',
-                '1')));
-
+                /* I18N: Configuration option */I18N::translate('Outside GEDCOM data - editable by anyone (including visitors)'),
+                /* I18N: Configuration option */ I18N::translate('This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the preceding option.'),
+                'VISITORS_MAY_EDIT',
+                '0')));
+    
+    $factsAndEventsSub = array();
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Configuration option */I18N::translate('Show GOV hierarchy for'),
             array(
@@ -147,6 +151,10 @@ trait Gov4WebtreesModuleTrait {
             /* I18N: Configuration option */I18N::translate('General'),
             null,
             $generalSub);
+    $sections[] = new ControlPanelSection(
+            /* I18N: Configuration option */I18N::translate('GOV Id Management'),
+            'It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them.',
+            $editingSub);
     $sections[] = new ControlPanelSection(
             /* I18N: Configuration option */I18N::translate('Facts and Events Tab Settings'),
             null,

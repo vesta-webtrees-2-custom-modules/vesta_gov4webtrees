@@ -18,10 +18,20 @@ This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its web
 
 * Historic and current GOV data is loaded from the GOV server, cached internally, and displayed for individual facts and events. 
 * Location data (map coordinates) is also used, if available, for map links and other custom modules.
+* GOV ids have to be entered manually, once per place name. They may be managed in different ways (depending on the module administration settings):
 
 ![Screenshot](gov.png)
-* GOV ids have to be entered manually, once per place name. Note that the edit controls have been moved: They are now grouped with the other edit controls (circled red in the screenshot).
-* Alternatively, GOV ids may be set via a custom _GOV tag under the respective PLAC tag (for a specific fact or event), or via the Shared Places module. In this case, they are exported via GEDCOM data (and the explicit edit control should be disabled via module administration).
+1. GOV ids outside GEDCOM data. In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation.
+Note that the edit controls have been moved: They are now grouped with the other edit controls (circled red in the screenshot).
+
+2. GOV ids within GEDCOM data. GOV ids may also be set via the Shared Places module. In this case, they are exported via GEDCOM data.
+Here, the GOV icon grouped with the edit controls just reloads the place hierarchy from the GOV server. 
+When creating or updating shared places, the GOV id edit controls are supported:
+
+![Screenshot](gov2.png)
+
+3. Alternatively, GOV ids may always be set via a custom _GOV tag under the respective PLAC tag (for a specific fact or event). This is not recommended, and there are no edit controls to support this. The module still displays the place hierarchies in this case though.
+
 
 ### Demo<a name="demo"/>
 
@@ -29,8 +39,8 @@ Access a (webtrees 1.x) demo of the module [here](https://cissee.de/gov4webtrees
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.0-beta.5.2
-* Based on and tested with webtrees 2.0.0-beta.5. Cannot be used with webtrees 1.x!
+* Current version: 2.0.0.1
+* Based on and tested with webtrees 2.0.0. Cannot be used with webtrees 1.x, or earlier 2.x versions!
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
 * Provides location data to other custom modules.

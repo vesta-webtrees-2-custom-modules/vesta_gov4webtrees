@@ -16,8 +16,11 @@ if (!$thePlace) {
           <?= I18N::translate('GOV id') ?>
       </label>
     <?php endif ?>
+    <?php 
+      //we'd like to use far fa-compass but we'd have to import explicitly
+    ?>
     
-    <div><i class="fas fa-compass fa-fw wt-icon-map-gov" aria-hidden="true">  </i> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     
     <?php if ($internal): ?>
       <div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>
@@ -26,7 +29,6 @@ if (!$thePlace) {
     <?php endif ?>
 
 </div>
-
 
 <select
     autocomplete="off"
@@ -53,26 +55,50 @@ if (!$thePlace) {
 </select>
 
 <?php View::push('javascript') ?>
-<?php /* cf webtrees.min.js, with adjustment for 'noResults' */ ?>
+<?php if ($modal): /* cf ajax.phtml (in case this is used as a modal), with adjustment for 'noResults' */ ?>
 <script>
-$(document).ready(function() {
-  console.log("select2");
+//don't do the following on DOMContentLoaded - we're executing after this element has already been rendered 
+//document.addEventListener("DOMContentLoaded", function () {
+  $("#wt-ajax-modal")
+    .on("shown.bs.modal", function (event) {
+      // Activate autocomplete fields
+      $(".select2gov", $(this)).select2({
+        dropdownParent: $(this),
+        language: {
+          "noResults": function(){
+              return "<?= I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
+          }
+        },
+        escapeMarkup: function (x) { return x; }
+      });
+    });
+//});
+</script>
+<?php else: /* cf webtrees.js, with adjustment for 'noResults' */ ?>
+<script>
+      console.log("yihaa");
+$(function() {
+      console.log("yihaa");
   $("select.select2gov").select2({
         language: {
-       "noResults": function(){
-           return "<?= I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
-       }
-   },
+            "noResults": function(){
+                return "<?= I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
+            }
+        },
         // Do not escape - we do it on the server.
         escapeMarkup: function (x) {
             return x;
-        },
+        }
     });
-    
+  
+  //do we really need this?
   $("select.select2gov:not([multiple])")
     .on("select2:unselect", function (evt) {
         $(evt.delegateTarget).html("<option value=\"\" selected></option>");
-    });  
+    });
+ 
 });
 </script>
+<?php endif ?>
+
 <?php View::endpush() ?>
