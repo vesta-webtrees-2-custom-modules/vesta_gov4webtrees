@@ -44,7 +44,7 @@ if (!$thePlace) {
     data-placeholder=""
     id="<?= $id ?>"
     name="<?= $name ?>"
-    <?= ($govId === null)?'required':'' ?>>
+    <?= (($govId === null) && $internal)?'required':'' ?>>
     <?php if ($govId !== null): ?>
         <option value="<?= $govId ?>">
             <?= $govId ?>
@@ -76,9 +76,7 @@ if (!$thePlace) {
 </script>
 <?php else: /* cf webtrees.js, with adjustment for 'noResults' */ ?>
 <script>
-      console.log("yihaa");
 $(function() {
-      console.log("yihaa");
   $("select.select2gov").select2({
         language: {
             "noResults": function(){

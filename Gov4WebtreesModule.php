@@ -71,7 +71,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0.1';
+    return '2.0.0.2';
   }
 
   public function customModuleLatestVersionUrl(): string {
@@ -302,7 +302,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
       return new GenericViewElement('', '');
     }
     
-    $html = '';    
+    $html = '';
     $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
     $html .= view($this->name() . '::edit/gov-id-edit-control', [
             'moduleName' => $this->name(), 
@@ -362,7 +362,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     if (boolval($this->getPreference('VISITORS_MAY_EDIT', '0'))) {
       $canEdit = true;
     } else {
-      $canEdit = Auth::isEditor($fact->record()->tree());
+      $canEdit = $fact->canEdit();
     }
     
     if (!$canEdit) {
