@@ -4,7 +4,7 @@
 This [webtrees](https://www.webtrees.net/) custom module provides data to an extended 'Facts and Events' tab, enhancing events with [GOV](http://gov.genealogy.net) (historic gazetteer) data.
 The project’s website is [cissee.de](https://cissee.de).
 
-This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its webtrees 1.x counterpart, see [here](https://github.com/ric2016/gov4webtrees). You can safely upgrade from the 1.x version and its database table, all data will be preserved.
+This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its webtrees 1.x counterpart, see [here](https://github.com/ric2016/gov4webtrees). You can safely upgrade from the 1.x version and its database tables, all data will be preserved.
 
 ## Contents
 
@@ -39,7 +39,7 @@ Access a (webtrees 1.x) demo of the module [here](https://cissee.de/gov4webtrees
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.0.2
+* Current version: 2.0.0.3
 * Based on and tested with webtrees 2.0.0. Cannot be used with webtrees 1.x, or earlier 2.x versions!
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 

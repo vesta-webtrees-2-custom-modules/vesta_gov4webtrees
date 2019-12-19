@@ -10,7 +10,6 @@ use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
-use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
@@ -71,7 +70,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0.2';
+    return '2.0.0.3';
   }
 
   public function customModuleLatestVersionUrl(): string {

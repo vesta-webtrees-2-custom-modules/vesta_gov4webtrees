@@ -455,9 +455,11 @@ class FunctionsGov {
   }
 
   public static function setTypeDescription($type, $lang, $description) {
-    DB::table('gov_descriptions')->insert([
+    //updateOrInsert rather than insert in order to avoid concurrency issues
+    DB::table('gov_descriptions')->updateOrInsert([
         'type' => $type,
-        'lang' => $lang,
+        'lang' => $lang
+    ], [    
         'description' => $description
     ]);
   }
