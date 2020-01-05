@@ -66,7 +66,7 @@ if (!$thePlace) {
         dropdownParent: $(this),
         language: {
           "noResults": function(){
-              return "<?= I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
+              return "<?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
           }
         },
         escapeMarkup: function (x) { return x; }
@@ -80,7 +80,7 @@ $(function() {
   $("select.select2gov").select2({
         language: {
             "noResults": function(){
-                return "<?= I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
+                return "<?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
             }
         },
         // Do not escape - we do it on the server.

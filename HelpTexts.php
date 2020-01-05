@@ -2,13 +2,14 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
-use Fisharebest\Webtrees\I18N;
+use Cissee\WebtreesExt\MoreI18N;
+use function view;
 
 class HelpTexts {
 
   public static function helpText($help) {
     switch ($help) {
-
+      /*  
       //note: currently nowhere used!
       case 'Cleanup Required!':
         $title = I18N::translate('Cleanup Required!');
@@ -19,11 +20,12 @@ class HelpTexts {
                 '</p><p>' .
                 I18N::translate('You can still use GOV parish ids for religious events, and administrative ids for other events, but you\'ll have to disambiguate your place names accordingly.') .
                 '</p>';
-        break;
+        break;      
+       */
 
       default:
-        $title = I18N::translate('Help');
-        $text = I18N::translate('The help text has not been written for this item.');
+        $title = MoreI18N::xlate('Help');
+        $text = MoreI18N::xlate('The help text has not been written for this item.');
         break;
     }
 

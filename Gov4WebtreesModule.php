@@ -70,7 +70,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   }
 
   public function customModuleVersion(): string {
-    return '2.0.0.3';
+    return '2.0.1.1';
   }
 
   public function customModuleLatestVersionUrl(): string {
@@ -346,7 +346,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     //reset in order to reload hierarchy
     FunctionsGov::deleteGovObject($govId);
     
-    FlashMessages::addMessage(I18N::translate('GOV hierarchy has been reloaded from GOV server for %1$s.', $placeName));
+    FlashMessages::addMessage(I18N::translate('GOV place hierarchy has been reloaded from GOV server for %1$s.', $placeName));
     
     //no need to return data
     return response();
@@ -563,8 +563,9 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     $span = '<div><span class="govText">';
     $span .= '<a href="http://gov.genealogy.net/" target="_blank">';
     //we'd like to use far fa-compass but we'd have to import explicitly
+    //TODO: use proper modal here? tooltip isn't helpful on tablets etc
     if ($tooltip) {
-      $span .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true" title="' . $tooltip . '"></i></span>';
+      $span .= '<span class="wt-icon-map-gov" title="' . $tooltip . '"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
     } else {
       $span .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
     }
@@ -576,7 +577,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
 
     if (!$compactDisplay) {
       $span .= '<div><span class="govText2">';
-      $span .= '(Administrative levels: ';
+      $span .= '('.I18N::translate('Administrative levels').': ';
       $span .= $hierarchy2;
       $span .= ')</span>';
     }
@@ -628,11 +629,11 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   ////////////////////////////////////////////////////////////////////////////////
   
   private function title1(): string {
-    return I18N::translate('Gov4Webtrees Module Location Data Providers');
+    return /* I18N: Module Configuration */I18N::translate('Gov4Webtrees Module Location Data Providers');
   }
   
   private function description1(): string {
-    return I18N::translate('Modules listed here are used (in the configured order) to determine GOV Ids of places.');
+    return /* I18N: Module Configuration */I18N::translate('Modules listed here are used (in the configured order) to determine GOV Ids of places.');
   }
   
   //hook management - generalize?

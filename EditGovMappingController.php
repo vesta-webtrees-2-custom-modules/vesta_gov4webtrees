@@ -83,7 +83,7 @@ class EditGovMappingController extends AbstractEditController {
     
     //unexpected to occur anymore now that we validate via select2GovId (where the same I18N string is used)
     if ($gov == null) {
-      $error = I18N::translate('Invalid Id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.');
+      $error = I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.');
       
       //try again
       return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
