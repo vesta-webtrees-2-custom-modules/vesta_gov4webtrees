@@ -14,6 +14,29 @@ require_once __DIR__ . '/nusoap/lib/nusoap.php';
 
 class SoapWrapper {
 
+  public static function initSoapClient($wsdl) {
+    //libxml_disable_entity_loader(false); //this was experimental
+    
+    /*
+    $params = array(
+      'trace' => 1,
+      'exceptions' => 1, 
+      'cache_wsdl' => WSDL_CACHE_NONE
+    );
+    */
+    
+    /*
+    try {
+      $file = file_get_contents($wsdl);
+      error_log("wsdl loaded: ".$file);
+    } catch (\Exception $ex) {
+      error_log("wsdl NOT loaded: ".$ex->getTraceAsString());
+    }
+    */
+    
+    return new SoapClient($wsdl);
+  }
+  
   public static function initNusoapClient($wsdl) {
     $client = new nusoap_client($wsdl, 'wsdl');
     //important:
@@ -46,8 +69,7 @@ class SoapWrapper {
       return SoapWrapper::nusoapArrayToObject($description);
     }
 
-    //libxml_disable_entity_loader(false); //this was experimental
-    $readclient = new SoapClient($wsdl);
+    $readclient = SoapWrapper::initSoapClient($wsdl);
     return $readclient->getTypeDescription($type, $lang);
   }
 
@@ -68,8 +90,7 @@ class SoapWrapper {
       return $client->call('checkObjectId', array('itemId' => $id));
     }
 
-    //libxml_disable_entity_loader(false); //this was experimental
-    $readclient = new SoapClient($wsdl);
+    $readclient = SoapWrapper::initSoapClient($wsdl);
     return $readclient->checkObjectId($id);
   }
 
@@ -109,9 +130,8 @@ class SoapWrapper {
 
       return $place;
     }
-
-    //libxml_disable_entity_loader(false); //this was experimental
-    $readclient = new SoapClient($wsdl);
+    
+    $readclient = SoapWrapper::initSoapClient($wsdl);
     try {
       $place = $readclient->getObject($id);
     } catch (SoapFault $fault) {

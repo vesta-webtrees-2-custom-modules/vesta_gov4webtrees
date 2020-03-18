@@ -68,13 +68,13 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
   public function customModuleAuthorName(): string {
     return 'Richard Cissée';
   }
-
+  
   public function customModuleVersion(): string {
-    return '2.0.2.1';
+    return file_get_contents(__DIR__ . '/latest-version.txt');
   }
 
   public function customModuleLatestVersionUrl(): string {
-    return 'https://cissee.de';
+    return 'https://raw.githubusercontent.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/master/latest-version.txt';
   }
 
   public function customModuleSupportUrl(): string {
@@ -367,7 +367,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     if (!$canEdit) {
       //not editable
       return new GenericViewElement('', '');
-    }
+    }    
     
     if ($fact->attribute('PLAC') === '') {
       //no PLAC, doesn't make sense to edit here
@@ -376,7 +376,9 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
     
     $ps = PlaceStructure::create("2 PLAC " . $fact->place()->gedcomName(), $fact->record()->tree());
     
-    $readonly = boolval($this->getPreference('NO_ONE_MAY_EDIT', '0'));
+    $readonly = boolval($this->getPreference('NO_ONE_MAY_EDIT', '0')) && 
+            !boolval($this->getPreference('VISITORS_MAY_EDIT', '0'));
+    
     if ($readonly) {
       $placerec = Functions::getSubRecord(2, '2 PLAC', $fact->gedcom());
       if (empty($placerec)) {
@@ -420,7 +422,7 @@ class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface
         'fact' => $fact, 
         'moduleName' => $this->name(),
         'title' => $title]);
-    
+     
     return new GenericViewElement($html, '');
   }
   
