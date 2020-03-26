@@ -17,7 +17,9 @@ use Fisharebest\Webtrees\Http\Controllers\Admin\ModuleController;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
+use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
+use Fisharebest\Webtrees\Module\ModuleCustomTrait;
 use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
@@ -44,11 +46,23 @@ use function response;
 use function route;
 use function view;
 
-class Gov4WebtreesModule extends AbstractModule implements ModuleCustomInterface, ModuleConfigInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface, GovIdEditControlsInterface {
+class Gov4WebtreesModule extends AbstractModule implements 
+  ModuleCustomInterface, 
+  ModuleConfigInterface, 
+  IndividualFactsTabExtenderInterface, 
+  FunctionsPlaceInterface, 
+  GovIdEditControlsInterface {
   
   //cannot use original AbstractModule because we override setPreference, setName
+  use ModuleCustomTrait, ModuleConfigTrait, VestaModuleTrait {
+    VestaModuleTrait::customTranslations insteadof ModuleCustomTrait;
+    VestaModuleTrait::customModuleLatestVersion insteadof ModuleCustomTrait;
+    VestaModuleTrait::getAssetAction insteadof ModuleCustomTrait;
+    VestaModuleTrait::assetUrl insteadof ModuleCustomTrait;
+    
+    VestaModuleTrait::getConfigLink insteadof ModuleConfigTrait;
+  }
   
-  use VestaModuleTrait;
   use Gov4WebtreesModuleTrait;
   use EmptyIndividualFactsTabExtender;
   use EmptyFunctionsPlace;

@@ -34,7 +34,6 @@ class EditGovMappingController extends AbstractEditController {
    */
   public function editGovMapping(ServerRequestInterface $request, Tree $tree): ResponseInterface {
     $placeName = Requests::getString($request, 'place-name');
-
     $ps = PlaceStructure::create("2 PLAC " . $placeName, $tree);
     
     //do not use plac2gov here - we're only interested in actual direct mappings at this point!
