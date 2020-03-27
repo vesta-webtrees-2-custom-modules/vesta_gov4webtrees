@@ -497,6 +497,8 @@ class Gov4WebtreesModule extends AbstractModule implements
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
     $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
 
+    $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
+    
     if ($useMedianDate) {
       $julianDay1 = $place->getEventDateInterval()->getMedian();
     } else {
@@ -516,12 +518,12 @@ class Gov4WebtreesModule extends AbstractModule implements
     $str1 = GenericViewElement::createEmpty();
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
-      $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govId, $tooltip);
+      $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
     }
     $str2 = GenericViewElement::createEmpty();
     if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
-      $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip);
+      $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
     }
     $gve = GenericViewElement::implode([$str1, $str2]);
     
@@ -535,7 +537,8 @@ class Gov4WebtreesModule extends AbstractModule implements
           string $julianDay, 
           string $julianDayText, 
           string $id,
-          ?string $tooltip): GenericViewElement {
+          ?string $tooltip, 
+          bool $fallbackPreferDeu): GenericViewElement {
 
     //initialize with placeholder
     $version = -1;
@@ -545,7 +548,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     $nextId = $id;
     while ($nextId !== null) {
-      $data = $this->getDataAndNextId($allowSettlements, $locale, $julianDay, $nextId, $version);
+      $data = $this->getDataAndNextId($allowSettlements, $locale, $julianDay, $nextId, $version, $fallbackPreferDeu);
       
       if ($data === []) {
         $nextId = null;
@@ -620,9 +623,10 @@ class Gov4WebtreesModule extends AbstractModule implements
           string $locale,
           string $julianDay, 
           string $id, 
-          int $version): array {
+          int $version, 
+          bool $fallbackPreferDeu): array {
     
-    $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale);
+    $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale, $fallbackPreferDeu);
 
     if ($gov == null) {
       //invalid id!

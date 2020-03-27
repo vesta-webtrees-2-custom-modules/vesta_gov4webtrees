@@ -55,6 +55,18 @@ trait Gov4WebtreesModuleTrait {
                 'RESET',
                 '0'))); //not a persistent setting, see overridden setSetting/setPreference!
     
+    $generalSub[] = new ControlPanelSubsection(
+            /* I18N: Module Configuration */I18N::translate('Fallback language'),
+            array(new ControlPanelCheckbox(
+                /* I18N: Module Configuration */I18N::translate('fallback to German place names'),
+                /* I18N: Module Configuration */I18N::translate('Determines strategy in case the place name is not available in the current language (for the given date): ') .
+                /* I18N: Module Configuration */I18N::translate('If checked, attempt to fall back to the German place name. ') .
+                /* I18N: Module Configuration */I18N::translate('If unchecked, prefer any language other than German; ') .
+                /* I18N: Module Configuration */I18N::translate('motivated by the assumption that place names in the local language are more useful in general ') .
+                /* I18N: Module Configuration */I18N::translate('(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names).'),
+                'FALLBACK_LANGUAGE_PREFER_DEU',
+                '1')));
+    
     $editingSub = array();
     $editingSub[] = new ControlPanelSubsection(
             /* I18N: Module Configuration */I18N::translate('Where to edit and store GOV ids'),

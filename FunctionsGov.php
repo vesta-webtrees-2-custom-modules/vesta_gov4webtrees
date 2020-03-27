@@ -928,7 +928,7 @@ class FunctionsGov {
   }
 
   //should only be used internally! use retrieveGovObjectSnapshot instead!
-  public static function getGovObjectSnapshot($julianDay, $id, $lang) {
+  public static function getGovObjectSnapshot($julianDay, $id, $lang, bool $fallbackPreferDeu) {
     $row = DB::table('gov_objects')
             ->where('gov_id', '=', $id)
             ->first();
@@ -945,7 +945,7 @@ class FunctionsGov {
     $version = (int)$row->version;
 
     $type = FunctionsGov::getTypeSnapshot($julianDay, $id, $lang);
-    $label = FunctionsGov::getLabelSnapshot($julianDay, $id, $lang);
+    $label = FunctionsGov::getLabelSnapshot($julianDay, $id, $lang, $fallbackPreferDeu);
     $parents = FunctionsGov::getParents($id);
     return new GovObjectSnapshot($lat, $lon, $version, $type, $label, $parents);
   }
@@ -968,7 +968,7 @@ class FunctionsGov {
     return $row->type;
   }
 
-  public static function getLabelSnapshot1($julianDay, $id, $lang) {
+  public static function getLabelSnapshot($julianDay, $id, $lang, bool $fallbackPreferDeu) {
     $rows = DB::table('gov_labels')
             ->where('gov_id', '=', $id)
             ->where(function($q) use ($julianDay) {
@@ -980,57 +980,41 @@ class FunctionsGov {
             ->orderBy('language', 'asc') //in order to obtain a consistent fallback
             ->get();
 
-    $fallback = "...";
-    foreach ($rows as $row) {
-      $fallback = $row->label; //anything will do ...
-      if ($row->language === $lang) {
-        return $row->label;
-      }
-    }
-
-    return $fallback;
-  }
-
-  public static function getLabelSnapshot($julianDay, $id, $lang) {
-    $rows = DB::table('gov_labels')
-            ->where('gov_id', '=', $id)
-            ->where(function($q) use ($julianDay) {
-              $q->whereNull('from')->orWhere('from', '<=', $julianDay);
-            })
-            ->where(function($q) use ($julianDay) {
-              $q->whereNull('to')->orWhere('to', '>', $julianDay);
-            })
-            ->orderBy('language', 'asc') //in order to obtain a consistent fallback
-            ->get();
-
-    $fallback = "...";
+    $fallbackNonDeu = "...";
     $fallbackDeu = "...";
     foreach ($rows as $row) {
-      if ($fallback === "...") {
-        $fallback = $row->label; //anything will do ... (but return a consistent fallback!)
-      }
+      
       if ($row->language === "deu") {
         $fallbackDeu = $row->label;
+      } else {
+        if ($fallbackNonDeu === "...") {
+          $fallbackNonDeu = $row->label; //anything will do ... (but return a consistent fallback!)
+        }
       }
+      
       if ($row->language === $lang) {
         return $row->label;
       }
     }
 
-    //if (empty($rows)) {
-    //	return 'X'.$fallback.'Y'.$id.'Z'.$lang;
-    //}
-    //prefer German fallback
-    if ($fallbackDeu !== "...") {
+    //prefer German fallback - or not! see https://www.webtrees.net/index.php/en/forum/4-customising/34270-vesta-gov4webtrees-language#76196
+    if ($fallbackPreferDeu) {
+      if ($fallbackDeu !== "...") {
+        return $fallbackDeu;
+      }
+      return $fallbackNonDeu;
+    } else {
+      if ($fallbackNonDeu !== "...") {
+        return $fallbackNonDeu;
+      }
       return $fallbackDeu;
     }
-    return $fallback;
   }
 
-  public static function retrieveGovObjectSnapshot($module, $julianDay, $id, int $version, $locale) {
+  public static function retrieveGovObjectSnapshot($module, $julianDay, $id, int $version, $locale, bool $fallbackPreferDeu) {
     $lang = FunctionsGov::toLang($locale);
 
-    $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
+    $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang, $fallbackPreferDeu);
     if ($gov != null) {
       if ($gov->getVersion() >= $version) {
         return $gov;
@@ -1044,7 +1028,7 @@ class FunctionsGov {
     }
 
     FunctionsGov::setGovObject($id, $gov);
-    return FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
+    return FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang, $fallbackPreferDeu);
   }
 
   public static function loadNonLoaded($module, $ids, $version) {
