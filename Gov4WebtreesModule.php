@@ -20,6 +20,8 @@ use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomTrait;
+use Fisharebest\Webtrees\Module\ModuleGlobalInterface;
+use Fisharebest\Webtrees\Module\ModuleGlobalTrait;
 use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
@@ -50,12 +52,13 @@ use function view;
 class Gov4WebtreesModule extends AbstractModule implements 
   ModuleCustomInterface, 
   ModuleConfigInterface, 
+  ModuleGlobalInterface,
   IndividualFactsTabExtenderInterface, 
   FunctionsPlaceInterface, 
   GovIdEditControlsInterface {
   
   //cannot use original AbstractModule because we override setPreference, setName
-  use ModuleCustomTrait, ModuleConfigTrait, VestaModuleTrait {
+  use ModuleCustomTrait, ModuleConfigTrait, ModuleGlobalTrait, VestaModuleTrait {
     VestaModuleTrait::customTranslations insteadof ModuleCustomTrait;
     VestaModuleTrait::customModuleLatestVersion insteadof ModuleCustomTrait;
     VestaModuleTrait::getAssetAction insteadof ModuleCustomTrait;
@@ -109,6 +112,19 @@ class Gov4WebtreesModule extends AbstractModule implements
     return __DIR__ . '/resources/';
   }
 
+  public function headContent(): string {
+    //easier to serve this globally, even if not strictly required on each page
+    //(but required e.g. for pages where gov2html is shown)
+    
+    //note: content actually served via style.phtml!
+    $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
+    
+    //note: content actually served via <theme>.phtml!
+    $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
+
+    return $html;
+  }
+    
   public function getHelpAction(ServerRequestInterface $request): ResponseInterface {
     $topic = Requests::getString($request, 'topic');
     return response(HelpTexts::helpText($topic));
@@ -206,27 +222,22 @@ class Gov4WebtreesModule extends AbstractModule implements
         'css/minimal.css' => 'css/minimal'];
   }
   
+  //no longer required
+  /*
   public function hFactsTabGetOutputBeforeTab(Individual $person) {
-    /*
-    //legacy
-    //load script once
-    //
-    //TODO: not great because timestamp is added, preventing caching
-    //(timestamp because this is loaded via jquery via ajax)
-    //not sure this still applies for 2.x
-    $pre = '<script src="' . $this->assetUrl('js/jquery-ui.js') . '"></script>';
-    $pre .= '<script src="' . $this->assetUrl('js/widgets.js') . '"></script>';
-    */
     $pre = '';
+    $html = '';
     
+    //now loaded globally
     //note: content actually served via style.phtml!
     $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
     
     //note: content actually served via <theme>.phtml!
     $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
-
+    
     return new GenericViewElement($html, $pre);
   }
+  */
 
   protected function getThemeForCss(): string {
     //align with current theme (supporting - for now - the default webtrees themes)
@@ -317,7 +328,10 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
     
     $html = '';
-    $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
+    
+    //now loaded globally
+    //$html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
+    
     $html .= view($this->name() . '::edit/gov-id-edit-control', [
             'moduleName' => $this->name(), 
             'withLabel' => $withLabel, 
@@ -489,6 +503,32 @@ class Gov4WebtreesModule extends AbstractModule implements
     $trace = $govReference->getTrace();
     $trace->add('map coordinates via Gov4Webtrees module (data from GOV server)');
     return new MapCoordinates($gov->getLat(), $gov->getLon(), $trace);
+  }
+  
+  public function gov2html(GovReference $govReference): ?string {
+    $govId = $govReference->getId();
+    
+    $locale = I18N::locale();
+        
+    $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
+    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
+
+    $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
+
+    $dateTime = new DateTime();
+    $dateTime->format('Y-m-d');
+    $julianDay2 = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
+
+    $tooltip = null;
+    $debugGovSource = $this->getPreference('DEBUG_GOV_SOURCE', '1');
+    if ($debugGovSource) {
+      $tooltip .= $govReference->getTrace()->getAll();
+    }
+    
+    $str2 = GenericViewElement::createEmpty();
+    $julianDayText = I18N::translate('today');
+    $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
+    return $str2->getMain();
   }
   
   public function factPlaceAdditions(PlaceStructure $place): ?FactPlaceAdditions {

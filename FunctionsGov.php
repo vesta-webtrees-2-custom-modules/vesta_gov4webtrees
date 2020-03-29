@@ -649,6 +649,9 @@ class FunctionsGov {
   public static function toLang($locale) {
 
     //currently, only 'eng','rus','dut' seem to have translated descriptions at all (and even these are incomplete)
+    if (substr($locale, 0, 2) === 'de') {
+      return 'deu';
+    }
     return FunctionsGov::LANGUAGES[substr($locale, 0, 2)] ?? 'deu';
   }
 
