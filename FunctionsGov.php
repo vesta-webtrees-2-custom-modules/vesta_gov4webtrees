@@ -5,6 +5,7 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 use DateInterval;
 use DateTime;
 use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Support\Collection;
 use nusoap_client;
 use SoapClient;
 use SoapFault;
@@ -46,7 +47,7 @@ class SoapWrapper {
 
     $err = $client->getError();
     if ($err) {
-      throw new Exception("NuSOAP Constructor error: " . $err);
+      throw new \Exception("NuSOAP Constructor error: " . $err);
     }
     return $client;
   }
@@ -413,6 +414,20 @@ class FunctionsGov {
     return $row->name;
   }
 
+  /**
+   * 
+   * @param array[string] $ids
+   * @return Collection<string>
+   */
+  public static function getNamesMappedToGovIds(array $ids): Collection {    
+    return DB::table('gov_ids')
+            ->whereIn('gov_id', $ids)
+            ->get()
+            ->map(function (stdClass $row): string {
+                return $row->name;
+            });
+  }
+  
   public static function deleteGovId($name) {
     DB::table('gov_ids')
             ->where('name', '=', $name)

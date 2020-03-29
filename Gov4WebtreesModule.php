@@ -25,6 +25,7 @@ use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\View;
+use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ReflectionObject;
@@ -438,6 +439,16 @@ class Gov4WebtreesModule extends AbstractModule implements
         'title' => $title]);
      
     return new GenericViewElement($html, '');
+  }
+  
+  public function govs2Placenames(Collection $govs): Collection {
+    $ids = $govs.map(function (GovReference $gov): string {
+                return $gov->id;
+            })
+            ->toArray();
+    
+    //get all placenames via mapping table
+    return FunctionsGov::getNamesMappedToGovIds($ids);
   }
   
   public function plac2Gov(PlaceStructure $ps): ?GovReference {
