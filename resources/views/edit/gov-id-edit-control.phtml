@@ -30,11 +30,15 @@ if (!$thePlace) {
 
 </div>
 
+  <?php
+    //data-minimum-input-length: usually 12, but there are some shorter ones, such as adm_368372
+  ?>
+
 <select
     autocomplete="off"
     class="form-control select2gov"
     data-ajax--delay="350"
-    data-minimum-input-length="12"
+    data-minimum-input-length="10"
     data-ajax--type="POST"
     data-ajax--url="<?= e(route('module', [
         'module' => $moduleName,
