@@ -15,7 +15,6 @@ use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
 use Fisharebest\Webtrees\Http\Controllers\Admin\ModuleController;
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
@@ -116,10 +115,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     //easier to serve this globally, even if not strictly required on each page
     //(but required e.g. for pages where gov2html is shown)
     
-    //note: content actually served via style.phtml!
-    $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
-    
-    //note: content actually served via <theme>.phtml!
+    $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';    
     $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
 
     return $html;
@@ -215,29 +211,13 @@ class Gov4WebtreesModule extends AbstractModule implements
     return $placeStructures;
   }
 
-  public function assetsViaViews(): array {
-    return [
-        'css/style.css' => 'css/style',
-        'css/webtrees.css' => 'css/webtrees',
-        'css/minimal.css' => 'css/minimal'];
-  }
-  
-  //no longer required
-  /*
-  public function hFactsTabGetOutputBeforeTab(Individual $person) {
-    $pre = '';
-    $html = '';
-    
-    //now loaded globally
-    //note: content actually served via style.phtml!
-    $html = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
-    
-    //note: content actually served via <theme>.phtml!
-    $html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
-    
-    return new GenericViewElement($html, $pre);
-  }
-  */
+  //no longer required - css is static now
+  //public function assetsViaViews(): array {
+  //  return [
+  //      'css/style.css' => 'css/style',
+  //      'css/webtrees.css' => 'css/webtrees',
+  //      'css/minimal.css' => 'css/minimal'];
+  //}
 
   protected function getThemeForCss(): string {
     //align with current theme (supporting - for now - the default webtrees themes)
@@ -253,53 +233,6 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
     return $themeName;
   }
-  
-  //legacy
-  /*
-  public function hFactsTabGetOutputAfterTab(Individual $person) {
-    //refresh (= initially show) all widgets (these are created via FunctionsPrintGov)!
-    //(further optimization: could restrict to visible facts here, and refresh others on toggle of 'Events of close relatives')
-    $post = '<script>' .
-            '$(".govWidget").each(function() {' .
-            '	$(this).gov("instance")._refresh();' .
-            '});' .
-            '</script>';
-
-    return new GenericViewElement('', $post);
-  }
-
-  public function hFactsTabGetFormatPlaceAdditions(PlaceStructure $place) {
-    $fpg = new FunctionsPrintGov($this);
-    $gve = $fpg->getGovForFactPlace($place);
-    $html = $gve->getMain();
-    $script = $gve->getScript();
-    $ll = $this->hPlacesGetLatLon($place);
-    $tooltip = null;
-    if ($ll) {
-      $tooltip = 'via GOV';
-    }
-
-    return new FormatPlaceAdditions('', $ll, $tooltip, $html, '', $script);
-  }
-
-  public function getExpandAction(ServerRequestInterface $request): ResponseInterface {
-    $switchToSlowAjax = Requests::getBool($request, 'switchToSlowAjax');
-    if ($switchToSlowAjax) {
-      //auto-adjust
-      $this->setPreference('FAST_AJAX', '0');
-    }
-    
-    //we can cache here (response is immutable for given version)!
-    //$response->headers->set('Cache-Control', 'public,max-age=31536000,immutable');
-    $expiry_date = Carbon::now()->addYears(10)->toDateTimeString();
-    
-    $response = response(AjaxRequests::expand($this, $request), 200, [
-      'Expires' => $expiry_date,
-    ]);
-    
-    return $response;
-  }
-  */
 
   public function setPreference(string $setting_name, string $setting_value): void {
     if ('RESET' === $setting_name) {
