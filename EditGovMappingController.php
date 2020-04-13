@@ -33,6 +33,9 @@ class EditGovMappingController extends AbstractEditController {
    * @return Response
    */
   public function editGovMapping(ServerRequestInterface $request, Tree $tree): ResponseInterface {
+    //set delay here to mimic slow servers and to test whether select2 is properly initialized (issue #9)
+    //sleep(2);
+    
     $placeName = Requests::getString($request, 'place-name');
     $ps = PlaceStructure::create("2 PLAC " . $placeName, $tree);
     

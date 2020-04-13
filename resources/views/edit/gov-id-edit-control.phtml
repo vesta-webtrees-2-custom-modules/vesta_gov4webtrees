@@ -59,25 +59,18 @@ if (!$thePlace) {
 </select>
 
 <?php View::push('javascript') ?>
-<?php if ($modal): /* cf ajax.phtml (in case this is used as a modal), with adjustment for 'noResults' */ ?>
-<script>
-//don't do the following on DOMContentLoaded - we're executing after this element has already been rendered 
-//document.addEventListener("DOMContentLoaded", function () {
-  $("#wt-ajax-modal")
-    .on("shown.bs.modal", function (event) {
-      // Activate autocomplete fields
-      $(".select2gov", $(this)).select2({
-        dropdownParent: $(this),
-        language: {
-          "noResults": function(){
-              return "<?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
-          }
-        },
-        escapeMarkup: function (x) { return x; }
-      });
-    });
-//});
-</script>
+<?php if ($modal): /* cf ajax.phtml (in case this is used as a modal), with adjustment for 'noResults' */
+//nothing to do, handled elsewhere
+ 
+//this fixes issue #9.  
+//apparently, there is no way to properly and consistently (fast vs slow servers) initialize select2 within modal via script loaded via ajax.
+//
+//note that in any case we'd keep adding more event listeners every time the content is loaded via ajax,
+//so anyway, it seems better to initialize from placeholder, as in ajax.phtml;
+//we just need our own specific placeholder: ajax-modal-gov.phtml.
+//
+//by the way: why are we even loading modal content via ajax? seems clumsy.
+?>
 <?php else: /* cf webtrees.js, with adjustment for 'noResults' */ ?>
 <script>
 $(function() {

@@ -1,0 +1,48 @@
+<?php 
+  //adapted from ajax.phtml
+
+  use Fisharebest\Webtrees\I18N;
+
+?>
+<!-- A dynamic modal, with content loaded using AJAX. -->
+<div class="modal fade" id="wt-ajax-modal-gov" tabindex="-1" role="dialog" aria-labelledBy="wt-ajax-modal-gov-title" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+            <div id="wt-ajax-modal-gov-title"></div>
+        </div>
+	</div>
+</div>
+
+<script>
+    //unlike ajax.phtml, this is loaded via ajax (as part of tab), i.e. after DOMContentLoaded
+    //we could instead replace the individual-page.phtml view, but that potentially clashes with other custom modules!
+    //document.addEventListener("DOMContentLoaded", function () {
+        $("#wt-ajax-modal-gov")
+            .on("show.bs.modal", function (event) {
+              console.log("show gov");
+                let modal_content = this.querySelector(".modal-content");
+
+                // If we need to paste the result into a select2 control
+                modal_content.dataset.selectId = event.relatedTarget.dataset.selectId;
+
+                // Clear existing content (to prevent FOUC) and load new content.
+                $(modal_content)
+                    .empty()
+                    .load(event.relatedTarget.dataset.href, function () {
+                        // Activate autocomplete fields
+                        $("select.select2gov").select2({
+                            dropdownParent: $(this),
+                            language: {
+                                "noResults": function(){
+                                    return "<?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
+                                }
+                            },
+                            // Do not escape - we do it on the server.
+                            escapeMarkup: function (x) {
+                                return x;
+                            }
+                        });
+                    });
+            });
+    //});
+</script>

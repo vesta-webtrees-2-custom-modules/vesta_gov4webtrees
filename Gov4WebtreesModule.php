@@ -15,6 +15,7 @@ use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
 use Fisharebest\Webtrees\Http\Controllers\Admin\ModuleController;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
@@ -316,6 +317,12 @@ class Gov4WebtreesModule extends AbstractModule implements
   
   ////////////////////////////////////////////////////////////////////////////////
   
+  public function hFactsTabGetOutputBeforeTab(Individual $person) {
+    //special modal placeholder
+    $html = view($this->name() . '::modals/ajax-modal-gov');
+    return GenericViewElement::create($html);
+  }
+  
   public function hFactsTabGetAdditionalEditControls(
           Fact $fact): GenericViewElement {
     
@@ -328,12 +335,12 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     if (!$canEdit) {
       //not editable
-      return new GenericViewElement('', '');
+      return GenericViewElement::createEmpty();
     }    
     
     if ($fact->attribute('PLAC') === '') {
       //no PLAC, doesn't make sense to edit here
-      return new GenericViewElement('', '');
+      return GenericViewElement::createEmpty();
     }
     
     $ps = PlaceStructure::create("2 PLAC " . $fact->place()->gedcomName(), $fact->record()->tree());
@@ -353,7 +360,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     
       if ($govReference === null) {
         //nothing to offer here
-        return new GenericViewElement('', '');
+        return GenericViewElement::createEmpty();
       }
       
       //allow to reload the gov hierarchy
@@ -367,7 +374,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             'place-name' => $fact->place()->gedcomName()
         ])]);
     
-      return new GenericViewElement($html, '');
+      return GenericViewElement::create($html);
     }
     
     //do not use plac2gov here - we're only interested in actual direct mappings at this point!
@@ -385,7 +392,7 @@ class Gov4WebtreesModule extends AbstractModule implements
         'moduleName' => $this->name(),
         'title' => $title]);
      
-    return new GenericViewElement($html, '');
+    return GenericViewElement::create($html);
   }
   
   public function govs2Placenames(Collection $govs): Collection {

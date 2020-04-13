@@ -76,7 +76,7 @@ class SoapWrapper {
 
   public static function checkObjectId($module, $id) {
     $wsdl = 'http://gov.genealogy.net/services/ComplexService?wsdl';
-
+  
     $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
     if (!$nusoap) {
       if (!extension_loaded('soap')) {
