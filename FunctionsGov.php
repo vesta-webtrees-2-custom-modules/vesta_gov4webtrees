@@ -4,12 +4,14 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use DateInterval;
 use DateTime;
+use Exception;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
 use nusoap_client;
 use SoapClient;
 use SoapFault;
 use stdClass;
+use Throwable;
 
 require_once __DIR__ . '/nusoap/lib/nusoap.php';
 
@@ -47,7 +49,7 @@ class SoapWrapper {
 
     $err = $client->getError();
     if ($err) {
-      throw new \Exception("NuSOAP Constructor error: " . $err);
+      throw new Exception("NuSOAP Constructor error: " . $err);
     }
     return $client;
   }
@@ -83,16 +85,25 @@ class SoapWrapper {
         //use NuSOAP, auto-adjust setting
         $nusoap = true;
         $module->setPreference('USE_NUSOAP', '1');
+      } else {
+        try {
+          $readclient = SoapWrapper::initSoapClient($wsdl);
+          return $readclient->checkObjectId($id);
+        } catch (Throwable $ex) {
+          //fall-through and retry with nusoap, in order to simplify error handling
+        }        
       }
     }
 
-    if ($nusoap) {
-      $client = SoapWrapper::initNusoapClient($wsdl);
-      return $client->call('checkObjectId', array('itemId' => $id));
+    $client = SoapWrapper::initNusoapClient($wsdl);
+    //$client->setGlobalDebugLevel(1);
+    $ret = $client->call('checkObjectId', array('itemId' => $id));
+    $err = $client->getError();
+    if ($err) {
+      //error_log(print_r($err, TRUE));
+      throw new GOVServerUnavailableException($err);
     }
-
-    $readclient = SoapWrapper::initSoapClient($wsdl);
-    return $readclient->checkObjectId($id);
+    return $ret;
   }
 
   public static function getObject($module, $id) {
@@ -356,10 +367,10 @@ class FunctionsGov {
   //TODO? "Die Beschreibung der Objekttypen kann man per Webservice mit der WSDL-Operation getTypeDescription abholen und in einer Tabelle ablegen." (GOV Wiki)
   //const+array not available in php < 5.6     
   //
-  //TODO update regularly!
+  //TODO update regularly! Last update: 2020/04. Source: http://gov.genealogy.net/type/list
   //
   public static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
-  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 158, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267);
+  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 158, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274);
   public static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 118, 120, 121, 129, 139, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
 
   public static function clear() {

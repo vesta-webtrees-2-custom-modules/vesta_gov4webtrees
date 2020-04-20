@@ -59,7 +59,7 @@ if (!$thePlace) {
 </select>
 
 <?php View::push('javascript') ?>
-<?php if ($modal): /* cf ajax.phtml (in case this is used as a modal), with adjustment for 'noResults' */
+<?php if ($select2Initializer === null): /* cf ajax.phtml (in case this is used as a modal, or part thereof), with adjustment for 'noResults' */
 //nothing to do, handled elsewhere
  
 //this fixes issue #9.  
@@ -67,31 +67,20 @@ if (!$thePlace) {
 //
 //note that in any case we'd keep adding more event listeners every time the content is loaded via ajax,
 //so anyway, it seems better to initialize from placeholder, as in ajax.phtml;
-//we just need our own specific placeholder: ajax-modal-gov.phtml.
+//we just need our own specific placeholder: ajax-modal-vesta.phtml.
 //
 //by the way: why are we even loading modal content via ajax? seems clumsy.
 ?>
 <?php else: /* cf webtrees.js, with adjustment for 'noResults' */ ?>
 <script>
 $(function() {
-  $("select.select2gov").select2({
-        language: {
-            "noResults": function(){
-                return "<?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
-            }
-        },
-        // Do not escape - we do it on the server.
-        escapeMarkup: function (x) {
-            return x;
-        }
-    });
-  
+  <?= $select2Initializer ?>
   //do we really need this?
-  $("select.select2gov:not([multiple])")
-    .on("select2:unselect", function (evt) {
-        $(evt.delegateTarget).html("<option value=\"\" selected></option>");
-    });
- 
+  //$("select.select2gov:not([multiple])")
+  //  .on("select2:unselect", function (evt) {
+  //      $(evt.delegateTarget).html("<option value=\"\" selected></option>");
+  //  });
+   
 });
 </script>
 <?php endif ?>

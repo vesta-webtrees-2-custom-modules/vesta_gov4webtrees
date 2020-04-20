@@ -1,0 +1,22 @@
+<?php 
+  use Fisharebest\Webtrees\I18N;
+
+  //a javascript block
+?>
+
+// Activate autocomplete fields
+$("select.select2gov").select2({
+    <?php if ($withinModal) : ?>
+    dropdownParent: $(this),      
+    <?php endif ?>
+    
+    language: {
+        "noResults": function(){
+            return "<?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?>";
+        }
+    },
+    // Do not escape - we do it on the server.
+    escapeMarkup: function (x) {
+        return x;
+    }
+});

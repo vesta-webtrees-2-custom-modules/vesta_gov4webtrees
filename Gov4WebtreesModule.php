@@ -81,6 +81,40 @@ class Gov4WebtreesModule extends AbstractModule implements
     //cannot do this in constructor: module name not set yet!    
     //migrate (we need the module name here to store the setting)
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 1);
+
+    //ongoing - error handling in case GOV server is unavailable
+    /*
+    $lastServerDown = intval($this->getPreference('GOV_SERVER_DOWN', '0'));
+    if ($lastServerDown > 0) {
+      $messages = Session::get('flash_messages', []);
+      if (empty($messages)) {
+        FlashMessages::addMessage(I18N::translate("The GOV server seems to be temporarily unavailable."));
+      }
+      
+      //reset (in order to recover once the server is back)
+      //but only if it's been a while
+      //(we do not reset immediately because we may be in ajax context here,
+      //in which case the next 'main' request still needs to see the message)
+      if ((time() - $lastServerDown) > 60) {
+        //sixty seconds should be enough for ajax requests, surely?
+        $this->setPreference('GOV_SERVER_DOWN', '0');
+      }
+    }
+    */
+  }
+   
+  protected function flashGovServerUnavailable() {
+    //ongoing - error handling in case GOV server is unavailable
+    /*
+    //problematic - flash message aren't thead-safe, see webtrees issue #3138
+    $messages = Session::get('flash_messages', []);
+    if (empty($messages)) {
+      FlashMessages::addMessage(I18N::translate("The GOV server seems to be temporarily unavailable."));
+    }
+    
+    //instead, use a setting and notify onBoot() (i.e. on subsequent requests)? 
+    //$this->setPreference('GOV_SERVER_DOWN', ''.time());
+    */
   }
   
   public function customModuleAuthorName(): string {
@@ -145,14 +179,25 @@ class Gov4WebtreesModule extends AbstractModule implements
       return array();
     }
 
-    $govId = FunctionsPrintGov::getGovId($place);
+    try {
+      $govId = FunctionsPrintGov::getGovId($place);
+    } catch (GOVServerUnavailableException $ex) {
+      $govId = null;
+      $this->flashGovServerUnavailable();
+    }
+    
     if ($govId === null) {
       return array();
     }
 
     $placeStructures = array();
 
-    $gov = FunctionsGov::retrieveGovObject($this, $govId);
+    try {
+      $gov = FunctionsGov::retrieveGovObject($this, $govId);
+    } catch (GOVServerUnavailableException $ex) {
+      $gov = null;
+      $this->flashGovServerUnavailable();
+    }
 
     //load hierarchy (one per type of location)
     foreach ($typesOfLocation as $typeOfLocation) {
@@ -249,6 +294,17 @@ class Gov4WebtreesModule extends AbstractModule implements
   
   //GovIdEditControlsInterface
   
+  public function govIdEditControlSelect2ScriptSnippet(): string {
+    return $this->govIdEditControlSelect2ScriptSnippetInternal(true);
+  }
+  
+  public function govIdEditControlSelect2ScriptSnippetInternal(bool $withinModal): string {
+    $html = view($this->name() . '::script/select2-initializer-gov', [
+        'withinModal' => $withinModal]);
+    
+    return $html;
+  }
+  
   public function govIdEditControl(
           ?string $govId, 
           string $id, 
@@ -258,7 +314,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           bool $withLabel): GenericViewElement {
     
     if (!boolval($this->getPreference('SUPPORT_EDITING_ELSEWHERE', '1'))) {
-      return new GenericViewElement('', '');
+      return GenericViewElement::createEmpty();
     }
     
     $html = '';
@@ -273,7 +329,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             'name' => $name, 
             'placeName' => $placeName, 
             'internal' => false,
-            'modal' => $forModal,
+            'select2Initializer' => $forModal?null:$this->govIdEditControlSelect2ScriptSnippetInternal(false),
             'govId' => $govId]);
     
     $script = View::stack('javascript');
@@ -318,8 +374,14 @@ class Gov4WebtreesModule extends AbstractModule implements
   ////////////////////////////////////////////////////////////////////////////////
   
   public function hFactsTabGetOutputBeforeTab(Individual $person) {
-    //special modal placeholder
-    $html = view($this->name() . '::modals/ajax-modal-gov');
+    //add the vesta modal placeholder, with custom select2 snippet
+    $script = $this->govIdEditControlSelect2ScriptSnippet();
+    
+    $html = view(VestaAdminController::vestaViewsNamespace() . '::modals/ajax-modal-vesta', [
+                'ajax' => true, //tab is loaded via ajax!
+                'select2Initializers' => [$script]
+    ]);
+    
     return GenericViewElement::create($html);
   }
   
@@ -429,7 +491,13 @@ class Gov4WebtreesModule extends AbstractModule implements
   }
   
   public function gov2map(GovReference $govReference): ?MapCoordinates {
-    $gov = FunctionsGov::retrieveGovObject($this, $govReference->getId());
+    try {
+      $gov = FunctionsGov::retrieveGovObject($this, $govReference->getId());
+    } catch (GOVServerUnavailableException $ex) {
+      $gov = null;
+      $this->flashGovServerUnavailable();
+    } 
+    
     if ($gov === null) {
       return null;
     }
@@ -617,7 +685,12 @@ class Gov4WebtreesModule extends AbstractModule implements
           int $version, 
           bool $fallbackPreferDeu): array {
     
-    $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale, $fallbackPreferDeu);
+    try {
+      $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale, $fallbackPreferDeu);
+    } catch (GOVServerUnavailableException $ex) {
+      $gov = null;
+      $this->flashGovServerUnavailable();
+    }    
 
     if ($gov == null) {
       //invalid id!

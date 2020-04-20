@@ -24,7 +24,7 @@ e(route('module', [
             'name' => 'gov-id',
             'placeName' => $placeName, 
             'internal' => true, 
-            'modal' => true,
+            'select2Initializer' => null, //we're within a modal: initialize elsewhere!
             'govId' => $govId]) ?>
     </div>
 
@@ -51,7 +51,7 @@ e(route('module', [
           contentType: false,
           processData: false,
           success: function () {
-              //$('#wt-ajax-modal-gov').modal('hide'); //no need for this
+              //$('#wt-ajax-modal-vesta').modal('hide'); //no need for this
               
               //additionally scroll to top in order to show the flash message
               window.onbeforeunload = function () {
