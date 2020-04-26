@@ -80,41 +80,17 @@ class Gov4WebtreesModule extends AbstractModule implements
   protected function onBoot(): void {
     //cannot do this in constructor: module name not set yet!    
     //migrate (we need the module name here to store the setting)
-    $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 1);
-
-    //ongoing - error handling in case GOV server is unavailable
-    /*
-    $lastServerDown = intval($this->getPreference('GOV_SERVER_DOWN', '0'));
-    if ($lastServerDown > 0) {
-      $messages = Session::get('flash_messages', []);
-      if (empty($messages)) {
-        FlashMessages::addMessage(I18N::translate("The GOV server seems to be temporarily unavailable."));
-      }
-      
-      //reset (in order to recover once the server is back)
-      //but only if it's been a while
-      //(we do not reset immediately because we may be in ajax context here,
-      //in which case the next 'main' request still needs to see the message)
-      if ((time() - $lastServerDown) > 60) {
-        //sixty seconds should be enough for ajax requests, surely?
-        $this->setPreference('GOV_SERVER_DOWN', '0');
-      }
-    }
-    */
+    $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 2);
   }
    
-  protected function flashGovServerUnavailable() {
+  public function flashGovServerUnavailable() {
     //ongoing - error handling in case GOV server is unavailable
-    /*
-    //problematic - flash message aren't thead-safe, see webtrees issue #3138
+    //problematic: flash message aren't thead-safe, see webtrees issue #3138
+    //but we can live with the current fix
     $messages = Session::get('flash_messages', []);
-    if (empty($messages)) {
+    if (empty($messages)) {      
       FlashMessages::addMessage(I18N::translate("The GOV server seems to be temporarily unavailable."));
     }
-    
-    //instead, use a setting and notify onBoot() (i.e. on subsequent requests)? 
-    //$this->setPreference('GOV_SERVER_DOWN', ''.time());
-    */
   }
   
   public function customModuleAuthorName(): string {
@@ -284,6 +260,10 @@ class Gov4WebtreesModule extends AbstractModule implements
     if ('RESET' === $setting_name) {
       if ('1' === $setting_value) {
         FunctionsGov::clear();
+        
+        //we didn't mean to store this preference at all,
+        //but we accidentally did. Safer to reset always, that's anyway the intended behavior
+        $setting_value = '0';
       }
     }
 
@@ -365,7 +345,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     //reset in order to reload hierarchy
     FunctionsGov::deleteGovObject($govId);
     
-    FlashMessages::addMessage(I18N::translate('GOV place hierarchy has been reloaded from GOV server for %1$s.', $placeName));
+    FlashMessages::addMessage(I18N::translate('GOV place hierarchy for %1$s will be reloaded from server.', $placeName));
     
     //no need to return data
     return response();
@@ -513,7 +493,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     return new MapCoordinates($gov->getLat(), $gov->getLon(), $trace);
   }
   
-  public function gov2html(GovReference $govReference): ?string {
+  public function gov2html(GovReference $govReference): ?GenericViewElement {
     $govId = $govReference->getId();
     
     $locale = I18N::locale();
@@ -536,7 +516,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     $str2 = GenericViewElement::createEmpty();
     $julianDayText = I18N::translate('today');
     $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
-    return $str2->getMain();
+    return $str2;
   }
   
   public function factPlaceAdditions(PlaceStructure $place): ?FactPlaceAdditions {

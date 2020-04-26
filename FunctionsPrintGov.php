@@ -43,45 +43,8 @@ class FunctionsPrintGov {
     if (!$name) {
       return null;
     }
-      
-    //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
-    //$type is legacy!
-    $type = 'MAIN';
-    $fallbackType = 'KSP';
-    /*    
-    //don't even switch for legacy ids - confusing wrt resetting gov id
-    switch ($place->getEventType()) {
-      case 'CHR':
-      case 'MARR':
-      case 'BAPM':
-      case 'BURI':
-        $type = 'KSP';
-        $fallbackType = 'MAIN';
-        break;
-      default:
-        break;
-    }
-    */
 
-    $id = null;
-    
-    //note: version in id mapping table is nowhere used, i.e. deprecated!
-    $version = null;
-
-    $idAndVersion = FunctionsGov::getGovId($fullName, $type);
-    if ($idAndVersion) {
-      $version = array_pop($idAndVersion);
-      $id = array_pop($idAndVersion);
-    } else {
-      //fallback
-      $idAndVersion = FunctionsGov::getGovId($fullName, $fallbackType);
-      if ($idAndVersion) {
-        $version = array_pop($idAndVersion);
-        $id = array_pop($idAndVersion);
-      }
-    }
-
-    return $id;
+    return FunctionsGov::getGovId($fullName);
   }
 
   //see Date.php

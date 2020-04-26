@@ -105,20 +105,27 @@ class EditGovMappingController extends AbstractEditController {
   public function select2GovId(ServerRequestInterface $request): ResponseInterface {
       //$page  = (int) ($request->getParsedBody()['page'] ?? 1);
       $govId = $request->getParsedBody()['q'] ?? '';
-      
-      $ret = FunctionsGov::checkGovId($this->module, $govId);
 
-      $results = ($ret !== null)?collect([[
-                    'id'    => $ret,
-                    'text'  => $ret,
-                    'title' => ' ',
-                ]]):collect([]);
+      try {  
+        $ret = FunctionsGov::checkGovId($this->module, $govId);
 
-      return response([
-          'results'    => $results,
-          'pagination' => [
-              'more' => false,
-          ],
-      ]);
+        $results = ($ret !== null)?collect([[
+                      'id'    => $ret,
+                      'text'  => $ret,
+                      'title' => ' ',
+                  ]]):collect([]);
+
+        return response([
+            'results'    => $results,
+            'pagination' => [
+                'more' => false,
+            ],
+        ]);
+      } catch (GOVServerUnavailableException $ex) {
+        $this->module->flashGovServerUnavailable();
+        return response([
+            'error'    => 'GOVServerUnavailable',
+        ], StatusCodeInterface::STATUS_SERVICE_UNAVAILABLE);
+      }
   }
 }

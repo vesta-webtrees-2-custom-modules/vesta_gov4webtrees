@@ -51,7 +51,7 @@ e(route('module', [
           contentType: false,
           processData: false,
           success: function () {
-              //$('#wt-ajax-modal-vesta').modal('hide'); //no need for this
+              $('#wt-ajax-modal-vesta').modal('hide'); //also hideen when reload is finished, but this is faster
               
               //additionally scroll to top in order to show the flash message
               window.onbeforeunload = function () {

@@ -9,7 +9,6 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
 use nusoap_client;
 use SoapClient;
-use SoapFault;
 use stdClass;
 use Throwable;
 
@@ -63,17 +62,25 @@ class SoapWrapper {
         //use NuSOAP, auto-adjust setting
         $nusoap = true;
         $module->setPreference('USE_NUSOAP', '1');
+      } else {
+        try {
+          $readclient = SoapWrapper::initSoapClient($wsdl);
+          return $readclient->getTypeDescription($type, $lang);
+        } catch (Throwable $ex) {
+          //fall-through and retry with nusoap, in order to simplify error handling
+        }        
       }
     }
 
-    if ($nusoap) {
-      $client = SoapWrapper::initNusoapClient($wsdl);
-      $description = $client->call('getTypeDescription', array('typeId' => $type, 'language' => $lang));
-      return SoapWrapper::nusoapArrayToObject($description);
+    $client = SoapWrapper::initNusoapClient($wsdl);
+    //$client->setGlobalDebugLevel(1);
+    $description = $client->call('getTypeDescription', array('typeId' => $type, 'language' => $lang));
+    $err = $client->getError();
+    if ($err) {
+      //error_log(print_r($err, TRUE));
+      throw new GOVServerUnavailableException($err);
     }
-
-    $readclient = SoapWrapper::initSoapClient($wsdl);
-    return $readclient->getTypeDescription($type, $lang);
+    return SoapWrapper::nusoapArrayToObject($description);
   }
 
   public static function checkObjectId($module, $id) {
@@ -115,45 +122,28 @@ class SoapWrapper {
         //use NuSOAP, auto-adjust setting
         $nusoap = true;
         $module->setPreference('USE_NUSOAP', '1');
-      }
-    }
-
-    if ($nusoap) {
-      $client = SoapWrapper::initNusoapClient($wsdl);
-      $place = $client->call('getObject', array('itemId' => $id));
-      if ($client->fault) {
-        echo 'Fault: ';
-        print_r($place);
       } else {
-        $err = $client->getError();
-        if ($err) {
-          echo 'Error: ';
-          print_r($err);
-        }
+        try {
+          $readclient = SoapWrapper::initSoapClient($wsdl);
+          return $readclient->getObject($id);
+        } catch (Throwable $ex) {
+          //fall-through and retry with nusoap, in order to simplify error handling
+        }        
       }
-
-      if ($place == null) {
-        return null;
-      }
-
-      $place = SoapWrapper::nusoapArrayToObject($place);
-      //print_r($place);
-      //echo "<br/>";
-
-      return $place;
-    }
-    
-    $readclient = SoapWrapper::initSoapClient($wsdl);
-    try {
-      $place = $readclient->getObject($id);
-    } catch (SoapFault $fault) {
-      //if (substr($fault->faultstring,0,15) === "no such object:") {
-      //	return null;
-      //}
-      throw $fault;
     }
 
-    return $place;
+    $client = SoapWrapper::initNusoapClient($wsdl);
+    $place = $client->call('getObject', array('itemId' => $id));
+    $err = $client->getError();
+    if ($err) {
+      //error_log(print_r($err, TRUE));
+      throw new GOVServerUnavailableException($err);
+    }
+    if ($place == null) {
+      return null;
+    }
+
+    return SoapWrapper::nusoapArrayToObject($place);
   }
 
   //cannot use this - have to strip nusoap's '!' prefixes, and preserve some arrays
@@ -390,28 +380,18 @@ class FunctionsGov {
             ->delete();
     
     //keep ids!
-    
-    //no longer required
-    /*
-    //keep ids, but re-version (browser caches getExpandAction() responses based on version, so we have to reset here)    
-    DB::table('gov_ids')->update([
-        'version' => time()
-    ]);
-    */
   }
 
-  public static function getGovId($name, $type) {
+  public static function getGovId($name): ?string {
     $row = DB::table('gov_ids')
             ->where('name', '=', $name)
-            ->where('type', '=', $type)
             ->first();
 
     if ($row == null) {
       return null;
     }
     $id = $row->gov_id;
-    $version = $row->version;
-    return array($id, $version);
+    return $id;
   }
 
   public static function getNameMappedToGovId($id) {
@@ -442,30 +422,15 @@ class FunctionsGov {
   public static function deleteGovId($name) {
     DB::table('gov_ids')
             ->where('name', '=', $name)
-            //->where('type', '=', $type)
             ->delete();
   }
   
-  public static function setGovId($name, $id) {
-    //https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/issues/3
-    //$type is legacy!
-    
-    //conceptually 3 cases:
-    //1. this is a new id: Always use type 'MAIN'.
-    //2. there is a single existing id: Set type 'MAIN'.
-    //3. there are two existing ids, one for each type:
-    //notify user that this isn't a good idea (elsewhere).
-    //delete both existing and set type 'MAIN'
-    
-    //i.e. in any case, delete all existing and always set type 'MAIN'.
-    
+  public static function setGovId($name, $id) {    
     FunctionsGov::deleteGovId($name);
 
     DB::table('gov_ids')->insert([
         'name' => $name,
-        'type' => 'MAIN', //$type,
-        'gov_id' => $id,
-        'version' => 0 //$version is also legacy in this table
+        'gov_id' => $id
     ]);
   }
 
@@ -937,21 +902,47 @@ class FunctionsGov {
         $labels[] = new GovProperty($place->name->value, $lang, $from, $to);
       }
     }
-
-    if (property_exists($place, "part-of")) {
+    
+    $rawParents = array();
+    
+    //we currently do not distinguish between the different kinds of relation!
+    
+    if (property_exists($place, 'part-of')) {
       if (is_array($place->{'part-of'})) {
-        foreach ($place->{'part-of'} as $key => $parent) {
-          $from = FunctionsGov::getBeginAsJulianDate($parent);
-          $to = FunctionsGov::getEndAsJulianDateExclusively($parent);
-          $parents[] = new GovProperty($parent->ref, null, $from, $to);
+        foreach ($place->{'part-of'} as $parent) {
+          $rawParents[] = $parent;
         }
       } else if ($place->{'part-of'} != null) {
-        $from = FunctionsGov::getBeginAsJulianDate($place->{'part-of'});
-        $to = FunctionsGov::getEndAsJulianDateExclusively($place->{'part-of'});
-        $parents[] = new GovProperty($place->{'part-of'}->ref, null, $from, $to);
+        $rawParents[] = $place->{'part-of'};
       }
     }
     
+    if (property_exists($place, 'located-in')) {
+      if (is_array($place->{'located-in'})) {
+        foreach ($place->{'located-in'} as $parent) {
+          $rawParents[] = $parent;
+        }
+      } else if ($place->{'located-in'} != null) {
+        $rawParents[] = $place->{'located-in'};
+      }
+    }
+    
+    if (property_exists($place, 'represents')) {
+      if (is_array($place->{'represents'})) {
+        foreach ($place->{'represents'} as $parent) {
+          $rawParents[] = $parent;
+        }
+      } else if ($place->{'represents'} != null) {
+        $rawParents[] = $place->{'represents'};
+      }
+    }
+    
+    foreach ($rawParents as $parent) {
+      $from = FunctionsGov::getBeginAsJulianDate($parent);
+      $to = FunctionsGov::getEndAsJulianDateExclusively($parent);
+      $parents[] = new GovProperty($parent->ref, null, $from, $to);
+    }
+        
     $version = round(microtime(true) * 1000);
     return new GovObject($lat, $lon, $version, $types, $labels, $parents);
   }
