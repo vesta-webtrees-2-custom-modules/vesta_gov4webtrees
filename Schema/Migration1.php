@@ -13,11 +13,27 @@ class Migration1 implements MigrationInterface {
 
   public function upgrade(): void {
 
-    if (DB::schema()->hasColumn('gov_ids', 'type')) {
-        DB::schema()->table('gov_ids', static function (Blueprint $table): void {
-            $table->dropColumn('type');
-            $table->dropColumn('version');
+    if (DB::schema()->hasColumn('gov_ids', 'type') || DB::schema()->hasColumn('gov_ids', 'version')) {
+      if (!DB::schema()->hasTable('gov_ids_temp')) {
+        DB::schema()->create('gov_ids_temp', function (Blueprint $table): void {
+          $table->integer('id', true);
+          $table->text('name');
+          $table->string('gov_id', 32);
         });
+      } else {
+        DB::table('gov_ids_temp')->delete();
+      }
+
+      $datas = DB::table('gov_ids')->select(['id', 'name', 'gov_id'])->get();
+      $inserts = array();
+      foreach ($datas as $data) {
+        $inserts[] = ['id' => $data->id, 
+                 'name' => $data->name, 
+                 'gov_id' => $data->gov_id];
+      }
+      DB::table('gov_ids_temp')->insert($inserts);
+      DB::schema()->drop('gov_ids');
+      DB::schema()->rename('gov_ids_temp', 'gov_ids');
     }
   }
 }

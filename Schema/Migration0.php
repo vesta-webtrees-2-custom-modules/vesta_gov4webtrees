@@ -16,10 +16,8 @@ class Migration0 implements MigrationInterface {
     if (!DB::schema()->hasTable('gov_ids')) {
       DB::schema()->create('gov_ids', function (Blueprint $table): void {
         $table->integer('id', true);
-        $table->string('type', 8);
         $table->text('name');
         $table->string('gov_id', 32);
-        $table->bigInteger('version', false, true);
       });
     }
 
