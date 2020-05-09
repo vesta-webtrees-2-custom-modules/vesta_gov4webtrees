@@ -615,12 +615,18 @@ class Gov4WebtreesModule extends AbstractModule implements
     $hierarchy2 = '';
     
     $nextId = $id;
+    $link = null;
     while ($nextId !== null) {
       $data = $this->getDataAndNextId($allowSettlements, $locale, $julianDay, $nextId, $version, $fallbackPreferDeu);
       
       if ($data === []) {
         $nextId = null;
       } else {
+        if ($link === null) {
+          //Issue #11
+          $link = "http://gov.genealogy.net/item/show/" . $nextId;
+        }
+        
         if ($hierarchy !== '') {
           $hierarchy .= ', ';
         }
@@ -647,8 +653,12 @@ class Gov4WebtreesModule extends AbstractModule implements
       }
     }
     
+    if ($link === null) {
+      $link = "http://gov.genealogy.net/";
+    }
+    
     $span = '<div><span class="govText">';
-    $span .= '<a href="http://gov.genealogy.net/" target="_blank">';
+    $span .= '<a href="'. $link . '" target="_blank">';
     //we'd like to use far fa-compass but we'd have to import explicitly
     //TODO: use proper modal here? tooltip isn't helpful on tablets etc
     if ($tooltip) {
@@ -656,7 +666,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     } else {
       $span .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
     }
-    $span .= 'GOV</a> (';
+    $span .= ' GOV</a> (';
     $span .= $julianDayText;
     $span .= '): ';
     $span .= $hierarchy;
