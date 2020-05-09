@@ -35,12 +35,16 @@ class EditGovMappingController extends AbstractEditController {
   public function editGovMapping(ServerRequestInterface $request, Tree $tree): ResponseInterface {
     //set delay here to mimic slow servers and to test whether select2 is properly initialized (issue #9)
     //sleep(2);
+
+    $govId = null;
     
     $placeName = Requests::getString($request, 'place-name');
-    $ps = PlaceStructure::create("2 PLAC " . $placeName, $tree);
+    $ps = PlaceStructure::fromName($placeName, $tree);
     
-    //do not use plac2gov here - we're only interested in actual direct mappings at this point!
-    $govId = FunctionsPrintGov::getGovId($ps);
+    if ($ps != null) {
+      //do not use plac2gov here - we're only interested in actual direct mappings at this point!
+      $govId = Gov4WebtreesModule::plac2govViaMappingTable($ps);      
+    }
     
     //'cleanup' use case (multiple GOV ids mapped): handled silently now
     //should we address this explicitly? E.g. show warning icon next to edit control?

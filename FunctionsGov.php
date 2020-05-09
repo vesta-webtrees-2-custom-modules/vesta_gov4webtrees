@@ -66,7 +66,7 @@ class SoapWrapper {
         try {
           $readclient = SoapWrapper::initSoapClient($wsdl);
           return $readclient->getTypeDescription($type, $lang);
-        } catch (Throwable $ex) {
+        } catch (Throwable $ex) {          
           //fall-through and retry with nusoap, in order to simplify error handling
         }        
       }
@@ -77,7 +77,7 @@ class SoapWrapper {
     $description = $client->call('getTypeDescription', array('typeId' => $type, 'language' => $lang));
     $err = $client->getError();
     if ($err) {
-      //error_log(print_r($err, TRUE));
+      error_log("GOVServerUnavailable: " . print_r($err, TRUE));
       throw new GOVServerUnavailableException($err);
     }
     return SoapWrapper::nusoapArrayToObject($description);
@@ -107,7 +107,7 @@ class SoapWrapper {
     $ret = $client->call('checkObjectId', array('itemId' => $id));
     $err = $client->getError();
     if ($err) {
-      //error_log(print_r($err, TRUE));
+      error_log("GOVServerUnavailable: " . print_r($err, TRUE));
       throw new GOVServerUnavailableException($err);
     }
     return $ret;
@@ -136,7 +136,7 @@ class SoapWrapper {
     $place = $client->call('getObject', array('itemId' => $id));
     $err = $client->getError();
     if ($err) {
-      //error_log(print_r($err, TRUE));
+      error_log("GOVServerUnavailable: " . print_r($err, TRUE));
       throw new GOVServerUnavailableException($err);
     }
     if ($place == null) {
@@ -407,12 +407,12 @@ class FunctionsGov {
 
   /**
    * 
-   * @param array[string] $ids
+   * @param Collection<string> $ids
    * @return Collection<string>
    */
-  public static function getNamesMappedToGovIds(array $ids): Collection {    
+  public static function getNamesMappedToGovIds(Collection $ids): Collection {    
     return DB::table('gov_ids')
-            ->whereIn('gov_id', $ids)
+            ->whereIn('gov_id', $ids->toArray())
             ->get()
             ->map(function (stdClass $row): string {
                 return $row->name;
@@ -697,7 +697,7 @@ class FunctionsGov {
   }
 
   //should only be used internally! use retrieveGovObject instead!
-  public static function getGovObject($id) {
+  public static function getGovObject($id): ?GovObject {
     $row = DB::table('gov_objects')
             ->where('gov_id', '=', $id)
             ->first();
@@ -905,8 +905,7 @@ class FunctionsGov {
     
     $rawParents = array();
     
-    //we currently do not distinguish between the different kinds of relation!
-    
+    //we currently do not distinguish between the different kinds of relation!    
     if (property_exists($place, 'part-of')) {
       if (is_array($place->{'part-of'})) {
         foreach ($place->{'part-of'} as $parent) {

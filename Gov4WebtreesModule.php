@@ -5,17 +5,16 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 use Cissee\Webtrees\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
 use Cissee\Webtrees\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
-use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsPrintGov;
 use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
+use Fisharebest\ExtCalendar\GregorianCalendar;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
 use Fisharebest\Webtrees\Http\Controllers\Admin\ModuleController;
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
@@ -23,6 +22,7 @@ use Fisharebest\Webtrees\Module\ModuleCustomTrait;
 use Fisharebest\Webtrees\Module\ModuleGlobalInterface;
 use Fisharebest\Webtrees\Module\ModuleGlobalTrait;
 use Fisharebest\Webtrees\Services\ModuleService;
+use Fisharebest\Webtrees\Services\SearchService;
 use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
@@ -72,9 +72,11 @@ class Gov4WebtreesModule extends AbstractModule implements
   use EmptyFunctionsPlace;
 
   protected $module_service;
-  
-  public function __construct(ModuleService $module_service) {
+  protected $search_service;
+          
+  public function __construct(ModuleService $module_service, SearchService $search_service) {
     $this->module_service = $module_service;
+    $this->search_service = $search_service;
   }
   
   protected function onBoot(): void {
@@ -135,102 +137,6 @@ class Gov4WebtreesModule extends AbstractModule implements
   public function getHelpAction(ServerRequestInterface $request): ResponseInterface {
     $topic = Requests::getString($request, 'topic');
     return response(HelpTexts::helpText($topic));
-  }
-  
-  //TODO adjust: use plac2gov?
-  //HookInterface: FunctionsPlaceInterface
-  public function hPlacesGetParentPlaces(PlaceStructure $place, $typesOfLocation, $recursively = false) {
-    $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
-    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
-
-    //$date = $place->getEventDateInterval();
-
-    if ($useMedianDate) {
-      $julianDay = $place->getEventDateInterval()->getMedian();
-    } else {
-      $julianDay = $place->getEventDateInterval()->getMin();
-    }
-
-    if ($julianDay === null) {
-      return array();
-    }
-
-    try {
-      $govId = FunctionsPrintGov::getGovId($place);
-    } catch (GOVServerUnavailableException $ex) {
-      $govId = null;
-      $this->flashGovServerUnavailable();
-    }
-    
-    if ($govId === null) {
-      return array();
-    }
-
-    $placeStructures = array();
-
-    try {
-      $gov = FunctionsGov::retrieveGovObject($this, $govId);
-    } catch (GOVServerUnavailableException $ex) {
-      $gov = null;
-      $this->flashGovServerUnavailable();
-    }
-
-    //load hierarchy (one per type of location)
-    foreach ($typesOfLocation as $typeOfLocation) {
-      $types = array();
-      $typesFallback = array();
-
-      if ("POLI" === $typeOfLocation) {
-        $types = FunctionsGov::$TYPES_ADMINISTRATIVE;
-        if ($allowSettlements) {
-          $typesFallback = FunctionsGov::$TYPES_SETTLEMENT;
-        }
-      } else if ("RELI" === $typeOfLocation) {
-        $types = FunctionsGov::$TYPES_RELIGIOUS;
-      }
-      //"GEOG", "CULT" not supported yet!
-
-      $currentGov = $gov;
-      $currentGovId = $govId;
-      //TODO: use from/to rather than single julianDay?
-
-      while ($currentGov !== null) {
-        //next hierarchy level (if any)
-        $nextGovId = null;
-        if (sizeOf($types) > 0) {
-          $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $types, $gov->getVersion());
-        }
-        if (($govId === null) && (sizeOf($typesFallback) > 0)) {
-          $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback, $gov->getVersion());
-        }
-        if ($nextGovId === null) {
-          break;
-        }
-        $currentGovId = $nextGovId;
-        $currentGov = FunctionsGov::retrieveGovObject($this, $currentGovId);
-
-        if ($currentGov !== null) {
-          //if we have a GOV-Id mapping, use that instead
-          //(e.g. place name in GOV is "Verden St.Andreas", but we use "Verden (St. Andreas)")
-          //TODO: this does not take into account GOV mappings elsewhere (e.g. via _GOV in shared place)!						
-          $mappedName = FunctionsGov::getNameMappedToGovId($currentGovId);
-          if ($mappedName !== null) {
-            $placeStructures[] = new PlaceStructure("2 PLAC " . $mappedName, $place->getTree(), null, GedcomDateInterval::createEmpty());
-          } else {
-            //which label to use as place name here? we cannot decide = use all of them!
-            foreach ($currentGov->getLabels() as $placeName) {
-              $placeStructures[] = new PlaceStructure("2 PLAC " . $placeName->getProp(), $place->getTree(), null, GedcomDateInterval::createEmpty());
-            }
-          }
-        }
-
-        if (!$recursively) {
-          break;
-        }
-      }
-    }
-
-    return $placeStructures;
   }
 
   //no longer required - css is static now
@@ -353,6 +259,14 @@ class Gov4WebtreesModule extends AbstractModule implements
   
   ////////////////////////////////////////////////////////////////////////////////
   
+  public function hFactsTabRequiresModalVesta(Tree $tree): ?string {
+    //add the vesta modal placeholder, with custom select2 snippet
+    $script = $this->govIdEditControlSelect2ScriptSnippet();
+    return $script;
+  }
+  
+  //now handled by the vesta_personal_facts module itself!
+  /*
   public function hFactsTabGetOutputBeforeTab(Individual $person) {
     //add the vesta modal placeholder, with custom select2 snippet
     $script = $this->govIdEditControlSelect2ScriptSnippet();
@@ -364,6 +278,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     return GenericViewElement::create($html);
   }
+  */
   
   public function hFactsTabGetAdditionalEditControls(
           Fact $fact): GenericViewElement {
@@ -380,12 +295,11 @@ class Gov4WebtreesModule extends AbstractModule implements
       return GenericViewElement::createEmpty();
     }    
     
-    if ($fact->attribute('PLAC') === '') {
-      //no PLAC, doesn't make sense to edit here
+    $ps = PlaceStructure::fromFact($fact);
+    if ($ps === null) {
+      //no PLAC (or empty), doesn't make sense to edit here
       return GenericViewElement::createEmpty();
     }
-    
-    $ps = PlaceStructure::create("2 PLAC " . $fact->place()->gedcomName(), $fact->record()->tree());
     
     $readonly = boolval($this->getPreference('NO_ONE_MAY_EDIT', '0')) && 
             !boolval($this->getPreference('VISITORS_MAY_EDIT', '0'));
@@ -420,7 +334,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
     
     //do not use plac2gov here - we're only interested in actual direct mappings at this point!
-    $govId = FunctionsPrintGov::getGovId($ps);
+    $govId = Gov4WebtreesModule::plac2govViaMappingTable($ps);
     
     //ok to edit
     if ($govId === null) {
@@ -436,35 +350,49 @@ class Gov4WebtreesModule extends AbstractModule implements
      
     return GenericViewElement::create($html);
   }
-  
-  public function govs2Placenames(Collection $govs): Collection {
-    $ids = $govs.map(function (GovReference $gov): string {
-                return $gov->id;
-            })
-            ->toArray();
     
-    //get all placenames via mapping table
-    return FunctionsGov::getNamesMappedToGovIds($ids);
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  public static function plac2govViaMappingTable(PlaceStructure $place): ?string {
+    $name = $place->getPlace()->placeName();
+    $fullName = $place->getPlace()->gedcomName();
+
+    $placeId = $place->getPlace()->id();
+
+    //this occurs in case of new place names (respective change not approved yet) 
+    if (!$placeId) {
+      return null;
+    }
+
+    if (!$name) {
+      return null;
+    }
+
+    return FunctionsGov::getGovId($fullName);
+  }
+
+  //see Date.php
+  //we're not supposed to use that in webtrees, nevermind
+  //we don't necessarily want the median year, so we have to use our own function 
+  public static function gregorianYear($julianDay) {
+    $gregorian_calendar = new GregorianCalendar;
+    list($year) = $gregorian_calendar->jdToYmd($julianDay);
+    return $year;
   }
   
-  public function plac2Gov(PlaceStructure $ps): ?GovReference {
-    //1. _GOV set directly?
-
-    //previous versions of this module excluded newly created (not yet approved) places,
-    //this seems unnecessary and has been discontinued
-    
-    //supposed to be under 2 PLAC, that's not checked here though!
-    $govId = FunctionsPrintGov::getValue($ps->getGedcom(), 3, '_GOV');
+  public function plac2gov(PlaceStructure $ps): ?GovReference {
+    //1. _GOV set directly?    
+    $govId = $ps->getGov();
     if ($govId !== null) {
       $trace = new Trace('GOV-Id via Gov4Webtrees module (_GOV tag)');
-      return new GovReference($govId, $trace);
+      return new GovReference($govId, $trace, $ps->getLevel());
     }
     
     //2. id set via mapping table?
-    $govId = FunctionsPrintGov::getGovId($ps);
+    $govId = Gov4WebtreesModule::plac2govViaMappingTable($ps);
     if ($govId !== null) {
       $trace = new Trace('GOV-Id via Gov4Webtrees module (mapping outside GEDCOM)');
-      return new GovReference($govId, $trace);      
+      return new GovReference($govId, $trace, $ps->getLevel());      
     }
     
     return null;
@@ -519,6 +447,107 @@ class Gov4WebtreesModule extends AbstractModule implements
     return $str2;
   }
   
+  public function govPgov(GovReference $govReference, GedcomDateInterval $dateInterval, Collection $typesOfLocation, int $maxLevels = PHP_INT_MAX): Collection {
+    $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
+    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
+
+    if ($useMedianDate) {
+      $julianDay = $dateInterval->getMedian();
+    } else {
+      $julianDay = $dateInterval->getMin();
+    }
+
+    if ($julianDay === null) {
+      return new Collection();
+    }
+    
+    $govId = $govReference->getId();
+
+    $ret = new Collection();
+
+    try {
+      $gov = FunctionsGov::retrieveGovObject($this, $govId);
+    } catch (GOVServerUnavailableException $ex) {
+      $gov = null;
+      $this->flashGovServerUnavailable();
+    }
+
+    //load hierarchy (one per type of location)
+    foreach ($typesOfLocation as $typeOfLocation) {
+      $types = array();
+      $typesFallback = array();
+
+      if ("POLI" === $typeOfLocation) {
+        $types = FunctionsGov::$TYPES_ADMINISTRATIVE;
+        if ($allowSettlements) {
+          $typesFallback = FunctionsGov::$TYPES_SETTLEMENT;
+        }
+      } else if ("RELI" === $typeOfLocation) {
+        $types = FunctionsGov::$TYPES_RELIGIOUS;
+      }
+      //"GEOG", "CULT" not supported yet!
+
+      $currentGov = $gov;
+      $currentGovId = $govId;
+      $currentLevel = 0;
+      //TODO: use from/to rather than single julianDay?
+      
+      while (($currentGov !== null) && ($maxLevels-- > 0)) {
+        //next hierarchy level (if any)
+        $nextGovId = null;
+        $currentLevel++;
+        if (sizeOf($types) > 0) {
+          $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $types, $gov->getVersion());
+        }
+        if (($govId === null) && (sizeOf($typesFallback) > 0)) {
+          $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback, $gov->getVersion());
+        }
+        if ($nextGovId === null) {
+          break;
+        }
+        $currentGovId = $nextGovId;
+        $currentGov = FunctionsGov::retrieveGovObject($this, $currentGovId);
+
+        if ($currentGov !== null) {
+          $trace = $govReference->getTrace();
+          $trace->add('GOV-Id via Gov4Webtrees module (hierarchy)');
+          $ret->add(new GovReference(
+                  $currentGovId, 
+                  $trace, 
+                  $currentLevel));
+        }
+      }
+    }
+
+    return $ret;
+  }
+
+  public function gov2plac(GovReference $gov, Tree $tree): ?PlaceStructure {
+    $ids = new Collection([$gov->getId()]);
+    $place_id = FunctionsGov::getNamesMappedToGovIds($ids)->first();    
+    if ($place_id === null) {
+      //we haven't mapped this gov id at all, cannot use the $place_id
+      //(we mustn't use the gov name of the place - it may clash with other placenames!)
+      return null;
+    }
+
+    // Request for a non-existent place?
+    $place = $this->search_service->searchPlaces($tree, $place_id, 0, 1)            
+            ->first();
+            
+    if ($place == null) {
+      //gov id has been mapped, but place no longer exists (at least not in this tree)
+      //or its a gov-id retrieved e.g. via gov parent hierarchy
+      return null;
+    }
+    
+    //set the _GOV tag to make further operations on this object more efficient 
+    //(we don't have to look it up again)
+    return PlaceStructure::fromNameAndGov($place_id, $gov->getId(), $tree);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////
+  
   public function factPlaceAdditions(PlaceStructure $place): ?FactPlaceAdditions {
     //get a gov reference (may be provided by ourselves ultimately)
     $govReference = FunctionsPlaceUtils::plac2gov($this, $place, false);
@@ -556,7 +585,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     $str1 = GenericViewElement::createEmpty();
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
-      $julianDayText = FunctionsPrintGov::gregorianYear($julianDay1);
+      $julianDayText = Gov4WebtreesModule::gregorianYear($julianDay1);
       $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
     }
     $str2 = GenericViewElement::createEmpty();
