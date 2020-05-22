@@ -3,13 +3,13 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Fisharebest\Webtrees\I18N;
-use Vesta\ControlPanel\Model\ControlPanelCheckbox;
-use Vesta\ControlPanel\Model\ControlPanelCheckboxInverted;
-use Vesta\ControlPanel\Model\ControlPanelPreferences;
-use Vesta\ControlPanel\Model\ControlPanelRadioButton;
-use Vesta\ControlPanel\Model\ControlPanelRadioButtons;
-use Vesta\ControlPanel\Model\ControlPanelSection;
-use Vesta\ControlPanel\Model\ControlPanelSubsection;
+use Vesta\ControlPanelUtils\Model\ControlPanelCheckbox;
+use Vesta\ControlPanelUtils\Model\ControlPanelCheckboxInverted;
+use Vesta\ControlPanelUtils\Model\ControlPanelPreferences;
+use Vesta\ControlPanelUtils\Model\ControlPanelRadioButton;
+use Vesta\ControlPanelUtils\Model\ControlPanelRadioButtons;
+use Vesta\ControlPanelUtils\Model\ControlPanelSection;
+use Vesta\ControlPanelUtils\Model\ControlPanelSubsection;
 
 trait Gov4WebtreesModuleTrait {
 
@@ -37,14 +37,16 @@ trait Gov4WebtreesModuleTrait {
 
   protected function createPrefs() {
     $generalSub = array();
+    /*
     $generalSub[] = new ControlPanelSubsection(
-            /* I18N: Module Configuration */I18N::translate('Displayed title'),
+            I18N::translate('Displayed title'),
             array(new ControlPanelCheckbox(
-                /* I18N: Module Configuration */I18N::translate('Include the %1$s symbol in the module title', $this->getVestaSymbol()),
+                I18N::translate('Include the %1$s symbol in the module title', $this->getVestaSymbol()),
                 null,
                 'VESTA',
                 '1')));
-
+    */
+    
     $generalSub[] = new ControlPanelSubsection(
             /* I18N: Module Configuration */I18N::translate('Local GOV data'),
             array(new ControlPanelCheckbox(
