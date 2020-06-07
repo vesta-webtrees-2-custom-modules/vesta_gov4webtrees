@@ -38,12 +38,15 @@ use Vesta\Hook\HookInterfaces\GovIdEditControlsInterface;
 use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
 use Vesta\Model\GovReference;
+use Vesta\Model\LocReference;
 use Vesta\Model\MapCoordinates;
 use Vesta\Model\PlaceStructure;
 use Vesta\Model\Trace;
 use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
+use const CAL_GREGORIAN;
 use function app;
+use function cal_to_jd;
 use function redirect;
 use function response;
 use function route;
@@ -83,6 +86,8 @@ class Gov4WebtreesModule extends AbstractModule implements
     //cannot do this in constructor: module name not set yet!    
     //migrate (we need the module name here to store the setting)
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 2);
+    
+    $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 1);
   }
    
   public function flashGovServerUnavailable() {
@@ -111,15 +116,6 @@ class Gov4WebtreesModule extends AbstractModule implements
     return 'https://cissee.de';
   }
 
-  public function description(): string {
-    return $this->getShortDescription();
-  }
-
-  /**
-   * Where does this module store its resources
-   *
-   * @return string
-   */
   public function resourcesFolder(): string {
     return __DIR__ . '/resources/';
   }
@@ -148,11 +144,14 @@ class Gov4WebtreesModule extends AbstractModule implements
   //}
 
   protected function getThemeForCss(): string {
-    //align with current theme (supporting - for now - the default webtrees themes)
+    //align with current theme (supporting the default webtrees themes, and specific custom themes)
     $themeName = Session::get('theme');
     if ('minimal' !== $themeName) {
       if ('fab' === $themeName) {
         //fab also uses font awesome icons
+        $themeName = 'minimal';
+      } else if ('_myartjaub_ruraltheme_' === $themeName) {
+        //and the custom 'rural' theme
         $themeName = 'minimal';
       } else {
         //default
@@ -421,12 +420,11 @@ class Gov4WebtreesModule extends AbstractModule implements
     return new MapCoordinates($gov->getLat(), $gov->getLon(), $trace);
   }
   
-  public function gov2html(GovReference $govReference): ?GenericViewElement {
-    $govId = $govReference->getId();
-    
+  public function gov2html(GovReference $govReference, Tree $tree): ?GenericViewElement {
     $locale = I18N::locale();
         
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
+    $withInternalLinks = boolval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
 
     $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
@@ -443,7 +441,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     $str2 = GenericViewElement::createEmpty();
     $julianDayText = I18N::translate('today');
-    $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
+    $str2 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
     return $str2;
   }
   
@@ -556,15 +554,15 @@ class Gov4WebtreesModule extends AbstractModule implements
       return null;
     }
     
-    $govId = $govReference->getId();
-    
+    $tree = $place->getTree();
     $locale = I18N::locale();
         
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
+    $withInternalLinks = boolval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
     $showCurrentDateGov = intval($this->getPreference('SHOW_CURRENT_DATE', '0'));
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
     $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
-
+    
     $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
     
     if ($useMedianDate) {
@@ -586,12 +584,12 @@ class Gov4WebtreesModule extends AbstractModule implements
     $str1 = GenericViewElement::createEmpty();
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = Gov4WebtreesModule::gregorianYear($julianDay1);
-      $str1 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
+      $str1 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
     }
     $str2 = GenericViewElement::createEmpty();
     if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
-      $str2 = $this->getHierarchy($compactDisplay, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govId, $tooltip, $fallbackPreferDeu);
+      $str2 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
     }
     $gve = GenericViewElement::implode([$str1, $str2]);
     
@@ -600,14 +598,18 @@ class Gov4WebtreesModule extends AbstractModule implements
   
   protected function getHierarchy(
           bool $compactDisplay, 
+          bool $withInternalLinks, 
           bool $allowSettlements, 
           string $locale,
           string $julianDay, 
           string $julianDayText, 
-          string $id,
+          GovReference $govReference,
+          Tree $tree,
           ?string $tooltip, 
           bool $fallbackPreferDeu): GenericViewElement {
-
+ 
+    $id = $govReference->getId();
+ 
     //initialize with placeholder
     $version = -1;
     
@@ -631,9 +633,45 @@ class Gov4WebtreesModule extends AbstractModule implements
           $hierarchy .= ', ';
         }
 
-        $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
-        $hierarchy .= $data['label'];
-        $hierarchy .= '</a>';
+        if ($withInternalLinks) {
+
+          //Issue #13: is this a known webtrees place?
+          //(note: there may be more than one - we restrict to first found)
+          $ps = FunctionsPlaceUtils::gov2plac($this, $govReference, $tree);
+          if ($ps !== null) {
+            
+            $pre = '';
+            //link to location? note: for now not indirectly = only if location defines the GOV!
+            $loc = $ps->getLoc();
+            if ($loc !== null) {
+              $locLink = FunctionsPlaceUtils::loc2linkIcon($this, new LocReference($loc, $tree, new Trace('')));
+              if ($locLink !== null) {
+                $pre = $locLink;
+              }
+            }            
+            
+            $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
+            $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
+            $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
+            $hierarchy .= '</a>';
+            $hierarchy .= $pre;
+            $hierarchy .= '<a dir="auto" href="' . e($ps->getPlace()->url()) . '">' . $ps->getPlace()->placeName() . '</a>';
+          
+          } else {
+            $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
+            $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
+            $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
+            $hierarchy .= '</a>';
+            $hierarchy .= '<i>' . $data['label'] . '</i>';
+          }
+          
+        } else {          
+          $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
+          $hierarchy .= $data['label'];
+          $hierarchy .= '</a>';
+        }
+        
+        
   
         if (!$compactDisplay) {
           if ($hierarchy2 !== '') {
@@ -643,7 +681,10 @@ class Gov4WebtreesModule extends AbstractModule implements
         }
         
         $nextId = $data['nextId'];
-        
+        if ($nextId !== null) {
+          $govReference = new GovReference($nextId, new Trace(''));
+        }        
+                
         if ($version === -1) {
           //replace placeholder version:
           //after a reset, object is reloaded from server, and now() is used as version (triggering reloading of parents)

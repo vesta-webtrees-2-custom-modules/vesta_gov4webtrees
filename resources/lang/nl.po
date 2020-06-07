@@ -7,16 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2020-01-01 16:03+0100\n"
-"PO-Revision-Date: 2020-06-03 19:00+0200\n"
+"POT-Creation-Date: 2020-06-07 17:28+0200\n"
+"PO-Revision-Date: 2020-06-07 19:03+0200\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de\n"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:68
+msgid "(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names)."
+msgstr "(Waarom wordt het Duits in het bijzonder genoemd? Omdat de GOV-gazetteer is momenteel nogal Duitstalig is, en daarom hebben veel plaatsen Duitse namen)."
 
 #: Gov4WebtreesModuleTrait.php:22
 msgid "A module integrating GOV (historic gazetteer) data."
@@ -28,11 +33,11 @@ msgid "A module integrating GOV (historic gazetteer) data. Enhances places with 
 msgstr "Een module met geïntegreerde GOV (historische gazetteer) gegevens. Hiermee verbetert u de plaatsen met GOV-gegevens via het uitgebreide tabblad 'Feiten en gebeurtenissen'."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:127
+#: Gov4WebtreesModuleTrait.php:139
 msgid "According to the current GOV specification, settlements are not supposed to be parents of other settlements."
 msgstr "Volgens de huidige GOV-specificatie worden nederzettingen niet verondersteld om ouders te zijn van andere nederzettingen."
 
-#: Gov4WebtreesModule.php:580
+#: Gov4WebtreesModule.php:727
 msgid "Administrative levels"
 msgstr "Bestuursniveaus"
 
@@ -42,12 +47,12 @@ msgid "All data (except for the mapping of places to GOV ids, which has to be do
 msgstr "Alle gegevens (behalve de toewijzing van plaatsen aan GOV-id's, die handmatig moeten worden gedaan) worden opgehaald van de GOV-server en intern in de cache opgeslagen."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:126
+#: Gov4WebtreesModuleTrait.php:138
 msgid "Allow objects of type 'settlement' in hierarchy"
 msgstr "Objecten van het type 'nederzetting' in hiërarchie toestaan"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:114
+#: Gov4WebtreesModuleTrait.php:128
 msgid "Compact display (administrative levels only as tooltips)"
 msgstr "Compacte weergave (administratieve niveaus alleen als tooltips)"
 
@@ -57,50 +62,55 @@ msgid "Consequently, place hierarchy information can only be changed indirectly,
 msgstr "Plaatshiërarchie-informatie kan daarom alleen indirect worden gewijzigd, via de GOV-website."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:104
+#: Gov4WebtreesModuleTrait.php:64
+msgid "Determines strategy in case the place name is not available in the current language (for the given date): "
+msgstr "Hiermee bepaalt u de strategie voor het geval de plaatsnaam niet beschikbaar is in de huidige taal (voor de gegeven datum): "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:118
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr "Een tooltip weergeven die de bron van het GOV-id aangeeft. Dit is vooral bedoeld voor debugging."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:109
+#: Gov4WebtreesModuleTrait.php:123
 msgid "Displayed data"
 msgstr "Weergegeven gegevens"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:41
-msgid "Displayed title"
-msgstr "Weergegeven titel"
-
-#. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:147
+#: Gov4WebtreesModuleTrait.php:159
 msgid "Execute requests to the GOV server via NuSOAP, rather than using the native php SoapClient. The native SoapClient is usually enabled (you can check this in your php.ini settings), but may not be provided by all hosters. If the native client is not enabled/available, this option is checked automatically."
 msgstr "Voer aanvragen uit naar de GOV-server via NuSOAP, in plaats van de native php SoapClient te gebruiken. De native SoapClient is meestal ingeschakeld (u kunt dit controleren in uw php.ini-instellingen), maar kan niet worden verstrekt door alle hosters. Als de native client niet is ingeschakeld/beschikbaar is, wordt deze optie automatisch aangevinkt."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:161
+#: Gov4WebtreesModuleTrait.php:173
 msgid "Facts and Events Tab Settings"
 msgstr "Instellingen voor tabblad Feiten en gebeurtenissen"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:133
+#: Gov4WebtreesModuleTrait.php:61
+msgid "Fallback language"
+msgstr "Terugvaltaal"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:145
 msgid "For events with a date range, use the median date"
 msgstr "Voor gebeurtenissen met een datumbereik gebruikt u de mediaandatum"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:157
+#: Gov4WebtreesModuleTrait.php:169
 msgid "GOV Id Management"
-msgstr "GOV Id-beheer"
+msgstr "GOV-id-beheer"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
 msgstr "GOV-id"
 
-#: EditGovMappingController.php:75
+#: EditGovMappingController.php:81
 #, php-format
 msgid "GOV id for %1$s has been removed."
 msgstr "GOV-id voor %1$s is verwijderd."
 
-#: EditGovMappingController.php:97
+#: EditGovMappingController.php:103
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr "GOV-id voor %1$s is ingesteld op %2$s."
@@ -110,25 +120,40 @@ msgstr "GOV-id voor %1$s is ingesteld op %2$s."
 msgid "GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported."
 msgstr "GOV-id's worden standaard buiten GEDCOM-gegevens opgeslagen, maar id's die zijn opgeslagen via _GOV-tags worden ook ondersteund."
 
-#: Gov4WebtreesModule.php:349
+#: Gov4WebtreesModule.php:262
 #, php-format
-msgid "GOV place hierarchy has been reloaded from GOV server for %1$s."
-msgstr "GOV-plaatshiërarchie is herladen vanaf GOV-server voor %1$s."
+msgid "GOV place hierarchy for %1$s will be reloaded from server."
+msgstr "GOV-plaatshiërarchie voor %1$s zal worden herladen vanaf de server."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:153
+#: Gov4WebtreesModuleTrait.php:165
 msgid "General"
 msgstr "Algemeen"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModule.php:632
+#: Gov4WebtreesModule.php:785
 msgid "Gov4Webtrees Module Location Data Providers"
 msgstr "Gov4Webtrees module Locatiegegevensaanbieders"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:65
+msgid "If checked, attempt to fall back to the German place name. "
+msgstr "Indien aangevinkt, probeer terug te vallen op de Duitse plaatsnaam. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:134
+msgid "If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible."
+msgstr "Als dit is aangevinkt, gebruikt de weergegeven GOV-hiërarchie, indien mogelijk, plaatsnamen uit de GEDCOM-gegevens."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:79
 msgid "If this option is checked, you usually want to disable the following option. "
 msgstr "Als deze optie is ingeschakeld, wilt u meestal de volgende optie uitschakelen. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:66
+msgid "If unchecked, prefer any language other than German; "
+msgstr "Als dit niet is aangevinkt, geeft de voorkeur aan een andere taal dan Duits; "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:32
@@ -136,34 +161,27 @@ msgid "In particular, the Shared Places custom module may be used to manage GOV 
 msgstr "In het bijzonder kan de aangepaste module Gedeelde plaatsen worden gebruikt om GOV-id's binnen GEDCOM-gegevens te beheren."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:70
+#: Gov4WebtreesModuleTrait.php:84
 msgid "In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation. "
 msgstr "In dit geval worden de GOV-id's opgeslagen in een aparte databasetabel, die handmatig moet worden beheerd wanneer de betreffende boom naar een andere webtrees-installatie wordt verplaatst. "
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:43
-#, php-format
-msgid "Include the %1$s symbol in the module title"
-msgstr "Het symbool %1$s opnemen in de moduletitel"
-
-#. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:139
+#: Gov4WebtreesModuleTrait.php:151
 msgid "Internals (adjusted automatically if necessary)"
 msgstr "Internen (indien nodig automatisch aangepast)"
 
-#: EditGovMappingController.php:86
-#: resources/views/edit/gov-id-edit-control.phtml:69
-#: resources/views/edit/gov-id-edit-control.phtml:83
+#: EditGovMappingController.php:92
+#: resources/views/script/select2-initializer-gov.phtml:15
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
-msgstr "Ongeldige GOV-id! Geldige GOV-ids zijn bijvoorbeeld 'EITTZE_W3091', 'object_1086218'."
+msgstr "Ongeldig GOV-id! Geldige GOV-ids zijn bijvoorbeeld 'EITTZE_W3091', 'object_1086218'."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:158
+#: Gov4WebtreesModuleTrait.php:170
 msgid "It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them."
 msgstr "Het wordt aanbevolen om slechts één van de volgende opties te gebruiken. U kunt ook (tijdelijk) alle bewerkingen uitschakelen via het uitvinken van alle bewerkingen."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:49
+#: Gov4WebtreesModuleTrait.php:51
 msgid "Local GOV data"
 msgstr "Lokale GOV-gegevens"
 
@@ -172,12 +190,12 @@ msgid "Look up a matching GOV id on the GOV server"
 msgstr "Zoek een overeenkomende GOV-id op op de GOV-server"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:54
+#: Gov4WebtreesModuleTrait.php:56
 msgid "Mappings of places to GOV ids are not affected."
 msgstr "Toewijzingen van plaatsen naar GOV-id's worden niet beïnvloed."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModule.php:636
+#: Gov4WebtreesModule.php:789
 msgid "Modules listed here are used (in the configured order) to determine GOV Ids of places."
 msgstr "De hier vermelde modules worden gebruikt (in de geconfigureerde volgorde) om de GOV-id's van de plaatsen te bepalen."
 
@@ -186,27 +204,27 @@ msgid "Note: The mapping from place to GOV id is stored outside the gedcom data.
 msgstr "Opmerking: De toewijzing van plaats naar GOV-id wordt buiten de gedcom-gegevens opgeslagen."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:129
+#: Gov4WebtreesModuleTrait.php:141
 msgid "Note: Ultimately it's probably preferable to correct the respective GOV data itself."
 msgstr "Opmerking: Uiteindelijk heeft het waarschijnlijk de voorkeur om de respectievelijke GOV-gegevens zelf te corrigeren."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:134
+#: Gov4WebtreesModuleTrait.php:146
 msgid "Otherwise, the start date is used (this is more consistent with other date-based calculations in webtrees)."
 msgstr "Anders wordt de begindatum gebruikt (dit komt meer overeen met andere op datum gebaseerde berekeningen in webtrees)."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:69
+#: Gov4WebtreesModuleTrait.php:83
 msgid "Outside GEDCOM data"
 msgstr "Buiten GEDCOM-gegevens"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:75
+#: Gov4WebtreesModuleTrait.php:89
 msgid "Outside GEDCOM data - editable by anyone (including visitors)"
 msgstr "Buiten GEDCOM-gegevens - bewerkbaar voor iedereen (inclusief bezoekers)"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:64
+#: Gov4WebtreesModuleTrait.php:78
 msgid "Particularly useful in order to manage GOV ids via the Shared Places module. Ids are stored and exportable via GEDCOM tags. "
 msgstr "Vooral handig om GOV-ids te beheren via de Gedeelde plaatsen module. Id's worden opgeslagen en geëxporteerd via GEDCOM tags. "
 
@@ -224,13 +242,13 @@ msgstr "Biedt locatiegegevens aan andere aangepaste modules."
 #: Gov4WebtreesModuleTrait.php:33
 #, php-format
 msgid "Requires the '%1$s Vesta Common' module, and the '%1$s Vesta Facts and events' module."
-msgstr "Vereist de '%1$s Vesta Common' module, en de '%1$s Vesta Feiten en gebeurtenissen' module."
+msgstr "Vereist de modules '%1$s Vesta Algemeen' en '%1$s Vesta Feiten en gebeurtenissen'."
 
-#: Gov4WebtreesModule.php:416
+#: Gov4WebtreesModule.php:351
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "Stel GOV-id opnieuw in en herlaad de hiërarchie van plaatsen"
 
-#: EditGovMappingController.php:48
+#: EditGovMappingController.php:54
 #, php-format
 msgid "Reset GOV id for %1$s"
 msgstr "Stel GOV-id opnieuw in voor %s"
@@ -239,47 +257,57 @@ msgstr "Stel GOV-id opnieuw in voor %s"
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
 msgstr "Sla de huidige id op om de plaatshiërarchiegegevens van de GOV-server opnieuw te laden."
 
-#: Gov4WebtreesModule.php:414
+#: Gov4WebtreesModule.php:349
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "Stel GOV-id in"
 
-#: EditGovMappingController.php:46
+#: EditGovMappingController.php:52
 #, php-format
 msgid "Set GOV id for %1$s"
 msgstr "Stel GOV-id in voor %s"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:82
+#: Gov4WebtreesModuleTrait.php:96
 msgid "Show GOV hierarchy for"
 msgstr "GOV-hiërarchie weergeven voor"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:103
+#: Gov4WebtreesModuleTrait.php:117
 msgid "Show additional info"
 msgstr "Aanvullende informatie weergeven"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:52
+#: Gov4WebtreesModuleTrait.php:54
 msgid "Subsequently, all data is retrieved again from the GOV server. "
 msgstr "Vervolgens worden alle gegevens weer opgehaald van de GOV-server. "
 
+#: Gov4WebtreesModule.php:99
+#: resources/views/script/select2-initializer-gov.phtml:19
+msgid "The GOV server seems to be temporarily unavailable."
+msgstr "De GOV-server lijkt tijdelijk niet beschikbaar."
+
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:76
+#: Gov4WebtreesModuleTrait.php:90
 msgid "This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the preceding option."
 msgstr "Deze optie bestaat voornamelijk voor demoservers en wordt verder niet aanbevolen. Het heeft voorrang op de voorgaande optie."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:128
+#: Gov4WebtreesModuleTrait.php:140
 msgid "This policy hasn't been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise."
 msgstr "Dit beleid is echter niet strikt gevolgd. Vink deze optie aan als u op de een of andere manier in onvolledige hiërarchieën terechtkomt."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:146
+#: Gov4WebtreesModuleTrait.php:158
 msgid "Use NuSOAP instead of SoapClient"
 msgstr "NuSOAP gebruiken in plaats van SoapClient"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:53
+#: Gov4WebtreesModuleTrait.php:133
+msgid "Use place names and link to places existing in webtrees"
+msgstr "Plaatsnamen en koppeling naar plaatsen in webtrees gebruiken "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:55
 msgid "Usually only required in case of substantial changes of the GOV data. "
 msgstr "Meestal alleen vereist in geval van substantiële wijzigingen van de GOV-gegevens. "
 
@@ -288,17 +316,17 @@ msgid "Vesta Gov4Webtrees"
 msgstr "Vesta Gov4Webtrees"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:71
+#: Gov4WebtreesModuleTrait.php:85
 msgid "When this option is disabled, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server."
 msgstr "Wanneer deze optie is uitgeschakeld, wordt een alternatief besturingselement voor bewerken geboden, waarmee hiërarchieën van de GOV-server nog steeds opnieuw kunnen worden geladen."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:60
+#: Gov4WebtreesModuleTrait.php:74
 msgid "Where to edit and store GOV ids"
 msgstr "Waar moeten de GOV-id's worden bewerkt en opgeslagen"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:63
+#: Gov4WebtreesModuleTrait.php:77
 msgid "Within GEDCOM data (via other custom modules). "
 msgstr "Binnen GEDCOM-gegevens (via andere aangepaste modules). "
 
@@ -307,34 +335,53 @@ msgid "You may also save an empty id in order to remove the mapping."
 msgstr "U kunt ook een lege id opslaan om de toewijzing te verwijderen."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:96
+#: Gov4WebtreesModuleTrait.php:110
 msgid "both"
 msgstr "allebei"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:88
+#: Gov4WebtreesModuleTrait.php:102
 msgid "date of event"
 msgstr "datum van de gebeurtenis"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:99
+#: Gov4WebtreesModuleTrait.php:63
+msgid "fallback to German place names"
+msgstr "terugvallen op Duitse plaatsnamen"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:113
 msgid "for events without a date, present time hierarchy will be used regardless of this preference."
 msgstr "voor gebeurtenissen zonder datum wordt de huidige tijdhiërarchie gebruikt, ongeacht deze voorkeur."
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:92
+#: Gov4WebtreesModuleTrait.php:67
+msgid "motivated by the assumption that place names in the local language are more useful in general "
+msgstr "ingegeven door de veronderstelling dat plaatsnamen in de lokale taal in het algemeen nuttiger zijn"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:106
 msgid "present time"
 msgstr "tegenwoordige tijd"
 
-#: Gov4WebtreesModule.php:398
+#: Gov4WebtreesModule.php:333
 msgid "reload the GOV place hierarchy"
 msgstr "herlaad de hiërarchie van plaatsen"
 
 #. I18N: Module Configuration
-#: Gov4WebtreesModuleTrait.php:51
+#: Gov4WebtreesModuleTrait.php:53
 msgid "reset all cached data once"
 msgstr "reset alle gegevens in de cache één keer"
 
-#: Gov4WebtreesModule.php:507
+#: Gov4WebtreesModule.php:452 Gov4WebtreesModule.php:600
 msgid "today"
 msgstr "vandaag"
+
+#~ msgid "Displayed title"
+#~ msgstr "Weergegeven titel"
+
+#~ msgid "GOV place hierarchy has been reloaded from GOV server for %1$s."
+#~ msgstr "GOV-plaatshiërarchie is herladen vanaf GOV-server voor %1$s."
+
+#~ msgid "Include the %1$s symbol in the module title"
+#~ msgstr "Het %1$s-symbool opnemen in de moduletitel"

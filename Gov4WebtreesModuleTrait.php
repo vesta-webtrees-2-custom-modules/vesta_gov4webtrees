@@ -129,13 +129,11 @@ trait Gov4WebtreesModuleTrait {
                 null,
                 'COMPACT_DISPLAY',
                 '1'),
-        /*
-          new ControlPanelCheckbox(
-          I18N::translate('Additionally show GOV hierarchy for present time'),
-          null,
-          'SHOW_CURRENT_DATE',
-          '0'),
-         */
+        new ControlPanelCheckbox(
+                /* I18N: Module Configuration */I18N::translate('Use place names and link to places existing in webtrees'),
+                /* I18N: Module Configuration */I18N::translate('If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible.'),
+                'DISPLAY_INTERNAL_LINKS',
+                '1'),
         new ControlPanelCheckbox(
                 /* I18N: Module Configuration */I18N::translate('Allow objects of type \'settlement\' in hierarchy'),
                 /* I18N: Module Configuration */I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') .
