@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-06-07 17:28+0200\n"
-"PO-Revision-Date: 2020-06-07 19:03+0200\n"
+"PO-Revision-Date: 2020-06-09 10:29+0200\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -59,7 +59,7 @@ msgstr "Compacte weergave (administratieve niveaus alleen als tooltips)"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:30
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
-msgstr "Plaatshiërarchie-informatie kan daarom alleen indirect worden gewijzigd, via de GOV-website."
+msgstr "Daarom kan informatie over hiërarchie van plaatsen alleen indirect worden gewijzigd via de GOV-website."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:64
@@ -123,7 +123,7 @@ msgstr "GOV-id's worden standaard buiten GEDCOM-gegevens opgeslagen, maar id's d
 #: Gov4WebtreesModule.php:262
 #, php-format
 msgid "GOV place hierarchy for %1$s will be reloaded from server."
-msgstr "GOV-plaatshiërarchie voor %1$s zal worden herladen vanaf de server."
+msgstr "GOV-hiërarchie van plaatsen voor %1$s zal worden herladen vanaf de server."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:165
@@ -246,7 +246,7 @@ msgstr "Vereist de modules '%1$s Vesta Algemeen' en '%1$s Vesta Feiten en gebeur
 
 #: Gov4WebtreesModule.php:351
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
-msgstr "Stel GOV-id opnieuw in en herlaad de hiërarchie van plaatsen"
+msgstr "Stel GOV-id opnieuw in en herlaad de GOV-hiërarchie van plaatsen"
 
 #: EditGovMappingController.php:54
 #, php-format
@@ -255,7 +255,7 @@ msgstr "Stel GOV-id opnieuw in voor %s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
-msgstr "Sla de huidige id op om de plaatshiërarchiegegevens van de GOV-server opnieuw te laden."
+msgstr "Sla de huidige id op om de hiërarchie van plaatsen opnieuw te laden van de GOV-server."
 
 #: Gov4WebtreesModule.php:349
 msgid "Set GOV id (outside GEDCOM)"
@@ -269,12 +269,12 @@ msgstr "Stel GOV-id in voor %s"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:96
 msgid "Show GOV hierarchy for"
-msgstr "GOV-hiërarchie weergeven voor"
+msgstr "Toon GOV-hiërarchie voor"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:117
 msgid "Show additional info"
-msgstr "Aanvullende informatie weergeven"
+msgstr "Toon aanvullende informatie"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:54
@@ -304,7 +304,7 @@ msgstr "NuSOAP gebruiken in plaats van SoapClient"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:133
 msgid "Use place names and link to places existing in webtrees"
-msgstr "Plaatsnamen en koppeling naar plaatsen in webtrees gebruiken "
+msgstr "Plaatsnamen en koppeling naar plaatsen in webtrees gebruiken"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:55
@@ -352,17 +352,17 @@ msgstr "terugvallen op Duitse plaatsnamen"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:113
 msgid "for events without a date, present time hierarchy will be used regardless of this preference."
-msgstr "voor gebeurtenissen zonder datum wordt de huidige tijdhiërarchie gebruikt, ongeacht deze voorkeur."
+msgstr "voor gebeurtenissen zonder datum wordt de tegenwoordige hiërarchie gebruikt, ongeacht deze voorkeur."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:67
 msgid "motivated by the assumption that place names in the local language are more useful in general "
-msgstr "ingegeven door de veronderstelling dat plaatsnamen in de lokale taal in het algemeen nuttiger zijn"
+msgstr "ingegeven door de veronderstelling dat plaatsnamen in de lokale taal in het algemeen nuttiger zijn "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:106
 msgid "present time"
-msgstr "tegenwoordige tijd"
+msgstr "huidige tijd"
 
 #: Gov4WebtreesModule.php:333
 msgid "reload the GOV place hierarchy"
