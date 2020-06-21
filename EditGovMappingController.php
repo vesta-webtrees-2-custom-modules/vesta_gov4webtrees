@@ -7,7 +7,7 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 use Cissee\WebtreesExt\Requests;
 use Fig\Http\Message\StatusCodeInterface;
 use Fisharebest\Webtrees\FlashMessages;
-use Fisharebest\Webtrees\Http\Controllers\AbstractEditController;
+use Fisharebest\Webtrees\Http\ViewResponseTrait;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\ResponseInterface;
@@ -15,12 +15,15 @@ use Psr\Http\Message\ServerRequestInterface;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
 use Vesta\Model\PlaceStructure;
+use function collect;
 use function response;
 use function view;
 
-//cf EditRepositoryController
-class EditGovMappingController extends AbstractEditController {
+//TODO refactor to RequestHandlers
+class EditGovMappingController {
 
+  use ViewResponseTrait;
+  
   protected $module;
 
   public function __construct($module) {
