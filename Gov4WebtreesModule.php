@@ -7,6 +7,7 @@ use Cissee\Webtrees\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
+use Cissee\WebtreesExt\MoreI18N;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
 use Fisharebest\ExtCalendar\GregorianCalendar;
@@ -87,7 +88,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     //migrate (we need the module name here to store the setting)
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 2);
     
-    $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 1);
+    $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 2);
   }
    
   public function flashGovServerUnavailable() {
@@ -424,7 +425,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     $locale = I18N::locale();
         
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
-    $withInternalLinks = boolval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
+    $withInternalLinks = intval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
 
     $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
@@ -558,7 +559,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     $locale = I18N::locale();
         
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
-    $withInternalLinks = boolval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
+    $withInternalLinks = intval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
     $showCurrentDateGov = intval($this->getPreference('SHOW_CURRENT_DATE', '0'));
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
     $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
@@ -595,10 +596,24 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     return new FactPlaceAdditions(GenericViewElement::createEmpty(), $gve, GenericViewElement::createEmpty());
   }
+    
+  protected function plac2linkIcon(PlaceStructure $ps): string {
+    return $this->linkIcon(
+            $this->name() . '::icons/place', 
+            MoreI18N::xlate('Place'), 
+            $ps->getPlace()->url());
+  }
+    
+  public function linkIcon($view, $title, $url) {
+    return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
+            view($view) .
+            '<span class="sr-only">' . $title . '</span>' .
+            '</a>';
+  }
   
   protected function getHierarchy(
           bool $compactDisplay, 
-          bool $withInternalLinks, 
+          int $withInternalLinks, 
           bool $allowSettlements, 
           string $locale,
           string $julianDay, 
@@ -632,47 +647,67 @@ class Gov4WebtreesModule extends AbstractModule implements
         if ($hierarchy !== '') {
           $hierarchy .= ', ';
         }
-
-        if ($withInternalLinks) {
-
-          //Issue #13: is this a known webtrees place?
-          //(note: there may be more than one - we restrict to first found)
-          $ps = FunctionsPlaceUtils::gov2plac($this, $govReference, $tree);
-          if ($ps !== null) {
-            
+        
+        switch ($withInternalLinks) {
+          case 0: //classic
+            $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
+            $hierarchy .= $data['label'];
+            $hierarchy .= '</a>';
+            break;
+          case 1: //classic plus place/shared place icons
+          case 2: //names and main links to place, plus gov icons
             $pre = '';
-            //link to location? note: for now not indirectly = only if location defines the GOV!
-            $loc = $ps->getLoc();
-            if ($loc !== null) {
-              $locLink = FunctionsPlaceUtils::loc2linkIcon($this, new LocReference($loc, $tree, new Trace('')));
-              if ($locLink !== null) {
-                $pre = $locLink;
-              }
-            }            
             
-            $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
-            $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
-            $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
-            $hierarchy .= '</a>';
-            $hierarchy .= $pre;
-            $hierarchy .= '<a dir="auto" href="' . e($ps->getPlace()->url()) . '">' . $ps->getPlace()->placeName() . '</a>';
-          
-          } else {
-            $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
-            $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
-            $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
-            $hierarchy .= '</a>';
-            $hierarchy .= '<i>' . $data['label'] . '</i>';
-          }
-          
-        } else {          
-          $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
-          $hierarchy .= $data['label'];
-          $hierarchy .= '</a>';
+            //Issue #13: is this a known webtrees place?
+            //(note: there may be more than one - we restrict to first found)
+            $ps = FunctionsPlaceUtils::gov2plac($this, $govReference, $tree);
+            if ($ps !== null) {
+
+              //link to location? note: for now not indirectly = only if location defines the GOV!
+              $loc = $ps->getLoc();
+              if ($loc !== null) {
+                $locLink = FunctionsPlaceUtils::loc2linkIcon($this, new LocReference($loc, $tree, new Trace('')));
+                if ($locLink !== null) {
+                  $pre = $locLink;
+                }
+              }
+            }
+            
+            switch ($withInternalLinks) {
+              case 1: //classic plus place/shared place icons
+                if (($ps !== null) && ($pre === '')) {
+                  $pre = $this->plac2LinkIcon($ps);
+                }
+                $hierarchy .= $pre;
+                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
+                $hierarchy .= $data['label'];
+                $hierarchy .= '</a>';
+                break;
+              case 2: //names and main links to place, plus gov icons
+                if ($ps !== null) {
+                  $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
+                  $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
+                  $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
+                  $hierarchy .= '</a>';
+                  $hierarchy .= $pre;
+                  $hierarchy .= '<a dir="auto" href="' . e($ps->getPlace()->url()) . '">' . $ps->getPlace()->placeName() . '</a>';
+
+                } else {
+                  $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
+                  $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
+                  $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
+                  $hierarchy .= '</a>';
+                  $hierarchy .= '<i>' . $data['label'] . '</i>';
+                }
+                break;
+              default:
+                break;
+            }  
+            break;
+          default:
+            break;
         }
-        
-        
-  
+
         if (!$compactDisplay) {
           if ($hierarchy2 !== '') {
             $hierarchy2 .= ', ';

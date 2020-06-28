@@ -130,11 +130,6 @@ trait Gov4WebtreesModuleTrait {
                 'COMPACT_DISPLAY',
                 '1'),
         new ControlPanelCheckbox(
-                /* I18N: Module Configuration */I18N::translate('Use place names and link to places existing in webtrees'),
-                /* I18N: Module Configuration */I18N::translate('If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible.'),
-                'DISPLAY_INTERNAL_LINKS',
-                '1'),
-        new ControlPanelCheckbox(
                 /* I18N: Module Configuration */I18N::translate('Allow objects of type \'settlement\' in hierarchy'),
                 /* I18N: Module Configuration */I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') .
                 /* I18N: Module Configuration */I18N::translate('This policy hasn\'t been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise.') .
@@ -148,6 +143,27 @@ trait Gov4WebtreesModuleTrait {
                 '0')));
 
     $factsAndEventsSub[] = new ControlPanelSubsection(
+            /* I18N: Module Configuration */I18N::translate('Place text and links'),
+            array(new ControlPanelRadioButtons(
+                false,
+                array(
+            new ControlPanelRadioButton(
+                    /* I18N: Module Configuration */I18N::translate('Use place names and links from GOV'),
+                    /* I18N: Module Configuration */I18N::translate('\'Classic\' mode.'),
+                    '0'),
+            new ControlPanelRadioButton(
+                    /* I18N: Module Configuration */I18N::translate('Use place names and links from GOV, additionally link to places existing in webtrees via icons'),
+                    /* I18N: Module Configuration */I18N::translate('\'Classic\' mode, extended to link to places from the GEDCOM data, if possible.'),
+                    '1'),
+            new ControlPanelRadioButton(
+                    /* I18N: Module Configuration */I18N::translate('Use place names and link to places existing in webtrees, additionally link to GOV via icons'),
+                    /* I18N: Module Configuration */I18N::translate('If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible.'),
+                    '2')),
+                null,
+                'DISPLAY_INTERNAL_LINKS',
+                '1')));
+    
+    $generalSub[] = new ControlPanelSubsection(
             /* I18N: Module Configuration */I18N::translate('Internals (adjusted automatically if necessary)'),
             array(/* new ControlPanelCheckbox(
           I18N::translate('Use fast ajax requests'),

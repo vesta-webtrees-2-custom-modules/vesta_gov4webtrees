@@ -40,7 +40,7 @@ Access a demo of the module [here](https://cissee.de/gov4webtrees2Demo). Feel fr
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.6.0.4
+* Current version: 2.0.6.1.0
 * Based on and tested with webtrees 2.0.6. Cannot be used with webtrees 1.x. May not work with earlier 2.x versions!
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
@@ -70,6 +70,7 @@ If you use GEDCOM data with _GOV tags for GOV ids (either directly or via the Sh
 * Nutzt Daten des [Geschichtlichen Orts-Verzeichnisses GOV](http://gov.genealogy.net) des [Vereins für Computergenealogie e. V.](http://compgen.de), basierend auf einer [Creative Commons-Lizenz](http://wiki-de.genealogy.net/GOV/Webservice#Lizenz).
 * Dutch translations provided by TheDutchJewel.
 * Slovak translations provided by Ladislav Rosival.
+* Czech translations provided by Josef Prause.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
