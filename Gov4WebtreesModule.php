@@ -531,10 +531,13 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
 
     // Request for a non-existent place?
-    $place = $this->search_service->searchPlaces($tree, $place_id, 0, 1)            
+    
+    //WTF SearchService
+    $query = implode(',',explode(', ', $place_id));
+    $place = $this->search_service->searchPlaces($tree, $query, 0, 1)            
             ->first();
             
-    if ($place == null) {
+    if ($place === null) {
       //gov id has been mapped, but place no longer exists (at least not in this tree)
       //or its a gov-id retrieved e.g. via gov parent hierarchy
       return null;
@@ -672,7 +675,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                 }
               }
             }
-            
+
             switch ($withInternalLinks) {
               case 1: //classic plus place/shared place icons
                 if (($ps !== null) && ($pre === '')) {

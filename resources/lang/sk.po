@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-06-07 17:28+0200\n"
-"PO-Revision-Date: 2020-03-28 20:13+0100\n"
+"PO-Revision-Date: 2020-07-10 19:35+0200\n"
 "Last-Translator: Ladislav Rosival <lacoros@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 
 #. I18N: Module Configuration
@@ -103,17 +103,17 @@ msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
-msgstr ""
+msgstr "Identifikátor GOV"
 
 #: EditGovMappingController.php:81
 #, php-format
 msgid "GOV id for %1$s has been removed."
-msgstr "GOV id pre %1$s bolo odstránené."
+msgstr "Identifikátor GOV pre %1$s bolo odstránené."
 
 #: EditGovMappingController.php:103
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
-msgstr "GOV id pre %1$s bolo nastavené na %2$s."
+msgstr "Identifikátor GOV pre %1$s bolo nastavené na %2$s."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:31
@@ -123,7 +123,7 @@ msgstr ""
 #: Gov4WebtreesModule.php:262
 #, php-format
 msgid "GOV place hierarchy for %1$s will be reloaded from server."
-msgstr ""
+msgstr "GOV hierarchia pre %1$s sa obnoví zo servera."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:165
@@ -173,7 +173,7 @@ msgstr ""
 #: EditGovMappingController.php:92
 #: resources/views/script/select2-initializer-gov.phtml:15
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
-msgstr "Neplatné GOV id! Platné GOV id sú napr. 'EITTZE_W3091', 'object_1086218'."
+msgstr "Neplatný identifikátor GOV! Platné identifikátory sú napr. 'EITTZE_W3091', 'object_1086218'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:170
@@ -246,25 +246,25 @@ msgstr ""
 
 #: Gov4WebtreesModule.php:351
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
-msgstr "Znovunastaviť GOV id (mimo GEDCOM) a načítať hierarchiu miesta GOV"
+msgstr "Znovunastaviť identifikátor GOV (mimo GEDCOM) a načítať hierarchiu miest GOV"
 
 #: EditGovMappingController.php:54
 #, php-format
 msgid "Reset GOV id for %1$s"
-msgstr "Resetovať GOV id pre %1$s"
+msgstr "Resetovať identifikátor GOV pre %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
-msgstr "Uložte aktuálne id, aby sa znovunačítala hierarchia miesta z GOV serveru."
+msgstr "Uložte aktuálny identifikátor, aby sa znovunačítala hierarchia miesta z GOV serveru."
 
 #: Gov4WebtreesModule.php:349
 msgid "Set GOV id (outside GEDCOM)"
-msgstr "Nastaviť GOV id (mimo GEDCOM)"
+msgstr "Nastaviť identifikátor GOV (mimo GEDCOM)"
 
 #: EditGovMappingController.php:52
 #, php-format
 msgid "Set GOV id for %1$s"
-msgstr "Nastaviť GOV id pre %1$s"
+msgstr "Nastaviť identifikátor GOV pre %1$s"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:96
@@ -284,7 +284,7 @@ msgstr ""
 #: Gov4WebtreesModule.php:99
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
-msgstr ""
+msgstr "Zdá sa, že server GOV je momentálne nedostupný."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:90
@@ -332,7 +332,7 @@ msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:28
 msgid "You may also save an empty id in order to remove the mapping."
-msgstr ""
+msgstr "Môžete uložiť aj prázdny identifikátor aby ste zrušili prepojenie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:110
