@@ -785,27 +785,27 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     try {
       $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale, $fallbackPreferDeu);
+      
+      if ($gov == null) {
+        //invalid id!
+        return [];
+      }
+
+      //data and next id
+      $type = FunctionsGov::retrieveTypeDescription($this, $gov->getType(), $locale);
+      $label = $gov->getLabel();
+
+      //next hierarchy level (if any)
+      $nextId = FunctionsGov::findGovParentOfType($this, $id, $gov, $julianDay, FunctionsGov::$TYPES_ADMINISTRATIVE, $version);
+      if ($allowSettlements && !$nextId) {
+        $nextId = FunctionsGov::findGovParentOfType($this, $id, $gov, $julianDay, FunctionsGov::$TYPES_SETTLEMENT, $version);
+      }
+
+      return ['type' => $type, 'label' => $label, 'nextId' => $nextId, 'version' => $gov->getVersion()];
     } catch (GOVServerUnavailableException $ex) {
-      $gov = null;
       $this->flashGovServerUnavailable();
-    }    
-
-    if ($gov == null) {
-      //invalid id!
       return [];
-    }
-    
-    //data and next id
-    $type = FunctionsGov::retrieveTypeDescription($this, $gov->getType(), $locale);
-    $label = $gov->getLabel();
-
-    //next hierarchy level (if any)
-    $nextId = FunctionsGov::findGovParentOfType($this, $id, $gov, $julianDay, FunctionsGov::$TYPES_ADMINISTRATIVE, $version);
-    if ($allowSettlements && !$nextId) {
-      $nextId = FunctionsGov::findGovParentOfType($this, $id, $gov, $julianDay, FunctionsGov::$TYPES_SETTLEMENT, $version);
-    }
-    
-    return ['type' => $type, 'label' => $label, 'nextId' => $nextId, 'version' => $gov->getVersion()];
+    }    
   }
   
   ////////////////////////////////////////////////////////////////////////////////
