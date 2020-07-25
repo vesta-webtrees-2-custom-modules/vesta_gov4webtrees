@@ -1,0 +1,1738 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:gov="http://gov.genealogy.net/ontology.owl#"
+    xmlns:j.0="owl:"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://gov.genealogy.net/types.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_9">
+    <rdfs:comment xml:lang="en">Streets, highways, roads, or railroad feature type</rdfs:comment>
+    <rdfs:label xml:lang="en">transportation</rdfs:label>
+    <rdfs:label xml:lang="de">Verkehrswesen</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_8">
+    <rdfs:label xml:lang="en">populated place</rdfs:label>
+    <rdfs:label xml:lang="de">Wohnplatz</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_6">
+    <rdfs:label xml:lang="en">judicial</rdfs:label>
+    <rdfs:label xml:lang="de">Gericht</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_27">
+    <rdfs:comment xml:lang="de">Bundesländer u.ä. </rdfs:comment>
+    <rdfs:label xml:lang="de">adm1</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_1"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_26">
+    <rdfs:label xml:lang="de">adm0</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_1"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_29">
+    <rdfs:comment xml:lang="de">Kreise (wie Deutschland heute), Amtshauptmannschaften, historische (kreisähnliche) Ämter u.ä. </rdfs:comment>
+    <rdfs:label xml:lang="de">adm3</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_1"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_28">
+    <rdfs:comment xml:lang="de">Regierungsbezirke u.ä. </rdfs:comment>
+    <rdfs:label xml:lang="de">adm2</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_1"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_1">
+    <rdfs:label xml:lang="en">administrative division</rdfs:label>
+    <rdfs:label xml:lang="de">(politische) Verwaltung</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_13">
+    <rdfs:comment xml:lang="en">Other or unknown feature type</rdfs:comment>
+    <rdfs:label xml:lang="en">other</rdfs:label>
+    <rdfs:label xml:lang="de">Sonstige</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_30">
+    <rdfs:comment xml:lang="de">Ämter (Ebene zwischen Gemeinde und Kreis), Verwaltungsgemeinschaften, Verbandsgemeinden u.a. </rdfs:comment>
+    <rdfs:label xml:lang="de">adm4</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_4">
+    <rdfs:label xml:lang="en">geographic features</rdfs:label>
+    <rdfs:label xml:lang="de">geographische Typen </rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_10">
+    <rdfs:comment xml:lang="en">places that are no settlements</rdfs:comment>
+    <rdfs:comment xml:lang="de">Plätze, die keine Wohnplätze sind</rdfs:comment>
+    <rdfs:label xml:lang="en">place</rdfs:label>
+    <rdfs:label xml:lang="de">Platz</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_32">
+    <rdfs:comment xml:lang="de">Strukturen unterhalb von Gemeinden </rdfs:comment>
+    <rdfs:label xml:lang="de">adm6</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_3">
+    <rdfs:label xml:lang="en">ecclesiastical (church)</rdfs:label>
+    <rdfs:label xml:lang="de">Kirche</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_31">
+    <rdfs:comment xml:lang="de">Gemeinde</rdfs:comment>
+    <rdfs:label xml:lang="de">adm5</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_2">
+    <rdfs:label xml:lang="en">civil</rdfs:label>
+    <rdfs:label xml:lang="de">Zivilverwaltung</rdfs:label>
+  </owl:Class>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#6">
+    <rdfs:label xml:lang="en">diocese</rdfs:label>
+    <rdfs:label xml:lang="pl">biskupstwo</rdfs:label>
+    <rdfs:label xml:lang="fr">diocèse</rdfs:label>
+    <rdfs:label xml:lang="de">Bistum</rdfs:label>
+    <rdfs:label xml:lang="nl">bisdom</rdfs:label>
+    <rdfs:label xml:lang="ru">епископство</rdfs:label>
+    <rdfs:label xml:lang="da">stift</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#129">
+    <rdfs:label xml:lang="en">settlement</rdfs:label>
+    <rdfs:label xml:lang="de">Wohnplatz</rdfs:label>
+    <rdfs:label xml:lang="ru">населённый пункт</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#226">
+    <rdfs:label xml:lang="de">Obmannschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#105">
+    <rdfs:label xml:lang="de">Landgericht</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#117">
+    <rdfs:label xml:lang="de">Unterförsterei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#238">
+    <rdfs:label xml:lang="en">urban-type settlement</rdfs:label>
+    <rdfs:label xml:lang="uk">селище міського типу</rdfs:label>
+    <rdfs:label xml:lang="de">Siedlung städtischen Typs</rdfs:label>
+    <rdfs:label xml:lang="ru">Посёлок городского типа</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#202">
+    <rdfs:label xml:lang="de">Amtsgerichtsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#214">
+    <rdfs:label xml:lang="cs">cesarstwo</rdfs:label>
+    <rdfs:label xml:lang="en">realm</rdfs:label>
+    <rdfs:label xml:lang="pl">cesarstwo</rdfs:label>
+    <rdfs:label xml:lang="de">Kaiserreich</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#21">
+    <rdfs:label xml:lang="en">manor (building)</rdfs:label>
+    <rdfs:label xml:lang="de">Gut (Gebäude)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#57">
+    <rdfs:label xml:lang="de">Amt (dänisches)</rdfs:label>
+    <rdfs:label xml:lang="da">amt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#69">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4230450-7"/>
+    <rdfs:label xml:lang="en">hamlet</rdfs:label>
+    <rdfs:label xml:lang="pl">wólka</rdfs:label>
+    <rdfs:label xml:lang="fr">hameau</rdfs:label>
+    <rdfs:label xml:lang="de">Weiler</rdfs:label>
+    <rdfs:label xml:lang="nl">gehucht</rdfs:label>
+    <rdfs:label xml:lang="ru">крестьянская усадьба</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#33">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4499053-4"/>
+    <rdfs:label xml:lang="en">electorate</rdfs:label>
+    <rdfs:label xml:lang="de">Kurfürstentum</rdfs:label>
+    <rdfs:label xml:lang="ru">курфюршество</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#185">
+    <rdfs:label xml:lang="de">Klosteramt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#197">
+    <rdfs:label xml:lang="de">veraltet (Sozialgericht)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_27 rdf:about="http://gov.genealogy.net/types.owl#45">
+    <rdfs:label xml:lang="en">province</rdfs:label>
+    <rdfs:label xml:lang="fr">province</rdfs:label>
+    <rdfs:label xml:lang="nl">provincie</rdfs:label>
+    <rdfs:label xml:lang="cs">provincie</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4176036-0"/>
+    <rdfs:label xml:lang="de">Provinz</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+    <rdfs:label xml:lang="ru">провинция</rdfs:label>
+  </j.1:group_27>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#161">
+    <rdfs:label xml:lang="de">Verwaltungsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#173">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4480683-8"/>
+    <rdfs:label xml:lang="uk">Райхскомісаріат</rdfs:label>
+    <rdfs:label xml:lang="pl">Komisariat Rzeszy</rdfs:label>
+    <rdfs:label xml:lang="de">Reichskommissariat</rdfs:label>
+    <rdfs:label xml:lang="ru">Рейхскомиссариат</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#270">
+    <rdfs:label xml:lang="cs">okres</rdfs:label>
+    <rdfs:label xml:lang="sk">okres</rdfs:label>
+    <rdfs:label xml:lang="de">Bezirk (Österreich)</rdfs:label>
+    <rdfs:label xml:lang="hu">járás</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#7">
+    <rdfs:label xml:lang="en">federal state</rdfs:label>
+    <rdfs:label xml:lang="cs">spolková země</rdfs:label>
+    <rdfs:label xml:lang="pl">kraj związkowych</rdfs:label>
+    <rdfs:label xml:lang="de">Bundesland</rdfs:label>
+    <rdfs:label xml:lang="ru">федеральная земля</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_9 rdf:about="http://gov.genealogy.net/types.owl#118">
+    <rdfs:label xml:lang="cs">nádraží</rdfs:label>
+    <rdfs:label xml:lang="en">train station</rdfs:label>
+    <rdfs:label xml:lang="pl">dworzec kolejowy</rdfs:label>
+    <rdfs:label xml:lang="fr">Gare</rdfs:label>
+    <rdfs:label xml:lang="de">Bahnhof</rdfs:label>
+    <rdfs:label xml:lang="ru">железнодорожный вокзал</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_8"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_9>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#239">
+    <rdfs:label xml:lang="de">Verwaltungsamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#215">
+    <rdfs:label xml:lang="de">Reichshälfte</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#227">
+    <rdfs:label xml:lang="de">Kirchspielslandgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#20">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4158007-2"/>
+    <rdfs:label xml:lang="cs">hrabství</rdfs:label>
+    <rdfs:label xml:lang="en">countship</rdfs:label>
+    <rdfs:label xml:lang="pl">hrabstwo</rdfs:label>
+    <rdfs:label xml:lang="de">Grafschaft</rdfs:label>
+    <rdfs:label xml:lang="ru">графство</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#203">
+    <rdfs:label xml:lang="de">Domanialamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#32">
+    <rdfs:label xml:lang="en">county (generic)</rdfs:label>
+    <rdfs:label xml:lang="cs">okres</rdfs:label>
+    <rdfs:label xml:lang="pl">powiat</rdfs:label>
+    <rdfs:label xml:lang="de">Kreis</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#198">
+    <rdfs:label xml:lang="de">veraltet (früher: Bundesverwaltungsgericht)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#68">
+    <rdfs:label xml:lang="de">Hauptort</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#174">
+    <rdfs:label xml:lang="en">general district</rdfs:label>
+    <rdfs:label xml:lang="uk">Генеральбецірк</rdfs:label>
+    <rdfs:label xml:lang="pl">Komisariat Generalny</rdfs:label>
+    <rdfs:label xml:lang="de">Generalbezirk</rdfs:label>
+    <rdfs:label xml:lang="ru">Генеральный округ</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#44">
+    <rdfs:label xml:lang="de">Pfarrverband</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#186">
+    <rdfs:label xml:lang="de">Rentkammer</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#56">
+    <rdfs:label xml:lang="en">republic</rdfs:label>
+    <rdfs:label xml:lang="pl">rzeczpospolita</rdfs:label>
+    <rdfs:label xml:lang="fr">république</rdfs:label>
+    <rdfs:label xml:lang="de">Republik</rdfs:label>
+    <rdfs:label xml:lang="nl">republiek</rdfs:label>
+    <rdfs:label xml:lang="ru">республика</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#150">
+    <rdfs:label xml:lang="pl">gmina miejska</rdfs:label>
+    <rdfs:label xml:lang="de">Stadt (Gebietskörperschaft)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#271">
+    <rdfs:label xml:lang="de">Stadt mit Munizipium</rdfs:label>
+    <rdfs:label xml:lang="hu">törvényhatósági jogú város</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#162">
+    <rdfs:label xml:lang="pl">gmina miejsko-wiejska</rdfs:label>
+    <rdfs:label xml:lang="de">Stadt- und Landgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#127">
+    <rdfs:label xml:lang="de">Verwaltungsverband</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_32 rdf:about="http://gov.genealogy.net/types.owl#248">
+    <rdfs:label xml:lang="pl">Sołectwo</rdfs:label>
+    <rdfs:label xml:lang="de">Schulzenamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_32>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#139">
+    <rdfs:label xml:lang="de">Einschicht</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_2 rdf:about="http://gov.genealogy.net/types.owl#103">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4138659-0"/>
+    <rdfs:label xml:lang="en">civil registry</rdfs:label>
+    <rdfs:label xml:lang="pl">urząd stanu cywilnego</rdfs:label>
+    <rdfs:label xml:lang="fr">état civil</rdfs:label>
+    <rdfs:label xml:lang="lt">Civilinės metrikacijos įstaiga</rdfs:label>
+    <rdfs:label xml:lang="de">Standesamt</rdfs:label>
+    <rdfs:label xml:lang="ru">Отделы за́писей а́ктов гражда́нского состоя́ния</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_2>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#224">
+    <rdfs:label xml:lang="de">Pfleggericht</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_6"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_27 rdf:about="http://gov.genealogy.net/types.owl#31">
+    <rdfs:label xml:lang="nl">koninkrijk</rdfs:label>
+    <rdfs:label xml:lang="ru">королевство</rdfs:label>
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4164383-5"/>
+    <rdfs:label xml:lang="fr">royaume</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdfs:label xml:lang="el">βασίλειο</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
+    <rdfs:label xml:lang="de">Königreich</rdfs:label>
+    <rdfs:label xml:lang="it">regno</rdfs:label>
+    <rdfs:label xml:lang="en">kingdom</rdfs:label>
+    <rdfs:label xml:lang="es">reino</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_27>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#43">
+    <rdfs:label xml:lang="de">Pfarrkuratie</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#115">
+    <rdfs:label xml:lang="en">forestry</rdfs:label>
+    <rdfs:label xml:lang="pl">leśniczówka</rdfs:label>
+    <rdfs:label xml:lang="lt">girininkija</rdfs:label>
+    <rdfs:label xml:lang="de">Försterei</rdfs:label>
+    <rdfs:label xml:lang="ru">лесничество</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#236">
+    <rdfs:label xml:lang="en">houses</rdfs:label>
+    <rdfs:label xml:lang="de">Häuser</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#200">
+    <rdfs:label xml:lang="de">veraltet (früher: Verwaltungsgericht)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#212">
+    <rdfs:label xml:lang="de">Landherrenschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#4">
+    <rdfs:label xml:lang="de">Bauerschaft</rdfs:label>
+    <rdfs:label xml:lang="nl">buurschap</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#79">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4440008-1"/>
+    <rdfs:label xml:lang="en">hundred</rdfs:label>
+    <rdfs:label xml:lang="de">Harde</rdfs:label>
+    <rdfs:label xml:lang="nl">herred</rdfs:label>
+    <rdfs:label xml:lang="da">herred</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_6"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#55">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4012775-8"/>
+    <rdfs:label xml:lang="cs">vesnice</rdfs:label>
+    <rdfs:label xml:lang="en">village</rdfs:label>
+    <rdfs:label xml:lang="pl">wieś</rdfs:label>
+    <rdfs:label xml:lang="de">Dorf</rdfs:label>
+    <rdfs:label xml:lang="ru">деревня, село</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#67">
+    <rdfs:label xml:lang="en">solitude</rdfs:label>
+    <rdfs:label xml:lang="de">Einöde</rdfs:label>
+    <rdfs:label xml:lang="ru">глухое место</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#183">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4160263-8"/>
+    <rdfs:label xml:lang="de">Hochstift</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#195">
+    <rdfs:label xml:lang="de">veraltet (Bundessozialgericht)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#171">
+    <rdfs:label xml:lang="de">Stadthauptmannschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#116">
+    <rdfs:label xml:lang="de">Oberförsterei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#237">
+    <rdfs:label xml:lang="uk">селищна рада</rdfs:label>
+    <rdfs:label xml:lang="de">Siedlungsrat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#128">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4166599-5"/>
+    <rdfs:label xml:lang="de">Landgrafschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#249">
+    <rdfs:label xml:lang="de">Erzbischöfliches Amt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#213">
+    <rdfs:label xml:lang="en">gorsoviet</rdfs:label>
+    <rdfs:label xml:lang="de">Stadtrat</rdfs:label>
+    <rdfs:label xml:lang="ru">городский совет</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#42">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4115544-0"/>
+    <rdfs:label xml:lang="en">parish</rdfs:label>
+    <rdfs:label xml:lang="de">Pfarrei</rdfs:label>
+    <rdfs:label xml:lang="ru"> (церковный) приход</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#54">
+    <rdfs:label xml:lang="en">part of town</rdfs:label>
+    <rdfs:label xml:lang="cs">městská část</rdfs:label>
+    <rdfs:label xml:lang="pl">dzielnica miasta</rdfs:label>
+    <rdfs:label xml:lang="de">Stadtteil</rdfs:label>
+    <rdfs:label xml:lang="nl">stadsdeel</rdfs:label>
+    <rdfs:label xml:lang="ru">часть города</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#104">
+    <rdfs:label xml:lang="de">veraltet (Standesamt (Gebäude))</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#225">
+    <rdfs:label xml:lang="de">Rentamt (älterer Ordnung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#30">
+    <rdfs:label xml:lang="cs">klášter</rdfs:label>
+    <rdfs:label xml:lang="en">monastery (building)</rdfs:label>
+    <rdfs:label xml:lang="pl">klasztor</rdfs:label>
+    <rdfs:label xml:lang="de">Kloster (Gebäude)</rdfs:label>
+    <rdfs:label xml:lang="nl">klooster (opstal)</rdfs:label>
+    <rdfs:label xml:lang="ru">монастырь</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_8"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#201">
+    <rdfs:label xml:lang="de">Landeskommissarbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#5">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4145203-3"/>
+    <rdfs:label xml:lang="en">district</rdfs:label>
+    <rdfs:label xml:lang="de">Bezirk</rdfs:label>
+    <rdfs:label xml:lang="ru">округ</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#196">
+    <rdfs:label xml:lang="de">veraltet (Landessozialgericht)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#66">
+    <rdfs:label xml:lang="en">village</rdfs:label>
+    <rdfs:label xml:lang="pl">wieś kościelna</rdfs:label>
+    <rdfs:label xml:lang="de">Kirchdorf</rdfs:label>
+    <rdfs:label xml:lang="ru">село с церковью</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#78">
+    <rdfs:label xml:lang="en">Amt (administrative division)</rdfs:label>
+    <rdfs:label xml:lang="de">Amt (kreisähnlich)</rdfs:label>
+    <rdfs:label xml:lang="ru">aмт</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_2 rdf:about="http://gov.genealogy.net/types.owl#172">
+    <rdfs:label xml:lang="de">Katastralgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_2>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#184">
+    <rdfs:label xml:lang="de">Kammerschreiberei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#160">
+    <rdfs:label xml:lang="en">soviet republic</rdfs:label>
+    <rdfs:label xml:lang="de">Sowjetrepublik</rdfs:label>
+    <rdfs:label xml:lang="ru">Советская Республика</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#149">
+    <rdfs:label xml:lang="de">Landratsamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#125">
+    <rdfs:label xml:lang="en">imperial abbey</rdfs:label>
+    <rdfs:label xml:lang="de">Reichsabtei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#246">
+    <rdfs:label xml:lang="pl">Gromada</rdfs:label>
+    <rdfs:label xml:lang="de">Gromada</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#53">
+    <rdfs:label xml:lang="cs">obvod města</rdfs:label>
+    <rdfs:label xml:lang="en">urban county (city)</rdfs:label>
+    <rdfs:label xml:lang="pl">powiat grodzki</rdfs:label>
+    <rdfs:label xml:lang="de">Stadtkreis</rdfs:label>
+    <rdfs:label xml:lang="ru">город окружного подчинения</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#137">
+    <rdfs:label xml:lang="en">region</rdfs:label>
+    <rdfs:label xml:lang="cs">kraj</rdfs:label>
+    <rdfs:label xml:lang="de">Region (Gebietskörperschaft)</rdfs:label>
+    <rdfs:label xml:lang="ru">край</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#258">
+    <rdfs:label xml:lang="pl">gmina miejska</rdfs:label>
+    <rdfs:label xml:lang="de">Stadtgemeinde (PL)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#65">
+    <rdfs:label xml:lang="de">Pfarrdorf</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#101">
+    <rdfs:label xml:lang="de">Kreisdirektion</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#222">
+    <rdfs:label xml:lang="de">Kreis (mittlere Verwaltungsebene)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#113">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4164765-8"/>
+    <rdfs:label xml:lang="en">comitatus</rdfs:label>
+    <rdfs:label xml:lang="pl">komitat</rdfs:label>
+    <rdfs:label xml:lang="de">Komitat</rdfs:label>
+    <rdfs:label xml:lang="nl">comitaat</rdfs:label>
+    <rdfs:label xml:lang="hu">Vármegye</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#234">
+    <rdfs:label xml:lang="en">borough</rdfs:label>
+    <rdfs:label xml:lang="de">Borough</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#41">
+    <rdfs:label xml:lang="de">Pfarr-Rektorat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#210">
+    <rdfs:label xml:lang="de">Kirchenbund</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#2">
+    <rdfs:label xml:lang="de">Amtsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#77">
+    <rdfs:label xml:lang="de">Reichskreis</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <gov:Type rdf:about="http://gov.genealogy.net/types.owl#89">
+    <rdfs:label xml:lang="de">Friedhof</rdfs:label>
+    <rdfs:label xml:lang="en">cemetery</rdfs:label>
+    <rdfs:label xml:lang="nl">begraafplaats</rdfs:label>
+    <rdfs:label xml:lang="pl">cmentarz</rdfs:label>
+    <rdfs:label xml:lang="cs">hřbitov</rdfs:label>
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4018537-0"/>
+    <rdfs:label xml:lang="ru">кладбище</rdfs:label>
+    <rdfs:label xml:lang="fr">cimetière</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_10"/>
+  </gov:Type>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#181">
+    <rdfs:label xml:lang="de">Rotte</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_8"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#193">
+    <rdfs:label xml:lang="de">Alm</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#138">
+    <rdfs:label xml:lang="de">Oberlandratsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#259">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4196594-2"/>
+    <rdfs:label xml:lang="de">Landvogteibezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#64">
+    <rdfs:label xml:lang="pl">folwark</rdfs:label>
+    <rdfs:label xml:lang="de">Vorwerk</rdfs:label>
+    <rdfs:label xml:lang="ru">фольварок</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#114">
+    <rdfs:label xml:lang="de">Vest</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#235">
+    <rdfs:label xml:lang="en">unitary authority</rdfs:label>
+    <rdfs:label xml:lang="de">Unitary Authority</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#247">
+    <rdfs:label xml:lang="de">Ortsteil (Verwaltung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#76">
+    <rdfs:label xml:lang="de">Adeliges Gut</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#126">
+    <rdfs:label xml:lang="de">Syssel</rdfs:label>
+    <rdfs:label xml:lang="nl">syssel</rdfs:label>
+    <rdfs:label xml:lang="da">syssel</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#211">
+    <rdfs:label xml:lang="de">Landgebiet</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#40">
+    <rdfs:label xml:lang="en">part of place</rdfs:label>
+    <rdfs:label xml:lang="pl">część miejscowości</rdfs:label>
+    <rdfs:label xml:lang="de">Ortsteil</rdfs:label>
+    <rdfs:label xml:lang="ru">часть местности</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#52">
+    <rdfs:label xml:lang="en">borough</rdfs:label>
+    <rdfs:label xml:lang="de">Stadtbezirk</rdfs:label>
+    <rdfs:label xml:lang="ru">городской район</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#102">
+    <rdfs:label xml:lang="cs">lesovna</rdfs:label>
+    <rdfs:label xml:lang="en">forester's house</rdfs:label>
+    <rdfs:label xml:lang="de">Forsthaus</rdfs:label>
+    <rdfs:label xml:lang="ru">дом лесничево</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#223">
+    <rdfs:label xml:lang="de">Landgericht (älterer Ordnung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_6"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#88">
+    <rdfs:label xml:lang="ro">judeţ</rdfs:label>
+    <rdfs:label xml:lang="de">Judet</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#3">
+    <rdfs:label xml:lang="en">Magistrates' Court</rdfs:label>
+    <rdfs:label xml:lang="de">Amtsgericht</rdfs:label>
+    <rdfs:label xml:lang="ru">участковый суд</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#194">
+    <rdfs:label xml:lang="de">Distrikts-Amt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#170">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4150256-5"/>
+    <rdfs:label xml:lang="en">district</rdfs:label>
+    <rdfs:label xml:lang="de">Distrikt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#182">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/108133133X"/>
+    <rdfs:label xml:lang="de">Erzstift</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#50">
+    <rdfs:label xml:lang="cs">stát</rdfs:label>
+    <rdfs:label xml:lang="en">country</rdfs:label>
+    <rdfs:label xml:lang="pl">państwo</rdfs:label>
+    <rdfs:label xml:lang="de">Staat</rdfs:label>
+    <rdfs:label xml:lang="ru">государство</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#75">
+    <rdfs:label xml:lang="de">Güterdistrikt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#147">
+    <rdfs:label xml:lang="de">veraltet (Politischer Bezirk)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#268">
+    <rdfs:label xml:lang="de">Großgemeinde (Ungarn)</rdfs:label>
+    <rdfs:label xml:lang="hu">nagyközség</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#159">
+    <rdfs:label xml:lang="en">Khutor</rdfs:label>
+    <rdfs:label xml:lang="uk">хутір</rdfs:label>
+    <rdfs:label xml:lang="de">Chutor</rdfs:label>
+    <rdfs:label xml:lang="ru">хутор</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#87">
+    <rdfs:label xml:lang="en">mill</rdfs:label>
+    <rdfs:label xml:lang="pl">młyn</rdfs:label>
+    <rdfs:label xml:lang="fr">moulin</rdfs:label>
+    <rdfs:label xml:lang="de">Mühle</rdfs:label>
+    <rdfs:label xml:lang="nl">molen</rdfs:label>
+    <rdfs:label xml:lang="ru">мельница</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#51">
+    <rdfs:label xml:lang="nl">stad</rdfs:label>
+    <rdfs:label xml:lang="ru">город</rdfs:label>
+    <rdfs:label xml:lang="cs">město</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+    <rdfs:label xml:lang="it">città</rdfs:label>
+    <rdfs:label xml:lang="fr">ville</rdfs:label>
+    <rdfs:label xml:lang="da">by</rdfs:label>
+    <rdfs:label xml:lang="de">Stadt (Siedlung)</rdfs:label>
+    <rdfs:label xml:lang="en">town</rdfs:label>
+  </j.1:group_8>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#244">
+    <rdfs:label xml:lang="de">Nebenkirche</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#135">
+    <rdfs:label xml:lang="fr">canton</rdfs:label>
+    <rdfs:label xml:lang="de">canton</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#256">
+    <rdfs:label xml:lang="sk">kraj</rdfs:label>
+    <rdfs:label xml:lang="de">Landesbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#63">
+    <rdfs:label xml:lang="en">rayon</rdfs:label>
+    <rdfs:label xml:lang="de">Rayon</rdfs:label>
+    <rdfs:label xml:lang="ru">район</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#111">
+    <rdfs:label xml:lang="cs">zámek</rdfs:label>
+    <rdfs:label xml:lang="pl">zamek</rdfs:label>
+    <rdfs:label xml:lang="de">Schloss</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#232">
+    <rdfs:label xml:lang="de">Randort</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#99">
+    <rdfs:label xml:lang="en">captaincy</rdfs:label>
+    <rdfs:label xml:lang="de">Amtshauptmannschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#191">
+    <rdfs:label xml:lang="de">Kommende</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#19">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4156818-7"/>
+    <rdfs:label xml:lang="cs">soudní okres</rdfs:label>
+    <rdfs:label xml:lang="de">Gerichtsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#61">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/7715136-7"/>
+    <rdfs:label xml:lang="en">grand duchy</rdfs:label>
+    <rdfs:label xml:lang="cs">velkovévodství</rdfs:label>
+    <rdfs:label xml:lang="pl">wielkie księstwo</rdfs:label>
+    <rdfs:label xml:lang="fr">Grand-Duché</rdfs:label>
+    <rdfs:label xml:lang="de">Großherzogtum</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#86">
+    <rdfs:label xml:lang="en">part province</rdfs:label>
+    <rdfs:label xml:lang="de">Teilprovinz</rdfs:label>
+    <rdfs:label xml:lang="ru">часть провинции</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#136">
+    <rdfs:label xml:lang="fr">commune</rdfs:label>
+    <rdfs:label xml:lang="de">commune</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#257">
+    <rdfs:label xml:lang="pl">gmina wiejska</rdfs:label>
+    <rdfs:label xml:lang="de">Landgemeinde PL</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#1">
+    <rdfs:label xml:lang="de">Amt (Verwaltung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#148">
+    <rdfs:label xml:lang="de">Erfüllende Gemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#269">
+    <rdfs:label xml:lang="de">Kleingemeinde (Ungarn)</rdfs:label>
+    <rdfs:label xml:lang="hu">kisközség</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#98">
+    <rdfs:label xml:lang="de">veraltet (Amtsgericht Gebäude)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#62">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4168913-6"/>
+    <rdfs:label xml:lang="en">margravate</rdfs:label>
+    <rdfs:label xml:lang="de">Markgrafschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#112">
+    <rdfs:label xml:lang="de">Gespanschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#233">
+    <rdfs:label xml:lang="de">Flecken (Siedlung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#124">
+    <rdfs:label xml:lang="en">Abbey</rdfs:label>
+    <rdfs:label xml:lang="fr">Abbaye</rdfs:label>
+    <rdfs:label xml:lang="de">Abtei</rdfs:label>
+    <rdfs:label xml:lang="nl">Abdij</rdfs:label>
+    <rdfs:label xml:lang="ru">Аббатство</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#245">
+    <rdfs:label xml:lang="en">chapel</rdfs:label>
+    <rdfs:label xml:lang="pl">kaplica</rdfs:label>
+    <rdfs:label xml:lang="fr">chapelle</rdfs:label>
+    <rdfs:label xml:lang="de">Kapelle</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#74">
+    <rdfs:label xml:lang="en">deprecated</rdfs:label>
+    <rdfs:label xml:lang="de">veraltet (Gut)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#100">
+    <rdfs:label xml:lang="de">Kreishauptmannschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#221">
+    <rdfs:label xml:lang="nn">Fylkeskommune</rdfs:label>
+    <rdfs:label xml:lang="de">Fylke</rdfs:label>
+    <rdfs:label xml:lang="nb">Fylke</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#18">
+    <rdfs:label xml:lang="en">municipality</rdfs:label>
+    <rdfs:label xml:lang="cs">obec</rdfs:label>
+    <rdfs:label xml:lang="pl">gmina</rdfs:label>
+    <rdfs:label xml:lang="de">Gemeinde</rdfs:label>
+    <rdfs:label xml:lang="nl">gemeente</rdfs:label>
+    <rdfs:label xml:lang="ru">община</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#192">
+    <rdfs:label xml:lang="cs">Okupační zóna</rdfs:label>
+    <rdfs:label xml:lang="en">zone of occupation</rdfs:label>
+    <rdfs:label xml:lang="fr">Zone d'occupation</rdfs:label>
+    <rdfs:label xml:lang="de">Besatzungszone</rdfs:label>
+    <rdfs:label xml:lang="ru">зона оккупации</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#180">
+    <rdfs:label xml:lang="de">Marktgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#60">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4155609-4"/>
+    <rdfs:label xml:lang="en">principality</rdfs:label>
+    <rdfs:label xml:lang="cs">knížectví</rdfs:label>
+    <rdfs:label xml:lang="pl">księstwo</rdfs:label>
+    <rdfs:label xml:lang="de">Fürstentum</rdfs:label>
+    <rdfs:label xml:lang="ru">княжество</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#72">
+    <rdfs:label xml:lang="en">people's republic</rdfs:label>
+    <rdfs:label xml:lang="pl">Rzeczpospolita Ludowa</rdfs:label>
+    <rdfs:label xml:lang="de">Volksrepublik</rdfs:label>
+    <rdfs:label xml:lang="ru">народная республика</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#169">
+    <rdfs:label xml:lang="de">Gemeinde (schwedisch)</rdfs:label>
+    <rdfs:label xml:lang="sv">kommun</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_31 rdf:about="http://gov.genealogy.net/types.owl#97">
+    <rdfs:label xml:lang="fr">mairie</rdfs:label>
+    <rdfs:label xml:lang="de">Bürgermeisterei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_31>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#145">
+    <rdfs:label xml:lang="de">Markt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#266">
+    <rdfs:label xml:lang="de">Landratsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#73">
+    <rdfs:label xml:lang="de">Landdrostei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#85">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4198606-4"/>
+    <rdfs:label xml:lang="en">rural municipality</rdfs:label>
+    <rdfs:label xml:lang="pl">gmina wiejska</rdfs:label>
+    <rdfs:label xml:lang="de">Landgemeinde</rdfs:label>
+    <rdfs:label xml:lang="ru">сельская община</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#157">
+    <rdfs:label xml:lang="en">Guberniya</rdfs:label>
+    <rdfs:label xml:lang="uk">губернія</rdfs:label>
+    <rdfs:label xml:lang="pl">Gubernia</rdfs:label>
+    <rdfs:label xml:lang="de">Gouvernement</rdfs:label>
+    <rdfs:label xml:lang="ru">губерния</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#121">
+    <rdfs:label xml:lang="en">colony</rdfs:label>
+    <rdfs:label xml:lang="pl">kolonia</rdfs:label>
+    <rdfs:label xml:lang="fr">colonie</rdfs:label>
+    <rdfs:label xml:lang="de">Kolonie</rdfs:label>
+    <rdfs:label xml:lang="ru">колония</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_2 rdf:about="http://gov.genealogy.net/types.owl#242">
+    <rdfs:label xml:lang="de">Katasteramt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_2>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#133">
+    <rdfs:label xml:lang="en">region</rdfs:label>
+    <rdfs:label xml:lang="fr">région</rdfs:label>
+    <rdfs:label xml:lang="de">Region (französisch)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#254">
+    <rdfs:label xml:lang="bg">Окръг</rdfs:label>
+    <rdfs:label xml:lang="de">Okrug</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#230">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4523921-6"/>
+    <rdfs:label xml:lang="en">scattered settlement</rdfs:label>
+    <rdfs:label xml:lang="de">Streusiedlung</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#17">
+    <rdfs:label xml:lang="en">building</rdfs:label>
+    <rdfs:label xml:lang="pl">budynek</rdfs:label>
+    <rdfs:label xml:lang="de">Gebäude</rdfs:label>
+    <rdfs:label xml:lang="ru">здание</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#29">
+    <rdfs:label xml:lang="en">parish</rdfs:label>
+    <rdfs:label xml:lang="pl">parafia</rdfs:label>
+    <rdfs:label xml:lang="de">Kirchspiel</rdfs:label>
+    <rdfs:label xml:lang="ru"> церковный приход</rdfs:label>
+    <rdfs:label xml:lang="da">sogn</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#71">
+    <rdfs:label xml:lang="en">confederation</rdfs:label>
+    <rdfs:label xml:lang="de">Staatenbund</rdfs:label>
+    <rdfs:label xml:lang="ru">союз государств</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#83">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4123339-6"/>
+    <rdfs:label xml:lang="cs">hanzovní město</rdfs:label>
+    <rdfs:label xml:lang="en">Hanseatic city</rdfs:label>
+    <rdfs:label xml:lang="de">Hansestadt</rdfs:label>
+    <rdfs:label xml:lang="ru">ганзейский город</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#158">
+    <rdfs:label xml:lang="cs">část obce</rdfs:label>
+    <rdfs:label xml:lang="de">Gemeindeteil</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#134">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4143068-2"/>
+    <rdfs:label xml:lang="fr">arrondissement</rdfs:label>
+    <rdfs:label xml:lang="de">arrondissement</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#255">
+    <rdfs:label xml:lang="de">Stadtgut</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#84">
+    <rdfs:label xml:lang="de">Kirchspielvogtei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#96">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4414011-3"/>
+    <rdfs:label xml:lang="cs">arcibiskupství</rdfs:label>
+    <rdfs:label xml:lang="en">archbishopric</rdfs:label>
+    <rdfs:label xml:lang="pl">arcybiskupstwo</rdfs:label>
+    <rdfs:label xml:lang="de">Erzbistum</rdfs:label>
+    <rdfs:label xml:lang="ru">архиепископство</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#146">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4145204-5"/>
+    <rdfs:label xml:lang="cs">okresni hejtmanstvi</rdfs:label>
+    <rdfs:label xml:lang="de">Bezirkshauptmannschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#267">
+    <rdfs:label xml:lang="de">sognekommune</rdfs:label>
+    <rdfs:label xml:lang="da">sognekommune</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#110">
+    <rdfs:label xml:lang="en">district office</rdfs:label>
+    <rdfs:label xml:lang="de">Bezirksamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#231">
+    <rdfs:label xml:lang="de">Höfe</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#122">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4229991-3"/>
+    <rdfs:label xml:lang="de">Verbandsgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#243">
+    <rdfs:label xml:lang="de">Propstei</rdfs:label>
+    <rdfs:label xml:lang="da">provsti</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#28">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4125362-0"/>
+    <rdfs:label xml:lang="de">Kirchenprovinz</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#16">
+    <rdfs:label xml:lang="en">free state</rdfs:label>
+    <rdfs:label xml:lang="cs">nezávislý stát</rdfs:label>
+    <rdfs:label xml:lang="de">Freistaat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#190">
+    <rdfs:label xml:lang="de">Ballei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#82">
+    <rdfs:label xml:lang="de">Domkapitel (Herrschaft)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#94">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4188123-0"/>
+    <rdfs:label xml:lang="de">Verwaltungsgemeinschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#70">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4188497-8"/>
+    <rdfs:label xml:lang="en">bailiwick</rdfs:label>
+    <rdfs:label xml:lang="de">Vogtei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#167">
+    <rdfs:label xml:lang="en">mandate territory</rdfs:label>
+    <rdfs:label xml:lang="pl">terytorium mandatowe</rdfs:label>
+    <rdfs:label xml:lang="de">Mandatsgebiet</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#95">
+    <j.0:sameAs rdf:resource="https://www.wikidata.org/wiki/Q22865"/>
+    <rdfs:label xml:lang="en">county-level city</rdfs:label>
+    <rdfs:label xml:lang="de">Kreisfreie Stadt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#179">
+    <rdfs:label xml:lang="de">Ritterkreis</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#143">
+    <rdfs:label xml:lang="de">kommune</rdfs:label>
+    <rdfs:label xml:lang="no">kommune</rdfs:label>
+    <rdfs:label xml:lang="da">kommune</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#264">
+    <rdfs:label xml:lang="fr">mairie</rdfs:label>
+    <rdfs:label xml:lang="de">Mairie</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#155">
+    <rdfs:label xml:lang="en">region</rdfs:label>
+    <rdfs:label xml:lang="de">Region (katholische Kirche)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#240">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4209157-3"/>
+    <rdfs:label xml:lang="en">uyezd</rdfs:label>
+    <rdfs:label xml:lang="uk">уїзд</rdfs:label>
+    <rdfs:label xml:lang="pl">ujezd</rdfs:label>
+    <rdfs:label xml:lang="de">Ujesd</rdfs:label>
+    <rdfs:label xml:lang="ru">уезд</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#131">
+    <rdfs:label xml:lang="de">Weichbild</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#252">
+    <rdfs:label xml:lang="en">local government</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#39">
+    <rdfs:label xml:lang="en">place</rdfs:label>
+    <rdfs:label xml:lang="pl">miejscowość</rdfs:label>
+    <rdfs:label xml:lang="de">Ort</rdfs:label>
+    <rdfs:label xml:lang="ru">местность</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_10 rdf:about="http://gov.genealogy.net/types.owl#15">
+    <rdfs:label xml:lang="en">field name</rdfs:label>
+    <rdfs:label xml:lang="de">Flurname</rdfs:label>
+    <rdfs:label xml:lang="ru">микротопоним</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_10>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#27">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4163919-4"/>
+    <rdfs:label xml:lang="de">Kirchenkreis</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_31 rdf:about="http://gov.genealogy.net/types.owl#93">
+    <rdfs:label xml:lang="de">Reichsstadt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_31>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#81">
+    <rdfs:label xml:lang="en">monastery</rdfs:label>
+    <rdfs:label xml:lang="de">Kloster (Gebiet)</rdfs:label>
+    <rdfs:label xml:lang="ru"> монастырь</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#156">
+    <rdfs:label xml:lang="de">Gemeindebezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#168">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4145203-3"/>
+    <rdfs:label xml:lang="fr">comté</rdfs:label>
+    <rdfs:label xml:lang="de">Provinz (schwedisch)</rdfs:label>
+    <rdfs:label xml:lang="sv">län</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#253">
+    <rdfs:label xml:lang="en">religious organization</rdfs:label>
+    <rdfs:label xml:lang="de">Religionsgemeinschaft</rdfs:label>
+    <rdfs:label xml:lang="ru">религиозная организация</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#144">
+    <rdfs:label xml:lang="de">Ortschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#265">
+    <rdfs:label xml:lang="en">sultanate</rdfs:label>
+    <rdfs:label xml:lang="fr">sultanat</rdfs:label>
+    <rdfs:label xml:lang="it">sultanato</rdfs:label>
+    <rdfs:label xml:lang="es">sultanato</rdfs:label>
+    <rdfs:label xml:lang="de">Sultanat</rdfs:label>
+    <rdfs:label xml:lang="nl">sultanaat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#14">
+    <rdfs:label xml:lang="cs">městyse</rdfs:label>
+    <rdfs:label xml:lang="de">Flecken (Gebietskörperschaft)</rdfs:label>
+    <rdfs:label xml:lang="ru">местечко</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#120">
+    <rdfs:label xml:lang="en">settlement</rdfs:label>
+    <rdfs:label xml:lang="pl">osada</rdfs:label>
+    <rdfs:label xml:lang="de">Siedlung</rdfs:label>
+    <rdfs:label xml:lang="ru">посёлок</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#241">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4652152-5"/>
+    <rdfs:label xml:lang="en">Volost</rdfs:label>
+    <rdfs:label xml:lang="uk">волость</rdfs:label>
+    <rdfs:label xml:lang="pl">Wołost</rdfs:label>
+    <rdfs:label xml:lang="de">Wolost</rdfs:label>
+    <rdfs:label xml:lang="ru">волость</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#26">
+    <rdfs:label xml:lang="en">church</rdfs:label>
+    <rdfs:label xml:lang="fr">église</rdfs:label>
+    <rdfs:label xml:lang="de">Kirche</rdfs:label>
+    <rdfs:label xml:lang="nl">kerk</rdfs:label>
+    <rdfs:label xml:lang="ru">церковь</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <gov:Type rdf:about="http://gov.genealogy.net/types.owl#38">
+    <rdfs:label xml:lang="en">oblast</rdfs:label>
+    <rdfs:label xml:lang="fr">oblast</rdfs:label>
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4172315-6"/>
+    <rdfs:label xml:lang="de">Oblast</rdfs:label>
+    <rdfs:label xml:lang="bg">област</rdfs:label>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q171308"/>
+    <rdfs:label xml:lang="uk">область</rdfs:label>
+    <rdfs:label xml:lang="ru">область</rdfs:label>
+    <rdfs:label xml:lang="pl">obwód</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+  </gov:Type>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#109">
+    <rdfs:label xml:lang="de">Forstgutsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#206">
+    <rdfs:label xml:lang="de">Regionalkirchenamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#218">
+    <rdfs:label xml:lang="de">Stadt (Einheitsgemeinde)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#80">
+    <rdfs:label xml:lang="de">Landschaft (Verwaltung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#92">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4073439-0"/>
+    <rdfs:label xml:lang="de">Kirchengemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#189">
+    <rdfs:label xml:lang="de">Großpriorat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#13">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4583998-0"/>
+    <owl:sameAs rdf:resource="http://www.wikidata.org/entity/Q1129743"/>
+    <rdfs:label xml:lang="en">filial church</rdfs:label>
+    <rdfs:label xml:lang="de">Filiale</rdfs:label>
+    <rdfs:label xml:lang="ru">отделение</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#165">
+    <rdfs:label xml:lang="de">Gnotschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#25">
+    <rdfs:label xml:lang="en">canton</rdfs:label>
+    <rdfs:label xml:lang="fr">canton de</rdfs:label>
+    <rdfs:label xml:lang="it">cantone di</rdfs:label>
+    <rdfs:label xml:lang="de">Kanton</rdfs:label>
+    <rdfs:label xml:lang="ru">кантон</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#177">
+    <rdfs:label xml:lang="de">Reichsritterschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#262">
+    <rdfs:label xml:lang="de">Stadtteil (Verwaltung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#153">
+    <rdfs:label xml:lang="de">Kommissariat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#274">
+    <rdfs:label xml:lang="en">unincorporated area</rdfs:label>
+    <rdfs:label xml:lang="fr">secteur non constitué en municipalité</rdfs:label>
+    <rdfs:label xml:lang="de">gemeindefreies Gebiet</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#250">
+    <rdfs:label xml:lang="de">Apostolische Administratur</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#37">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4172217-6"/>
+    <rdfs:label xml:lang="de">Oberamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#49">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4759491-3"/>
+    <rdfs:label xml:lang="en">sprengel</rdfs:label>
+    <rdfs:label xml:lang="de">Sprengel</rdfs:label>
+    <rdfs:label xml:lang="ru">церковный приход</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#219">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4698842-7"/>
+    <rdfs:label xml:lang="de">Expositur</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#207">
+    <rdfs:label xml:lang="de">Oberamtsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#91">
+    <rdfs:label xml:lang="de">Bistumsregion</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#178">
+    <rdfs:label xml:lang="de">Ritterkanton</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#154">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/7787200-9"/>
+    <rdfs:label xml:lang="de">Honschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#24">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4151453-1"/>
+    <rdfs:label xml:lang="en">Farm</rdfs:label>
+    <rdfs:label xml:lang="pl">dwór</rdfs:label>
+    <rdfs:label xml:lang="lt">viensėdis</rdfs:label>
+    <rdfs:label xml:lang="de">Hof</rdfs:label>
+    <rdfs:label xml:lang="ru">двор</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <gov:Type rdf:about="http://gov.genealogy.net/types.owl#166">
+    <rdfs:label xml:lang="de">Ruine</rdfs:label>
+    <rdfs:label xml:lang="da">ruin</rdfs:label>
+    <rdfs:label xml:lang="ru">руины</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_10"/>
+    <rdfs:label xml:lang="nl">ruïne</rdfs:label>
+    <rdfs:label xml:lang="en">ruins</rdfs:label>
+    <rdfs:label xml:lang="cs">zřícenina</rdfs:label>
+    <rdfs:label xml:lang="pl">ruiny</rdfs:label>
+    <rdfs:label xml:lang="fr">ruine</rdfs:label>
+  </gov:Type>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#36">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4073976-4"/>
+    <rdfs:label xml:lang="en">rural county (rural)</rdfs:label>
+    <rdfs:label xml:lang="pl">powiat ziemski</rdfs:label>
+    <rdfs:label xml:lang="de">Landkreis</rdfs:label>
+    <rdfs:label xml:lang="ru">сельский район</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#130">
+    <rdfs:label xml:lang="en">state</rdfs:label>
+    <rdfs:label xml:lang="de">Bundesstaat</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#251">
+    <rdfs:label xml:lang="de">autonome Gemeinschaft</rdfs:label>
+    <rdfs:label xml:lang="es">comunidad autónoma</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#142">
+    <rdfs:label xml:lang="de">Reichsgau</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#263">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4759491-3"/>
+    <rdfs:label xml:lang="de">Sprengel (obere Verwaltung)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#12">
+    <rdfs:label xml:lang="de">Dompfarrei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#48">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4179043-1"/>
+    <rdfs:label xml:lang="de">Samtgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#8">
+    <rdfs:label xml:lang="cs">hrad</rdfs:label>
+    <rdfs:label xml:lang="en">castle</rdfs:label>
+    <rdfs:label xml:lang="pl">zamek (warowny)</rdfs:label>
+    <rdfs:label xml:lang="fr">château</rdfs:label>
+    <rdfs:label xml:lang="de">Burg</rdfs:label>
+    <rdfs:label xml:lang="nl">kasteel</rdfs:label>
+    <rdfs:label xml:lang="ru">замок</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_10 rdf:about="http://gov.genealogy.net/types.owl#90">
+    <rdfs:label xml:lang="cs">zaniklé sídlo</rdfs:label>
+    <rdfs:label xml:lang="en">abandoned place</rdfs:label>
+    <rdfs:label xml:lang="pl">pustkowie</rdfs:label>
+    <rdfs:label xml:lang="de">Wüstung</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_10>
+  <gov:Type rdf:about="http://gov.genealogy.net/types.owl#107">
+    <rdfs:label xml:lang="da">Ø</rdfs:label>
+    <rdfs:label xml:lang="de">Insel</rdfs:label>
+    <rdfs:label xml:lang="nl">eiland</rdfs:label>
+    <rdfs:label xml:lang="fr">île</rdfs:label>
+    <rdfs:label xml:lang="ru">остров</rdfs:label>
+    <rdfs:label xml:lang="cs">ostrov</rdfs:label>
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4128227-9"/>
+    <rdfs:label xml:lang="en">island</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_4"/>
+    <rdfs:label xml:lang="pl">wyspa</rdfs:label>
+  </gov:Type>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#228">
+    <rdfs:label xml:lang="de">Gerichtsamt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_9 rdf:about="http://gov.genealogy.net/types.owl#119">
+    <rdfs:label xml:lang="en">stop station</rdfs:label>
+    <rdfs:label xml:lang="pl">stacja (kolejowa)</rdfs:label>
+    <rdfs:label xml:lang="de">Haltestelle</rdfs:label>
+    <rdfs:label xml:lang="ru">станица</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_10"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_9>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#204">
+    <rdfs:label xml:lang="de">Ritterschaftliches Amt</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#216">
+    <rdfs:label xml:lang="de">Landesteil</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#187">
+    <rdfs:label xml:lang="de">zu überprüfen</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#35">
+    <rdfs:label xml:lang="en">national church</rdfs:label>
+    <rdfs:label xml:lang="de">Landeskirche</rdfs:label>
+    <rdfs:label xml:lang="ru">церковь федеральной земли</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_4 rdf:about="http://gov.genealogy.net/types.owl#47">
+    <rdfs:label xml:lang="en">historical region</rdfs:label>
+    <rdfs:label xml:lang="pl">dzielnica historyczna</rdfs:label>
+    <rdfs:label xml:lang="de">Landschaft (Region)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_4>
+  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#199">
+    <rdfs:label xml:lang="de">veraltet (früher: Landesverwaltungsgericht)</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_13>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#163">
+    <rdfs:label xml:lang="de">Ortsgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#11">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4070487-7"/>
+    <rdfs:label xml:lang="cs">Diecéze</rdfs:label>
+    <rdfs:label xml:lang="en">diocese</rdfs:label>
+    <rdfs:label xml:lang="pl">Diecezja</rdfs:label>
+    <rdfs:label xml:lang="de">Diözese</rdfs:label>
+    <rdfs:label xml:lang="ru">Диоцез</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#23">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4159687-0"/>
+    <rdfs:label xml:lang="cs">vévodství</rdfs:label>
+    <rdfs:label xml:lang="en">duchy</rdfs:label>
+    <rdfs:label xml:lang="fr">duché</rdfs:label>
+    <rdfs:label xml:lang="de">Herzogtum</rdfs:label>
+    <rdfs:label xml:lang="nl">hertogdom</rdfs:label>
+    <rdfs:label xml:lang="ru">герцогство</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#175">
+    <rdfs:label xml:lang="de">Kreisgebiet</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#260">
+    <rdfs:label xml:lang="de">Delegaturbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#151">
+    <rdfs:label xml:lang="de">Oberlandesgericht</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_6>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#272">
+    <rdfs:label xml:lang="de">Königliche Freistadt (Ungarn)</rdfs:label>
+    <rdfs:label xml:lang="hu">szabad királyi város</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#59">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4190193-9"/>
+    <rdfs:label xml:lang="en">voivodship</rdfs:label>
+    <rdfs:label xml:lang="pl">województwo</rdfs:label>
+    <rdfs:label xml:lang="de">Wojewodschaft</rdfs:label>
+    <rdfs:label xml:lang="ru">воеводство</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#9">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4149024-1"/>
+    <rdfs:label xml:lang="en">deanery</rdfs:label>
+    <rdfs:label xml:lang="cs">děkanát</rdfs:label>
+    <rdfs:label xml:lang="pl">Dekanat</rdfs:label>
+    <rdfs:label xml:lang="de">Dekanat</rdfs:label>
+    <rdfs:label xml:lang="ru">деканат</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_3>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#217">
+    <rdfs:label xml:lang="de">Direktionsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#108">
+    <rdfs:label xml:lang="pl">obszar dworski</rdfs:label>
+    <rdfs:label xml:lang="de">Gutsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#229">
+    <rdfs:label xml:lang="en">group of houses</rdfs:label>
+    <rdfs:label xml:lang="de">Häusergruppe</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#205">
+    <rdfs:label xml:lang="en">selsoviet</rdfs:label>
+    <rdfs:label xml:lang="uk">сільська рада</rdfs:label>
+    <rdfs:label xml:lang="de">Dorfrat</rdfs:label>
+    <rdfs:label xml:lang="ru">сельский совет</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#10">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4142071-8"/>
+    <rdfs:label xml:lang="fr">département</rdfs:label>
+    <rdfs:label xml:lang="de">Departement</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#176">
+    <rdfs:label xml:lang="en">protectorate</rdfs:label>
+    <rdfs:label xml:lang="cs">protektorát</rdfs:label>
+    <rdfs:label xml:lang="pl">protektorat</rdfs:label>
+    <rdfs:label xml:lang="de">Protektorat</rdfs:label>
+    <rdfs:label xml:lang="ru">протекторат</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#46">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4177408-5"/>
+    <rdfs:label xml:lang="en">administrative district</rdfs:label>
+    <rdfs:label xml:lang="de">Regierungsbezirk</rdfs:label>
+    <rdfs:label xml:lang="ru">административный округ</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#188">
+    <rdfs:label xml:lang="de">Ritterorden</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#58">
+    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4284121-5"/>
+    <rdfs:label xml:lang="en">union republic</rdfs:label>
+    <rdfs:label xml:lang="de">Unionsrepublik</rdfs:label>
+    <rdfs:label xml:lang="ru">союзная республика</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#22">
+    <rdfs:label xml:lang="en">dominion</rdfs:label>
+    <rdfs:label xml:lang="de">Herrschaft</rdfs:label>
+    <rdfs:label xml:lang="ru">доминион</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#152">
+    <rdfs:label xml:lang="de">Landbürgermeisterei</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_30"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#273">
+    <rdfs:label xml:lang="de">Stadt mit geordnetem Magistrate (Ungarn)</rdfs:label>
+    <rdfs:label xml:lang="hu">rendezett tanácsú város</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#164">
+    <rdfs:label xml:lang="de">Ortsbezirk</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#34">
+    <rdfs:label xml:lang="en">state</rdfs:label>
+    <rdfs:label xml:lang="de">Land</rdfs:label>
+    <rdfs:label xml:lang="ru"> страна</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#140">
+    <rdfs:label xml:lang="de">Einheitsgemeinde</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_1>
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#261">
+    <rdfs:label xml:lang="de">Hofschaft</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
+  </j.1:group_8>
+</rdf:RDF>

@@ -11,6 +11,8 @@ use Fisharebest\Webtrees\Schema\MigrationInterface;
  */
 class Migration1 implements MigrationInterface {
 
+  //TODO: Migration2: remove obsolete table gov_descriptions!
+   
   public function upgrade(): void {
 
     if (DB::schema()->hasColumn('gov_ids', 'type') || DB::schema()->hasColumn('gov_ids', 'version')) {

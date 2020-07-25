@@ -1,0 +1,23 @@
+<?php
+
+$value = $govTypeId;
+        
+//cf FunctionsEdit:
+//-- Build the selector for the Media 'TYPE' Fact
+
+  $html          = '<select name="text[]">';
+  $selectedValue = $value;
+  if (!array_key_exists($selectedValue, $govTypeIds) && ($selectedValue !== null)) {
+      $html .= '<option selected value="' . e($value) . '" >' . e($value) . '</option>';
+  }
+  foreach (['' => ''] + $govTypeIds as $typeName => $typeValue) {
+      $html .= '<option value="' . $typeName . '" ';
+      if ($selectedValue === "".$typeName) {
+          $html .= 'selected';
+      }
+      $html .= '>' . $typeValue . '</option>';
+  }
+  $html .= '</select>';
+
+  echo $html;
+?>

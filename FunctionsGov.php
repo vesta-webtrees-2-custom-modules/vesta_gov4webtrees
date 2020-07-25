@@ -5,6 +5,7 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 use DateInterval;
 use DateTime;
 use Exception;
+use Fisharebest\Localization\Locale\LocaleInterface;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
 use nusoap_client;
@@ -52,7 +53,8 @@ class SoapWrapper {
     }
     return $client;
   }
-
+  
+  //obsolete, descriptions now managed via owl file
   public static function getTypeDescription($module, $type, $lang) {
     $wsdl = 'http://gov.genealogy.net/services/SimpleService?wsdl';
 
@@ -354,15 +356,61 @@ class GovProperty {
 
 class FunctionsGov {
 
-  //TODO? "Die Beschreibung der Objekttypen kann man per Webservice mit der WSDL-Operation getTypeDescription abholen und in einer Tabelle ablegen." (GOV Wiki)
-  //const+array not available in php < 5.6     
-  //
-  //TODO update regularly! Last update: 2020/04. Source: http://gov.genealogy.net/type/list
-  //
-  public static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
+  //TODO update regularly! Last update: 2020/04. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+  
+  //http://gov.genealogy.net/types.owl#group_1
+  //with subs:
+  //civil
+  //http://gov.genealogy.net/types.owl#group_2
+  //adm0
+  //http://gov.genealogy.net/types.owl#group_26
+  //adm1
+  //http://gov.genealogy.net/types.owl#group_27
+  //adm2
+  //http://gov.genealogy.net/types.owl#group_28
+  //adm3
+  //http://gov.genealogy.net/types.owl#group_29
+  //adm4
+  //http://gov.genealogy.net/types.owl#group_30
+  //adm5
+  //http://gov.genealogy.net/types.owl#group_31
+  //adm6
+  //http://gov.genealogy.net/types.owl#group_32
   public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 158, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274);
+     
+  //http://gov.genealogy.net/types.owl#group_3
+  public static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
+  
+  //http://gov.genealogy.net/types.owl#group_8
   public static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 118, 120, 121, 129, 139, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
+  
+  //http://gov.genealogy.net/types.owl#group_6
+  public static $TYPES_JUDICIAL = array(3, 19, 70, 79, 105, 114, 151, 154, 202, 223, 224, 228);
+  
+  //http://gov.genealogy.net/types.owl#group_4
+  public static $TYPES_GEOGRAPHIC = array(47, 107);
+  
+  //http://gov.genealogy.net/types.owl#group_10
+  public static $TYPES_PLACE = array(15, 89, 90, 166);
+  
+  //http://gov.genealogy.net/types.owl#group_9
+  public static $TYPES_TRANSPORTATION = array(118, 119);
 
+  //http://gov.genealogy.net/types.owl#group_13
+  //other (deprecated)
+  
+  public static function allTypes(): array {
+    $ret = array_merge(FunctionsGov::$TYPES_RELIGIOUS, 
+            FunctionsGov::$TYPES_ADMINISTRATIVE,
+            FunctionsGov::$TYPES_SETTLEMENT,
+            FunctionsGov::$TYPES_JUDICIAL,
+            FunctionsGov::$TYPES_GEOGRAPHIC,
+            FunctionsGov::$TYPES_PLACE,
+            FunctionsGov::$TYPES_TRANSPORTATION);
+    
+    return $ret;
+  }
+  
   public static function clear() {
     DB::table('gov_objects')
             ->delete();
@@ -630,7 +678,8 @@ class FunctionsGov {
     }
     return FunctionsGov::LANGUAGES[substr($locale, 0, 2)] ?? 'deu';
   }
-
+  
+  //obsolete, descriptions now managed via owl file
   public static function getTypeDescription($type, $lang) {
     $row = DB::table('gov_descriptions')
             ->where('type', '=', $type)
@@ -643,7 +692,8 @@ class FunctionsGov {
     $description = $row->description;
     return $description;
   }
-
+  
+  //obsolete, descriptions now managed via owl file
   public static function setTypeDescription($type, $lang, $description) {
     //updateOrInsert rather than insert in order to avoid concurrency issues
     DB::table('gov_descriptions')->updateOrInsert([
@@ -654,6 +704,7 @@ class FunctionsGov {
     ]);
   }
 
+  //obsolete, descriptions now managed via owl file
   public static function loadTypeDescription($module, $type, $lang) {
     if ($type == '...') {
       //type may not be set for all dates (although it should be, in clean GOV)
@@ -662,22 +713,124 @@ class FunctionsGov {
     $description = SoapWrapper::getTypeDescription($module, $type, $lang);
     return $description->item[0];
   }
+  
+  /**
+   * 
+   * @return array key: type, value: array of languageTag:value
+   */
+  public static function getTypeDescriptions($module): array {
+    return app('cache.array')->remember('types.owl', function() use($module): array {
+      return FunctionsGov::loadTypeDescriptionsFromFile($module);
+    });
+  }  
+  
+  protected static function loadTypeDescriptionsFromFile($module): array {
+    $ret = [];
+    
+    $xml = simplexml_load_file($module->resourcesFolder() . 'lang/types.owl');
+    
+    $xml->registerXPathNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+    $xml->registerXPathNamespace('j.1', 'http://gov.genealogy.net/types.owl#');
+    
+    //not sure why some types have this namespace, seems like a bug
+    $xml->registerXPathNamespace('gov', 'http://gov.genealogy.net/ontology.owl#');
 
-  public static function retrieveTypeDescription($module, $type, $locale) {
-    $lang = FunctionsGov::toLang($locale);
+    $paths = [
+        '/rdf:RDF/gov:Type', 
+        '/rdf:RDF/j.1:group_1',
+        '/rdf:RDF/j.1:group_2',
+        '/rdf:RDF/j.1:group_3',
+        '/rdf:RDF/j.1:group_4',
+        '/rdf:RDF/j.1:group_6',
+        '/rdf:RDF/j.1:group_8',
+        '/rdf:RDF/j.1:group_9',
+        '/rdf:RDF/j.1:group_10',
+        '/rdf:RDF/j.1:group_26',
+        '/rdf:RDF/j.1:group_27',
+        '/rdf:RDF/j.1:group_28',
+        '/rdf:RDF/j.1:group_29',
+        '/rdf:RDF/j.1:group_30',
+        '/rdf:RDF/j.1:group_31',
+        '/rdf:RDF/j.1:group_32'];
+    
+    foreach($paths as $path) {            
+      foreach($xml->xpath($path) as $node) {
+        $type = [];
+
+        $key = $node->attributes('http://www.w3.org/1999/02/22-rdf-syntax-ns#')['about']->__toString();
+        //error_log("key: ".$key);
+
+        $node->registerXPathNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#');
+        
+        foreach($node->xpath('rdfs:label') as $label) {
+          $languageTag = $label->attributes('http://www.w3.org/XML/1998/namespace')['lang']->__toString();
+          //error_log("languageTag: ".$languageTag);
+          $value = $label->__toString();
+          //error_log("value: ".$value);
+
+          $type[$languageTag] = $value;
+        }      
+
+        $ret[$key] = $type;
+      }
+    }  
+    
+    return $ret;
+  }
+  
+  public static function retrieveTypeDescription(
+          $module, 
+          $type, 
+          LocaleInterface $locale): ?string {
+    
+    $typeDescriptions = self::getTypeDescriptions($module);
+    
+    $key = "http://gov.genealogy.net/types.owl#".$type;
+    
+    if (array_key_exists($key, $typeDescriptions)) {
+      $values = $typeDescriptions[$key];
+      
+      $languageTag = $locale->languageTag();
+      
+      if (array_key_exists($languageTag, $values)) {
+        return $values[$languageTag];
+      }
+      
+      //fallback to "en":
+      if (array_key_exists("en", $values)) {
+        return $values["en"];
+      }
+      
+      //fallback to "de":
+      if (array_key_exists("de", $values)) {
+        return $values["de"];
+      }
+      
+      //fallback to any:
+      if (!empty($values)) {
+        return reset($values);
+      }
+    }
+    
+    return null;
+    
+    /*
+    $lang = FunctionsGov::toLang($locale->languageTag());
 
     $description = FunctionsGov::getTypeDescription($type, $lang);
     if ($description != null) {
       return $description;
     }
-
+    
     $description = FunctionsGov::loadTypeDescription($module, $type, $lang);
     if (($description == null) || ($description == '...')) {
       return $description;
     }
 
     FunctionsGov::setTypeDescription($type, $lang, $description);
+     * 
     return $description;
+    */
   }
 
   public static function retrieveGovObject($module, $id) {
@@ -758,8 +911,43 @@ class FunctionsGov {
     return $props;
   }
 
+  public static function getTransitiveParentIds($id) {
+    $ret = new Collection();
+    $ret->add($id);
+
+    $queue = [];        
+    $queue[]=$id;
+
+    while (!empty($queue)) {
+      $current = $queue;
+      
+      $rows = DB::table('gov_parents')
+            ->whereIn('gov_id', $current)
+            ->get();
+
+      $queue = [];
+      foreach ($rows as $row) {
+        $parentId = $row->parent_id;        
+        if (!$ret->contains($parentId)) {
+          $ret->add($parentId);
+          $queue[]=$parentId;
+        }
+      }
+    }
+
+    return $ret->toArray();
+  }
+  
   //usually in order to trigger reloading
-  public static function deleteGovObject($id) {
+  public static function deleteGovObject($id, bool $hierarchy = true) {
+    if ($hierarchy) {
+      $ids = FunctionsGov::getTransitiveParentIds($id);
+      DB::table('gov_objects')
+            ->whereIn('gov_id', $ids)
+            ->delete();
+      return;
+    }
+    
     DB::table('gov_objects')
             ->where('gov_id', '=', $id)
             ->delete();
@@ -1211,4 +1399,17 @@ class FunctionsGov {
     return null;
   }
 
+  public static function getGovTypeIds($module, LocaleInterface $locale): array {
+    $types = new Collection(self::allTypes());
+            
+    return $types->mapWithKeys(static function (int $key) use ($module, $locale): array {
+                $desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
+                if ($desc !== null) {
+                  return [$key => $desc . " (" . $key . ")"];
+                }
+                return [$key => "".$key];
+            })
+            ->sort('\Fisharebest\Webtrees\I18N::strcasecmp')
+            ->toArray();
+    }
 }

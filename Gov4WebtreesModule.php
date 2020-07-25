@@ -11,6 +11,7 @@ use Cissee\WebtreesExt\MoreI18N;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
 use Fisharebest\ExtCalendar\GregorianCalendar;
+use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
@@ -223,6 +224,26 @@ class Gov4WebtreesModule extends AbstractModule implements
     return new GenericViewElement($html, $script);
   }
   
+  public function govTypeIdEditControl(
+          ?string $govTypeId, 
+          string $id, 
+          string $name): GenericViewElement {
+    
+    $locale = I18N::locale();
+    $govTypeIds = FunctionsGov::getGovTypeIds($this, $locale);
+    
+    $html = view($this->name() . '::edit/gov-type-id-edit-control', [
+            'moduleName' => $this->name(), 
+            'id' => $id, 
+            'name' => $name, 
+            'govTypeIds' => $govTypeIds,
+            'govTypeId' => $govTypeId]);
+    
+    $script = View::stack('javascript');
+    
+    return new GenericViewElement($html, $script);
+  }
+  
   ////////////////////////////////////////////////////////////////////////////////
   
   public function postSelect2GovIdAction(ServerRequestInterface $request): ResponseInterface {    
@@ -251,7 +272,11 @@ class Gov4WebtreesModule extends AbstractModule implements
     //reset in order to reload hierarchy
     FunctionsGov::deleteGovObject($govId);
     
-    FlashMessages::addMessage(I18N::translate('GOV place hierarchy for %1$s will be reloaded from server.', $placeName));
+    if ($placeName !== '') {
+      FlashMessages::addMessage(I18N::translate('GOV place hierarchy for %1$s has been reloaded from GOV server.', $placeName));
+    } else {
+      FlashMessages::addMessage(I18N::translate('GOV place hierarchy has been reloaded from GOV server.'));
+    }    
     
     //no need to return data
     return response();
@@ -294,6 +319,25 @@ class Gov4WebtreesModule extends AbstractModule implements
       //not editable
       return GenericViewElement::createEmpty();
     }    
+    
+    if ($fact->getTag() === '_GOV') {
+      //direct gov tag (on place or shared place)
+      
+      $govReference = new GovReference($fact->value(), new Trace(""));
+      
+      //allow to reload the gov hierarchy
+      $html = view($this->name() . '::edit/icon-fact-reload-gov', [        
+        'moduleName' => $this->name(),
+        'title' => I18N::translate('reload the GOV place hierarchy'),
+        'route' => route('module', [
+            'module' => $this->name(),
+            'action' => 'ReloadGovHierarchy',
+            'gov-id' => $govReference->getId(),
+            'place-name' => ""
+        ])]);
+    
+      return GenericViewElement::create($html);
+    }
     
     $ps = PlaceStructure::fromFact($fact);
     if ($ps === null) {
@@ -442,7 +486,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     $str2 = GenericViewElement::createEmpty();
     $julianDayText = I18N::translate('today');
-    $str2 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
+    $str2 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale, $julianDay2, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
     return $str2;
   }
   
@@ -588,12 +632,12 @@ class Gov4WebtreesModule extends AbstractModule implements
     $str1 = GenericViewElement::createEmpty();
     if (($julianDay1) && ($showCurrentDateGov !== 2)) {
       $julianDayText = Gov4WebtreesModule::gregorianYear($julianDay1);
-      $str1 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale->languageTag(), $julianDay1, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
+      $str1 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale, $julianDay1, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
     }
     $str2 = GenericViewElement::createEmpty();
     if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
       $julianDayText = I18N::translate('today');
-      $str2 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale->languageTag(), $julianDay2, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
+      $str2 = $this->getHierarchy($compactDisplay, $withInternalLinks, $allowSettlements, $locale, $julianDay2, $julianDayText, $govReference, $tree, $tooltip, $fallbackPreferDeu);
     }
     $gve = GenericViewElement::implode([$str1, $str2]);
     
@@ -618,7 +662,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           bool $compactDisplay, 
           int $withInternalLinks, 
           bool $allowSettlements, 
-          string $locale,
+          LocaleInterface $locale,
           string $julianDay, 
           string $julianDayText, 
           GovReference $govReference,
@@ -777,14 +821,16 @@ class Gov4WebtreesModule extends AbstractModule implements
   
   protected function getDataAndNextId(
           bool $allowSettlements, 
-          string $locale,
+          LocaleInterface $locale,
           string $julianDay, 
           string $id, 
           int $version, 
           bool $fallbackPreferDeu): array {
     
+    $lang = $locale->languageTag();
+    
     try {
-      $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $locale, $fallbackPreferDeu);
+      $gov = FunctionsGov::retrieveGovObjectSnapshot($this, $julianDay, $id, $version, $lang, $fallbackPreferDeu);
       
       if ($gov == null) {
         //invalid id!
