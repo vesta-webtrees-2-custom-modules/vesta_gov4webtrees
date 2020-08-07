@@ -34,9 +34,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ReflectionObject;
 use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
+use Vesta\Hook\HookInterfaces\EmptyPrintFunctionsPlace;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceUtils;
 use Vesta\Hook\HookInterfaces\GovIdEditControlsInterface;
+use Vesta\Hook\HookInterfaces\PrintFunctionsPlaceInterface;
 use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
 use Vesta\Model\GovReference;
@@ -60,6 +62,7 @@ class Gov4WebtreesModule extends AbstractModule implements
   ModuleGlobalInterface,
   IndividualFactsTabExtenderInterface, 
   FunctionsPlaceInterface, 
+  PrintFunctionsPlaceInterface, 
   GovIdEditControlsInterface {
   
   //cannot use original AbstractModule because we override setPreference, setName
@@ -75,6 +78,7 @@ class Gov4WebtreesModule extends AbstractModule implements
   use Gov4WebtreesModuleTrait;
   use EmptyIndividualFactsTabExtender;
   use EmptyFunctionsPlace;
+  use EmptyPrintFunctionsPlace;
 
   protected $module_service;
   protected $search_service;
