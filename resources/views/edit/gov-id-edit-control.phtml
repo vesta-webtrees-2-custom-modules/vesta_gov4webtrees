@@ -20,7 +20,14 @@ if (!$thePlace) {
       //we'd like to use far fa-compass but we'd have to import explicitly
     ?>
     
-    <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <?php 
+      //TODO we should cutoff, for href, at first comma
+    ?>
+    <?php if ($placeNameInputSelector !== null): ?>
+        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/extended" onclick="var REF = $('<?= $placeNameInputSelector ?>'); window.open((REF.val() !== '')?'http://gov.genealogy.net/search/name/?name='+REF.val():'http://gov.genealogy.net/search/extended'); return false;" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <?php else: ?>
+        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <?php endif ?>    
     
     <?php if ($internal): ?>
       <div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>

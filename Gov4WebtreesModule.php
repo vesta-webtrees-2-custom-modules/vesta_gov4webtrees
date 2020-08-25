@@ -201,6 +201,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           string $id, 
           string $name, 
           string $placeName,
+          ?string $placeNameInputSelector,
           bool $forModal,
           bool $withLabel): GenericViewElement {
     
@@ -219,6 +220,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             'id' => $id, 
             'name' => $name, 
             'placeName' => $placeName, 
+            'placeNameInputSelector' => $placeNameInputSelector, 
             'internal' => false,
             'select2Initializer' => $forModal?null:$this->govIdEditControlSelect2ScriptSnippetInternal(false),
             'govId' => $govId]);

@@ -23,6 +23,9 @@ trait Gov4WebtreesModuleTrait {
   }
 
   protected function getFullDescription() {
+    $link1 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees">'.I18N::translate('Main Readme.').'</a>';
+    $link2 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_common/blob/master/docs/LocationData.md">'.I18N::translate('Vesta location data management overview.').'</a>';
+
     $description = array();
     $description[] = /* I18N: Module Configuration */I18N::translate('A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended \'Facts and events\' tab.') . ' ' .
             /* I18N: Module Configuration */I18N::translate('Place hierarchies are displayed historically, i.e. according to the date of the respective event.') . ' ' .
@@ -32,6 +35,7 @@ trait Gov4WebtreesModuleTrait {
             /* I18N: Module Configuration */I18N::translate('In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data.');
     $description[] = /* I18N: Module Configuration */I18N::translate('Requires the \'%1$s Vesta Common\' module, and the \'%1$s Vesta Facts and events\' module.', $this->getVestaSymbol());
     $description[] = /* I18N: Module Configuration */I18N::translate('Provides location data to other custom modules.');
+    $description[] = $link1 . ' ' . $link2;
     return $description;
   }
 
