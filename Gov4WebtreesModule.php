@@ -430,6 +430,10 @@ class Gov4WebtreesModule extends AbstractModule implements
     return $year;
   }
   
+  public function plac2govSupported(): bool {
+    return true;
+  }
+  
   public function plac2gov(PlaceStructure $ps): ?GovReference {
     //1. _GOV set directly?    
     $govId = $ps->getGov();
@@ -497,6 +501,15 @@ class Gov4WebtreesModule extends AbstractModule implements
   }
   
   public function govPgov(GovReference $govReference, GedcomDateInterval $dateInterval, Collection $typesOfLocation, int $maxLevels = PHP_INT_MAX): Collection {
+    try {
+      return $this->govPgovInternal($govReference, $dateInterval, $typesOfLocation, $maxLevels);
+    } catch (GOVServerUnavailableException $ex) {
+      $this->flashGovServerUnavailable();
+      return new Collection();
+    }
+  }
+    
+  protected function govPgovInternal(GovReference $govReference, GedcomDateInterval $dateInterval, Collection $typesOfLocation, int $maxLevels = PHP_INT_MAX): Collection {   
     $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
     $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
 
@@ -514,12 +527,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
     $ret = new Collection();
 
-    try {
-      $gov = FunctionsGov::retrieveGovObject($this, $govId);
-    } catch (GOVServerUnavailableException $ex) {
-      $gov = null;
-      $this->flashGovServerUnavailable();
-    }
+    $gov = FunctionsGov::retrieveGovObject($this, $govId);
 
     //load hierarchy (one per type of location)
     foreach ($typesOfLocation as $typeOfLocation) {
