@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-06-07 17:28+0200\n"
-"PO-Revision-Date: 2020-06-09 10:29+0200\n"
+"PO-Revision-Date: 2020-09-12 21:36+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
-"Language-Team: \n"
-"Language: de\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:68
@@ -187,7 +188,7 @@ msgstr "Lokale GOV-gegevens"
 
 #: resources/views/edit/gov-id-edit-control.phtml:23
 msgid "Look up a matching GOV id on the GOV server"
-msgstr "Zoek een overeenkomende GOV-id op op de GOV-server"
+msgstr "Zoek een overeenkomende GOV-id op de GOV-server"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:56
@@ -251,7 +252,7 @@ msgstr "Stel GOV-id opnieuw in en herlaad de GOV-hiërarchie van plaatsen"
 #: EditGovMappingController.php:54
 #, php-format
 msgid "Reset GOV id for %1$s"
-msgstr "Stel GOV-id opnieuw in voor %s"
+msgstr "Stel GOV-id opnieuw in voor %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
@@ -264,7 +265,7 @@ msgstr "Stel GOV-id in"
 #: EditGovMappingController.php:52
 #, php-format
 msgid "Set GOV id for %1$s"
-msgstr "Stel GOV-id in voor %s"
+msgstr "Stel GOV-id in voor %1$s"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:96
