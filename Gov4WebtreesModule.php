@@ -33,6 +33,7 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ReflectionObject;
+use Vesta\CommonI18N;
 use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
 use Vesta\Hook\HookInterfaces\EmptyPrintFunctionsPlace;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
@@ -874,11 +875,11 @@ class Gov4WebtreesModule extends AbstractModule implements
   ////////////////////////////////////////////////////////////////////////////////
   
   private function title1(): string {
-    return /* I18N: Module Configuration */I18N::translate('Gov4Webtrees Module Location Data Providers');
+    return CommonI18N::locationDataProviders();
   }
   
   private function description1(): string {
-    return /* I18N: Module Configuration */I18N::translate('Modules listed here are used (in the configured order) to determine GOV Ids of places.');
+    return CommonI18N::mapCoordinates();
   }
   
   //hook management - generalize?

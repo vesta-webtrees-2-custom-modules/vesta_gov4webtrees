@@ -3,6 +3,7 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Fisharebest\Webtrees\I18N;
+use Vesta\CommonI18N;
 use Vesta\ControlPanelUtils\Model\ControlPanelCheckbox;
 use Vesta\ControlPanelUtils\Model\ControlPanelCheckboxInverted;
 use Vesta\ControlPanelUtils\Model\ControlPanelPreferences;
@@ -14,7 +15,7 @@ use Vesta\ControlPanelUtils\Model\ControlPanelSubsection;
 trait Gov4WebtreesModuleTrait {
 
   protected function getMainTitle() {
-    return I18N::translate('Vesta Gov4Webtrees');
+    return CommonI18N::titleVestaGov4Webtrees();
   }
 
   public function getShortDescription() {
@@ -23,8 +24,8 @@ trait Gov4WebtreesModuleTrait {
   }
 
   protected function getFullDescription() {
-    $link1 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees">'.I18N::translate('Main Readme.').'</a>';
-    $link2 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_common/blob/master/docs/LocationData.md">'.I18N::translate('Vesta location data management overview.').'</a>';
+    $link1 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees">'.CommonI18N::readme().'</a>';
+    $link2 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_common/blob/master/docs/LocationData.md">'.CommonI18N::readmeLocationData().'</a>';
 
     $description = array();
     $description[] = /* I18N: Module Configuration */I18N::translate('A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended \'Facts and events\' tab.') . ' ' .
@@ -33,9 +34,11 @@ trait Gov4WebtreesModuleTrait {
             /* I18N: Module Configuration */I18N::translate('Consequently, place hierarchy information can only be changed indirectly, via the GOV website.') . ' ' .
             /* I18N: Module Configuration */I18N::translate('GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported.') . ' ' .
             /* I18N: Module Configuration */I18N::translate('In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data.');
-    $description[] = /* I18N: Module Configuration */I18N::translate('Requires the \'%1$s Vesta Common\' module, and the \'%1$s Vesta Facts and events\' module.', $this->getVestaSymbol());
-    $description[] = /* I18N: Module Configuration */I18N::translate('Provides location data to other custom modules.');
-    $description[] = $link1 . ' ' . $link2;
+    $description[] = 
+            CommonI18N::requires2(CommonI18N::titleVestaCommon(), CommonI18N::titleVestaPersonalFacts());
+    $description[] = 
+            CommonI18N::providesLocationData();
+    $description[] = $link1 . '. ' . $link2 . '.';
     return $description;
   }
 
@@ -43,7 +46,7 @@ trait Gov4WebtreesModuleTrait {
     $generalSub = array();
     /*
     $generalSub[] = new ControlPanelSubsection(
-            I18N::translate('Displayed title'),
+            CommonI18N::displayedTitle(),
             array(new ControlPanelCheckbox(
                 I18N::translate('Include the %1$s symbol in the module title', $this->getVestaSymbol()),
                 null,
@@ -124,7 +127,7 @@ trait Gov4WebtreesModuleTrait {
                 '0')));
                 
     $factsAndEventsSub[] = new ControlPanelSubsection(
-            /* I18N: Module Configuration */I18N::translate('Displayed data'),
+            CommonI18N::displayedData(),
             array(
         
         //TODO: would be nice to have this only if tooltip isn't available (tablets)
@@ -182,7 +185,7 @@ trait Gov4WebtreesModuleTrait {
 
     $sections = array();
     $sections[] = new ControlPanelSection(
-            /* I18N: Module Configuration */I18N::translate('General'),
+            CommonI18N::general(),
             null,
             $generalSub);
     $sections[] = new ControlPanelSection(
@@ -190,7 +193,7 @@ trait Gov4WebtreesModuleTrait {
             /* I18N: Module Configuration */I18N::translate('It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them.'),
             $editingSub);
     $sections[] = new ControlPanelSection(
-            /* I18N: Module Configuration */I18N::translate('Facts and Events Tab Settings'),
+            CommonI18N::factsAndEventsTabSettings(),
             null,
             $factsAndEventsSub);
 
