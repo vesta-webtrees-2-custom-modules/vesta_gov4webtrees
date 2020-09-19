@@ -8,9 +8,10 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-09-19 15:42+0200\n"
-"PO-Revision-Date: 2020-09-12 21:36+0000\n"
+"PO-Revision-Date: 2020-09-19 17:40+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,13 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:163
 msgid "'Classic' mode, extended to link to places from the GEDCOM data, if possible."
 msgstr ""
+"'Klassieke' modus, uitgebreid om te linken naar plaatsen uit de GEDCOM-"
+"gegevens, indien mogelijk."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:159
 msgid "'Classic' mode."
-msgstr ""
+msgstr "'Klassieke' modus."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:75
@@ -123,11 +126,11 @@ msgstr "GOV-id's worden standaard buiten GEDCOM-gegevens opgeslagen, maar id's d
 #: Gov4WebtreesModule.php:286
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
-msgstr ""
+msgstr "GOV-plaatshiërarchie voor %1$s is herladen vanaf GOV-server."
 
 #: Gov4WebtreesModule.php:288
 msgid "GOV place hierarchy has been reloaded from GOV server."
-msgstr ""
+msgstr "GOV-plaatshiërarchie is opnieuw geladen vanaf GOV-server."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:72
@@ -226,7 +229,7 @@ msgstr "Plaatshiërarchieën worden historisch weergegeven, d.w.z. op basis van 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:153
 msgid "Place text and links"
-msgstr ""
+msgstr "Plaatstekst en koppelingen"
 
 #: Gov4WebtreesModule.php:397
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -289,16 +292,20 @@ msgstr "NuSOAP gebruiken in plaats van SoapClient"
 #: Gov4WebtreesModuleTrait.php:166
 msgid "Use place names and link to places existing in webtrees, additionally link to GOV via icons"
 msgstr ""
+"Gebruik plaatsnamen en link naar plaatsen die bestaan in webtrees, en link "
+"bovendien naar GOV via pictogrammen"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Use place names and links from GOV"
-msgstr ""
+msgstr "Gebruik plaatsnamen en links van GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:162
 msgid "Use place names and links from GOV, additionally link to places existing in webtrees via icons"
 msgstr ""
+"Gebruik plaatsnamen en links van GOV, en link bovendien naar plaatsen die in "
+"webtrees bestaan via pictogrammen"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:62
@@ -308,6 +315,9 @@ msgstr "Meestal alleen vereist in geval van substantiële wijzigingen van de GOV
 #: WhatsNew/WhatsNew1.php:11
 msgid "Vesta Gov4Webtrees: The displayed GOV hierarchy now additionally links to webtrees places where possible. You can switch back to the classic display (and others) via the module configuration."
 msgstr ""
+"Vesta Gov4Webtrees: De weergegeven GOV-hiërarchie linkt nu waar mogelijk ook "
+"naar webtrees-plaatsen. U kunt terugschakelen naar de klassieke weergave (en "
+"andere) via de moduleconfiguratie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:92
