@@ -8,30 +8,33 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-09-19 15:42+0200\n"
-"PO-Revision-Date: 2020-07-10 19:35+0200\n"
-"Last-Translator: Ladislav Rosival <lacoros@gmail.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-10-06 15:26+0000\n"
+"Last-Translator: ro-la <lacoros@gmail.com>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:163
 msgid "'Classic' mode, extended to link to places from the GEDCOM data, if possible."
-msgstr ""
+msgstr "„Klasický“ mód, rozšírený o link ku miestam z GEDCOM údajov, ak sa dá."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:159
 msgid "'Classic' mode."
-msgstr ""
+msgstr "„Klasický“ mód."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:75
 msgid "(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names)."
 msgstr ""
+"(Prečo je nemčina takto mimoradne vyzdvihnutá? GOV databáza je v súčasnosti "
+"veľmi orientovaná na nemčinu a preto má mnoho mies nemecké názvy)."
 
 #: Gov4WebtreesModuleTrait.php:23
 msgid "A module integrating GOV (historic gazetteer) data."
