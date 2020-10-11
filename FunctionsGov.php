@@ -6,12 +6,16 @@ use DateInterval;
 use DateTime;
 use Exception;
 use Fisharebest\Localization\Locale\LocaleInterface;
+use Fisharebest\Webtrees\Registry;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
 use nusoap_client;
 use SoapClient;
 use stdClass;
 use Throwable;
+use const CAL_GREGORIAN;
+use function cal_from_jd;
+use function cal_to_jd;
 
 require_once __DIR__ . '/nusoap/lib/nusoap.php';
 
@@ -719,7 +723,7 @@ class FunctionsGov {
    * @return array key: type, value: array of languageTag:value
    */
   public static function getTypeDescriptions($module): array {
-    return app('cache.array')->remember('types.owl', function() use($module): array {
+    return Registry::cache()->array()->remember('types.owl', function() use($module): array {
       return FunctionsGov::loadTypeDescriptionsFromFile($module);
     });
   }  
