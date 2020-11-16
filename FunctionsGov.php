@@ -45,7 +45,8 @@ class SoapWrapper {
   }
   
   public static function initNusoapClient($wsdl) {
-    $client = new nusoap_client($wsdl, 'wsdl');
+    //timeouts: 10 seconds
+    $client = new nusoap_client($wsdl, 'wsdl', false, false, false, false, 10, 10);
     //important:
     $client->soap_defencoding = 'utf-8';
     $client->encode_utf8 = false;
