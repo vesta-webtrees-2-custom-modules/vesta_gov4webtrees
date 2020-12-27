@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-09-19 15:42+0200\n"
-"PO-Revision-Date: 2020-01-01 16:08+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-12-27 10:48+0000\n"
+"Last-Translator: Richard Cissée <ric@richard-cissee.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:163
@@ -32,20 +33,29 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:75
 msgid "(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names)."
 msgstr ""
+"(Warum ist gerade Deutsch derart hervorgehoben? Da das GOV-Ortsverzeichnis "
+"derzeit eher deutschsprachig ist und daher viele Orte deutsche Namen haben) ."
 
 #: Gov4WebtreesModuleTrait.php:23
 msgid "A module integrating GOV (historic gazetteer) data."
 msgstr ""
+"Ein Modul zur Integration von Daten aus dem GOV (Das Geschichtliche Orts-"
+"Verzeichnis)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:31
 msgid "A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended 'Facts and events' tab."
 msgstr ""
+"Ein Modul zur Integration von Daten aus dem GOV (Das Geschichtliche Orts-"
+"Verzeichnis). Ergänzt Orte um zusätzliche GOV-Daten über den erweiterten "
+"Reiter \"Fakten und Ereignisse\"."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
 msgid "According to the current GOV specification, settlements are not supposed to be parents of other settlements."
 msgstr ""
+"Nach der aktuellen GOV-Spezifikation sollten Objekte vom Typ \"Siedlung\" "
+"keinen anderen Objekten dieses Typs übergeordnet sein."
 
 #: Gov4WebtreesModule.php:818
 msgid "Administrative levels"
@@ -55,36 +65,51 @@ msgstr "Verwaltungsebenen"
 #: Gov4WebtreesModuleTrait.php:33
 msgid "All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved from the GOV server and cached internally."
 msgstr ""
+"Alle Daten (mit Ausnahme der Zuordnung von Orten zu GOV-IDs, die manuell "
+"erfolgen muss) werden vom GOV-Server abgerufen und intern "
+"zwischengespeichert."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:140
 msgid "Allow objects of type 'settlement' in hierarchy"
-msgstr ""
+msgstr "Objekte vom Typ \"Siedlung\" in Hierarchie berücksichtigen"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Compact display (administrative levels only as tooltips)"
-msgstr ""
+msgstr "Kompakte Anzeige (Verwaltungsebenen nur als Tooltips)"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:34
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr ""
+"Folglich können Ortshierarchieinformationen nur indirekt über die GOV-"
+"Website geändert werden."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:71
 msgid "Determines strategy in case the place name is not available in the current language (for the given date): "
 msgstr ""
+"Strategie, falls der Ortsname in der aktuellen Sprache (für das angegebene "
+"Datum) nicht verfügbar ist: "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:125
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr ""
+"Zeigt einen Tooltip an, der die Quelle der GOV-ID angibt. Dieser ist "
+"hauptsächlich zur Fehleranalyse gedacht."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:182
 msgid "Execute requests to the GOV server via NuSOAP, rather than using the native php SoapClient. The native SoapClient is usually enabled (you can check this in your php.ini settings), but may not be provided by all hosters. If the native client is not enabled/available, this option is checked automatically."
 msgstr ""
+"Führt Anfragen an den GOV-Server über NuSOAP aus, anstatt den nativen PHP-"
+"SoapClient zu verwenden. Der native SoapClient ist normalerweise aktiviert ("
+"Sie können dies in Ihren php.ini-Einstellungen überprüfen), wird jedoch "
+"möglicherweise nicht von allen Hostern bereitgestellt. Wenn der native "
+"Client nicht aktiviert bzw. verfügbar ist, wird diese Option automatisch "
+"aktiviert."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:68
