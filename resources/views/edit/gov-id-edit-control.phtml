@@ -55,6 +55,7 @@ if (!$thePlace) {
     data-placeholder=""
     id="<?= $id ?>"
     name="<?= $name ?>"
+    style="width:100%"
     <?= (($govId === null) && $internal)?'required':'' ?>>
     <?php if ($govId !== null): ?>
         <option value="<?= $govId ?>">
