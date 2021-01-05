@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-09-19 15:42+0200\n"
-"PO-Revision-Date: 2020-12-27 10:48+0000\n"
-"Last-Translator: Richard Cissée <ric@richard-cissee.de>\n"
+"PO-Revision-Date: 2021-01-05 18:29+0000\n"
+"Last-Translator: Bernd Schwendinger <b0ernie@gmx.net>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
@@ -23,11 +23,13 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:163
 msgid "'Classic' mode, extended to link to places from the GEDCOM data, if possible."
 msgstr ""
+"'Klassischer' Modus, erweitert um Verweise zu Orten aus den GEDCOM-Daten, "
+"soweit möglich."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:159
 msgid "'Classic' mode."
-msgstr ""
+msgstr "'Klassischer' Modus."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:75
@@ -114,17 +116,17 @@ msgstr ""
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:68
 msgid "Fallback language"
-msgstr ""
+msgstr "Rückfall-Sprache"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:147
 msgid "For events with a date range, use the median date"
-msgstr ""
+msgstr "Für Ereignisse mit Zeitspanne bitte das gemittelte Datum nutzen"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:192
 msgid "GOV Id Management"
-msgstr ""
+msgstr "GOV-ID Verwaltung"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
@@ -144,35 +146,42 @@ msgstr "GOV-ID für %1$s wurde auf %2$s gesetzt."
 #: Gov4WebtreesModuleTrait.php:35
 msgid "GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported."
 msgstr ""
+"GOV-IDs werden standardmäßig außerhalb der GEDCOM-Daten gespeichert, es "
+"werden aber auch IDs in _GOV-Tags unterstützt."
 
 #: Gov4WebtreesModule.php:286
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
-msgstr ""
+msgstr "Die GOV-Ortshierarchie für %1$s wurde vom GOV-Server geladen."
 
 #: Gov4WebtreesModule.php:288
 msgid "GOV place hierarchy has been reloaded from GOV server."
-msgstr ""
+msgstr "Die GOV-Ortshierarchie wurde vom GOV-Server geladen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:72
 msgid "If checked, attempt to fall back to the German place name. "
-msgstr ""
+msgstr "Wenn aktiviert wird der Rückfall auf deutsche Ortsnamen versucht. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:167
 msgid "If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible."
 msgstr ""
+"Wenn dies aktiviert wurde, werden für die angezeigte GOV-Hierarchie nach "
+"Möglichkeit die Ortsnamen aus den GEDCOM-Daten genutzt."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:86
 msgid "If this option is checked, you usually want to disable the following option. "
 msgstr ""
+"Wenn diese Option aktiviert ist, sollte in der Regel die nachfolgende Option "
+"deaktiviert werden. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:73
 msgid "If unchecked, prefer any language other than German; "
 msgstr ""
+"Wenn deaktiviert, wird einer anderen Sprache als Deutsch der Vorzug gegeben. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:36
