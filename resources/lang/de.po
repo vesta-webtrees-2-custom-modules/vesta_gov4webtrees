@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-09-19 15:42+0200\n"
-"PO-Revision-Date: 2021-01-05 18:29+0000\n"
+"PO-Revision-Date: 2021-01-05 22:29+0000\n"
 "Last-Translator: Bernd Schwendinger <b0ernie@gmx.net>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
@@ -187,16 +187,21 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:36
 msgid "In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data."
 msgstr ""
+"Namentlich das Gemeinsame-Orte (Shared Places) Benutzer-Modul erlaubt es GOV-"
+"IDs innerhalb der GEDCOM-Daten zu verwalten."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:91
 msgid "In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation. "
 msgstr ""
+"In diesem Fall werden die GOV-IDs in separaten Tabellen gespeichert, welche "
+"manuell berücksichtigt werden müssen, wenn der entsprechende Stammbaum in "
+"eine andere Webtrees-Installation verschoben wird. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:174
 msgid "Internals (adjusted automatically if necessary)"
-msgstr ""
+msgstr "Interna (automatische Anpassung sofern erforderlich)"
 
 #: EditGovMappingController.php:95
 #: resources/views/script/select2-initializer-gov.phtml:15
@@ -207,11 +212,13 @@ msgstr "Keine zulässige GOV-ID! Zulässige IDs haben die Form 'EITTZE_W3091', '
 #: Gov4WebtreesModuleTrait.php:193
 msgid "It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them."
 msgstr ""
+"Es wird empfohlen eine der folgenden Optionen zu nutzen. Man kann auch "
+"zeitweise jede Änderung unterbinden durch Deaktivierung aller Optionen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:58
 msgid "Local GOV data"
-msgstr ""
+msgstr "Lokale GOV-Daten"
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
