@@ -2,8 +2,8 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
-use Cissee\Webtrees\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
-use Cissee\Webtrees\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
+use Vesta\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
+use Vesta\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
