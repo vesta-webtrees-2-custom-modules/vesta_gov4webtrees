@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2020-09-19 15:42+0200\n"
-"PO-Revision-Date: 2021-01-09 14:32+0000\n"
+"PO-Revision-Date: 2021-01-12 14:32+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -169,7 +169,7 @@ msgstr "Ak je zvolená táto možnosť, mali by ste zrušiť nasledovnú. "
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:73
 msgid "If unchecked, prefer any language other than German; "
-msgstr "AK nie je zvolené, preferuje sa iný jazyk ako nemčina. "
+msgstr "Ak nie je zvolené, použije sa iný jazyk ako nemčina. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:36
@@ -288,17 +288,17 @@ msgstr "Nastaviť identifikátor GOV pre %1$s"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:103
 msgid "Show GOV hierarchy for"
-msgstr ""
+msgstr "Zobraziť GOV hierarchiu pre"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:124
 msgid "Show additional info"
-msgstr ""
+msgstr "Ukázať dodatočné informácie"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:61
 msgid "Subsequently, all data is retrieved again from the GOV server. "
-msgstr ""
+msgstr "Následne sa načítajú nanovo všetky údaje z GOV servera. "
 
 #: Gov4WebtreesModule.php:106
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -309,55 +309,68 @@ msgstr "Zdá sa, že server GOV je momentálne nedostupný."
 #: Gov4WebtreesModuleTrait.php:97
 msgid "This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the preceding option."
 msgstr ""
+"Táto voľba je určená hlavne pre ukážkový server a neodporúča sa použiť v "
+"iných prípadoch. Má vyššiu prioritu oproti predchádzajúcim voľbám."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
 msgid "This policy hasn't been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise."
 msgstr ""
+"Táto špecifikácia sa ale nedodržiava dôsledne. Aktivujte túto voľbu v "
+"prípade, že sa Vám zobrazí neúplná hierarchia."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:181
 msgid "Use NuSOAP instead of SoapClient"
-msgstr ""
+msgstr "Použiť NuSOAP namiesto SoapClient"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:166
 msgid "Use place names and link to places existing in webtrees, additionally link to GOV via icons"
 msgstr ""
+"Použiť názvy miest a prepojiť ich k miestam, ktoré existujú vo webtrees, "
+"dodatočne prepojiť ikonou s GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Use place names and links from GOV"
-msgstr ""
+msgstr "Použiť názvy miest a prepojenia z GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:162
 msgid "Use place names and links from GOV, additionally link to places existing in webtrees via icons"
 msgstr ""
+"Použiť názvy miest a prepojenia z GOV, dodatočne prepojiť ikonou s miestami, "
+"ktoré existujú vo webtrees"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:62
 msgid "Usually only required in case of substantial changes of the GOV data. "
-msgstr ""
+msgstr "Zvyčajne je potrebné len v prípade zásadných zmien údajov GOV. "
 
 #: WhatsNew/WhatsNew1.php:11
 msgid "Vesta Gov4Webtrees: The displayed GOV hierarchy now additionally links to webtrees places where possible. You can switch back to the classic display (and others) via the module configuration."
 msgstr ""
+"Vesta Gov4Webtrees: Zobrazovaná hierarchia GOV, tam kde to je možné, teraz "
+"dodatočne odkazuje na miesta vo webtrees. V konfigurácii modulu môžete "
+"prepnúť na pôvodné (alebo iné) zobrazenie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:92
 msgid "When this option is disabled, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server."
 msgstr ""
+"Ak je táto voľba deaktivovaná, je daná k dispozícii alternatívny prvok "
+"zadávania, ktorý umožňuje opätovné načítanie hierarchie miest z GOV servera."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:81
 msgid "Where to edit and store GOV ids"
-msgstr ""
+msgstr "Kde upravovať a ukladať GOV-id"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:84
 msgid "Within GEDCOM data (via other custom modules). "
-msgstr ""
+msgstr "V rámci údajov GEDCOM (použitím iných užívateľských modulov. "
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
@@ -376,17 +389,21 @@ msgstr "dátum udalosti"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:70
 msgid "fallback to German place names"
-msgstr ""
+msgstr "použiť nemecké názvy"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:120
 msgid "for events without a date, present time hierarchy will be used regardless of this preference."
 msgstr ""
+"Pre udalosti bez dátumu sa použije súčasná hierarchia, bez ohľadu na "
+"preferencie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
 msgid "motivated by the assumption that place names in the local language are more useful in general "
 msgstr ""
+"Vychádza sa z predpokladu, že názvy miest v lokálnom jazyku sú všeobecne "
+"viac užitočné. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:113
@@ -400,7 +417,7 @@ msgstr "znovunačítať GOV hierarchiu miesta"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:60
 msgid "reset all cached data once"
-msgstr ""
+msgstr "nanovo načítať všetky údaje v medzipamäti"
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:657
 msgid "today"
