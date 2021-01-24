@@ -2,11 +2,10 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
-use Vesta\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
-use Vesta\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
+use Cissee\WebtreesExt\Http\RequestHandlers\FunctionsPlaceProvidersAction;
 use Cissee\WebtreesExt\MoreI18N;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
@@ -15,7 +14,6 @@ use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
-use Fisharebest\Webtrees\Http\Controllers\Admin\ModuleController;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
@@ -25,20 +23,20 @@ use Fisharebest\Webtrees\Module\ModuleGlobalInterface;
 use Fisharebest\Webtrees\Module\ModuleGlobalTrait;
 use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Services\SearchService;
-use Fisharebest\Webtrees\Services\TreeService;
 use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\View;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use ReflectionObject;
 use Vesta\CommonI18N;
 use Vesta\Hook\HookInterfaces\EmptyFunctionsPlace;
+use Vesta\Hook\HookInterfaces\EmptyIndividualFactsTabExtender;
 use Vesta\Hook\HookInterfaces\EmptyPrintFunctionsPlace;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceInterface;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceUtils;
 use Vesta\Hook\HookInterfaces\GovIdEditControlsInterface;
+use Vesta\Hook\HookInterfaces\IndividualFactsTabExtenderInterface;
 use Vesta\Hook\HookInterfaces\PrintFunctionsPlaceInterface;
 use Vesta\Model\GedcomDateInterval;
 use Vesta\Model\GenericViewElement;
@@ -50,9 +48,7 @@ use Vesta\Model\Trace;
 use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
 use const CAL_GREGORIAN;
-use function app;
 use function cal_to_jd;
-use function redirect;
 use function response;
 use function route;
 use function view;
@@ -884,7 +880,7 @@ class Gov4WebtreesModule extends AbstractModule implements
   
   //hook management - generalize?
   //adapted from ModuleController (e.g. listFooters)
-  public function getProvidersAction(): ResponseInterface {
+  public function getFunctionsPlaceProvidersAction(): ResponseInterface {
     $modules = FunctionsPlaceUtils::modules($this, true);
 
     $controller = new VestaAdminController($this->name());
@@ -897,34 +893,9 @@ class Gov4WebtreesModule extends AbstractModule implements
                     true);
   }
 
-  public function postProvidersAction(ServerRequestInterface $request): ResponseInterface {
-    $modules = FunctionsPlaceUtils::modules($this, true);
-
-    $controller1 = new ModuleController($this->module_service, app(TreeService::class));
-    $reflector = new ReflectionObject($controller1);
-
-    //private!
-    //$controller1->updateStatus($modules, $request);
-
-    $method = $reflector->getMethod('updateStatus');
-    $method->setAccessible(true);
-    $method->invoke($controller1, $modules, $request);
-
-    FunctionsPlaceUtils::updateOrder($this, $request);
-
-    //private!
-    //$controller1->updateAccessLevel($modules, FunctionsPlaceInterface::class, $request);
-
-    $method = $reflector->getMethod('updateAccessLevel');
-    $method->setAccessible(true);
-    $method->invoke($controller1, $modules, FunctionsPlaceInterface::class, $request);
-
-    $url = route('module', [
-        'module' => $this->name(),
-        'action' => 'Providers'
-    ]);
-
-    return redirect($url);
+  public function postFunctionsPlaceProvidersAction(ServerRequestInterface $request): ResponseInterface {
+    $controller = new FunctionsPlaceProvidersAction($this);
+    return $controller->handle($request);
   }
 
   protected function editConfigBeforeFaq() {
@@ -932,7 +903,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
     $url1 = route('module', [
         'module' => $this->name(),
-        'action' => 'Providers'
+        'action' => 'FunctionsPlaceProviders'
     ]);
 
     //cf control-panel.phtml
