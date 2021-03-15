@@ -6,6 +6,8 @@ use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\WebtreesExt\AbstractModule;
 use Cissee\WebtreesExt\FactPlaceAdditions;
 use Cissee\WebtreesExt\Http\RequestHandlers\FunctionsPlaceProvidersAction;
+use Cissee\WebtreesExt\Module\ModuleMetaInterface;
+use Cissee\WebtreesExt\Module\ModuleMetaTrait;
 use Cissee\WebtreesExt\MoreI18N;
 use Cissee\WebtreesExt\Requests;
 use DateTime;
@@ -55,6 +57,7 @@ use function view;
 
 class Gov4WebtreesModule extends AbstractModule implements 
   ModuleCustomInterface, 
+  ModuleMetaInterface, 
   ModuleConfigInterface, 
   ModuleGlobalInterface,
   IndividualFactsTabExtenderInterface, 
@@ -63,13 +66,13 @@ class Gov4WebtreesModule extends AbstractModule implements
   GovIdEditControlsInterface {
   
   //cannot use original AbstractModule because we override setPreference, setName
-  use ModuleCustomTrait, ModuleConfigTrait, ModuleGlobalTrait, VestaModuleTrait {
+  use ModuleCustomTrait, ModuleMetaTrait, ModuleConfigTrait, ModuleGlobalTrait, VestaModuleTrait {
     VestaModuleTrait::customTranslations insteadof ModuleCustomTrait;
-    VestaModuleTrait::customModuleLatestVersion insteadof ModuleCustomTrait;
     VestaModuleTrait::getAssetAction insteadof ModuleCustomTrait;
-    VestaModuleTrait::assetUrl insteadof ModuleCustomTrait;
-    
+    VestaModuleTrait::assetUrl insteadof ModuleCustomTrait;    
     VestaModuleTrait::getConfigLink insteadof ModuleConfigTrait;
+    ModuleMetaTrait::customModuleVersion insteadof ModuleCustomTrait;
+    ModuleMetaTrait::customModuleLatestVersion insteadof ModuleCustomTrait;
   }
   
   use Gov4WebtreesModuleTrait;
@@ -106,13 +109,13 @@ class Gov4WebtreesModule extends AbstractModule implements
   public function customModuleAuthorName(): string {
     return 'Richard Cissée';
   }
-  
-  public function customModuleVersion(): string {
-    return file_get_contents(__DIR__ . '/latest-version.txt');
-  }
 
-  public function customModuleLatestVersionUrl(): string {
-    return 'https://raw.githubusercontent.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/master/latest-version.txt';
+  public function customModuleMetaDatasJson(): string {
+    return file_get_contents(__DIR__ . '/metadata.json');
+  } 
+  
+  public function customModuleLatestMetaDatasJsonUrl(): string {
+    return 'https://raw.githubusercontent.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees/master/metadata.json';
   }
 
   public function customModuleSupportUrl(): string {
