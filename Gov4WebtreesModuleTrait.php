@@ -64,18 +64,6 @@ trait Gov4WebtreesModuleTrait {
                 'RESET',
                 '0'))); //not a persistent setting, see overridden setSetting/setPreference!
     
-    $generalSub[] = new ControlPanelSubsection(
-            /* I18N: Module Configuration */I18N::translate('Fallback language'),
-            array(new ControlPanelCheckbox(
-                /* I18N: Module Configuration */I18N::translate('fallback to German place names'),
-                /* I18N: Module Configuration */I18N::translate('Determines strategy in case the place name is not available in the current language (for the given date): ') .
-                /* I18N: Module Configuration */I18N::translate('If checked, attempt to fall back to the German place name. ') .
-                /* I18N: Module Configuration */I18N::translate('If unchecked, prefer any language other than German; ') .
-                /* I18N: Module Configuration */I18N::translate('motivated by the assumption that place names in the local language are more useful in general ') .
-                /* I18N: Module Configuration */I18N::translate('(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names).'),
-                'FALLBACK_LANGUAGE_PREFER_DEU',
-                '1')));
-    
     $editingSub = array();
     $editingSub[] = new ControlPanelSubsection(
             /* I18N: Module Configuration */I18N::translate('Where to edit and store GOV ids'),
@@ -138,10 +126,16 @@ trait Gov4WebtreesModuleTrait {
                 '1'),
         new ControlPanelCheckbox(
                 /* I18N: Module Configuration */I18N::translate('Allow objects of type \'settlement\' in hierarchy'),
-                /* I18N: Module Configuration */I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') .
+                /* I18N: Module Configuration */I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') . ' ' .
                 /* I18N: Module Configuration */I18N::translate('This policy hasn\'t been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise.') .
                 /* I18N: Module Configuration */I18N::translate('Note: Ultimately it\'s probably preferable to correct the respective GOV data itself.'),
                 'ALLOW_SETTLEMENTS',
+                '1'),
+        new ControlPanelCheckbox(
+                /* I18N: Module Configuration */I18N::translate('Allow objects of type \'confederation\' in hierarchy'),
+                /* I18N: Module Configuration */I18N::translate('Objects of this type arguably do not strictly belong to the administrative hierarchy.') . ' ' .
+                /* I18N: Module Configuration */I18N::translate('Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities.'),
+                'ALLOW_ORGANIZATIONAL',
                 '1'),
         new ControlPanelCheckbox(
                 /* I18N: Module Configuration */I18N::translate('For events with a date range, use the median date'),
@@ -170,6 +164,29 @@ trait Gov4WebtreesModuleTrait {
                 'DISPLAY_INTERNAL_LINKS',
                 '1')));
     
+    $factsAndEventsSub[] = new ControlPanelSubsection(
+            /* I18N: Module Configuration */I18N::translate('Place names from GOV'),
+            array(new ControlPanelCheckbox(
+                /* I18N: Module Configuration */I18N::translate('fallback to German place names'),
+                /* I18N: Module Configuration *//*I18N::translate('Determines strategy in case the place name is not available in the current or any additional language (for the given date): ') .*/
+                /* I18N: Module Configuration */I18N::translate('As a final fallback, determine the place name according to this checkbox:') . ' ' .
+                /* I18N: Module Configuration */I18N::translate('If checked, attempt to fall back to the German place name. ') .
+                /* I18N: Module Configuration */I18N::translate('If unchecked, prefer any language other than German; ') .
+                /* I18N: Module Configuration */I18N::translate('motivated by the assumption that place names in the local language are more useful in general ') .
+                /* I18N: Module Configuration */I18N::translate('(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names).'),
+                'FALLBACK_LANGUAGE_PREFER_DEU',
+                '1')),
+            null, 
+            /* I18N: Module Configuration */I18N::translate('The GOV server provides place names in different languages. However, there is no concept of an \'official language\' for a place.') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('The current user language always has the highest priority.') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file \'%1$s\'.', 'resources/gov/languages.csv') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. \'official languages\' for a place hierarchy).') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('You can create and modify this csv file according to your personal preferences, see \'%1$s\' for an example.', 'resources/gov/languages.csv.example') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('It will not be overwritten by subsequent updates.')
+            );
+    
+
     $generalSub[] = new ControlPanelSubsection(
             /* I18N: Module Configuration */I18N::translate('Internals (adjusted automatically if necessary)'),
             array(/* new ControlPanelCheckbox(

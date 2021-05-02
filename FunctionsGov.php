@@ -261,7 +261,7 @@ class GovObjectSnapshot {
   private $lon;
   private $version;
   private $type;
-  private $label;
+  private $labels;
   private $parents;
 
   public function getLat() {
@@ -276,8 +276,8 @@ class GovObjectSnapshot {
     return $this->version;
   }
 
-  public function getLabel() {
-    return $this->label;
+  public function getLabels():array {
+    return $this->labels;
   }
 
   public function getType() {
@@ -288,18 +288,27 @@ class GovObjectSnapshot {
     return $this->parents;
   }
 
-  public function __construct($lat, $lon, int $version, $type, $label, $parents) {
+  public function __construct(
+          $lat, 
+          $lon, 
+          int $version, 
+          $type, 
+          array $labels, 
+          $parents) {
+    
     $this->lat = $lat;
     $this->lon = $lon;
     $this->version = $version;
     $this->type = $type;
-    $this->label = $label;
+    $this->labels = $labels;
     $this->parents = $parents;
   }
 
   public function toString() {
     $str = "";
-    $str .= $this->getLabel()->toString() . ";";
+    foreach ($this->getLabels() as $label) {
+      $str .= $label->toString() . ";";
+    }
     if (($this->getLat() != null) && ($this->getLon() != null)) {
       $str .= " location: (" . $this->getLat() . "; " . $this->getLon() . ").";
     }
@@ -381,8 +390,13 @@ class FunctionsGov {
   //http://gov.genealogy.net/types.owl#group_31
   //adm6
   //http://gov.genealogy.net/types.owl#group_32
-  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274);
-     
+  //excluding
+  //71 'Staatenbund'
+  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275);
+  
+  //71 'Staatenbund'
+  public static $TYPES_ORGANIZATIONAL = array(71);
+          
   //http://gov.genealogy.net/types.owl#group_3
   public static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
   
@@ -1139,8 +1153,47 @@ class FunctionsGov {
     return new GovObject($lat, $lon, $version, $types, $labels, $parents);
   }
 
+  public static function getGovObjectLanguageOverrides(
+          string $filename,
+          string $id): array {
+
+    $data = Registry::cache()->array()->remember(FunctionsGov::class . $filename, static function () use ($filename): array {
+      if (file_exists($filename)) {
+        $fp = fopen($filename, 'rb');
+        if ($fp) {
+          $datas = [];
+          
+          while (($data = fgetcsv($fp, 0, ';')) !== false) {
+            if (sizeof($data) > 2) {
+              $first = array_shift($data); //informational only (or comment)
+              if (!str_starts_with($first, '#')) {
+                $key = array_shift($data);
+                $datas[$key] = $data;
+              }              
+            }            
+          }
+          fclose($fp);
+          
+          return $datas;
+        }  
+      }
+        
+      return [];
+    });
+    
+    if (array_key_exists($id, $data)) {
+      return $data[$id];
+    }
+    
+    return [];
+  }
+  
   //should only be used internally! use retrieveGovObjectSnapshot instead!
-  public static function getGovObjectSnapshot($julianDay, $id, $lang, bool $fallbackPreferDeu) {
+  public static function getGovObjectSnapshot(
+          $julianDay, 
+          $id, 
+          string $lang): ?GovObjectSnapshot {
+    
     $row = DB::table('gov_objects')
             ->where('gov_id', '=', $id)
             ->first();
@@ -1156,10 +1209,19 @@ class FunctionsGov {
     //https://stackoverflow.com/questions/38034996/find-on-model-gives-id-as-string-in-one-environment-and-int-in-other
     $version = (int)$row->version;
 
-    $type = FunctionsGov::getTypeSnapshot($julianDay, $id, $lang);
-    $label = FunctionsGov::getLabelSnapshot($julianDay, $id, $lang, $fallbackPreferDeu);
+    $type = FunctionsGov::getTypeSnapshot($julianDay, $id, $lang);    
+    
+    $labels = FunctionsGov::retrieveLabels($julianDay, $id);
+    
     $parents = FunctionsGov::getParents($id);
-    return new GovObjectSnapshot($lat, $lon, $version, $type, $label, $parents);
+    
+    return new GovObjectSnapshot(
+            $lat, 
+            $lon, 
+            $version, 
+            $type, 
+            $labels, 
+            $parents);
   }
 
   public static function getTypeSnapshot($julianDay, $id, $lang) {
@@ -1180,7 +1242,10 @@ class FunctionsGov {
     return $row->type;
   }
 
-  public static function getLabelSnapshot($julianDay, $id, $lang, bool $fallbackPreferDeu) {
+  public static function retrieveLabels(
+          $julianDay, 
+          $id): array {
+    
     $rows = DB::table('gov_labels')
             ->where('gov_id', '=', $id)
             ->where(function($q) use ($julianDay) {
@@ -1192,41 +1257,79 @@ class FunctionsGov {
             ->orderBy('language', 'asc') //in order to obtain a consistent fallback
             ->get();
 
-    $fallbackNonDeu = "...";
-    $fallbackDeu = "...";
+    $retrieved = [];
     foreach ($rows as $row) {
+      $retrieved[$row->language] = $row->label;
+    }
+    
+    return $retrieved;
+  }
+  
+  /**
+   * 
+   * @param array $labelsIn
+   * @param array $languages return label in first language from this list. 
+   * Additionally return any other labels matching upper cased languages from this list.
+   * As a final fallback, return any non-german label
+   */
+  public static function resolveLabels(
+          array $labelsIn,
+          array $languages):array {
+    
+    $main = null;
+    $labelsOut = array();
+    
+    $usedLanguages = [];
+    
+    foreach ($languages as $language) {
+      $lang = strtolower($language);
+      if (!array_key_exists($lang, $usedLanguages)) {
+        $usedLanguages[$lang] = $lang;
+        
+        $isAdditional = ($language !== $lang);
       
-      if ($row->language === "deu") {
-        $fallbackDeu = $row->label;
-      } else {
-        if ($fallbackNonDeu === "...") {
-          $fallbackNonDeu = $row->label; //anything will do ... (but return a consistent fallback!)
+        if (array_key_exists($lang, $labelsIn)) {
+          $label = $labelsIn[$lang];
+
+          if ($main === null) {
+            $main = $label;
+          } else if ($isAdditional) {
+            $labelsOut[] = $label;
+          }
+        }
+      }      
+    }
+    
+    $mainDeu = '...';
+    if ($main === null) {
+      foreach ($labelsIn as $key => $value) {
+        if ($key === "deu") {
+          $mainDeu = $value;         
+        } else {
+          $main = $value; //anything will do ... (but return a consistent fallback!)
+          break;
         }
       }
-      
-      if ($row->language === $lang) {
-        return $row->label;
-      }
     }
-
-    //prefer German fallback - or not! see https://www.webtrees.net/index.php/en/forum/4-customising/34270-vesta-gov4webtrees-language#76196
-    if ($fallbackPreferDeu) {
-      if ($fallbackDeu !== "...") {
-        return $fallbackDeu;
-      }
-      return $fallbackNonDeu;
-    } else {
-      if ($fallbackNonDeu !== "...") {
-        return $fallbackNonDeu;
-      }
-      return $fallbackDeu;
+    
+    if ($main === null) {
+      $main = $mainDeu;
     }
+    
+    array_unshift($labelsOut, $main);
+    return $labelsOut;
   }
 
-  public static function retrieveGovObjectSnapshot($module, $julianDay, $id, int $version, $locale, bool $fallbackPreferDeu) {
+  public static function retrieveGovObjectSnapshot(
+          $module, 
+          $julianDay, 
+          $id, 
+          int $version, 
+          string $locale): ?GovObjectSnapshot {
+    
     $lang = FunctionsGov::toLang($locale);
 
-    $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang, $fallbackPreferDeu);
+    $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
     if ($gov != null) {
       if ($gov->getVersion() >= $version) {
         return $gov;
@@ -1240,7 +1343,7 @@ class FunctionsGov {
     }
 
     FunctionsGov::setGovObject($id, $gov);
-    return FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang, $fallbackPreferDeu);
+    return FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
   }
 
   public static function loadNonLoaded($module, $ids, $version) {
@@ -1269,22 +1372,36 @@ class FunctionsGov {
   }
 
   //TODO WARN IF AMBIGUOUS PARENTS (would have to be corrected in GOV directly)
-  public static function findGovParentOfType($module, $id, $gov, $julianDay, $types, $version) {
+  public static function findGovParentOfType(
+          $module, 
+          $id, 
+          $gov, 
+          $julianDay, 
+          $types, 
+          $version): ?string {
+    
     $ids = array();
     foreach ($gov->getParents() as $parent) {
       $ids[] = $parent->getProp();
     }
 
     if (count($ids) == 0) {
-      return;
+      return null;
     }
     return FunctionsGov::findGovParentOfTypeViaIds($module, $id, $ids, $julianDay, $types, $version);
   }
 
   //TODO WARN IF AMBIGUOUS PARENTS (would have to be corrected in GOV directly)
-  public static function findGovParentOfTypeViaIds($module, $id, $ids, $julianDay, $types, $version) {
+  public static function findGovParentOfTypeViaIds(
+          $module, 
+          $id, 
+          $ids, 
+          $julianDay, 
+          $types, 
+          $version): ?string {
+    
     if (count($types) == 0) {
-      return;
+      return null;
     }
 
     FunctionsGov::loadNonLoaded($module, $ids, $version);

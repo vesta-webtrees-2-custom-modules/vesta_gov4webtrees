@@ -28,5 +28,11 @@
 		"version": "2.0.15.3.0",
 		"from": "2.0.12",
 		"to": "2.0.16"
+	},
+	{
+		"version": "2.0.15.4.0",
+		"from": "2.0.12",
+		"to": "2.0.16",
+		"changelog": ["Added option to exclude objects of type 'confederation'.", "Added option to define additional languages for place names."]
 	}
 ]
