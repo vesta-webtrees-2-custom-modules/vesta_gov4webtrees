@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-05-01 16:11+0200\n"
-"PO-Revision-Date: 2020-11-17 13:28+0000\n"
+"PO-Revision-Date: 2021-05-02 19:31+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:157
@@ -52,6 +53,8 @@ msgstr "Selon la spécification actuelle du GOV, les colonies ne sont pas censé
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
+"De plus, le module vérifie si chaque ID GOV, ou l'un de ses parents dans la "
+"hiérarchie, a des langues définies dans le fichier csv '%1$s'."
 
 #: Gov4WebtreesModule.php:923
 msgid "Administrative levels"
@@ -65,7 +68,7 @@ msgstr "Toutes les données (à l'exception du mappage des lieux aux identifiant
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Allow objects of type 'confederation' in hierarchy"
-msgstr ""
+msgstr "Autoriser les objets de type «confédération» dans la hiérarchie"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:128
@@ -78,6 +81,8 @@ msgstr "Autoriser les objets de type «règlement» dans la hiérarchie"
 #: Gov4WebtreesModuleTrait.php:172
 msgid "As a final fallback, determine the place name according to this checkbox:"
 msgstr ""
+"En guise de solution de secours finale, déterminez le nom de lieu en "
+"fonction de cette case à cocher :"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:123
@@ -103,6 +108,9 @@ msgstr "Exécutez les requêtes vers le serveur GOV via NuSOAP, plutôt que d'ut
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Pour un lieu donné, ce module affiche un ou plusieurs noms en faisant "
+"correspondre les noms disponibles à une liste de langues, selon la stratégie "
+"suivante :"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
@@ -190,7 +198,7 @@ msgstr "Il est recommandé de n'utiliser qu'une des options suivantes. Vous pouv
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:186
 msgid "It will not be overwritten by subsequent updates."
-msgstr ""
+msgstr "Il ne sera pas écrasé par les mises à jour ultérieures."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:58
@@ -220,6 +228,8 @@ msgstr "Remarque : en fin de compte, il est probablement préférable de corrige
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
 msgstr ""
+"Les objets de ce type n'appartiennent sans doute pas strictement à la "
+"hiérarchie administrative."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
@@ -249,7 +259,7 @@ msgstr "Les hiérarchies de lieux sont affichées historiquement, c'est-à-dire 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:168
 msgid "Place names from GOV"
-msgstr ""
+msgstr "Noms de lieux de GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:147
@@ -297,6 +307,8 @@ msgstr "Par la suite, toutes les données sont à nouveau extraites du serveur G
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr ""
+"Le serveur GOV fournit des noms de lieux dans différentes langues. "
+"Cependant, il n'y a pas de notion de «langue officielle» pour un lieu."
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -307,11 +319,15 @@ msgstr "Le serveur GOV semble temporairement indisponible."
 #: Gov4WebtreesModuleTrait.php:182
 msgid "The current user language always has the highest priority."
 msgstr ""
+"La langue de l'utilisateur actuelle a toujours la priorité la plus élevée."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
 msgstr ""
+"Ces langues sont ensuite utilisées, dans l'ordre donné, soit comme solutions "
+"de secours, soit (si elles sont en majuscules) comme langues supplémentaires "
+"(c'est-à-dire \" langues officielles '' pour une hiérarchie de lieux)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
@@ -327,6 +343,9 @@ msgstr "Cette politique n'a cependant pas été strictement suivie. Cochez cette
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
 msgstr ""
+"Décochez cette option si vous ne souhaitez pas que des objets tels que "
+"l'Union européenne ou le Saint Empire romain apparaissent dans les "
+"hiérarchies en tant que parents d'entités souveraines."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
@@ -377,6 +396,8 @@ msgstr "Dans les données GEDCOM (via d'autres modules personnalisés). "
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
 msgstr ""
+"Vous pouvez créer et modifier ce fichier csv selon vos préférences "
+"personnelles, voir '%1$s' pour un exemple."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."

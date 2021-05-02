@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-05-01 16:11+0200\n"
-"PO-Revision-Date: 2021-01-12 14:32+0000\n"
+"PO-Revision-Date: 2021-05-02 19:31+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:157
@@ -52,6 +53,8 @@ msgstr "Podľa aktuálnych špecifikácií GOV by objekty typu „Sídlo (Siedlu
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
+"Dodatočne, modul kontroluje, či príslušné GOV-id, alebo ktorékoľvek z "
+"hierarchie nad ním, má zadefinované jazyky v csv-súbore „%1$s“."
 
 #: Gov4WebtreesModule.php:923
 msgid "Administrative levels"
@@ -65,7 +68,7 @@ msgstr "Všetky údaje (s výnimkou priradenia miesta k jeho GOV-id, čo je potr
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Allow objects of type 'confederation' in hierarchy"
-msgstr ""
+msgstr "Povoliť v hierarchii objekty typu „konfederácia (Staatenbund)“"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:128
@@ -77,7 +80,7 @@ msgstr "Povoliť v hierarchii objekty typu „Sídlo (Siedlung)“"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
 msgid "As a final fallback, determine the place name according to this checkbox:"
-msgstr ""
+msgstr "Ako konečný záchytný bod použiť názov miesta podľa tohto checkbox-u:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:123
@@ -103,6 +106,8 @@ msgstr "Vykonáva požiadavky na GOV-server prostredníctvom NuSOAP namiesto nat
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Pre dané miesto modul zobrazí meno v jednom alebo viacerých jazykoch, "
+"výberom zo zoznamu jazykov podľa nasledujúcej stratégie:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
@@ -190,7 +195,7 @@ msgstr "Odporúča sa použiť len jednu z nasledujúcich možností. Môžete d
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:186
 msgid "It will not be overwritten by subsequent updates."
-msgstr ""
+msgstr "Tento súbor nebude prepisovaný pri nasledujúcich aktualizáciách."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:58
@@ -219,7 +224,7 @@ msgstr "Upozornenie: V zásade je lepšie spraviť opravu príslušných údajov
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
-msgstr ""
+msgstr "Objekty tohto typu nespadajú striktne do administratívnej hierarchie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
@@ -249,7 +254,7 @@ msgstr "Hierarchia miest je zobrazená historicky, t.j. zodpovedajúco dátumu p
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:168
 msgid "Place names from GOV"
-msgstr ""
+msgstr "Názvy miest z GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:147
@@ -297,6 +302,8 @@ msgstr "Následne sa načítajú nanovo všetky údaje z GOV servera. "
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr ""
+"Server GOV poskytuje názvy miest v rôznych jazykoch. V štruktúre ich údajov "
+"však neexistuje koncept „oficiálneho jazyka“ pre konkrétne miesto."
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -306,12 +313,15 @@ msgstr "Zdá sa, že server GOV je momentálne nedostupný."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:182
 msgid "The current user language always has the highest priority."
-msgstr ""
+msgstr "Jazyk užívateľa má najvyššiu prioritu."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
 msgstr ""
+"Tieto jazyky sa použijú, v zadanom poradí, buď prvý v poradí, alebo, ak je "
+"napísaný veľkými písmenami, ako dodatočný jazyk (napr. ako „oficiálny jazyk“ "
+"pre miesto)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
@@ -327,6 +337,8 @@ msgstr "Táto špecifikácia sa ale nedodržiava dôsledne. Aktivujte túto voľ
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
 msgstr ""
+"Zrušte túto voľbu, ak nechcete, aby sa zobrazili objekty ako Európska Únia, "
+"Svätá Ríša Rímska a pod. ako rodičovské objekty suverénnych entít."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
@@ -377,6 +389,8 @@ msgstr "V rámci údajov GEDCOM (použitím iných užívateľských modulov. "
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
 msgstr ""
+"Môžete vytvoriť a upravovať tento csv-súbor podľa vašich osobných "
+"preferencií, ako príklad pozrite súbor „%1$s“."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
