@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-05-01 16:11+0200\n"
-"PO-Revision-Date: 2021-05-02 19:31+0000\n"
+"PO-Revision-Date: 2021-05-02 22:31+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -53,7 +53,7 @@ msgstr "Podľa aktuálnych špecifikácií GOV by objekty typu „Sídlo (Siedlu
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
-"Dodatočne, modul kontroluje, či príslušné GOV-id, alebo ktorékoľvek z "
+"Dodatočne modul kontroluje, či príslušné GOV-id, alebo ktorékoľvek z "
 "hierarchie nad ním, má zadefinované jazyky v csv-súbore „%1$s“."
 
 #: Gov4WebtreesModule.php:923
@@ -319,7 +319,7 @@ msgstr "Jazyk užívateľa má najvyššiu prioritu."
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
 msgstr ""
-"Tieto jazyky sa použijú, v zadanom poradí, buď prvý v poradí, alebo, ak je "
+"Tieto jazyky sa použijú v zadanom poradí, buď prvý v poradí, alebo, ak je "
 "napísaný veľkými písmenami, ako dodatočný jazyk (napr. ako „oficiálny jazyk“ "
 "pre miesto)."
 
