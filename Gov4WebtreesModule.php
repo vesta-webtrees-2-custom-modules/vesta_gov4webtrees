@@ -724,6 +724,35 @@ class Gov4WebtreesModule extends AbstractModule implements
             '</a>';
   }
   
+  public function getLanguagesAndLanguagesForTypes(
+          LocaleInterface $locale): array {
+    
+    $overridesFilename = $this->resourcesFolder() . 'gov/languages.csv';
+
+    $languages = FunctionsGov::getGovObjectLanguageOverrides(
+              $overridesFilename,
+              ''); //empty key = global
+        
+    $languagesForTypes = [];
+    
+    //$lang is always first!
+    $lang = FunctionsGov::toLang($locale->languageTag());
+    $languagesForTypes []= $lang;
+    
+    if (sizeof($languages) === 0) {
+      //cf fallback is old FunctionsGov::retrieveTypeDescription method
+      $languagesForTypes []= 'eng';
+      $languagesForTypes []= 'deu';
+    } else {
+      $languagesForTypes = array_merge($languagesForTypes, $languages);
+    }
+    
+    return [
+        $overridesFilename,
+        $languages, 
+        $languagesForTypes];
+  }
+          
   protected function getHierarchy(
           bool $compactDisplay, 
           int $withInternalLinks, 
@@ -773,22 +802,22 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     ///////////////////////////////////////////////////////////////////////////
 
-    $languages = [];
-    
     //enhance with languages and resolve labels in reverse order
     $datas2 = [];
     
-    $overridesFilename = $this->resourcesFolder() . 'gov/languages.csv';
-    
+    [$overridesFilename, $languages, $languagesForTypes] = 
+            $this->getLanguagesAndLanguagesForTypes($locale);
+        
     foreach (array_reverse($datas) as $data) {
       $overrides = FunctionsGov::getGovObjectLanguageOverrides(
               $overridesFilename,
               $data['id']);
       
       if ((sizeof($overrides) > 0) || (sizeof($languages) === 0)) {
+        $languages = [];
+        
         //$lang is always first!
         $lang = FunctionsGov::toLang($locale->languageTag());
-        $languages = [];
         $languages []= $lang;
         $languages = array_merge($languages, $overrides);
         if ($fallbackPreferDeu) {
@@ -803,8 +832,10 @@ class Gov4WebtreesModule extends AbstractModule implements
         $label .= ' ('. $additional . ')';
       }
       
+      $resolvedType = FunctionsGov::resolveTypeDescription($this, $data['type'], $languagesForTypes);
+      
       $datas2 []= [
-          'type' => $data['type'], 
+          'type' => $resolvedType, 
           'label' => $label, 
           'nextId' => $data['nextId']];
     }
@@ -966,7 +997,7 @@ class Gov4WebtreesModule extends AbstractModule implements
       }
 
       //data and next id
-      $type = FunctionsGov::retrieveTypeDescription($this, $gov->getType(), $locale);
+      //$type = FunctionsGov::retrieveTypeDescription($this, $gov->getType(), $locale);
       $labels = $gov->getLabels();
 
       //next hierarchy level (if any)
@@ -999,7 +1030,7 @@ class Gov4WebtreesModule extends AbstractModule implements
       }
 
       return [
-          'type' => $type, 
+          'type' => $gov->getType(), 
           'labels' => $labels, 
           'id' => $id,
           'nextId' => $nextId, 

@@ -392,7 +392,7 @@ class FunctionsGov {
   //http://gov.genealogy.net/types.owl#group_32
   //excluding
   //71 'Staatenbund'
-  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275);
+  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274);
   
   //71 'Staatenbund'
   public static $TYPES_ORGANIZATIONAL = array(71);
@@ -797,6 +797,7 @@ class FunctionsGov {
     return $ret;
   }
   
+  /*
   public static function retrieveTypeDescription(
           $module, 
           $type, 
@@ -832,26 +833,45 @@ class FunctionsGov {
     }
     
     return null;
-    
-    /*
-    $lang = FunctionsGov::toLang($locale->languageTag());
-
-    $description = FunctionsGov::getTypeDescription($type, $lang);
-    if ($description != null) {
-      return $description;
-    }
-    
-    $description = FunctionsGov::loadTypeDescription($module, $type, $lang);
-    if (($description == null) || ($description == '...')) {
-      return $description;
-    }
-
-    FunctionsGov::setTypeDescription($type, $lang, $description);
-     * 
-    return $description;
-    */
   }
-
+  */
+  
+  public static function resolveTypeDescription(
+          $module, 
+          $type, 
+          array $languages): ?string {
+    
+    $typeDescriptions = self::getTypeDescriptions($module);
+    
+    $key = "http://gov.genealogy.net/types.owl#".$type;
+    
+    if (array_key_exists($key, $typeDescriptions)) {
+      $values = $typeDescriptions[$key];
+      
+      $inverse = array_flip(FunctionsGov::LANGUAGES);
+      
+      foreach ($languages as $lang) {
+        if ($lang === 'deu') {
+          $lang = 'ger';
+        }
+        if (array_key_exists($lang, $inverse)) {
+          $languageTag = $inverse[$lang];
+          
+          if (array_key_exists($languageTag, $values)) {
+            return $values[$languageTag];
+          }
+        }
+      }
+      
+      //fallback to any:
+      if (!empty($values)) {
+        return reset($values);
+      }
+    }
+    
+    return null;
+  }
+  
   public static function retrieveGovObject($module, $id) {
     $gov = FunctionsGov::getGovObject($id);
     if ($gov != null) {
@@ -1169,7 +1189,7 @@ class FunctionsGov {
               if (!str_starts_with($first, '#')) {
                 $key = array_shift($data);
                 $datas[$key] = $data;
-              }              
+              }            
             }            
           }
           fclose($fp);
@@ -1209,7 +1229,7 @@ class FunctionsGov {
     //https://stackoverflow.com/questions/38034996/find-on-model-gives-id-as-string-in-one-environment-and-int-in-other
     $version = (int)$row->version;
 
-    $type = FunctionsGov::getTypeSnapshot($julianDay, $id, $lang);    
+    $type = FunctionsGov::getTypeSnapshot($julianDay, $id);    
     
     $labels = FunctionsGov::retrieveLabels($julianDay, $id);
     
@@ -1224,7 +1244,7 @@ class FunctionsGov {
             $parents);
   }
 
-  public static function getTypeSnapshot($julianDay, $id, $lang) {
+  public static function getTypeSnapshot($julianDay, $id) {
     $row = DB::table('gov_types')
             ->where('gov_id', '=', $id)
             ->where(function($q) use ($julianDay) {
@@ -1523,9 +1543,13 @@ class FunctionsGov {
 
   public static function getGovTypeIds($module, LocaleInterface $locale): array {
     $types = new Collection(self::allTypes());
-            
-    return $types->mapWithKeys(static function (int $key) use ($module, $locale): array {
-                $desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
+    
+    [$overridesFilename, $languages, $languagesForTypes] = 
+            $module->getLanguagesAndLanguagesForTypes($locale);
+    
+    return $types->mapWithKeys(static function (int $key) use ($module, $languagesForTypes): array {
+                //$desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
+                $desc = FunctionsGov::resolveTypeDescription($module, "".$key, $languagesForTypes);
                 if ($desc !== null) {
                   return [$key => $desc . " (" . $key . ")"];
                 }
