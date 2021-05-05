@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-01 16:11+0200\n"
+"POT-Creation-Date: 2021-05-05 22:02+0200\n"
 "PO-Revision-Date: 2021-05-02 19:31+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,12 +51,9 @@ msgstr "Mevcut GOV şartnamesine göre, yerleşim yerlerinin diğer yerleşim ye
 #: Gov4WebtreesModuleTrait.php:183
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
-msgstr ""
-"Ek olarak modül, ilgili GOV kimliğinin veya hiyerarşi içindeki üstlerinden "
-"herhangi birinin '%1$s' csv dosyasında tanımlanmış dillere sahip olup "
-"olmadığını denetler."
+msgstr "Ek olarak modül, ilgili GOV kimliğinin veya hiyerarşi içindeki üstlerinden herhangi birinin '%1$s' csv dosyasında tanımlanmış dillere sahip olup olmadığını denetler."
 
-#: Gov4WebtreesModule.php:923
+#: Gov4WebtreesModule.php:979
 msgid "Administrative levels"
 msgstr "Yönetimsel düzeyler"
 
@@ -106,9 +102,7 @@ msgstr "Yerel php SoapClient kullanmak yerine, NuSOAP aracılığıyla GOV sunuc
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
-msgstr ""
-"Belirli bir yer için bu modüller, aşağıdaki stratejiye göre kullanılabilir "
-"isimleri bir dil listesiyle eşleştirerek bir veya daha fazla ismi görüntüler:"
+msgstr "Belirli bir yer için bu modüller, aşağıdaki stratejiye göre kullanılabilir isimleri bir dil listesiyle eşleştirerek bir veya daha fazla ismi görüntüler:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
@@ -225,9 +219,7 @@ msgstr "Not: Nihayetinde muhtemelen ilgili GOV verilerinin kendisinin düzeltilm
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
-msgstr ""
-"Bu türdeki nesneler muhtemelen katı bir şekilde yönetim hiyerarşisine ait "
-"değildir."
+msgstr "Bu türdeki nesneler muhtemelen katı bir şekilde yönetim hiyerarşisine ait değildir."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
@@ -304,9 +296,7 @@ msgstr "Daha sonra, tüm veriler GOV sunucusundan tekrar alınır. "
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
-msgstr ""
-"GOV sunucusu, farklı dillerde yer adları sağlar. Ancak, bir yer için 'resmi "
-"dil' kavramı yoktur."
+msgstr "GOV sunucusu, farklı dillerde yer adları sağlar. Ancak, bir yer için 'resmi dil' kavramı yoktur."
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -321,10 +311,7 @@ msgstr "Geçerli kullanıcı dili her zaman en yüksek önceliğe sahiptir."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
-msgstr ""
-"Bu diller daha sonra verilen sırayla ya yedek olarak ya da (büyük harfle "
-"yazılırsa) ek diller (yani bir yer hiyerarşisi için 'resmi diller') olarak "
-"kullanılır."
+msgstr "Bu diller daha sonra verilen sırayla ya yedek olarak ya da (büyük harfle yazılırsa) ek diller (yani bir yer hiyerarşisi için 'resmi diller') olarak kullanılır."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
@@ -339,10 +326,7 @@ msgstr "Bu politikaya kesinlikle uyulmadı. Aksi takdirde eksik hiyerarşilerle 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
-msgstr ""
-"Avrupa Birliği veya Kutsal Roma İmparatorluğu gibi nesnelerin hiyerarşilerde "
-"bağımsız varlıkların ebeveynleri olarak görünmesini istemiyorsanız bu "
-"seçeneğin işaretini kaldırın."
+msgstr "Avrupa Birliği veya Kutsal Roma İmparatorluğu gibi nesnelerin hiyerarşilerde bağımsız varlıkların ebeveynleri olarak görünmesini istemiyorsanız bu seçeneğin işaretini kaldırın."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
@@ -392,9 +376,7 @@ msgstr "GEDCOM verileri içinde (diğer özel modüller aracılığıyla). "
 #: Gov4WebtreesModuleTrait.php:185
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
-msgstr ""
-"Bu csv dosyasını kişisel tercihlerinize göre oluşturabilir ve "
-"değiştirebilirsiniz, örnek için bkz: '%1$s."
+msgstr "Bu csv dosyasını kişisel tercihlerinize göre oluşturabilir ve değiştirebilirsiniz, örnek için bkz: '%1$s."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
@@ -438,6 +420,10 @@ msgstr "GOV yer hiyerarşisini yeniden yükle"
 #: Gov4WebtreesModuleTrait.php:60
 msgid "reset all cached data once"
 msgstr "önbelleğe alınmış tüm verileri bir kez sıfırla"
+
+#: Gov4WebtreesModule.php:870
+msgid "this place does not exist at this point in time"
+msgstr ""
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
 msgid "today"

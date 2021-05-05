@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-01 16:11+0200\n"
+"POT-Creation-Date: 2021-05-05 22:02+0200\n"
 "PO-Revision-Date: 2020-12-09 12:29+0000\n"
 "Last-Translator: Thomas Rindal <thomas@rindal.net>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nb_NO/>\n"
@@ -53,7 +53,7 @@ msgstr "I henhold til gjeldende GOV-spesifikasjon skal ikke bosetninger være op
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
 
-#: Gov4WebtreesModule.php:923
+#: Gov4WebtreesModule.php:979
 msgid "Administrative levels"
 msgstr "Administrative nivåer"
 
@@ -420,6 +420,10 @@ msgstr "last inn GOV-stedshierarkiet på nytt"
 #: Gov4WebtreesModuleTrait.php:60
 msgid "reset all cached data once"
 msgstr "tilbakestill alle bufrede data én gang"
+
+#: Gov4WebtreesModule.php:870
+msgid "this place does not exist at this point in time"
+msgstr ""
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
 msgid "today"

@@ -804,16 +804,26 @@ class Gov4WebtreesModule extends AbstractModule implements
 
     //enhance with languages and resolve labels in reverse order
     $datas2 = [];
-    
-    [$overridesFilename, $languages, $languagesForTypes] = 
-            $this->getLanguagesAndLanguagesForTypes($locale);
         
+    [$overridesFilename, $languagesFallback, $languagesForTypes] = 
+            $this->getLanguagesAndLanguagesForTypes($locale);
+    
+    $languages = [];
+        
+    //$lang is always first!
+    $lang = FunctionsGov::toLang($locale->languageTag());
+    $languages []= $lang;
+    $languages = array_merge($languages, $languagesFallback);
+    if ($fallbackPreferDeu) {
+      $languages []= 'deu';
+    }
+    
     foreach (array_reverse($datas) as $data) {
       $overrides = FunctionsGov::getGovObjectLanguageOverrides(
               $overridesFilename,
               $data['id']);
       
-      if ((sizeof($overrides) > 0) || (sizeof($languages) === 0)) {
+      if (sizeof($overrides) > 0) {
         $languages = [];
         
         //$lang is always first!
@@ -856,11 +866,21 @@ class Gov4WebtreesModule extends AbstractModule implements
       if ($hierarchy !== '') {
         $hierarchy .= ', ';
       }
-        
+      
+      $nullType = I18N::translate('this place does not exist at this point in time');
+      $typeAndLabel = $data['type'] . ' ' . $data['label'];
+      if ($data['type'] === null) {
+        $typeAndLabel = $data['label'] . ' (' . $nullType .')';
+      }
+      $displayedLabel = $data['label'];
+      if ($data['type'] === null) {
+        $displayedLabel = '<s>' . $data['label'] . '</s>';
+      }
+          
       switch ($withInternalLinks) {
         case 0: //classic
-          $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
-          $hierarchy .= $data['label'];
+          $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $typeAndLabel . '">';
+          $hierarchy .= $displayedLabel;
           $hierarchy .= '</a>';
           break;
         case 1: //classic plus place/shared place icons
@@ -881,20 +901,20 @@ class Gov4WebtreesModule extends AbstractModule implements
               }
             }
           }
-
+          
           switch ($withInternalLinks) {
             case 1: //classic plus place/shared place icons
               if (($ps !== null) && ($pre === '')) {
                 $pre = $this->plac2LinkIcon($ps);
               }
               $hierarchy .= $pre;
-              $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $data['type'] . ' ' . $data['label'] . '">';
-              $hierarchy .= $data['label'];
+              $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $typeAndLabel . '">';
+              $hierarchy .= $displayedLabel;
               $hierarchy .= '</a>';
               break;
             case 2: //names and main links to place, plus gov icons
               if ($ps !== null) {
-                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
+                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
                 $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
                 $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
                 $hierarchy .= '</a>';
@@ -902,11 +922,11 @@ class Gov4WebtreesModule extends AbstractModule implements
                 $hierarchy .= '<a dir="auto" href="' . e($ps->getPlace()->url()) . '">' . $ps->getPlace()->placeName() . '</a>';
 
               } else {
-                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $data['type'] . ' ' . $data['label'] . '">';
+                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
                 $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
                 $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
                 $hierarchy .= '</a>';
-                $hierarchy .= '<i>' . $data['label'] . '</i>';
+                $hierarchy .= '<i>' . $displayedLabel . '</i>';
               }
               break;
             default:
@@ -921,7 +941,12 @@ class Gov4WebtreesModule extends AbstractModule implements
         if ($hierarchy2 !== '') {
           $hierarchy2 .= ', ';
         }
-        $hierarchy2 .= $data['type'];
+        
+        if ($data['type'] === null) {
+          $hierarchy2 .= $nullType;
+        } else {
+          $hierarchy2 .= $data['type'];
+        }        
       }
 
       $nextId = $data['nextId'];

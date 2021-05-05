@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-01 16:11+0200\n"
+"POT-Creation-Date: 2021-05-05 22:02+0200\n"
 "PO-Revision-Date: 2021-05-02 19:31+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,12 +51,9 @@ msgstr "Volgens de huidige GOV-specificatie worden nederzettingen niet veronders
 #: Gov4WebtreesModuleTrait.php:183
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
-msgstr ""
-"Bovendien controleert de module of de betreffende GOV-id, of een van de "
-"ouders binnen de hiërarchie, een taal heeft gedefinieerd in het csv-bestand "
-"'%1$s'."
+msgstr "Bovendien controleert de module of de betreffende GOV-id, of een van de ouders binnen de hiërarchie, een taal heeft gedefinieerd in het csv-bestand '%1$s'."
 
-#: Gov4WebtreesModule.php:923
+#: Gov4WebtreesModule.php:979
 msgid "Administrative levels"
 msgstr "Bestuursniveaus"
 
@@ -106,10 +102,7 @@ msgstr "Voer aanvragen uit naar de GOV-server via NuSOAP, in plaats van de nativ
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
-msgstr ""
-"Voor een bepaalde plaats worden in deze modules een of meer namen "
-"weergegeven door de beschikbare namen te vergelijken met een lijst met "
-"talen, volgens de volgende strategie:"
+msgstr "Voor een bepaalde plaats worden in deze modules een of meer namen weergegeven door de beschikbare namen te vergelijken met een lijst met talen, volgens de volgende strategie:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
@@ -226,9 +219,7 @@ msgstr "Opmerking: Uiteindelijk heeft het waarschijnlijk de voorkeur om de respe
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
-msgstr ""
-"Objecten van dit type behoren aantoonbaar niet strikt tot de administratieve "
-"hiërarchie."
+msgstr "Objecten van dit type behoren aantoonbaar niet strikt tot de administratieve hiërarchie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
@@ -305,9 +296,7 @@ msgstr "Vervolgens worden alle gegevens weer opgehaald van de GOV-server. "
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
-msgstr ""
-"De GOV-server biedt plaatsnamen in verschillende talen. Er is echter geen "
-"concept van een 'officiële taal' voor een plaats."
+msgstr "De GOV-server biedt plaatsnamen in verschillende talen. Er is echter geen concept van een 'officiële taal' voor een plaats."
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -322,10 +311,7 @@ msgstr "De huidige gebruikerstaal heeft altijd de hoogste prioriteit."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
-msgstr ""
-"Deze talen worden vervolgens in de gegeven volgorde gebruikt als terugval, "
-"of (indien in hoofdletters) als extra talen (d.w.z. 'officiële talen' voor "
-"een plaatshiërarchie)."
+msgstr "Deze talen worden vervolgens in de gegeven volgorde gebruikt als terugval, of (indien in hoofdletters) als extra talen (d.w.z. 'officiële talen' voor een plaatshiërarchie)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
@@ -340,10 +326,7 @@ msgstr "Dit beleid is echter niet strikt gevolgd. Vink deze optie aan als u op d
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
-msgstr ""
-"Schakel deze optie uit als u niet wilt dat objecten zoals de Europese Unie "
-"of het Heilige Roomse Rijk in hiërarchieën worden weergegeven als ouders van "
-"soevereine entiteiten."
+msgstr "Schakel deze optie uit als u niet wilt dat objecten zoals de Europese Unie of het Heilige Roomse Rijk in hiërarchieën worden weergegeven als ouders van soevereine entiteiten."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
@@ -393,9 +376,7 @@ msgstr "Binnen GEDCOM-gegevens (via andere aangepaste modules). "
 #: Gov4WebtreesModuleTrait.php:185
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
-msgstr ""
-"U kunt dit csv-bestand aanmaken en wijzigen op basis van uw persoonlijke "
-"voorkeuren, zie '%1$s' voor een voorbeeld."
+msgstr "U kunt dit csv-bestand aanmaken en wijzigen op basis van uw persoonlijke voorkeuren, zie '%1$s' voor een voorbeeld."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
@@ -439,6 +420,10 @@ msgstr "herlaad de hiërarchie van plaatsen"
 #: Gov4WebtreesModuleTrait.php:60
 msgid "reset all cached data once"
 msgstr "reset alle gegevens in de cache één keer"
+
+#: Gov4WebtreesModule.php:870
+msgid "this place does not exist at this point in time"
+msgstr ""
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
 msgid "today"

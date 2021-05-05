@@ -851,6 +851,8 @@ class FunctionsGov {
       $inverse = array_flip(FunctionsGov::LANGUAGES);
       
       foreach ($languages as $lang) {
+        $lang = strtolower($lang);
+        
         if ($lang === 'deu') {
           $lang = 'ger';
         }

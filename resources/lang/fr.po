@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-01 16:11+0200\n"
+"POT-Creation-Date: 2021-05-05 22:02+0200\n"
 "PO-Revision-Date: 2021-05-02 19:31+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,11 +51,9 @@ msgstr "Selon la spécification actuelle du GOV, les colonies ne sont pas censé
 #: Gov4WebtreesModuleTrait.php:183
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
-msgstr ""
-"De plus, le module vérifie si chaque ID GOV, ou l'un de ses parents dans la "
-"hiérarchie, a des langues définies dans le fichier csv '%1$s'."
+msgstr "De plus, le module vérifie si chaque ID GOV, ou l'un de ses parents dans la hiérarchie, a des langues définies dans le fichier csv '%1$s'."
 
-#: Gov4WebtreesModule.php:923
+#: Gov4WebtreesModule.php:979
 msgid "Administrative levels"
 msgstr "Niveaux administratifs"
 
@@ -80,9 +77,7 @@ msgstr "Autoriser les objets de type «règlement» dans la hiérarchie"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
 msgid "As a final fallback, determine the place name according to this checkbox:"
-msgstr ""
-"En guise de solution de secours finale, déterminez le nom de lieu en "
-"fonction de cette case à cocher :"
+msgstr "En guise de solution de secours finale, déterminez le nom de lieu en fonction de cette case à cocher :"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:123
@@ -107,10 +102,7 @@ msgstr "Exécutez les requêtes vers le serveur GOV via NuSOAP, plutôt que d'ut
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
-msgstr ""
-"Pour un lieu donné, ce module affiche un ou plusieurs noms en faisant "
-"correspondre les noms disponibles à une liste de langues, selon la stratégie "
-"suivante :"
+msgstr "Pour un lieu donné, ce module affiche un ou plusieurs noms en faisant correspondre les noms disponibles à une liste de langues, selon la stratégie suivante :"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
@@ -227,9 +219,7 @@ msgstr "Remarque : en fin de compte, il est probablement préférable de corrige
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
-msgstr ""
-"Les objets de ce type n'appartiennent sans doute pas strictement à la "
-"hiérarchie administrative."
+msgstr "Les objets de ce type n'appartiennent sans doute pas strictement à la hiérarchie administrative."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
@@ -306,9 +296,7 @@ msgstr "Par la suite, toutes les données sont à nouveau extraites du serveur G
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
-msgstr ""
-"Le serveur GOV fournit des noms de lieux dans différentes langues. "
-"Cependant, il n'y a pas de notion de «langue officielle» pour un lieu."
+msgstr "Le serveur GOV fournit des noms de lieux dans différentes langues. Cependant, il n'y a pas de notion de «langue officielle» pour un lieu."
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -318,16 +306,12 @@ msgstr "Le serveur GOV semble temporairement indisponible."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:182
 msgid "The current user language always has the highest priority."
-msgstr ""
-"La langue de l'utilisateur actuelle a toujours la priorité la plus élevée."
+msgstr "La langue de l'utilisateur actuelle a toujours la priorité la plus élevée."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
-msgstr ""
-"Ces langues sont ensuite utilisées, dans l'ordre donné, soit comme solutions "
-"de secours, soit (si elles sont en majuscules) comme langues supplémentaires "
-"(c'est-à-dire \" langues officielles '' pour une hiérarchie de lieux)."
+msgstr "Ces langues sont ensuite utilisées, dans l'ordre donné, soit comme solutions de secours, soit (si elles sont en majuscules) comme langues supplémentaires (c'est-à-dire \" langues officielles '' pour une hiérarchie de lieux)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
@@ -342,10 +326,7 @@ msgstr "Cette politique n'a cependant pas été strictement suivie. Cochez cette
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
-msgstr ""
-"Décochez cette option si vous ne souhaitez pas que des objets tels que "
-"l'Union européenne ou le Saint Empire romain apparaissent dans les "
-"hiérarchies en tant que parents d'entités souveraines."
+msgstr "Décochez cette option si vous ne souhaitez pas que des objets tels que l'Union européenne ou le Saint Empire romain apparaissent dans les hiérarchies en tant que parents d'entités souveraines."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
@@ -395,9 +376,7 @@ msgstr "Dans les données GEDCOM (via d'autres modules personnalisés). "
 #: Gov4WebtreesModuleTrait.php:185
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
-msgstr ""
-"Vous pouvez créer et modifier ce fichier csv selon vos préférences "
-"personnelles, voir '%1$s' pour un exemple."
+msgstr "Vous pouvez créer et modifier ce fichier csv selon vos préférences personnelles, voir '%1$s' pour un exemple."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
@@ -441,6 +420,10 @@ msgstr "recharger la hiérarchie des lieux GOV"
 #: Gov4WebtreesModuleTrait.php:60
 msgid "reset all cached data once"
 msgstr "réinitialiser une fois toutes les données mises en cache"
+
+#: Gov4WebtreesModule.php:870
+msgid "this place does not exist at this point in time"
+msgstr ""
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
 msgid "today"
