@@ -6,6 +6,7 @@ use DateInterval;
 use DateTime;
 use Exception;
 use Fisharebest\Localization\Locale\LocaleInterface;
+use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Registry;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
@@ -16,6 +17,9 @@ use Throwable;
 use const CAL_GREGORIAN;
 use function cal_from_jd;
 use function cal_to_jd;
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+use function str_starts_with;
 
 require_once __DIR__ . '/nusoap/lib/nusoap.php';
 
@@ -280,7 +284,7 @@ class GovObjectSnapshot {
     return $this->labels;
   }
 
-  public function getType() {
+  public function getType(): ?int {
     return $this->type;
   }
 
@@ -292,7 +296,7 @@ class GovObjectSnapshot {
           $lat, 
           $lon, 
           int $version, 
-          $type, 
+          ?int $type, 
           array $labels, 
           $parents) {
     
@@ -312,7 +316,7 @@ class GovObjectSnapshot {
     if (($this->getLat() != null) && ($this->getLon() != null)) {
       $str .= " location: (" . $this->getLat() . "; " . $this->getLon() . ").";
     }
-    $str .= " (type " . $this->getType()->toString() . ")";
+    $str .= " (type " . $this->getType() . ")";
     foreach ($this->getParents() as $parent) {
       $str .= " parent: " . $parent->toString() . ".";
     }
@@ -370,7 +374,8 @@ class GovProperty {
 
 class FunctionsGov {
 
-  //TODO update regularly! Last update: 2020/08. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+  //TODO update regularly! Last update: 2021/05. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+  public static $MAX_KNOWN_TYPE = 277;
   
   //http://gov.genealogy.net/types.owl#group_1
   //with subs:
@@ -393,7 +398,7 @@ class FunctionsGov {
   //excluding
   //71 'Staatenbund'
   //77 'Reichskreis'
-  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 72, 73, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274);
+  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 72, 73, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277);
   
   //71 'Staatenbund'
   public static $TYPES_ORGANIZATIONAL = array(71, 77);
@@ -798,50 +803,19 @@ class FunctionsGov {
     return $ret;
   }
   
-  /*
-  public static function retrieveTypeDescription(
-          $module, 
-          $type, 
-          LocaleInterface $locale): ?string {
-    
-    $typeDescriptions = self::getTypeDescriptions($module);
-    
-    $key = "http://gov.genealogy.net/types.owl#".$type;
-    
-    if (array_key_exists($key, $typeDescriptions)) {
-      $values = $typeDescriptions[$key];
-      
-      $languageTag = $locale->languageTag();
-      
-      if (array_key_exists($languageTag, $values)) {
-        return $values[$languageTag];
-      }
-      
-      //fallback to "en":
-      if (array_key_exists("en", $values)) {
-        return $values["en"];
-      }
-      
-      //fallback to "de":
-      if (array_key_exists("de", $values)) {
-        return $values["de"];
-      }
-      
-      //fallback to any:
-      if (!empty($values)) {
-        return reset($values);
-      }
-    }
-    
-    return null;
-  }
-  */
-  
   public static function resolveTypeDescription(
           $module, 
-          $type, 
+          ?int $type, 
           array $languages): ?string {
     
+    if ($type === null) {
+      return null;
+    }
+        
+    if ($type > FunctionsGov::$MAX_KNOWN_TYPE) {
+      return I18N::translate('unknown GOV type (newly introduced?)');
+    }
+
     $typeDescriptions = self::getTypeDescriptions($module);
     
     $key = "http://gov.genealogy.net/types.owl#".$type;
@@ -1247,7 +1221,7 @@ class FunctionsGov {
             $parents);
   }
 
-  public static function getTypeSnapshot($julianDay, $id) {
+  public static function getTypeSnapshot($julianDay, $id): ?int {
     $row = DB::table('gov_types')
             ->where('gov_id', '=', $id)
             ->where(function($q) use ($julianDay) {
@@ -1259,7 +1233,7 @@ class FunctionsGov {
             ->first();
 
     if ($row == null) {
-      return "...";
+      return null;
     }
 
     return $row->type;
@@ -1552,7 +1526,7 @@ class FunctionsGov {
     
     return $types->mapWithKeys(static function (int $key) use ($module, $languagesForTypes): array {
                 //$desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
-                $desc = FunctionsGov::resolveTypeDescription($module, "".$key, $languagesForTypes);
+                $desc = FunctionsGov::resolveTypeDescription($module, $key, $languagesForTypes);
                 if ($desc !== null) {
                   return [$key => $desc . " (" . $key . ")"];
                 }

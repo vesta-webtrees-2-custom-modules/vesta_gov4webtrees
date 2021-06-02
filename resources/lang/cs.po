@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-05 22:02+0200\n"
+"POT-Creation-Date: 2021-06-02 21:20+0200\n"
 "PO-Revision-Date: 2021-01-19 11:32+0000\n"
 "Last-Translator: Josef Prause <josef.prause@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
@@ -421,13 +421,17 @@ msgstr "znovu stáhnout GOV hierarchii míst"
 msgid "reset all cached data once"
 msgstr "znovu nastavit všechna cachovaná data jednorázově"
 
-#: Gov4WebtreesModule.php:870
+#: Gov4WebtreesModule.php:855
 msgid "this place does not exist at this point in time"
 msgstr ""
 
-#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
+#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
 msgid "today"
 msgstr "dnes"
+
+#: FunctionsGov.php:816
+msgid "unknown GOV type (newly introduced?)"
+msgstr ""
 
 #~ msgid "Determines strategy in case the place name is not available in the current language (for the given date): "
 #~ msgstr "Určuje strategii pro případ, že název místa není dostupný v současném jazyce (pro dané datum): "

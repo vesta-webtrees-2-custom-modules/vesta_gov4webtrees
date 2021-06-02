@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-05 22:02+0200\n"
+"POT-Creation-Date: 2021-06-02 21:20+0200\n"
 "PO-Revision-Date: 2021-05-06 07:31+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -422,13 +421,17 @@ msgstr "herlaad de hiërarchie van plaatsen"
 msgid "reset all cached data once"
 msgstr "reset alle gegevens in de cache één keer"
 
-#: Gov4WebtreesModule.php:870
+#: Gov4WebtreesModule.php:855
 msgid "this place does not exist at this point in time"
 msgstr "deze plaats bestaat niet op dit moment"
 
-#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
+#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
 msgid "today"
 msgstr "vandaag"
+
+#: FunctionsGov.php:816
+msgid "unknown GOV type (newly introduced?)"
+msgstr ""
 
 #~ msgid "Determines strategy in case the place name is not available in the current language (for the given date): "
 #~ msgstr "Hiermee bepaalt u de strategie voor het geval de plaatsnaam niet beschikbaar is in de huidige taal (voor de gegeven datum): "

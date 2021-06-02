@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-05-05 22:02+0200\n"
+"POT-Creation-Date: 2021-06-02 21:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,6 +42,10 @@ msgstr ""
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr ""
 
+#: FunctionsGov.php:816
+msgid "unknown GOV type (newly introduced?)"
+msgstr ""
+
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
@@ -68,11 +72,11 @@ msgstr ""
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr ""
 
-#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:694
+#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
 msgid "today"
 msgstr ""
 
-#: Gov4WebtreesModule.php:870
+#: Gov4WebtreesModule.php:855
 msgid "this place does not exist at this point in time"
 msgstr ""
 

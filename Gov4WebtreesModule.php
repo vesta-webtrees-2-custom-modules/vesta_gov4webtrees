@@ -662,51 +662,44 @@ class Gov4WebtreesModule extends AbstractModule implements
     } else {
       $julianDay1 = $place->getEventDateInterval()->getMin();
     }
-    
-    $dateTime = new DateTime();
-    $dateTime->format('Y-m-d');
-    $julianDay2 = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
 
     $tooltip = null;
     $debugGovSource = $this->getPreference('DEBUG_GOV_SOURCE', '1');
     if ($debugGovSource) {
       $tooltip .= $govReference->getTrace()->getAll();
+    }    
+    
+    $julianDayText1 = "n/a"; //placeholder, will never be displayed!
+    if (($julianDay1 !== null) && ($showCurrentDateGov !== 2)) {
+      $julianDayText1 = Gov4WebtreesModule::gregorianYear($julianDay1);
     }
     
-    $str1 = GenericViewElement::createEmpty();
-    if (($julianDay1) && ($showCurrentDateGov !== 2)) {
-      $julianDayText = Gov4WebtreesModule::gregorianYear($julianDay1);
-      $str1 = $this->getHierarchy(
-              $compactDisplay, 
-              $withInternalLinks, 
-              $allowSettlements, 
-              $allowOrganizational,
-              $locale, 
-              $julianDay1, 
-              $julianDayText, 
-              $govReference, 
-              $tree, 
-              $tooltip, 
-              $fallbackPreferDeu);
+    $julianDay2 = null;
+    $julianDayText2 = I18N::translate('today');
+    $dateTime = new DateTime();
+    $dateTime->format('Y-m-d');
+    if (($julianDay1 === null) || ($showCurrentDateGov !== 0)) {
+      $julianDay2 = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));          
     }
-    $str2 = GenericViewElement::createEmpty();
-    if (!$julianDay1 || ($showCurrentDateGov !== 0)) {
-      $julianDayText = I18N::translate('today');
-      $str2 = $this->getHierarchy(
-              $compactDisplay, 
-              $withInternalLinks, 
-              $allowSettlements, 
-              $allowOrganizational,
-              $locale, 
-              $julianDay2, 
-              $julianDayText, 
-              $govReference, 
-              $tree, 
-              $tooltip, 
-              $fallbackPreferDeu);
-    }
-    $gve = GenericViewElement::implode([$str1, $str2]);
     
+    $julianDayTextCombined = $julianDayText1 . "–" . $julianDayText2;
+    
+    $gve = $this->getHierarchyMaybeCombined(
+          $compactDisplay, 
+          $julianDayText1, 
+          $julianDayText2, 
+          $julianDayTextCombined, 
+          $tooltip, 
+          $julianDay1, 
+          $julianDay2, 
+          $withInternalLinks, 
+          $allowSettlements, 
+          $allowOrganizational, 
+          $locale,
+          $govReference,
+          $tree,
+          $fallbackPreferDeu);
+          
     return new FactPlaceAdditions(GenericViewElement::createEmpty(), $gve, GenericViewElement::createEmpty());
   }
     
@@ -752,20 +745,18 @@ class Gov4WebtreesModule extends AbstractModule implements
         $languages, 
         $languagesForTypes];
   }
-          
-  protected function getHierarchy(
+  
+  protected function getHierarchies(
           bool $compactDisplay, 
           int $withInternalLinks, 
           bool $allowSettlements, 
           bool $allowOrganizational, 
           LocaleInterface $locale,
           string $julianDay, 
-          string $julianDayText, 
           GovReference $govReference,
           Tree $tree,
-          ?string $tooltip, 
-          bool $fallbackPreferDeu): GenericViewElement {
- 
+          bool $fallbackPreferDeu): array {
+    
     $id = $govReference->getId();
  
     //retrieve hierarchy (has to be done separately in order to determine languages for labels)
@@ -852,17 +843,11 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     ///////////////////////////////////////////////////////////////////////////
     
-    $link = null;
     $hierarchy = '';
     $hierarchy2 = '';
         
     $nextId = $id; //reset
     foreach (array_reverse($datas2) as $data) {
-      if ($link === null) {
-        //Issue #11
-        $link = "http://gov.genealogy.net/item/show/" . $nextId;
-      }
-
       if ($hierarchy !== '') {
         $hierarchy .= ', ';
       }
@@ -955,10 +940,25 @@ class Gov4WebtreesModule extends AbstractModule implements
       }        
     }
     
-    if ($link === null) {
+    return [$id, $hierarchy, $hierarchy2];
+  }
+  
+  protected function getHierarchyGVE(
+          bool $compactDisplay, 
+          string $julianDayText,
+          ?string $tooltip,
+          array $hierarchies): GenericViewElement {
+    
+    [$id, $hierarchy, $hierarchy2] = $hierarchies;
+    
+    if ($id !== null) {
+      //Issue #11
+      $link = "http://gov.genealogy.net/item/show/" . $id;
+    } else {
+      //not sure what this fallback is good for
       $link = "http://gov.genealogy.net/";
     }
-    
+
     $span = '<div><span class="govText">';
     $span .= '<a href="'. $link . '" target="_blank">';
     //we'd like to use far fa-compass but we'd have to import explicitly
@@ -995,8 +995,112 @@ class Gov4WebtreesModule extends AbstractModule implements
       '</script>';
     */
     
-    return GenericViewElement::create($span);    
-  }    
+    return GenericViewElement::create($span);
+  }
+  
+  protected function getHierarchy(
+          bool $compactDisplay, 
+          int $withInternalLinks, 
+          bool $allowSettlements, 
+          bool $allowOrganizational, 
+          LocaleInterface $locale,
+          string $julianDay, 
+          string $julianDayText, 
+          GovReference $govReference,
+          Tree $tree,
+          ?string $tooltip, 
+          bool $fallbackPreferDeu): GenericViewElement {
+ 
+    $hierarchies = $this->getHierarchies(
+          $compactDisplay, 
+          $withInternalLinks, 
+          $allowSettlements, 
+          $allowOrganizational, 
+          $locale,
+          $julianDay, 
+          $govReference,
+          $tree,
+          $fallbackPreferDeu);
+        
+    return $this->getHierarchyGVE(            
+            $compactDisplay, 
+            $julianDayText,
+            $tooltip,
+            $hierarchies);   
+  }
+  
+  protected function getHierarchyMaybeCombined(
+          bool $compactDisplay, 
+          string $julianDayText1, 
+          string $julianDayText2, 
+          string $julianDayTextCombined, 
+          ?string $tooltip, 
+          ?string $julianDay1, 
+          ?string $julianDay2, 
+          int $withInternalLinks, 
+          bool $allowSettlements, 
+          bool $allowOrganizational, 
+          LocaleInterface $locale,
+          GovReference $govReference,
+          Tree $tree,
+          bool $fallbackPreferDeu): GenericViewElement {
+ 
+    if ($julianDay1 !== null) {
+      $hierarchies1 = $this->getHierarchies(
+          $compactDisplay, 
+          $withInternalLinks, 
+          $allowSettlements, 
+          $allowOrganizational, 
+          $locale,
+          $julianDay1, 
+          $govReference,
+          $tree,
+          $fallbackPreferDeu);
+    }
+    
+    if ($julianDay2 !== null) {
+      $hierarchies2 = $this->getHierarchies(
+          $compactDisplay, 
+          $withInternalLinks, 
+          $allowSettlements, 
+          $allowOrganizational, 
+          $locale,
+          $julianDay2, 
+          $govReference,
+          $tree,
+          $fallbackPreferDeu);
+    }
+    
+    if (($julianDay1 !== null) && ($julianDay2 !== null) && ($hierarchies1 === $hierarchies2)) {
+      return $this->getHierarchyGVE(            
+            $compactDisplay, 
+            $julianDayTextCombined,
+            $tooltip,
+            $hierarchies1);
+    }
+    
+    if ($julianDay1 !== null) {
+      $gve1 = $this->getHierarchyGVE(            
+            $compactDisplay, 
+            $julianDayText1,
+            $tooltip,
+            $hierarchies1);
+    } else {
+      $gve1 = GenericViewElement::createEmpty();
+    }
+            
+    if ($julianDay2 !== null) {
+      $gve2 = $this->getHierarchyGVE(            
+            $compactDisplay, 
+            $julianDayText2,
+            $tooltip,
+            $hierarchies2);
+    } else {
+      $gve2 = GenericViewElement::createEmpty();
+    }
+    
+    return GenericViewElement::implode([$gve1, $gve2]);
+  }
   
   protected function getDataAndNextId(
           bool $allowSettlements, 
