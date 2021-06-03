@@ -8,9 +8,10 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-06-02 21:20+0200\n"
-"PO-Revision-Date: 2021-05-02 19:31+0000\n"
+"PO-Revision-Date: 2021-06-03 11:33+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -423,7 +424,7 @@ msgstr "réinitialiser une fois toutes les données mises en cache"
 
 #: Gov4WebtreesModule.php:855
 msgid "this place does not exist at this point in time"
-msgstr ""
+msgstr "cet endroit n'existe pas pour le moment"
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
 msgid "today"
@@ -431,7 +432,7 @@ msgstr "aujourd'hui"
 
 #: FunctionsGov.php:816
 msgid "unknown GOV type (newly introduced?)"
-msgstr ""
+msgstr "type de GOV inconnu (récemment introduit ?)"
 
 #~ msgid "Determines strategy in case the place name is not available in the current language (for the given date): "
 #~ msgstr "Détermine la stratégie au cas où le nom de lieu n'est pas disponible dans la langue actuelle (pour la date donnée) : "
