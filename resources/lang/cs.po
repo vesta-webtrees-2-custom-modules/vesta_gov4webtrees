@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-06-02 21:20+0200\n"
-"PO-Revision-Date: 2021-01-19 11:32+0000\n"
+"PO-Revision-Date: 2021-06-07 22:32+0000\n"
 "Last-Translator: Josef Prause <josef.prause@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:157
@@ -52,6 +53,8 @@ msgstr "Podle současné specifikace GOV sídliště nemohou být rodiči jinýc
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
+"Modul dodatečně kontroluje, zda příslušný GOV id, nebo kterýkoliv z "
+"hierarchie nad ním, má jazyky definované v csv souboru' %1$s'."
 
 #: Gov4WebtreesModule.php:979
 msgid "Administrative levels"
@@ -65,7 +68,7 @@ msgstr "Všechny údaje (vyjma údajů pro mapování míst na GOV idy, což se 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Allow objects of type 'confederation' in hierarchy"
-msgstr ""
+msgstr "Povolit v hierarchii objekty typu 'konfederace'"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:128
@@ -78,6 +81,8 @@ msgstr "V hierarchii připustit objekty typu 'sídliště' (settlement)"
 #: Gov4WebtreesModuleTrait.php:172
 msgid "As a final fallback, determine the place name according to this checkbox:"
 msgstr ""
+"Jako konečný záchytný bod určit název místa podle tohoto zatrhávacího "
+"políčka:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:123
@@ -103,6 +108,8 @@ msgstr "Požadavky směrem k serveru GOV provádět skrze NuSOAP, nikoliv s pou�
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Pro dané místo zobrazí modul jeden nebo více názvů výběrem z dostupných "
+"názvů v seznamu jazyků podle následující strategie:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
@@ -190,7 +197,7 @@ msgstr "Doporučuje se zvolit právě jen jednu z následujících možností. J
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:186
 msgid "It will not be overwritten by subsequent updates."
-msgstr ""
+msgstr "Nebude přepisován pozdějšími aktualizacemi."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:58
@@ -220,6 +227,8 @@ msgstr "Poznámka: nakonec dostane pravděpodobně přednost opravit údaje GOV 
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
 msgstr ""
+"Objekty tohoto typu pravděpodobně nepatří přísně do administrativní "
+"hierarchie."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
@@ -249,7 +258,7 @@ msgstr "Hierarchie míst se zobrazují historicky, t.j. podle data příslušné
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:168
 msgid "Place names from GOV"
-msgstr ""
+msgstr "Názvy míst z GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:147
@@ -297,6 +306,8 @@ msgstr "Následně se všechny údaje znovu odeberou ze serveru GOV. "
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr ""
+"Server GOV poskytuje názvy míst v různých jazycích. Avšak neexistuje tam "
+"pojem 'úřední jazyk' pro místo."
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
@@ -306,12 +317,15 @@ msgstr "GOV server je pravděpodobně dočasně nedostupný."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:182
 msgid "The current user language always has the highest priority."
-msgstr ""
+msgstr "Jazyk uživatele má vždy nejvyšší prioritu."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
 msgstr ""
+"Tyto jazyky se pak použijí v daném pořadí buď jako náhradní jazyky, nebo "
+"(jsou-li psány velkými písmeny) jako dodatečné jazyky (tj. 'úřední jazyky' "
+"pro hierarchii míst)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
@@ -327,6 +341,8 @@ msgstr "Tato taktika se však nedodržuje přísně. Zvolte tuto možnost, pokud
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
 msgstr ""
+"Zrušte tuto volbu, nechcete-li v hierarchii zobrazovat objekty jako Evropská "
+"unie nebo Svatá říše římská coby rodičovské objekty svrchovaných entit."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
@@ -377,6 +393,8 @@ msgstr "Uvnitř údajů GEDCOM (skrze jiné moduly). "
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
 msgstr ""
+"Tento csv soubor můžete vytvořit a upravit podle svých osobních preferencí, "
+"pro příklad vizte '%1$s'."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
@@ -423,7 +441,7 @@ msgstr "znovu nastavit všechna cachovaná data jednorázově"
 
 #: Gov4WebtreesModule.php:855
 msgid "this place does not exist at this point in time"
-msgstr ""
+msgstr "toto místo v daném čase neexistuje"
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
 msgid "today"
@@ -431,7 +449,7 @@ msgstr "dnes"
 
 #: FunctionsGov.php:816
 msgid "unknown GOV type (newly introduced?)"
-msgstr ""
+msgstr "neznámý GOV typ (nově zavedený?)"
 
 #~ msgid "Determines strategy in case the place name is not available in the current language (for the given date): "
 #~ msgstr "Určuje strategii pro případ, že název místa není dostupný v současném jazyce (pro dané datum): "
