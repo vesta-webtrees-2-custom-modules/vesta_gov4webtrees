@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-06-02 21:20+0200\n"
-"PO-Revision-Date: 2021-06-14 08:32+0000\n"
+"PO-Revision-Date: 2021-06-14 14:32+0000\n"
 "Last-Translator: z-yurets <zaharchenko.yurij@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
@@ -71,222 +71,259 @@ msgstr "перезавантажити ієрархію місця GOV"
 
 #: Gov4WebtreesModule.php:394
 msgid "Set GOV id (outside GEDCOM)"
-msgstr ""
+msgstr "Встановити ідентифікатор GOV (поза GEDCOM)"
 
 #: Gov4WebtreesModule.php:396
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr ""
+"Скинути ідентифікатор GOV (поза GEDCOM) і перезавантажте ієрархію місць GOV"
 
 #: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
 msgid "today"
-msgstr ""
+msgstr "сьогодні"
 
 #: Gov4WebtreesModule.php:855
 msgid "this place does not exist at this point in time"
-msgstr ""
+msgstr "на даний момент цього місця не існує"
 
 #: Gov4WebtreesModule.php:979
 msgid "Administrative levels"
-msgstr ""
+msgstr "Адміністративні рівні"
 
 #: Gov4WebtreesModuleTrait.php:23
 msgid "A module integrating GOV (historic gazetteer) data."
-msgstr ""
+msgstr "Модуль, що інтегрує дані GOV (історичний географічний довідник)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:31
 msgid "A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended 'Facts and events' tab."
 msgstr ""
+"Модуль з інтеграції даних GOV (історичний географічний довідник). Покращує "
+"місця з даними GOV за допомогою розширеної вкладки \"Факти та події\"."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:32
 msgid "Place hierarchies are displayed historically, i.e. according to the date of the respective event."
 msgstr ""
+"Ієрархії місць відображаються історично, тобто відповідно до дати "
+"відповідної події."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:33
 msgid "All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved from the GOV server and cached internally."
 msgstr ""
+"Усі дані (за винятком відображення місць до ідентифікаторів GOV, яке "
+"потрібно зробити вручну) отримуються з сервера GOV та кешуються всередині."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:34
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr ""
+"Отже, інформацію про ієрархію місць можна змінювати лише побічно через веб-"
+"сайт GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:35
 msgid "GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported."
 msgstr ""
+"Ідентифікатори GOV за замовчуванням зберігаються поза даними GEDCOM, але "
+"також підтримуються ідентифікатори, що зберігаються за допомогою тегів _GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:36
 msgid "In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data."
 msgstr ""
+"Зокрема, користувацький модуль Shared Places може використовуватися для "
+"управління ідентифікаторами GOV у даних GEDCOM."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:58
 msgid "Local GOV data"
-msgstr ""
+msgstr "Місцеві дані GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:60
 msgid "reset all cached data once"
-msgstr ""
+msgstr "скинути всі кешовані дані один раз"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:61
 msgid "Subsequently, all data is retrieved again from the GOV server. "
-msgstr ""
+msgstr "Згодом усі дані знову отримуються із сервера GOV. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:62
 msgid "Usually only required in case of substantial changes of the GOV data. "
-msgstr ""
+msgstr "Зазвичай це потрібно лише у разі значних змін даних GOV. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:63
 msgid "Mappings of places to GOV ids are not affected."
-msgstr ""
+msgstr "На відображення місць до ідентифікаторів GOV це не впливає."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:69
 msgid "Where to edit and store GOV ids"
-msgstr ""
+msgstr "Де редагувати та зберігати ідентифікатори GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:72
 msgid "Within GEDCOM data (via other custom modules). "
-msgstr ""
+msgstr "В межах даних GEDCOM (через інші користувацькі модулі). "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:73
 msgid "Particularly useful in order to manage GOV ids via the Shared Places module. Ids are stored and exportable via GEDCOM tags. "
 msgstr ""
+"Особливо корисно для управління ідентифікаторами GOV за допомогою модуля "
+"Shared Places. Ідентифікатори зберігаються та експортуються через теги "
+"GEDCOM. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
 msgid "If this option is checked, you usually want to disable the following option. "
-msgstr ""
+msgstr "Якщо цю опцію встановлено, зазвичай потрібно вимкнути наступну опцію. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:78
 msgid "Outside GEDCOM data"
-msgstr ""
+msgstr "Поза даними GEDCOM"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:79
 msgid "In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation. "
 msgstr ""
+"У цьому випадку ідентифікатори GOV зберігаються в окремій таблиці бази "
+"даних, якою потрібно керувати вручну під час переміщення відповідного дерева "
+"до іншої інсталяції веб-дерев. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:80
 msgid "When this option is disabled, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server."
 msgstr ""
+"Коли цю опцію вимкнено, надається альтернативний контроль редагування, який "
+"все ще дозволяє перезавантажити ієрархії місць із сервера GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:84
 msgid "Outside GEDCOM data - editable by anyone (including visitors)"
-msgstr ""
+msgstr "Зовнішні дані GEDCOM - редагуються будь-ким (включаючи відвідувачів)"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:85
 msgid "This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the preceding option."
 msgstr ""
+"Ця опція в основному існує для демонстраційних серверів, інакше не "
+"рекомендується. Він має перевагу над попереднім варіантом."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:91
 msgid "Show GOV hierarchy for"
-msgstr ""
+msgstr "Показати ієрархію GOV для"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:97
 msgid "date of event"
-msgstr ""
+msgstr "дата події"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:101
 msgid "present time"
-msgstr ""
+msgstr "теперішній час"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:105
 msgid "both"
-msgstr ""
+msgstr "обидва"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:108
 msgid "for events without a date, present time hierarchy will be used regardless of this preference."
 msgstr ""
+"для подій без дати застосовуватиметься ієрархія поточного часу незалежно від "
+"цієї переваги."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:112
 msgid "Show additional info"
-msgstr ""
+msgstr "Показати додаткову інформацію"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:113
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr ""
+"Відобразіть підказку із зазначенням джерела ідентифікатора GOV. Це "
+"призначено головним чином для налагодження."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:123
 msgid "Compact display (administrative levels only as tooltips)"
-msgstr ""
+msgstr "Компактний вигляд (адміністративні рівні лише як підказки)"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:128
 msgid "Allow objects of type 'settlement' in hierarchy"
-msgstr ""
+msgstr "Дозволити об’єкти типу «поселення, колонія» в ієрархії"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:129
 msgid "According to the current GOV specification, settlements are not supposed to be parents of other settlements."
 msgstr ""
+"Відповідно до чинної специфікації GOV, населені пункти не повинні бути "
+"батьківськими по відношенню до інших населених пунктів."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
 msgid "This policy hasn't been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise."
 msgstr ""
+"Однак ця політика не суворо дотримується. Позначте цей параметр, якщо в "
+"іншому випадку ви отримаєте неповні ієрархії."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:131
 msgid "Note: Ultimately it's probably preferable to correct the respective GOV data itself."
-msgstr ""
+msgstr "Примітка: Зрештою, мабуть, краще відкоригувати відповідні дані GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Allow objects of type 'confederation' in hierarchy"
-msgstr ""
+msgstr "Дозволити об’єкти типу „конфедерація” в ієрархії"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:136
 msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
 msgstr ""
+"Можливо, об’єкти цього типу не суворо належать до адміністративної ієрархії."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:137
 msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
 msgstr ""
+"Зніміть цей прапорець, якщо ви не хочете, щоб такі об'єкти, як Європейський "
+"Союз або Священна Римська імперія, відображалися в ієрархіях як батьки "
+"суверенних утворень."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:141
 msgid "For events with a date range, use the median date"
-msgstr ""
+msgstr "Для подій із діапазоном дат використовуйте серединну дату"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Otherwise, the start date is used (this is more consistent with other date-based calculations in webtrees)."
 msgstr ""
+"В іншому випадку використовується дата початку (це більш узгоджується з "
+"іншими розрахунками на основі дати на webtrees)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:147
 msgid "Place text and links"
-msgstr ""
+msgstr "Розмістіть текст та посилання"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:152
 msgid "Use place names and links from GOV"
-msgstr ""
+msgstr "Використовуйте назви місць та посилання від GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:153
