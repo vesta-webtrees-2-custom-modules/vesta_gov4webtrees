@@ -8,60 +8,66 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-06-02 21:20+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-06-14 08:32+0000\n"
+"Last-Translator: z-yurets <zaharchenko.yurij@gmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: EditGovMappingController.php:55
 #, php-format
 msgid "Set GOV id for %1$s"
-msgstr ""
+msgstr "Встановити ідентифікатор GOV для %1$s"
 
 #: EditGovMappingController.php:57
 #, php-format
 msgid "Reset GOV id for %1$s"
-msgstr ""
+msgstr "Скинути ідентифікатор GOV для %1$s"
 
 #: EditGovMappingController.php:84
 #, php-format
 msgid "GOV id for %1$s has been removed."
-msgstr ""
+msgstr "Ідентифікатор GOV для %1$s було видалено."
 
 #: EditGovMappingController.php:95
 #: resources/views/script/select2-initializer-gov.phtml:15
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
 msgstr ""
+"Недійсний ідентифікатор GOV! Приклад дійсних ідентифікаторів GOV: "
+"'EITTZE_W3091', 'object_1086218'."
 
 #: EditGovMappingController.php:106
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
-msgstr ""
+msgstr "Ідентифікатор GOV для %1$s встановлено як %2$s."
 
 #: FunctionsGov.php:816
 msgid "unknown GOV type (newly introduced?)"
-msgstr ""
+msgstr "невідомий тип GOV (нещодавно введений?)"
 
 #: Gov4WebtreesModule.php:105
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
-msgstr ""
+msgstr "Сервер GOV тимчасово недоступний."
 
 #: Gov4WebtreesModule.php:285
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
-msgstr ""
+msgstr "Ієрархію місця GOV для %1$s перезавантажено із сервера GOV."
 
 #: Gov4WebtreesModule.php:287
 msgid "GOV place hierarchy has been reloaded from GOV server."
-msgstr ""
+msgstr "Ієрархію місця GOV перезавантажено із сервера GOV."
 
 #: Gov4WebtreesModule.php:340 Gov4WebtreesModule.php:378
 msgid "reload the GOV place hierarchy"
-msgstr ""
+msgstr "перезавантажити ієрархію місця GOV"
 
 #: Gov4WebtreesModule.php:394
 msgid "Set GOV id (outside GEDCOM)"
