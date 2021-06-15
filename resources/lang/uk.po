@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-06-02 21:20+0200\n"
-"PO-Revision-Date: 2021-06-14 14:32+0000\n"
+"PO-Revision-Date: 2021-06-15 07:32+0000\n"
 "Last-Translator: z-yurets <zaharchenko.yurij@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
@@ -282,7 +282,7 @@ msgstr ""
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:131
 msgid "Note: Ultimately it's probably preferable to correct the respective GOV data itself."
-msgstr "Примітка: Зрештою, мабуть, краще відкоригувати відповідні дані GOV."
+msgstr "Зауваження: Зрештою, мабуть, краще відкоригувати відповідні дані GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
@@ -328,37 +328,45 @@ msgstr "Використовуйте назви місць та посиланн
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:153
 msgid "'Classic' mode."
-msgstr ""
+msgstr "\"Класичний\" режим."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:156
 msgid "Use place names and links from GOV, additionally link to places existing in webtrees via icons"
 msgstr ""
+"Використовуйте назви місць та посилання від GOV, додатково посилання на "
+"місця, що існують на webtrees, за допомогою піктограм"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:157
 msgid "'Classic' mode, extended to link to places from the GEDCOM data, if possible."
 msgstr ""
+"\"Класичний\" режим, по можливості розширений для посилання на місця з даних "
+"GEDCOM."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Use place names and link to places existing in webtrees, additionally link to GOV via icons"
 msgstr ""
+"Використовуйте назви місць і посилання на місця, що існують на webtrees, "
+"додаткові посилання на GOV за допомогою піктограм"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:161
 msgid "If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible."
 msgstr ""
+"Якщо це встановлено, відображена ієрархія GOV використовує імена місць із "
+"даних GEDCOM, коли це можливо."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:168
 msgid "Place names from GOV"
-msgstr ""
+msgstr "Топоніми від GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:170
 msgid "fallback to German place names"
-msgstr ""
+msgstr "запасний варіант до німецьких топонімів"
 
 #. I18N: Module Configuration
 #. I18N::translate('Determines strategy in case the place name is not available in the current or any additional language (for the given date): ') .
@@ -366,110 +374,141 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:172
 msgid "As a final fallback, determine the place name according to this checkbox:"
 msgstr ""
+"Як остаточний резервний варіант визначте назву місця відповідно до цього "
+"прапорця:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:173
 msgid "If checked, attempt to fall back to the German place name. "
-msgstr ""
+msgstr "Якщо відмічено, буде спроба повернутися до німецьких топонімів. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:174
 msgid "If unchecked, prefer any language other than German; "
 msgstr ""
+"Якщо не відмічено, перевагу буде віддано будь-якій іншій мові, крім "
+"німецької; "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:175
 msgid "motivated by the assumption that place names in the local language are more useful in general "
-msgstr ""
+msgstr "мотивовано припущенням, що топоніми місцевою мовою загалом корисніші "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:176
 msgid "(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names)."
 msgstr ""
+"(Чому саме так виділяють німецьку мову? Оскільки географічний довідник GOV "
+"наразі є доволі німецькомовним, то в багатьох місцях є німецькі назви)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:180
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr ""
+"Сервер GOV надає назви місць різними мовами. Однак поняття \"офіційна мова\" "
+"місця не існує."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:181
 msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Для даного місця цей модуль відображає одне або кілька імен, зіставляючи "
+"наявні імена зі списком мов, відповідно до наступної стратегії:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:182
 msgid "The current user language always has the highest priority."
-msgstr ""
+msgstr "Поточна мова користувача завжди має найвищий пріоритет."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:183
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
+"Крім того, модуль перевіряє, чи має відповідний ідентифікатор GOV (або будь-"
+"хто з його батьків у ієрархії) мови, визначені у файлі csv '%1$s'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:184
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
 msgstr ""
+"Потім ці мови використовуються в заданому порядку або як резервні копії, або "
+"(якщо верхній регістр) використовуються як додаткові мови (тобто \"офіційні "
+"мови\" для ієрархії місця)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:185
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
 msgstr ""
+"Ви можете створити та змінити цей файл csv відповідно до своїх особистих "
+"уподобань, див. приклад \"%1$s\"."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:186
 msgid "It will not be overwritten by subsequent updates."
-msgstr ""
+msgstr "Він не буде замінений під час наступних оновлень."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:191
 msgid "Internals (adjusted automatically if necessary)"
-msgstr ""
+msgstr "Внутрішня будова (за потреби регулюються автоматично)"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:198
 msgid "Use NuSOAP instead of SoapClient"
-msgstr ""
+msgstr "Використовувати NuSOAP замість SoapClient"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:199
 msgid "Execute requests to the GOV server via NuSOAP, rather than using the native php SoapClient. The native SoapClient is usually enabled (you can check this in your php.ini settings), but may not be provided by all hosters. If the native client is not enabled/available, this option is checked automatically."
 msgstr ""
+"Виконувати запити до сервера GOV через NuSOAP, а не за допомогою власного "
+"php SoapClient. Власний SoapClient зазвичай увімкнено (ви можете перевірити "
+"це у налаштуваннях php.ini), але він може надаватися не всіма хостерами. "
+"Якщо власний клієнт не ввімкнено / не доступний, цей параметр відмічається "
+"автоматично."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:209
 msgid "GOV Id Management"
-msgstr ""
+msgstr "Управління ідентифікаторами GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:210
 msgid "It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them."
 msgstr ""
+"Рекомендується використовувати лише один із наведених нижче варіантів. Ви "
+"також можете (тимчасово) вимкнути всі редагування, знявши прапорці з усіх."
 
 #: WhatsNew/WhatsNew1.php:11
 msgid "Vesta Gov4Webtrees: The displayed GOV hierarchy now additionally links to webtrees places where possible. You can switch back to the classic display (and others) via the module configuration."
 msgstr ""
+"Vesta Gov4Webtrees: Відображена ієрархія GOV тепер додатково посилається на "
+"місця webtrees, де це можливо. Ви можете повернутися до класичного вигляду ("
+"та інших) за допомогою конфігурації модуля."
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
-msgstr ""
+msgstr "Ідентифікатор GOV"
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
 msgid "Look up a matching GOV id on the GOV server"
-msgstr ""
+msgstr "Знайдіть відповідний ідентифікатор GOV на сервері GOV"
 
 #: resources/views/edit/gov-id-edit-control.phtml:33
 msgid "Note: The mapping from place to GOV id is stored outside the gedcom data."
 msgstr ""
+"Зауваження: Зіставлення місця з ідентифікатором GOV зберігається за межами "
+"даних Gedcom."
 
 #: resources/views/edit/gov-id-edit-control.phtml:34
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
 msgstr ""
+"Збережіть поточний ідентифікатор, щоб перезавантажити дані ієрархії місць із "
+"сервера GOV."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
-msgstr ""
+msgstr "Ви також можете зберегти порожній ідентифікатор, щоб видалити мітку."
