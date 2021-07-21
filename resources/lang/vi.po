@@ -1,0 +1,516 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the vesta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vesta 1.0\n"
+"Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
+"POT-Creation-Date: 2021-06-02 21:20+0200\n"
+"PO-Revision-Date: 2021-07-21 03:32+0000\n"
+"Last-Translator: ngohuuthuanfc9865b89dde4baf <ngohuuthuan@gmail.com>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/vi/>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.7.2-dev\n"
+
+#: EditGovMappingController.php:55
+#, php-format
+msgid "Set GOV id for %1$s"
+msgstr "Thiết lập id GOV cho %1$s"
+
+#: EditGovMappingController.php:57
+#, php-format
+msgid "Reset GOV id for %1$s"
+msgstr "Đặt lại id GOV cho %1$s"
+
+#: EditGovMappingController.php:84
+#, php-format
+msgid "GOV id for %1$s has been removed."
+msgstr "GOV id cho %1$s đã bị xóa."
+
+#: EditGovMappingController.php:95
+#: resources/views/script/select2-initializer-gov.phtml:15
+msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
+msgstr ""
+"GOV id không hợp lệ! Id GOV hợp lệ ví dụ: 'EITTZE_W3091', 'object_1086218'."
+
+#: EditGovMappingController.php:106
+#, php-format
+msgid "GOV id for %1$s has been set to %2$s."
+msgstr "GO id cho %1$s đã được đặt thành %2$s."
+
+#: FunctionsGov.php:816
+msgid "unknown GOV type (newly introduced?)"
+msgstr "loại GOV không xác định (mới được giới thiệu?)"
+
+#: Gov4WebtreesModule.php:105
+#: resources/views/script/select2-initializer-gov.phtml:19
+msgid "The GOV server seems to be temporarily unavailable."
+msgstr "Máy chủ GOV tạm thời không khả dụng."
+
+#: Gov4WebtreesModule.php:285
+#, php-format
+msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
+msgstr "Hệ thống phân cấp địa điểm GOV cho %1$s đã được tải lại từ máy chủ GOV."
+
+#: Gov4WebtreesModule.php:287
+msgid "GOV place hierarchy has been reloaded from GOV server."
+msgstr "Hệ thống phân cấp địa điểm GOV đã được tải lại từ máy chủ GOV."
+
+#: Gov4WebtreesModule.php:340 Gov4WebtreesModule.php:378
+msgid "reload the GOV place hierarchy"
+msgstr "tải lại hệ thống phân cấp địa điểm của GOV"
+
+#: Gov4WebtreesModule.php:394
+msgid "Set GOV id (outside GEDCOM)"
+msgstr "Đặt id GOV (bên ngoài GEDCOM)"
+
+#: Gov4WebtreesModule.php:396
+msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
+msgstr ""
+"Đặt lại id GOV (bên ngoài GEDCOM) và tải lại hệ thống phân cấp địa điểm của "
+"GOV"
+
+#: Gov4WebtreesModule.php:502 Gov4WebtreesModule.php:678
+msgid "today"
+msgstr "hôm nay"
+
+#: Gov4WebtreesModule.php:855
+msgid "this place does not exist at this point in time"
+msgstr "nơi này không tồn tại vào thời điểm này"
+
+#: Gov4WebtreesModule.php:979
+msgid "Administrative levels"
+msgstr "Các cấp quản trị"
+
+#: Gov4WebtreesModuleTrait.php:23
+msgid "A module integrating GOV (historic gazetteer) data."
+msgstr "Một mô-đun tích hợp dữ liệu GOV (công báo lịch sử)."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:31
+msgid "A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended 'Facts and events' tab."
+msgstr ""
+"Một mô-đun tích hợp dữ liệu GOV (công báo lịch sử). Cải thiện các địa điểm "
+"với dữ liệu GOV thông qua tab 'Sự kiện và số liệu' mở rộng."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:32
+msgid "Place hierarchies are displayed historically, i.e. according to the date of the respective event."
+msgstr ""
+"Phân cấp địa điểm được hiển thị theo lịch sử, tức là theo ngày diễn ra sự "
+"kiện tương ứng."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:33
+msgid "All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved from the GOV server and cached internally."
+msgstr ""
+"Tất cả dữ liệu (ngoại trừ ánh xạ địa điểm tới id GOV, phải được thực hiện "
+"theo cách thủ công) được truy xuất từ máy chủ GOV và được lưu trữ nội bộ."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:34
+msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
+msgstr ""
+"Do đó, thông tin phân cấp địa điểm chỉ có thể được thay đổi một cách gián "
+"tiếp, thông qua trang web của Chính phủ."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:35
+msgid "GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported."
+msgstr ""
+"Id GOV được lưu trữ bên ngoài dữ liệu GEDCOM theo mặc định, nhưng id được "
+"lưu trữ qua thẻ _GOV cũng được hỗ trợ."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:36
+msgid "In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data."
+msgstr ""
+"Trong trường hợp cụ thể, mô-đun tùy chỉnh Địa điểm được chia sẻ có thể được "
+"sử dụng để quản lý id GOV trong dữ liệu GEDCOM."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:58
+msgid "Local GOV data"
+msgstr "Dữ liệu GOV cục bộ"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:60
+msgid "reset all cached data once"
+msgstr "đặt lại tất cả dữ liệu đã lưu trong bộ nhớ cache một lần"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:61
+msgid "Subsequently, all data is retrieved again from the GOV server. "
+msgstr "Sau đó, tất cả dữ liệu được lấy lại từ máy chủ GOV. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:62
+msgid "Usually only required in case of substantial changes of the GOV data. "
+msgstr ""
+"Thường chỉ được yêu cầu trong trường hợp dữ liệu của Chính phủ có thay đổi "
+"đáng kể. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:63
+msgid "Mappings of places to GOV ids are not affected."
+msgstr "Ánh xạ địa điểm sang id GOV không bị ảnh hưởng."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:69
+msgid "Where to edit and store GOV ids"
+msgstr "Nơi chỉnh sửa và lưu trữ id GOV"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:72
+msgid "Within GEDCOM data (via other custom modules). "
+msgstr "Trong dữ liệu GEDCOM (thông qua các mô-đun tùy chỉnh khác). "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:73
+msgid "Particularly useful in order to manage GOV ids via the Shared Places module. Ids are stored and exportable via GEDCOM tags. "
+msgstr ""
+"Đặc biệt hữu ích để quản lý id GOV thông qua mô-đun Địa điểm được chia sẻ. "
+"Id được lưu trữ và có thể xuất thông qua thẻ GEDCOM. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:74
+msgid "If this option is checked, you usually want to disable the following option. "
+msgstr "Nếu tùy chọn này được chọn, bạn thường muốn tắt tùy chọn sau. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:78
+msgid "Outside GEDCOM data"
+msgstr "Dữ liệu GEDCOM bên ngoài"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:79
+msgid "In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation. "
+msgstr ""
+"Trong trường hợp này, các id GOV được lưu trữ trong một bảng cơ sở dữ liệu "
+"riêng biệt, bảng này phải được quản lý theo cách thủ công khi di chuyển cây "
+"tương ứng sang cài đặt webtrees khác. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:80
+msgid "When this option is disabled, an alternative edit control is provided, which still allows to reload place hierarchies from the GOV server."
+msgstr ""
+"Khi tùy chọn này bị vô hiệu hóa, điều khiển chỉnh sửa thay thế sẽ được cung "
+"cấp, điều này vẫn cho phép tải lại cấu trúc phân cấp vị trí từ máy chủ GOV."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:84
+msgid "Outside GEDCOM data - editable by anyone (including visitors)"
+msgstr ""
+"Dữ liệu GEDCOM bên ngoài - có thể chỉnh sửa bởi bất kỳ ai (kể cả khách truy "
+"cập)"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:85
+msgid "This option mainly exists for demo servers and is not recommended otherwise. It has precedence over the preceding option."
+msgstr ""
+"Tùy chọn này chủ yếu tồn tại cho các máy chủ demo và không được khuyến nghị "
+"theo cách khác. Nó được ưu tiên hơn tùy chọn trước đó."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:91
+msgid "Show GOV hierarchy for"
+msgstr "Hiển thị hệ thống phân cấp của GOV cho"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:97
+msgid "date of event"
+msgstr "ngày sự kiện"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:101
+msgid "present time"
+msgstr "thời điểm hiện tại"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:105
+msgid "both"
+msgstr "cả hai"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:108
+msgid "for events without a date, present time hierarchy will be used regardless of this preference."
+msgstr ""
+"đối với các sự kiện không có ngày, hệ thống phân cấp thời gian hiện tại sẽ "
+"được sử dụng bất kể tùy chọn này."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:112
+msgid "Show additional info"
+msgstr "Hiển thị thông tin bổ sung"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:113
+msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
+msgstr ""
+"Hiển thị chú giải công cụ cho biết nguồn của id GOV. Đây là mục đích chủ yếu "
+"để gỡ lỗi."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:123
+msgid "Compact display (administrative levels only as tooltips)"
+msgstr "Màn hình nhỏ gọn (chỉ cấp quản trị dưới dạng chú giải công cụ)"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:128
+msgid "Allow objects of type 'settlement' in hierarchy"
+msgstr "Cho phép các đối tượng thuộc loại 'giải quyết' trong hệ thống phân cấp"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:129
+msgid "According to the current GOV specification, settlements are not supposed to be parents of other settlements."
+msgstr ""
+"Theo quy định hiện tại của Chính phủ, các khu định cư không được cho là bao "
+"gồm của các khu định cư khác."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:130
+msgid "This policy hasn't been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise."
+msgstr ""
+"Chính sách này đã không được tuân thủ nghiêm ngặt. Chọn tùy chọn này nếu bạn "
+"kết thúc với cấu trúc phân cấp không hoàn chỉnh."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:131
+msgid "Note: Ultimately it's probably preferable to correct the respective GOV data itself."
+msgstr "Lưu ý: Cuối cùng thì có lẽ nên sửa chính dữ liệu GOV tương ứng."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:135
+msgid "Allow objects of type 'confederation' in hierarchy"
+msgstr "Cho phép các đối tượng thuộc loại 'liên minh' trong phân cấp"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:136
+msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
+msgstr ""
+"Các đối tượng kiểu này được cho là không hoàn toàn thuộc về hệ thống phân "
+"cấp hành chính."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:137
+msgid "Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities."
+msgstr ""
+"Bỏ chọn tùy chọn này nếu bạn không muốn các đối tượng như Liên minh Châu Âu "
+"hoặc Đế chế La Mã Thần thánh xuất hiện trong hệ thống phân cấp với tư cách "
+"là cha mẹ của các thực thể có chủ quyền."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:141
+msgid "For events with a date range, use the median date"
+msgstr "Đối với các sự kiện có phạm vi ngày, hãy sử dụng ngày trung bình"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:142
+msgid "Otherwise, the start date is used (this is more consistent with other date-based calculations in webtrees)."
+msgstr ""
+"Nếu không, ngày bắt đầu được sử dụng (điều này phù hợp hơn với các tính toán "
+"dựa trên ngày khác trong webtrees)."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:147
+msgid "Place text and links"
+msgstr "Đặt văn bản và liên kết"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:152
+msgid "Use place names and links from GOV"
+msgstr "Sử dụng tên địa điểm và liên kết từ GOV"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:153
+msgid "'Classic' mode."
+msgstr "Chế độ 'Cổ điển'."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:156
+msgid "Use place names and links from GOV, additionally link to places existing in webtrees via icons"
+msgstr ""
+"Sử dụng tên địa điểm và liên kết từ GOV, liên kết bổ sung đến các địa điểm "
+"hiện có trong webtrees thông qua biểu tượng"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:157
+msgid "'Classic' mode, extended to link to places from the GEDCOM data, if possible."
+msgstr ""
+"Chế độ 'Cổ điển', được mở rộng để liên kết đến các địa điểm từ dữ liệu "
+"GEDCOM, nếu có thể."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:160
+msgid "Use place names and link to places existing in webtrees, additionally link to GOV via icons"
+msgstr ""
+"Sử dụng tên địa điểm và liên kết đến các địa điểm hiện có trong webtrees, "
+"liên kết bổ sung với GOV thông qua các biểu tượng"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:161
+msgid "If this is checked, the displayed GOV hierarchy uses place names from the GEDCOM data, if possible."
+msgstr ""
+"Nếu điều này được chọn, hệ thống phân cấp GOV được hiển thị sẽ sử dụng địa "
+"danh từ dữ liệu GEDCOM, nếu có thể."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:168
+msgid "Place names from GOV"
+msgstr "Địa danh từ GOV"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:170
+msgid "fallback to German place names"
+msgstr "dự phòng cho các địa danh tiếng Đức"
+
+#. I18N: Module Configuration
+#. I18N::translate('Determines strategy in case the place name is not available in the current or any additional language (for the given date): ') .
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:172
+msgid "As a final fallback, determine the place name according to this checkbox:"
+msgstr ""
+"Như một dự phòng cuối cùng, hãy xác định tên địa điểm theo hộp kiểm này:"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:173
+msgid "If checked, attempt to fall back to the German place name. "
+msgstr "Nếu được chọn, hãy thử quay lại địa danh tiếng Đức. "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:174
+msgid "If unchecked, prefer any language other than German; "
+msgstr ""
+"Nếu không được chọn, hãy thích bất kỳ ngôn ngữ nào khác ngoài tiếng Đức; "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:175
+msgid "motivated by the assumption that place names in the local language are more useful in general "
+msgstr ""
+"được thúc đẩy bởi giả định rằng địa danh bằng ngôn ngữ địa phương nói chung "
+"hữu ích hơn "
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:176
+msgid "(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names)."
+msgstr ""
+"(Tại sao tiếng Đức đặc biệt lại được viết đơn lẻ như thế này? Bởi vì công "
+"báo của Chính phủ Việt Nam hiện đang sử dụng tiếng Đức là trung tâm, và do "
+"đó nhiều nơi có tên tiếng Đức)."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:180
+msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
+msgstr ""
+"Máy chủ GOV cung cấp tên địa điểm bằng các ngôn ngữ khác nhau. Tuy nhiên, "
+"không có khái niệm về 'ngôn ngữ chính thức' cho một địa điểm."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:181
+msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
+msgstr ""
+"Đối với một địa điểm nhất định, mô-đun này hiển thị một hoặc nhiều tên bằng "
+"cách đối sánh các tên có sẵn với danh sách ngôn ngữ, theo chiến lược sau:"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:182
+msgid "The current user language always has the highest priority."
+msgstr "Ngôn ngữ người dùng hiện tại luôn được ưu tiên cao nhất."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:183
+#, php-format
+msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
+msgstr ""
+"Ngoài ra, mô-đun sẽ kiểm tra xem id GOV tương ứng hoặc bất kỳ mã cha mẹ nào "
+"của nó trong hệ thống phân cấp, có ngôn ngữ được xác định trong tệp csv '%1$"
+"s' hay không."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:184
+msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
+msgstr ""
+"Sau đó, những ngôn ngữ này được sử dụng, theo thứ tự nhất định, dưới dạng dự "
+"phòng hoặc (nếu viết hoa) làm ngôn ngữ bổ sung (tức là 'ngôn ngữ chính thức' "
+"cho hệ thống phân cấp địa điểm)."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:185
+#, php-format
+msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
+msgstr ""
+"Bạn có thể tạo và sửa đổi tệp csv này theo sở thích cá nhân của mình, hãy "
+"xem '%1$s' để làm ví dụ."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:186
+msgid "It will not be overwritten by subsequent updates."
+msgstr "Nó sẽ không bị ghi đè bởi các bản cập nhật tiếp theo."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:191
+msgid "Internals (adjusted automatically if necessary)"
+msgstr "Nội bộ (được điều chỉnh tự động nếu cần)"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:198
+msgid "Use NuSOAP instead of SoapClient"
+msgstr "Sử dụng NuSOAP thay vì SoapClient"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:199
+msgid "Execute requests to the GOV server via NuSOAP, rather than using the native php SoapClient. The native SoapClient is usually enabled (you can check this in your php.ini settings), but may not be provided by all hosters. If the native client is not enabled/available, this option is checked automatically."
+msgstr ""
+"Thực thi các yêu cầu tới máy chủ GOV thông qua NuSOAP, thay vì sử dụng "
+"SoapClient php gốc. SoapClient gốc thường được bật (bạn có thể kiểm tra điều "
+"này trong cài đặt php.ini của mình), nhưng có thể không được cung cấp bởi "
+"tất cả các máy chủ. Nếu ứng dụng khách gốc không được bật / khả dụng, tùy "
+"chọn này sẽ tự động được kiểm tra."
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:209
+msgid "GOV Id Management"
+msgstr "Quản lý Id GOV"
+
+#. I18N: Module Configuration
+#: Gov4WebtreesModuleTrait.php:210
+msgid "It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them."
+msgstr ""
+"Bạn chỉ nên sử dụng một trong các tùy chọn sau. Bạn cũng có thể (tạm thời) "
+"tắt tất cả chỉnh sửa bằng cách bỏ chọn tất cả chúng."
+
+#: WhatsNew/WhatsNew1.php:11
+msgid "Vesta Gov4Webtrees: The displayed GOV hierarchy now additionally links to webtrees places where possible. You can switch back to the classic display (and others) via the module configuration."
+msgstr ""
+"Vesta Gov4Webtrees: Hệ thống phân cấp của GOV được hiển thị giờ đây cũng "
+"liên kết thêm đến những nơi có webtrees nếu có thể. Bạn có thể chuyển trở "
+"lại màn hình cổ điển (và các màn hình khác) thông qua cấu hình mô-đun."
+
+#: resources/views/edit/gov-id-edit-control.phtml:16
+msgid "GOV id"
+msgstr ""
+
+#: resources/views/edit/gov-id-edit-control.phtml:27
+#: resources/views/edit/gov-id-edit-control.phtml:29
+msgid "Look up a matching GOV id on the GOV server"
+msgstr "Tra cứu id GOV phù hợp trên máy chủ GOV"
+
+#: resources/views/edit/gov-id-edit-control.phtml:33
+msgid "Note: The mapping from place to GOV id is stored outside the gedcom data."
+msgstr ""
+"Lưu ý: Ánh xạ từ địa điểm đến id GOV được lưu trữ bên ngoài dữ liệu gedcom."
+
+#: resources/views/edit/gov-id-edit-control.phtml:34
+msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
+msgstr "Lưu id hiện tại để tải lại dữ liệu phân cấp địa điểm từ máy chủ GOV."
+
+#: resources/views/edit/gov-id-edit-control.phtml:35
+msgid "You may also save an empty id in order to remove the mapping."
+msgstr "Bạn cũng có thể lưu một id trống để xóa ánh xạ."
