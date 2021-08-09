@@ -197,6 +197,35 @@ class SoapWrapper {
 
 }
 
+class GovIdPlus {
+  
+  private $id;
+  private $hasLocalModifications;
+  private $ambiguous;
+  
+  public function getId(): ?string {
+    return $this->id;
+  }
+  
+  public function getHasLocalModifications(): bool {
+    return $this->hasLocalModifications;
+  }
+  
+  public function getAmbiguous(): bool {
+    return $this->ambiguous;
+  }
+  
+  public function __construct(
+          ?string $id, 
+          bool $hasLocalModifications, 
+          bool $ambiguous) {
+    
+    $this->id = $id;
+    $this->hasLocalModifications = $hasLocalModifications;
+    $this->ambiguous = $ambiguous;
+  }  
+}
+
 class GovObject {
 
   private $lat;
@@ -398,16 +427,17 @@ class FunctionsGov {
   //excluding
   //71 'Staatenbund'
   //77 'Reichskreis'
-  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 70, 72, 73, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 114, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 154, 156, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277);
+  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 72, 73, 75, 76, 78, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 156, 157, 160, 161, 162, 163, 164, 165, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277);
   
   //71 'Staatenbund'
+  //77 'Reichskreis'
   public static $TYPES_ORGANIZATIONAL = array(71, 77);
           
   //http://gov.genealogy.net/types.owl#group_3
   public static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
   
   //http://gov.genealogy.net/types.owl#group_8
-  public static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 118, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
+  public static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
   
   //http://gov.genealogy.net/types.owl#group_6
   public static $TYPES_JUDICIAL = array(3, 19, 70, 79, 105, 114, 151, 154, 202, 223, 224, 228);
@@ -441,16 +471,20 @@ class FunctionsGov {
             ->delete();
 
     DB::table('gov_labels')
+            ->where('sticky', '=', false)
             ->delete();
 
     DB::table('gov_types')
+            ->where('sticky', '=', false)
             ->delete();
 
     DB::table('gov_parents')
+            ->where('sticky', '=', false)
             ->delete();
 
-    DB::table('gov_descriptions')
-            ->delete();
+    //deprecated
+    //DB::table('gov_descriptions')
+    //        ->delete();
     
     //keep ids!
   }
@@ -985,14 +1019,17 @@ class FunctionsGov {
 
     DB::table('gov_types')
             ->where('gov_id', '=', $id)
+            ->where('sticky', '=', false)
             ->delete();
 
     DB::table('gov_labels')
             ->where('gov_id', '=', $id)
+            ->where('sticky', '=', false)
             ->delete();
 
     DB::table('gov_parents')
             ->where('gov_id', '=', $id)
+            ->where('sticky', '=', false)
             ->delete();
 
     if (count($govObject->getTypes()) > 0) {
@@ -1368,14 +1405,13 @@ class FunctionsGov {
     }
   }
 
-  //TODO WARN IF AMBIGUOUS PARENTS (would have to be corrected in GOV directly)
   public static function findGovParentOfType(
           $module, 
-          $id, 
+          string $id, 
           $gov, 
           $julianDay, 
           $types, 
-          $version): ?string {
+          $version): GovIdPlus {
     
     $ids = array();
     foreach ($gov->getParents() as $parent) {
@@ -1383,19 +1419,18 @@ class FunctionsGov {
     }
 
     if (count($ids) == 0) {
-      return null;
+      return new GovIdPlus(null, false, false);
     }
     return FunctionsGov::findGovParentOfTypeViaIds($module, $id, $ids, $julianDay, $types, $version);
   }
 
-  //TODO WARN IF AMBIGUOUS PARENTS (would have to be corrected in GOV directly)
   public static function findGovParentOfTypeViaIds(
           $module, 
-          $id, 
+          string $id, 
           $ids, 
           $julianDay, 
-          $types, 
-          $version): ?string {
+          array $types, 
+          $version): GovIdPlus {
     
     if (count($types) == 0) {
       return null;
@@ -1405,10 +1440,13 @@ class FunctionsGov {
 
     ////////
 
-    $row = DB::table('gov_parents')
+    $rows = DB::table('gov_parents')
             ->join('gov_types', 'gov_parents.parent_id', '=', 'gov_types.gov_id')
             ->where('gov_parents.gov_id', '=', $id)
-            ->whereIn('gov_types.type', $types)
+            ->where(function($q) use ($types) {
+              //sticky type supersedes other definitions, so we must load as well
+              $q->whereIn('gov_types.type', $types)->orWhere('gov_types.sticky', '=', true);
+            })            
             ->where(function($q) use ($julianDay) {
               $q->whereNull('gov_types.from')->orWhere('gov_types.from', '<=', $julianDay);
             })
@@ -1421,16 +1459,93 @@ class FunctionsGov {
             ->where(function($q) use ($julianDay) {
               $q->whereNull('gov_parents.to')->orWhere('gov_parents.to', '>', $julianDay);
             })
-            ->first();
+            ->select('parent_id', 'gov_types.type', 'gov_parents.sticky as sticky_parent')
+            ->get();
 
-    if ($row == null) {
-      return null;
+    if (sizeof($rows) == 0) {
+      return new GovIdPlus(null, false, false);
+    }        
+
+    //disregard ids with a non-matching (sticky) type (non-matching non-sticky aren't returned at all),
+    //even if there are other entries for this id
+    
+    $disregardedIds = [];
+    foreach ($rows as $row) {
+      //error_log("disregard? type = " . $row->type);
+      if (!in_array($row->type, $types)) {
+        //error_log("disregard: " . $row->parent_id);
+        $disregardedIds []= $row->parent_id;
+      }
     }
-
-    $id = $row->gov_id;
-    return $id;
+    
+    $id1 = FunctionsGov::fromRow($rows, $disregardedIds);
+    
+    if (!$id1->getHasLocalModifications() && sizeof($disregardedIds) !== 0) {
+      //hasLocalModifications via disregarded id?
+      $id2 = FunctionsGov::fromRow($rows, []);
+      
+      if ($id1->getId() !== $id2->getId()) {
+        return new GovIdPlus($id1->getId(), true, $id1->getAmbiguous());
+      }
+    }
+    
+    return $id1;
   }
 
+  protected function fromRow(
+          $rows,
+          $disregardedIds): GovIdPlus {
+   
+    //no particular order, but prefer sticky entries
+    $sticky = false;
+    $ambiguous = false;
+    $parentId = null;
+    
+    foreach ($rows as $row) {
+      if (in_array($row->parent_id, $disregardedIds)) {
+        continue;
+      }
+      
+      if ($row->sticky_parent) {
+        if (!$sticky) {
+          //first sticky
+          $sticky = true;
+          $ambiguous = false; //reset, non-stickies are irrelevant
+          $parentId = $row->parent_id;
+        } else {
+          //further ambiguous sticky
+          $ambiguous = true;
+        }
+      } else {
+        if (!$sticky) {
+          if ($parentId === null) {
+            //first non-sticky
+            $parentId = $row->parent_id;
+          } else {
+            //further ambiguous non-sticky
+            $ambiguous = true;
+          }
+        } else {
+          //disregard
+        }
+      }
+      
+      //error_log("parent of " . $id . " is " . $parentId);
+      //error_log("with sticky_parent" . $row->sticky_parent);
+      //
+      //error_log("intermediate result");
+      //error_log("sticky? " . $sticky);
+      //error_log("ambiguous? " . $ambiguous);
+      //error_log("parentId: " . $parentId);
+    }
+    
+    if ($parentId === null) {
+      return new GovIdPlus(null, false, false);
+    }
+    
+    return new GovIdPlus($parentId, $sticky, $ambiguous);
+  }
+  
   public static function getBeginAsJulianDate($prop) {
     if (property_exists($prop, "timespan")) {
       $timespan = $prop->timespan;

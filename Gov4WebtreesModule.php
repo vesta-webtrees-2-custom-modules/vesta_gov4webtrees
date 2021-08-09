@@ -91,7 +91,7 @@ class Gov4WebtreesModule extends AbstractModule implements
   protected function onBoot(): void {
     //cannot do this in constructor: module name not set yet!    
     //migrate (we need the module name here to store the setting)
-    $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 2);
+    $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 3);
     
     $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 4);
   }
@@ -582,16 +582,16 @@ class Gov4WebtreesModule extends AbstractModule implements
         if (sizeOf($types) > 0) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $types, $gov->getVersion());
         }
-        if (($govId === null) && (sizeOf($typesFallback1) > 0)) {
+        if (($nextGovId->getId() === null) && (sizeOf($typesFallback1) > 0)) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback1, $gov->getVersion());
         }
-        if (($govId === null) && (sizeOf($typesFallback2) > 0)) {
+        if (($nextGovId->getId() === null) && (sizeOf($typesFallback2) > 0)) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback2, $gov->getVersion());
         }
-        if ($nextGovId === null) {
+        if ($nextGovId->getId() === null) {
           break;
         }
-        $currentGovId = $nextGovId;
+        $currentGovId = $nextGovId->getId();
         $currentGov = FunctionsGov::retrieveGovObject($this, $currentGovId);
 
         if ($currentGov !== null) {
@@ -778,7 +778,7 @@ class Gov4WebtreesModule extends AbstractModule implements
       if ($data === []) {
         $nextId = null;
       } else {
-        $nextId = $data['nextId'];
+        $nextId = $data['nextId']->getId();
         
         if ($version === -1) {
           //replace placeholder version:
@@ -846,6 +846,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     $hierarchy = '';
     $hierarchy2 = '';
         
+    $hasLocalModifications = false;
     $nextId = $id; //reset
     foreach (array_reverse($datas2) as $data) {
       if ($hierarchy !== '') {
@@ -934,13 +935,17 @@ class Gov4WebtreesModule extends AbstractModule implements
         }        
       }
 
-      $nextId = $data['nextId'];
+      $nextId = $data['nextId']->getId();
       if ($nextId !== null) {
         $govReference = new GovReference($nextId, new Trace(''));
-      }        
+      }
+      
+      $hasLocalModifications = $hasLocalModifications || 
+              //may be set even if getId is null!
+              ($data['nextId']->getHasLocalModifications());
     }
     
-    return [$id, $hierarchy, $hierarchy2];
+    return [$id, $hierarchy, $hierarchy2, $hasLocalModifications];
   }
   
   protected function getHierarchyGVE(
@@ -949,7 +954,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           ?string $tooltip,
           array $hierarchies): GenericViewElement {
     
-    [$id, $hierarchy, $hierarchy2] = $hierarchies;
+    [$id, $hierarchy, $hierarchy2, $hasLocalModifications] = $hierarchies;
     
     if ($id !== null) {
       //Issue #11
@@ -968,7 +973,12 @@ class Gov4WebtreesModule extends AbstractModule implements
     } else {
       $span .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
     }
-    $span .= ' GOV</a> (';
+    $span .= ' GOV</a>';
+    if ($hasLocalModifications) {
+      //TODO shorter? replace by help icon?
+      $span .= I18N::translate(' (with local modifications)');
+    }
+    $span .= ' (';
     $span .= $julianDayText;
     $span .= '): ';
     $span .= $hierarchy;
@@ -1138,7 +1148,7 @@ class Gov4WebtreesModule extends AbstractModule implements
               FunctionsGov::$TYPES_ADMINISTRATIVE, 
               $version);
       
-      if ($allowOrganizational && !$nextId) {
+      if ($allowOrganizational && ($nextId === null)) {
         $nextId = FunctionsGov::findGovParentOfType(
               $this, 
               $id, 
@@ -1148,7 +1158,7 @@ class Gov4WebtreesModule extends AbstractModule implements
               $version);
       }
       
-      if ($allowSettlements && !$nextId) {
+      if ($allowSettlements && ($nextId === null)) {
         $nextId = FunctionsGov::findGovParentOfType(
                 $this, 
                 $id, 
