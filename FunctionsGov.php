@@ -211,6 +211,7 @@ class GovIdPlus {
     return $this->hasLocalModifications;
   }
   
+  //note: currently not evaluated anywhere, we could print a warning in this case
   public function getAmbiguous(): bool {
     return $this->ambiguous;
   }
@@ -223,7 +224,17 @@ class GovIdPlus {
     $this->id = $id;
     $this->hasLocalModifications = $hasLocalModifications;
     $this->ambiguous = $ambiguous;
-  }  
+  }
+  
+  public function withHasLocalModifications(
+          bool $hasLocalModifications): GovIdPlus {
+  
+    return new GovIdPlus($this->getId(), $hasLocalModifications, $this->getAmbiguous());
+  }
+  
+  public static function empty(): GovIdPlus {
+    return new GovIdPlus(null, false, false);
+  }
 }
 
 class GovObject {
@@ -1089,6 +1100,8 @@ class FunctionsGov {
   
   public static function loadGovObject($module, $id) {
 
+    //error_log("LOAD " . $id);
+    
     //first check for existence, maybe use replacement id
     $id = SoapWrapper::checkObjectId($module, $id);
     if ($id === "") {
@@ -1395,8 +1408,7 @@ class FunctionsGov {
     ////////
 
     foreach ($ids as $id) {
-      if (!in_array($id, $loadedIds)) {
-        //echo "LOAD " . $id . "<br/>";
+      if (!in_array($id, $loadedIds)) {        
         $gov = FunctionsGov::loadGovObject($module, $id);
         if ($gov != null) {
           FunctionsGov::setGovObject($id, $gov);
@@ -1419,7 +1431,7 @@ class FunctionsGov {
     }
 
     if (count($ids) == 0) {
-      return new GovIdPlus(null, false, false);
+      return GovIdPlus::empty();
     }
     return FunctionsGov::findGovParentOfTypeViaIds($module, $id, $ids, $julianDay, $types, $version);
   }
@@ -1463,7 +1475,7 @@ class FunctionsGov {
             ->get();
 
     if (sizeof($rows) == 0) {
-      return new GovIdPlus(null, false, false);
+      return GovIdPlus::empty();
     }        
 
     //disregard ids with a non-matching (sticky) type (non-matching non-sticky aren't returned at all),
@@ -1481,11 +1493,11 @@ class FunctionsGov {
     $id1 = FunctionsGov::fromRow($rows, $disregardedIds);
     
     if (!$id1->getHasLocalModifications() && sizeof($disregardedIds) !== 0) {
-      //hasLocalModifications via disregarded id?
+      //hasLocalModifications via disregarded id? Including case where null id is returned
       $id2 = FunctionsGov::fromRow($rows, []);
       
       if ($id1->getId() !== $id2->getId()) {
-        return new GovIdPlus($id1->getId(), true, $id1->getAmbiguous());
+        return $id1->withHasLocalModifications(true);
       }
     }
     
@@ -1540,7 +1552,7 @@ class FunctionsGov {
     }
     
     if ($parentId === null) {
-      return new GovIdPlus(null, false, false);
+      return GovIdPlus::empty();
     }
     
     return new GovIdPlus($parentId, $sticky, $ambiguous);

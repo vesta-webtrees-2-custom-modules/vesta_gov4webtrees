@@ -809,7 +809,7 @@ class Gov4WebtreesModule extends AbstractModule implements
       $languages []= 'deu';
     }
     
-    foreach (array_reverse($datas) as $data) {
+    foreach (array_reverse($datas) as $data) {      
       $overrides = FunctionsGov::getGovObjectLanguageOverrides(
               $overridesFilename,
               $data['id']);
@@ -1054,7 +1054,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           GovReference $govReference,
           Tree $tree,
           bool $fallbackPreferDeu): GenericViewElement {
- 
+    
     if ($julianDay1 !== null) {
       $hierarchies1 = $this->getHierarchies(
           $compactDisplay, 
