@@ -636,8 +636,22 @@ class Gov4WebtreesModule extends AbstractModule implements
   }
   
   ////////////////////////////////////////////////////////////////////////////////
+ 
+  public function factPlaceAdditionsBeforePlace(PlaceStructure $place): ?string {
+    return null;
+  }
   
-  public function factPlaceAdditions(PlaceStructure $place): ?FactPlaceAdditions {
+  public function factPlaceAdditionsAfterMap(PlaceStructure $place): ?string {
+    $fpa = $this->factPlaceAdditions($place);
+    
+    return ($fpa === null)?null:$fpa->getMain();
+  }
+  
+  public function factPlaceAdditionsAfterNotes(PlaceStructure $place): ?string {
+    return null;
+  }
+  
+  protected function factPlaceAdditions(PlaceStructure $place): ?GenericViewElement {
     //get a gov reference (may be provided by ourselves ultimately)
     $govReference = FunctionsPlaceUtils::plac2gov($this, $place, false);
     
@@ -700,7 +714,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           $tree,
           $fallbackPreferDeu);
           
-    return new FactPlaceAdditions(GenericViewElement::createEmpty(), $gve, GenericViewElement::createEmpty());
+    return $gve;
   }
     
   protected function plac2linkIcon(PlaceStructure $ps): string {
