@@ -582,6 +582,7 @@ class Gov4WebtreesModule extends AbstractModule implements
         if (sizeOf($types) > 0) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $types, $gov->getVersion());
         }
+        
         if (($nextGovId->getId() === null) && (sizeOf($typesFallback1) > 0)) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback1, $gov->getVersion());
         }
@@ -1152,7 +1153,7 @@ class Gov4WebtreesModule extends AbstractModule implements
       //data and next id
       //$type = FunctionsGov::retrieveTypeDescription($this, $gov->getType(), $locale);
       $labels = $gov->getLabels();
-
+      
       //next hierarchy level (if any)
       $nextId = FunctionsGov::findGovParentOfType(
               $this, 
@@ -1161,18 +1162,8 @@ class Gov4WebtreesModule extends AbstractModule implements
               $julianDay, 
               FunctionsGov::$TYPES_ADMINISTRATIVE, 
               $version);
-      
-      if ($allowOrganizational && ($nextId === null)) {
-        $nextId = FunctionsGov::findGovParentOfType(
-              $this, 
-              $id, 
-              $gov, 
-              $julianDay, 
-              FunctionsGov::$TYPES_ORGANIZATIONAL, 
-              $version);
-      }
-      
-      if ($allowSettlements && ($nextId === null)) {
+
+      if ($allowSettlements && ($nextId->getId() === null)) {
         $nextId = FunctionsGov::findGovParentOfType(
                 $this, 
                 $id, 
@@ -1180,6 +1171,16 @@ class Gov4WebtreesModule extends AbstractModule implements
                 $julianDay, 
                 FunctionsGov::$TYPES_SETTLEMENT, 
                 $version);
+      }
+      
+      if ($allowOrganizational && ($nextId->getId() === null)) {
+        $nextId = FunctionsGov::findGovParentOfType(
+              $this, 
+              $id, 
+              $gov, 
+              $julianDay, 
+              FunctionsGov::$TYPES_ORGANIZATIONAL, 
+              $version);
       }
 
       return [
