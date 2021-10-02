@@ -1,0 +1,76 @@
+<?php
+
+use Cissee\WebtreesExt\MoreI18N;
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\View;
+
+/**
+ * @var array<string,string> $breadcrumbs
+ * @var string               $title
+ */
+
+$icon = '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => $breadcrumbs]) ?>
+
+<h1><?= $title ?></h1>
+
+<p class="small">
+        <?= I18n::translate('Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server.') ?>
+</p>
+
+<p>
+    <label>
+        <input id="hide-unmodified-data" type="checkbox" data-toggle="collapse" data-target=".unmodified-data">
+        <?= I18N::translate('Hide data without local modifications') ?>
+    </label>
+</p>
+<table class="table table-bordered table-striped table-sm table-hover wt-table-locations">
+    <thead class="thead-dark">
+        <tr>
+            <th><?= I18N::translate('GOV data for') ?></th>
+            <th><?= MoreI18N::xlate('Latitude') ?></th>
+            <th><?= MoreI18N::xlate('Longitude') ?></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach ($rows as $govId => $row) : ?>
+        <tr class="<?= $row['hasStickyProp'] ? '' : 'unmodified-data collapse show' ?>">
+
+            <td dir="ltr">
+                <?= $row['label']
+            
+            //$icon . FunctionsGov::aToGovServer($govId, $row['label']) 
+            ?>
+            </td>
+            
+            <td dir="ltr">
+                <?php if ($row['lat'] === null) : ?>
+                    <?= view('icons/warning') ?>
+                <?php else : ?>
+                    <?= $row['lat'] ?>
+                <?php endif ?>
+            </td>
+
+            <td dir="ltr">
+                <?php if ($row['lon'] === null) : ?>
+                    <?= view('icons/warning') ?>
+                <?php else : ?>
+                    <?= $row['lon'] ?>
+                <?php endif ?>
+            </td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>
+
+<?php View::push('javascript') ?>
+<script>
+  'use strict';
+
+  webtrees.persistentToggle("hide-unmodified-data");
+</script>
+<?php View::endpush() ?>

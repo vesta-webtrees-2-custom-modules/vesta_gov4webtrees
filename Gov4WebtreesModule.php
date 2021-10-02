@@ -2,10 +2,17 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
+use Aura\Router\RouterContainer;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataDelete;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataEdit;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataList;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataSave;
 use Cissee\WebtreesExt\AbstractModule;
-use Cissee\WebtreesExt\FactPlaceAdditions;
 use Cissee\WebtreesExt\Http\RequestHandlers\FunctionsPlaceProvidersAction;
+use Cissee\WebtreesExt\Module\ModuleExtGlobalInterface;
+use Cissee\WebtreesExt\Module\ModuleExtGlobalTrait;
 use Cissee\WebtreesExt\Module\ModuleMetaInterface;
 use Cissee\WebtreesExt\Module\ModuleMetaTrait;
 use Cissee\WebtreesExt\MoreI18N;
@@ -16,13 +23,12 @@ use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
+use Fisharebest\Webtrees\Http\Middleware\AuthAdministrator;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomTrait;
-use Fisharebest\Webtrees\Module\ModuleGlobalInterface;
-use Fisharebest\Webtrees\Module\ModuleGlobalTrait;
 use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Services\SearchService;
 use Fisharebest\Webtrees\Session;
@@ -50,6 +56,7 @@ use Vesta\Model\Trace;
 use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
 use const CAL_GREGORIAN;
+use function app;
 use function cal_to_jd;
 use function response;
 use function route;
@@ -59,14 +66,14 @@ class Gov4WebtreesModule extends AbstractModule implements
   ModuleCustomInterface, 
   ModuleMetaInterface, 
   ModuleConfigInterface, 
-  ModuleGlobalInterface,
+  ModuleExtGlobalInterface,
   IndividualFactsTabExtenderInterface, 
   FunctionsPlaceInterface, 
   PrintFunctionsPlaceInterface, 
   GovIdEditControlsInterface {
   
   //cannot use original AbstractModule because we override setPreference, setName
-  use ModuleCustomTrait, ModuleMetaTrait, ModuleConfigTrait, ModuleGlobalTrait, VestaModuleTrait {
+  use ModuleCustomTrait, ModuleMetaTrait, ModuleConfigTrait, ModuleExtGlobalTrait, VestaModuleTrait {
     VestaModuleTrait::customTranslations insteadof ModuleCustomTrait;
     VestaModuleTrait::getAssetAction insteadof ModuleCustomTrait;
     VestaModuleTrait::assetUrl insteadof ModuleCustomTrait;    
@@ -94,6 +101,27 @@ class Gov4WebtreesModule extends AbstractModule implements
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 3);
     
     $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 4);
+    
+    $router_container = app(RouterContainer::class);
+    assert($router_container instanceof RouterContainer);
+    $router = $router_container->getMap();
+    
+    //http://localhost/dev/webtrees_releases/webtrees/admin/gov-data/object_156114
+    
+    $router->get(GovDataList::class, '/admin/gov-data', new GovDataList($this))
+            ->extras(['middleware' => [AuthAdministrator::class]]);
+    
+    $router->get(GovData::class, '/admin/gov-data/{gov_id}', new GovData($this))
+            ->extras(['middleware' => [AuthAdministrator::class]]);
+    
+    $router->get(GovDataEdit::class, '/admin/gov-data-edit/{type}/{key}', new GovDataEdit($this))
+            ->extras(['middleware' => [AuthAdministrator::class]]);
+    
+    $router->post(GovDataSave::class, '/admin/gov-data-update', GovDataSave::class)
+            ->extras(['middleware' => [AuthAdministrator::class]]);
+    
+    $router->post(GovDataDelete::class, '/admin/gov-data-delete/{type}/{key}', GovDataDelete::class)
+            ->extras(['middleware' => [AuthAdministrator::class]]);
   }
    
   public function flashGovServerUnavailable() {
@@ -126,6 +154,10 @@ class Gov4WebtreesModule extends AbstractModule implements
     return __DIR__ . '/resources/';
   }
 
+  public function headContentOnAdminPage(): string {
+    return $this->headContent();
+  }
+  
   public function headContent(): string {
     //easier to serve this globally, even if not strictly required on each page
     //(but required e.g. for pages where gov2html is shown)
@@ -239,14 +271,34 @@ class Gov4WebtreesModule extends AbstractModule implements
           string $name): GenericViewElement {
     
     $locale = I18N::locale();
-    $govTypeIds = FunctionsGov::getGovTypeIds($this, $locale);
+    $govTypeIdsByTypeGroup = FunctionsGov::getGovTypeIdsByTypeGroup($this, $locale);
     
     $html = view($this->name() . '::edit/gov-type-id-edit-control', [
             'moduleName' => $this->name(), 
             'id' => $id, 
             'name' => $name, 
-            'govTypeIds' => $govTypeIds,
+            'govTypeIdsByTypeGroup' => $govTypeIdsByTypeGroup,
             'govTypeId' => $govTypeId]);
+    
+    $script = View::stack('javascript');
+    
+    return new GenericViewElement($html, $script);
+  }
+  
+  public function govLanguageEditControl(
+          ?string $govLanguage, 
+          string $id, 
+          string $name): GenericViewElement {
+    
+    $locale = I18N::locale();
+    $govLanguages = FunctionsGov::getGovLanguages();
+    
+    $html = view($this->name() . '::edit/gov-language-edit-control', [
+            'moduleName' => $this->name(), 
+            'id' => $id, 
+            'name' => $name, 
+            'govLanguages' => $govLanguages,
+            'govLanguage' => $govLanguage]);
     
     $script = View::stack('javascript');
     
@@ -483,10 +535,8 @@ class Gov4WebtreesModule extends AbstractModule implements
         
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
     $withInternalLinks = intval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
-    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
-    $allowOrganizational = boolval($this->getPreference('ALLOW_ORGANIZATIONAL', '1'));
-
-    $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
+    $showSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
+    $showOrganizational = boolval($this->getPreference('ALLOW_ORGANIZATIONAL', '1'));
 
     $dateTime = new DateTime();
     $dateTime->format('Y-m-d');
@@ -503,22 +553,31 @@ class Gov4WebtreesModule extends AbstractModule implements
     $str2 = $this->getHierarchy(
             $compactDisplay, 
             $withInternalLinks, 
-            $allowSettlements, 
-            $allowOrganizational, 
+            $showSettlements, 
+            $showOrganizational, 
             $locale, 
             $julianDay2, 
             $julianDayText, 
             $govReference, 
             $tree, 
-            $tooltip, 
-            $fallbackPreferDeu);
+            $tooltip);
     
     return $str2;
   }
   
-  public function govPgov(GovReference $govReference, GedcomDateInterval $dateInterval, Collection $typesOfLocation, int $maxLevels = PHP_INT_MAX): Collection {
+  public function govPgov(
+          GovReference $govReference, 
+          GedcomDateInterval $dateInterval, 
+          Collection $typesOfLocation, 
+          int $maxLevels = PHP_INT_MAX): Collection {
+    
     try {
-      return $this->govPgovInternal($govReference, $dateInterval, $typesOfLocation, $maxLevels);
+      return $this->govPgovInternal(
+              $govReference, 
+              $dateInterval, 
+              $typesOfLocation, 
+              $maxLevels);
+      
     } catch (GOVServerUnavailableException $ex) {
       $this->flashGovServerUnavailable();
       return new Collection();
@@ -532,8 +591,8 @@ class Gov4WebtreesModule extends AbstractModule implements
           int $maxLevels = PHP_INT_MAX): Collection {   
     
     $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
-    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
-    $allowOrganizational = boolval($this->getPreference('ALLOW_ORGANIZATIONAL', '1'));
+    $showSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
+    $showOrganizational = boolval($this->getPreference('ALLOW_ORGANIZATIONAL', '1'));
 
     if ($useMedianDate) {
       $julianDay = $dateInterval->getMedian();
@@ -558,15 +617,17 @@ class Gov4WebtreesModule extends AbstractModule implements
       $typesFallback2 = array();
 
       if ("POLI" === $typeOfLocation) {
-        $types = FunctionsGov::$TYPES_ADMINISTRATIVE;
-        if ($allowSettlements) {
-          $typesFallback1 = FunctionsGov::$TYPES_SETTLEMENT;
-        }
-        if ($allowOrganizational) {
-          $typesFallback2 = FunctionsGov::$TYPES_ORGANIZATIONAL;
-        }        
+        $types = FunctionsGov::admTypes();
+        //if ($showSettlements) {
+          //allways fallback, but perhaps don't show
+          $typesFallback1 = FunctionsGov::settlementTypes();
+        //}
+        //if ($showOrganizational) {
+          //allways fallback, but perhaps don't show
+          $typesFallback2 = FunctionsGov::orgTypes();
+        //}        
       } else if ("RELI" === $typeOfLocation) {
-        $types = FunctionsGov::$TYPES_RELIGIOUS;
+        $types = FunctionsGov::religiousTypes();
       }
       //"GEOG", "CULT" not supported yet!
 
@@ -579,23 +640,30 @@ class Gov4WebtreesModule extends AbstractModule implements
         //next hierarchy level (if any)
         $nextGovId = null;
         $currentLevel++;
+        
         if (sizeOf($types) > 0) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $types, $gov->getVersion());
-        }
+          $show = true;
+        }        
         
         if (($nextGovId->getId() === null) && (sizeOf($typesFallback1) > 0)) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback1, $gov->getVersion());
+          $show = $showSettlements;
         }
+        
         if (($nextGovId->getId() === null) && (sizeOf($typesFallback2) > 0)) {
           $nextGovId = FunctionsGov::findGovParentOfType($this, $currentGovId, $currentGov, $julianDay, $typesFallback2, $gov->getVersion());
+          $show = $showOrganizational;
         }
+        
         if ($nextGovId->getId() === null) {
           break;
         }
+        
         $currentGovId = $nextGovId->getId();
         $currentGov = FunctionsGov::retrieveGovObject($this, $currentGovId);
 
-        if ($currentGov !== null) {
+        if ($show && ($currentGov !== null)) {
           $trace = $govReference->getTrace();
           $trace->add('GOV-Id via Gov4Webtrees module (hierarchy)');
           $ret->add(new GovReference(
@@ -666,11 +734,9 @@ class Gov4WebtreesModule extends AbstractModule implements
     $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
     $withInternalLinks = intval($this->getPreference('DISPLAY_INTERNAL_LINKS', '1'));
     $showCurrentDateGov = intval($this->getPreference('SHOW_CURRENT_DATE', '0'));
-    $allowSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
-    $allowOrganizational = boolval($this->getPreference('ALLOW_ORGANIZATIONAL', '1'));
+    $showSettlements = boolval($this->getPreference('ALLOW_SETTLEMENTS', '1'));
+    $showOrganizational = boolval($this->getPreference('ALLOW_ORGANIZATIONAL', '1'));
     $useMedianDate = boolval($this->getPreference('USE_MEDIAN_DATE', '0'));
-    
-    $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
     
     if ($useMedianDate) {
       $julianDay1 = $place->getEventDateInterval()->getMedian();
@@ -691,10 +757,10 @@ class Gov4WebtreesModule extends AbstractModule implements
     
     $julianDay2 = null;
     $julianDayText2 = I18N::translate('today');
-    $dateTime = new DateTime();
-    $dateTime->format('Y-m-d');
     if (($julianDay1 === null) || ($showCurrentDateGov !== 0)) {
-      $julianDay2 = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));          
+      $dateTime = new DateTime();
+      $dateTime->format('Y-m-d');
+      $julianDay2 = FunctionsGov::todayAsJulianDay();
     }
     
     $julianDayTextCombined = $julianDayText1 . "–" . $julianDayText2;
@@ -708,12 +774,11 @@ class Gov4WebtreesModule extends AbstractModule implements
           $julianDay1, 
           $julianDay2, 
           $withInternalLinks, 
-          $allowSettlements, 
-          $allowOrganizational, 
+          $showSettlements, 
+          $showOrganizational, 
           $locale,
           $govReference,
-          $tree,
-          $fallbackPreferDeu);
+          $tree);
           
     return $gve;
   }
@@ -732,12 +797,48 @@ class Gov4WebtreesModule extends AbstractModule implements
             '</a>';
   }
   
-  public function getLanguagesAndLanguagesForTypes(
-          LocaleInterface $locale): array {
-    
+  //empty key = global
+  public function getResolvedLanguages(
+          LocaleInterface $locale,
+          string $govId = '',
+          bool $returnNullInCaseOfNoOverrides = false): ?array {
+   
     $overridesFilename = $this->resourcesFolder() . 'gov/languages.csv';
 
-    $languages = FunctionsGov::getGovObjectLanguageOverrides(
+    $languageOverrides = FunctionsGov::getGovObjectLanguageOverrides(
+              $overridesFilename,
+              $govId);
+        
+    $languages = [];
+    
+    //$lang is always first!
+    $lang = FunctionsGov::toLang($locale->languageTag());
+    $languages []= $lang;
+    
+    if (sizeof($languageOverrides) === 0) {
+      if ($returnNullInCaseOfNoOverrides) {
+        return null;
+      }
+    } else {
+      $languages = array_merge($languages, $languageOverrides);
+    }
+    
+    $fallbackPreferDeu = boolval($this->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
+    
+    if ($fallbackPreferDeu) {
+      $languages []= 'deu';
+    }
+        
+    return $languages;
+  }
+  
+  
+  public function getResolvedLanguagesForTypes(
+          LocaleInterface $locale): array {
+   
+    $overridesFilename = $this->resourcesFolder() . 'gov/languages.csv';
+
+    $languageOverrides = FunctionsGov::getGovObjectLanguageOverrides(
               $overridesFilename,
               ''); //empty key = global
         
@@ -747,30 +848,26 @@ class Gov4WebtreesModule extends AbstractModule implements
     $lang = FunctionsGov::toLang($locale->languageTag());
     $languagesForTypes []= $lang;
     
-    if (sizeof($languages) === 0) {
+    if (sizeof($languageOverrides) === 0) {
       //cf fallback is old FunctionsGov::retrieveTypeDescription method
       $languagesForTypes []= 'eng';
       $languagesForTypes []= 'deu';
     } else {
-      $languagesForTypes = array_merge($languagesForTypes, $languages);
+      $languagesForTypes = array_merge($languagesForTypes, $languageOverrides);
     }
     
-    return [
-        $overridesFilename,
-        $languages, 
-        $languagesForTypes];
+    return $languagesForTypes;
   }
   
   protected function getHierarchies(
           bool $compactDisplay, 
           int $withInternalLinks, 
-          bool $allowSettlements, 
-          bool $allowOrganizational, 
+          bool $showSettlements, 
+          bool $showOrganizational, 
           LocaleInterface $locale,
           string $julianDay, 
           GovReference $govReference,
-          Tree $tree,
-          bool $fallbackPreferDeu): array {
+          Tree $tree): array {
     
     $id = $govReference->getId();
  
@@ -783,9 +880,9 @@ class Gov4WebtreesModule extends AbstractModule implements
     $nextId = $id;    
     while ($nextId !== null) {
       $data = $this->getDataAndNextId(
-              $allowSettlements, 
-              $allowOrganizational, 
-              $locale, 
+              $showSettlements, 
+              $showOrganizational, 
+              //$locale, 
               $julianDay, 
               $nextId, 
               $version);
@@ -805,69 +902,93 @@ class Gov4WebtreesModule extends AbstractModule implements
         $datas []= $data;
       }
     }
+
+    ///////////////////////////////////////////////////////////////////////////
     
+    //restructure and determine whether there are local modifications
+    $datas1 = [];
+    
+    //initially false
+    $hasLocalModifications = false;
+    
+    $thisId = new GovIdPlus($id, $hasLocalModifications, false);
+    $showThisId = true;
+       
+    foreach ($datas as $data) {
+            
+      //sanity check
+      if ($thisId->getId() !== $data['id']) {
+        throw new \Exception();
+      }
+      
+      if ($data['type'] !== null) {
+        $hasLocalModifications = $hasLocalModifications || $data['type']->getSticky();
+      }
+      
+      if ($showThisId) {
+        $datas1 []= [
+              'type' => $data['type'], 
+              'labels' => $data['labels'], 
+              'thisId' => $thisId,
+              'govReference' => $govReference];        
+      }
+      
+      $thisId = $data['nextId'];
+      $showThisId = $data['showNextId'];
+      if ($thisId->getId() !== null) {
+        $govReference = new GovReference($thisId->getId(), new Trace(''));
+      } else {
+        $govReference = null; //irrelevant, actually
+      }
+      
+      $hasLocalModifications = $hasLocalModifications || 
+        //may be set even if getId is null (final in hierarchy)!
+        ($thisId->getHasLocalModifications());
+    }
+   
     ///////////////////////////////////////////////////////////////////////////
 
     //enhance with languages and resolve labels in reverse order
     $datas2 = [];
-        
-    [$overridesFilename, $languagesFallback, $languagesForTypes] = 
-            $this->getLanguagesAndLanguagesForTypes($locale);
     
-    $languages = [];
-        
-    //$lang is always first!
-    $lang = FunctionsGov::toLang($locale->languageTag());
-    $languages []= $lang;
-    $languages = array_merge($languages, $languagesFallback);
-    if ($fallbackPreferDeu) {
-      $languages []= 'deu';
-    }
+    $languages = $this->getResolvedLanguages($locale);
+    $languagesForTypes = $this->getResolvedLanguagesForTypes($locale);
     
-    foreach (array_reverse($datas) as $data) {      
-      $overrides = FunctionsGov::getGovObjectLanguageOverrides(
-              $overridesFilename,
-              $data['id']);
+    
+    foreach (array_reverse($datas1) as $data) {
       
-      if (sizeof($overrides) > 0) {
-        $languages = [];
-        
-        //$lang is always first!
-        $lang = FunctionsGov::toLang($locale->languageTag());
-        $languages []= $lang;
-        $languages = array_merge($languages, $overrides);
-        if ($fallbackPreferDeu) {
-          $languages []= 'deu';
-        }
+      //$returnNullInCaseOfNoOverrides: preserve any higher level overrides 
+      //(without this param would revert to defaults)
+      $languagesAdjusted = $this->getResolvedLanguages($locale, $data['thisId']->getId(), true);
+      if ($languagesAdjusted !== null) {
+        $languages = $languagesAdjusted;
       }
-      
-      $resolvedLabels = FunctionsGov::resolveLabels($data['labels'], $languages);
-      $label = array_shift($resolvedLabels);
-      $additional = implode('/', $resolvedLabels);
-      if ($additional !== '') {
-        $label .= ' ('. $additional . ')';
+
+      $label = FunctionsGov::getResolvedLabel($data['labels'], $languages);      
+      $hasLocalModifications = $hasLocalModifications || $label->getSticky();
+
+      $resolvedType = null;
+      if ($data['type'] !== null) {
+        $resolvedType = FunctionsGov::resolveTypeDescription($this, $data['type']->getProp(), $languagesForTypes);
       }
-      
-      $resolvedType = FunctionsGov::resolveTypeDescription($this, $data['type'], $languagesForTypes);
-      
+
       $datas2 []= [
           'type' => $resolvedType, 
-          'label' => $label, 
-          'nextId' => $data['nextId']];
+          'label' => $label->getProp(), 
+          'thisId' => $data['thisId'],
+          'govReference' => $data['govReference']];
     }
     
     ///////////////////////////////////////////////////////////////////////////
     
     $hierarchy = '';
     $hierarchy2 = '';
-        
-    $hasLocalModifications = false;
-    $nextId = $id; //reset
+    
     foreach (array_reverse($datas2) as $data) {
       if ($hierarchy !== '') {
         $hierarchy .= ', ';
       }
-      
+              
       $nullType = I18N::translate('this place does not exist at this point in time');
       $typeAndLabel = $data['type'] . ' ' . $data['label'];
       if ($data['type'] === null) {
@@ -880,7 +1001,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           
       switch ($withInternalLinks) {
         case 0: //classic
-          $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $typeAndLabel . '">';
+          $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $data['thisId']->getId() . '" target="_blank" title="' . $typeAndLabel . '">';
           $hierarchy .= $displayedLabel;
           $hierarchy .= '</a>';
           break;
@@ -890,7 +1011,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
           //Issue #13: is this a known webtrees place?
           //(note: there may be more than one - we restrict to first found)
-          $ps = FunctionsPlaceUtils::gov2plac($this, $govReference, $tree);
+          $ps = FunctionsPlaceUtils::gov2plac($this, $data['govReference'], $tree);
           if ($ps !== null) {
 
             //link to location? note: for now not indirectly = only if location defines the GOV!
@@ -909,13 +1030,13 @@ class Gov4WebtreesModule extends AbstractModule implements
                 $pre = $this->plac2LinkIcon($ps);
               }
               $hierarchy .= $pre;
-              $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="' . $typeAndLabel . '">';
+              $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $data['thisId']->getId() . '" target="_blank" title="' . $typeAndLabel . '">';
               $hierarchy .= $displayedLabel;
               $hierarchy .= '</a>';
               break;
             case 2: //names and main links to place, plus gov icons
               if ($ps !== null) {
-                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
+                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $data['thisId']->getId() . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
                 $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
                 $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
                 $hierarchy .= '</a>';
@@ -923,7 +1044,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                 $hierarchy .= '<a dir="auto" href="' . e($ps->getPlace()->url()) . '">' . $ps->getPlace()->placeName() . '</a>';
 
               } else {
-                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $nextId . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
+                $hierarchy .= '<a href="http://gov.genealogy.net/item/show/' . $data['thisId']->getId() . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
                 $hierarchy .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
                 $hierarchy .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
                 $hierarchy .= '</a>';
@@ -949,15 +1070,6 @@ class Gov4WebtreesModule extends AbstractModule implements
           $hierarchy2 .= $data['type'];
         }        
       }
-
-      $nextId = $data['nextId']->getId();
-      if ($nextId !== null) {
-        $govReference = new GovReference($nextId, new Trace(''));
-      }
-      
-      $hasLocalModifications = $hasLocalModifications || 
-              //may be set even if getId is null!
-              ($data['nextId']->getHasLocalModifications());
     }
     
     return [$id, $hierarchy, $hierarchy2, $hasLocalModifications];
@@ -991,7 +1103,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     $span .= ' GOV</a>';
     if ($hasLocalModifications) {
       //TODO shorter? replace by help icon?
-      $span .= I18N::translate(' (with local modifications)');
+      $span .= ' (' . I18N::translate('with local modifications') . ')';
     }
     $span .= ' (';
     $span .= $julianDayText;
@@ -1026,26 +1138,24 @@ class Gov4WebtreesModule extends AbstractModule implements
   protected function getHierarchy(
           bool $compactDisplay, 
           int $withInternalLinks, 
-          bool $allowSettlements, 
-          bool $allowOrganizational, 
+          bool $showSettlements, 
+          bool $showOrganizational, 
           LocaleInterface $locale,
           string $julianDay, 
           string $julianDayText, 
           GovReference $govReference,
           Tree $tree,
-          ?string $tooltip, 
-          bool $fallbackPreferDeu): GenericViewElement {
+          ?string $tooltip): GenericViewElement {
  
     $hierarchies = $this->getHierarchies(
           $compactDisplay, 
           $withInternalLinks, 
-          $allowSettlements, 
-          $allowOrganizational, 
+          $showSettlements, 
+          $showOrganizational, 
           $locale,
           $julianDay, 
           $govReference,
-          $tree,
-          $fallbackPreferDeu);
+          $tree);
         
     return $this->getHierarchyGVE(            
             $compactDisplay, 
@@ -1063,37 +1173,34 @@ class Gov4WebtreesModule extends AbstractModule implements
           ?string $julianDay1, 
           ?string $julianDay2, 
           int $withInternalLinks, 
-          bool $allowSettlements, 
-          bool $allowOrganizational, 
+          bool $showSettlements, 
+          bool $showOrganizational, 
           LocaleInterface $locale,
           GovReference $govReference,
-          Tree $tree,
-          bool $fallbackPreferDeu): GenericViewElement {
+          Tree $tree): GenericViewElement {
     
     if ($julianDay1 !== null) {
       $hierarchies1 = $this->getHierarchies(
           $compactDisplay, 
           $withInternalLinks, 
-          $allowSettlements, 
-          $allowOrganizational, 
+          $showSettlements, 
+          $showOrganizational, 
           $locale,
           $julianDay1, 
           $govReference,
-          $tree,
-          $fallbackPreferDeu);
+          $tree);
     }
     
     if ($julianDay2 !== null) {
       $hierarchies2 = $this->getHierarchies(
           $compactDisplay, 
           $withInternalLinks, 
-          $allowSettlements, 
-          $allowOrganizational, 
+          $showSettlements, 
+          $showOrganizational, 
           $locale,
           $julianDay2, 
           $govReference,
-          $tree,
-          $fallbackPreferDeu);
+          $tree);
     }
     
     if (($julianDay1 !== null) && ($julianDay2 !== null) && ($hierarchies1 === $hierarchies2)) {
@@ -1128,22 +1235,21 @@ class Gov4WebtreesModule extends AbstractModule implements
   }
   
   protected function getDataAndNextId(
-          bool $allowSettlements, 
-          bool $allowOrganizational, 
-          LocaleInterface $locale,
+          bool $showSettlements, 
+          bool $showOrganizational, 
+          //LocaleInterface $locale,
           string $julianDay, 
           string $id, 
           int $version): array {
     
-    $lang = $locale->languageTag();
+    //$lang = $locale->languageTag();
     
     try {
       $gov = FunctionsGov::retrieveGovObjectSnapshot(
               $this, 
               $julianDay, 
               $id, 
-              $version, 
-              $lang);
+              $version);
       
       if ($gov == null) {
         //invalid id!
@@ -1160,27 +1266,33 @@ class Gov4WebtreesModule extends AbstractModule implements
               $id, 
               $gov, 
               $julianDay, 
-              FunctionsGov::$TYPES_ADMINISTRATIVE, 
+              FunctionsGov::admTypes(), 
               $version);
 
-      if ($allowSettlements && ($nextId->getId() === null)) {
+      $show = true;
+      
+      if (/*$allowSettlements &&*/ ($nextId->getId() === null)) {
         $nextId = FunctionsGov::findGovParentOfType(
                 $this, 
                 $id, 
                 $gov, 
                 $julianDay, 
-                FunctionsGov::$TYPES_SETTLEMENT, 
+                FunctionsGov::settlementTypes(), 
                 $version);
+        
+        $show = $showSettlements;
       }
       
-      if ($allowOrganizational && ($nextId->getId() === null)) {
+      if (/*$allowOrganizational &&*/ ($nextId->getId() === null)) {
         $nextId = FunctionsGov::findGovParentOfType(
               $this, 
               $id, 
               $gov, 
               $julianDay, 
-              FunctionsGov::$TYPES_ORGANIZATIONAL, 
+              FunctionsGov::orgTypes(), 
               $version);
+        
+        $show = $showOrganizational;
       }
 
       return [
@@ -1188,6 +1300,7 @@ class Gov4WebtreesModule extends AbstractModule implements
           'labels' => $labels, 
           'id' => $id,
           'nextId' => $nextId, 
+          'showNextId' => $show, 
           'version' => $gov->getVersion()];
       
     } catch (GOVServerUnavailableException $ex) {

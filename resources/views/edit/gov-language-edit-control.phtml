@@ -1,0 +1,23 @@
+<?php
+
+$value = $govLanguage;
+        
+//cf FunctionsEdit:
+//-- Build the selector for the Media 'TYPE' Fact
+
+  $html          = '<select name="text[]">';
+  $selectedValue = $value;
+  if (!array_key_exists($selectedValue, $govLanguages) && ($selectedValue !== null)) {
+      $html .= '<option selected value="' . e($value) . '" >' . e($value) . '</option>';
+  }
+  foreach (['' => ''] + $govLanguages as $langName => $langValue) {
+      $html .= '<option value="' . $langName . '" ';
+      if ($selectedValue === "".$langName) {
+          $html .= 'selected';
+      }
+      $html .= '>' . $langValue . '</option>';
+  }
+  $html .= '</select>';
+
+  echo $html;
+?>

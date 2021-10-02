@@ -1,0 +1,120 @@
+<?php
+
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataSave;
+use Cissee\WebtreesExt\MoreI18N;
+use Fisharebest\Webtrees\Date\GregorianDate;
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\View;
+
+/**
+ * @var string               $title
+ * @var array<string,string> $breadcrumbs
+ * etc
+ */
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => $breadcrumbs]) ?>
+
+<h1><?= $titlePlus ?></h1>
+
+<form method="post" action="<?= e(route(GovDataSave::class)) ?>">
+    <?= csrf_field() ?>
+    <input type="hidden" name="type" value="<?= e($type) ?>">
+    <input type="hidden" name="key" value="<?= e($prop->getKey()) ?>">
+    <input type="hidden" name="govId" value="<?= e($prop->getGovId()) ?>">
+    <input type="hidden" name="sticky" value="<?= e($prop->getSticky()) ?>">
+
+    <div class="form-group row">
+        <label class="col-form-label col-sm-1" for="prop">
+            <?= $typeLabel ?>
+        </label>
+        <div class="col-sm-6">
+            <?php
+              if ($type === 'label') {
+                ?>
+                <div class="input-group">
+                    <input type="text" dir="ltr" id="prop" class="editable form-control" name="prop" value="<?= $prop->getProp() ?>">
+                </div>            
+                <?php
+              } else if ($type === 'type') {
+                $gve = $module->govTypeIdEditControl($prop->getProp(), 'prop', 'prop');
+                echo $gve->getMain();
+                //assuming there is no script
+              } else if ($type === 'parent') {
+                $gve = $module->govIdEditControl($prop->getProp(), 'prop', 'prop', $placename, null, false, false);
+                echo $gve->getMain();
+                View::push('javascript');
+                echo $gve->getScript();
+                View::endpush();
+              }
+            ?>
+        </div>
+    </div>
+
+    <?php if ($type === 'label'): ?>
+      <div class="form-group row">
+          <label class="col-form-label col-sm-1" for="lang">
+              <?= MoreI18N::xlate('Language') ?>
+          </label>
+          <div class="col-sm-6">
+              <?php
+                $gve = $module->govLanguageEditControl($prop->getLanguage(), 'lang', 'lang');
+                echo $gve->getMain();
+                //assuming there is no script
+              ?>
+          </div>
+      </div>
+    <?php endif ?>
+    
+    <?php
+      $fromValue = '';
+    
+      $from = $prop->getFrom();
+      if ($from !== null) {
+        $fromValue = (new GregorianDate($from))->format('%Y-%m-%d');
+      }
+
+      $toValue = '';
+
+      $to = $prop->getTo();
+      if ($to !== null) {
+        $toValue = (new GregorianDate($to))->format('%Y-%m-%d');
+      }
+    ?>
+    
+    <div class="form-group row">
+        <label class="col-form-label col-sm-1" for="from">
+            <?= I18N::translate('From') ?>
+        </label>
+        <div class="col-sm-6">
+            <div class="input-group">
+                <input type="date" dir="ltr" id="from" class="editable form-control" name="from" value="<?= $fromValue ?>">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-form-label col-sm-1" for="to">
+            <?= I18N::translate('To') ?>
+        </label>
+        <div class="col-sm-6">
+            <div class="input-group">
+                <input type="date" dir="ltr" id="to" class="editable form-control" name="to" value="<?= $toValue ?>">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-1">
+            <button class="btn btn-primary" type="submit">
+                <?= MoreI18N::xlate('save') ?>
+            </button>
+            <a class="btn btn-secondary" href="<?= e(route(GovData::class, ['gov_id' => $prop->getGovId()])) ?>">
+                <?= MoreI18N::xlate('cancel') ?>
+            </a>
+        </div>
+    </div>
+</form>
+

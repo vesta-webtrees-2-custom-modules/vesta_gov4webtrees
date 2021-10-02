@@ -2,6 +2,7 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataList;
 use Fisharebest\Webtrees\I18N;
 use Vesta\CommonI18N;
 use Vesta\ControlPanelUtils\Model\ControlPanelCheckbox;
@@ -11,6 +12,8 @@ use Vesta\ControlPanelUtils\Model\ControlPanelRadioButton;
 use Vesta\ControlPanelUtils\Model\ControlPanelRadioButtons;
 use Vesta\ControlPanelUtils\Model\ControlPanelSection;
 use Vesta\ControlPanelUtils\Model\ControlPanelSubsection;
+use function e;
+use function route;
 
 trait Gov4WebtreesModuleTrait {
 
@@ -26,6 +29,8 @@ trait Gov4WebtreesModuleTrait {
   protected function getFullDescription() {
     $link1 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_gov4webtrees">'.CommonI18N::readme().'</a>';
     $link2 = '<a href="https://github.com/vesta-webtrees-2-custom-modules/vesta_common/blob/master/docs/LocationData.md">'.CommonI18N::readmeLocationData().'</a>';
+    
+    $link3 = '<a href="' . e(route(GovDataList::class)) . '">'./* I18N: Module Configuration; a link target */I18N::translate('here').'</a>';
 
     $description = array();
     $description[] = /* I18N: Module Configuration */I18N::translate('A module integrating GOV (historic gazetteer) data. Enhances places with GOV data via the extended \'Facts and events\' tab.') . ' ' .
@@ -39,10 +44,21 @@ trait Gov4WebtreesModuleTrait {
     $description[] = 
             CommonI18N::providesLocationData();
     $description[] = $link1 . '. ' . $link2 . '.';
+    
+    $description[] = 
+            /* I18N: Module Configuration */I18N::translate('You may modify all data retrieved from the GOV server %1$s.', $link3) . ' ' .
+            /* I18N: Module Configuration */I18N::translate('Obvious mistakes should be corrected on the GOV server itself, but there may be cases where this is not easily possible.') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire).') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences).') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group.');
+            
     return $description;
   }
 
   protected function createPrefs() {
+
+    $linkTypes = '<a href="http://gov.genealogy.net/type/list">'./* I18N: Module Configuration; a link target */I18N::translate('here').'</a>';
+    
     $generalSub = array();
     /*
     $generalSub[] = new ControlPanelSubsection(
@@ -60,7 +76,8 @@ trait Gov4WebtreesModuleTrait {
                 /* I18N: Module Configuration */I18N::translate('reset all cached data once'),
                 /* I18N: Module Configuration */I18N::translate('Subsequently, all data is retrieved again from the GOV server. ') .
                 /* I18N: Module Configuration */I18N::translate('Usually only required in case of substantial changes of the GOV data. ') .
-                /* I18N: Module Configuration */I18N::translate('Mappings of places to GOV ids are not affected.'),
+                /* I18N: Module Configuration */I18N::translate('Mappings of places to GOV ids are not affected.') . ' ' .
+                    /* I18N: Module Configuration */I18N::translate('Local modifications are preserved.'),
                 'RESET',
                 '0'))); //not a persistent setting, see overridden setSetting/setPreference!
     
@@ -115,6 +132,38 @@ trait Gov4WebtreesModuleTrait {
                 '0')));
                 
     $factsAndEventsSub[] = new ControlPanelSubsection(
+            /* I18N: Module Configuration */I18N::translate('Place hierarchy'),
+            array(            
+                
+        new ControlPanelCheckbox(
+                /* I18N: Module Configuration */I18N::translate('Show objects of type group \'%1$s\' in hierarchy', I18N::translate('Organizational')),
+                /* I18N: Module Configuration */I18N::translate('Objects of this type strictly do not belong to the administrative hierarchy in the sense that they are no territorial entities (Gebietskörperschaften).') . ' ' .
+                /* I18N: Module Configuration *//*I18N::translate('They often overlap with other objects, which would lead to confusing hierarchies in cases where objects have more than one parent object at a specific time.') . ' ' .*/
+                /* I18N: Module Configuration */I18N::translate('Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities.') . ' ' .
+                /* I18N: Module Configuration */I18N::translate('In any case, they are still used as fallbacks to determine further higher-level objects.'),
+                'ALLOW_ORGANIZATIONAL',
+                '0'),
+                
+        new ControlPanelCheckbox(
+                /* I18N: Module Configuration */I18N::translate('Show objects of type group \'%1$s\' in hierarchy', I18N::translate('Settlement')),
+                /* I18N: Module Configuration */I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') . ' ' .
+                /* I18N: Module Configuration */I18N::translate('This policy hasn\'t been strictly followed though. Check this option if you still want to display settlements in hierarchies.') . ' ' .
+                /* I18N: Module Configuration */I18N::translate('In any case, they are still used as fallbacks to determine further higher-level objects.') . ' ' .
+                /* I18N: Module Configuration */I18N::translate('Note: Ultimately it\'s probably preferable to correct the respective GOV data itself.'),
+                'ALLOW_SETTLEMENTS',
+                '0')),        
+        
+            
+            null,
+            /* I18N: Module Configuration */I18N::translate('GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group \'%1$s\'.', I18N::translate('Administrative')) . ' ' .
+            /* I18N: Module Configuration *//*I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .*/
+            /* I18N: Module Configuration */I18N::translate('Several object types that are part of this type group in the original model can be seen as problematic in this context, and have been moved to a custom \'%1$s\' type group.', I18N::translate('Organizational')) . ' ' .
+            /* I18N: Module Configuration */I18N::translate('For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally.') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('See also %1$s for the original list of types and type descriptions.', $linkTypes),
+                                        
+    );
+
+    $factsAndEventsSub[] = new ControlPanelSubsection(
             CommonI18N::displayedData(),
             array(
         
@@ -124,24 +173,13 @@ trait Gov4WebtreesModuleTrait {
                 null,
                 'COMPACT_DISPLAY',
                 '1'),
-        new ControlPanelCheckbox(
-                /* I18N: Module Configuration */I18N::translate('Allow objects of type \'settlement\' in hierarchy'),
-                /* I18N: Module Configuration */I18N::translate('According to the current GOV specification, settlements are not supposed to be parents of other settlements.') . ' ' .
-                /* I18N: Module Configuration */I18N::translate('This policy hasn\'t been strictly followed though. Check this option if you end up with incomplete hierarchies otherwise.') .
-                /* I18N: Module Configuration */I18N::translate('Note: Ultimately it\'s probably preferable to correct the respective GOV data itself.'),
-                'ALLOW_SETTLEMENTS',
-                '1'),
-        new ControlPanelCheckbox(
-                /* I18N: Module Configuration */I18N::translate('Allow objects of type \'confederation\' in hierarchy'),
-                /* I18N: Module Configuration */I18N::translate('Objects of this type arguably do not strictly belong to the administrative hierarchy.') . ' ' .
-                /* I18N: Module Configuration */I18N::translate('Uncheck this option if you do not want objects such as the European Union or the Holy Roman Empire to appear in hierarchies as parents of sovereign entities.'),
-                'ALLOW_ORGANIZATIONAL',
-                '1'),
+                
         new ControlPanelCheckbox(
                 /* I18N: Module Configuration */I18N::translate('For events with a date range, use the median date'),
                 /* I18N: Module Configuration */I18N::translate('Otherwise, the start date is used (this is more consistent with other date-based calculations in webtrees).'),
                 'USE_MEDIAN_DATE',
-                '0')));
+                '0')
+    ));   
 
     $factsAndEventsSub[] = new ControlPanelSubsection(
             /* I18N: Module Configuration */I18N::translate('Place text and links'),
@@ -178,7 +216,7 @@ trait Gov4WebtreesModuleTrait {
                 '1')),
             null, 
             /* I18N: Module Configuration */I18N::translate('The GOV server provides place names in different languages. However, there is no concept of an \'official language\' for a place.') . ' ' .
-            /* I18N: Module Configuration */I18N::translate('For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:') . ' ' .
+            /* I18N: Module Configuration */I18N::translate('For a given place, this module displays one or more names by matching the available names against a list of languages, according to the following strategy:') . ' ' .
             /* I18N: Module Configuration */I18N::translate('The current user language always has the highest priority.') . ' ' .
             /* I18N: Module Configuration */I18N::translate('Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file \'%1$s\'.', 'resources/gov/languages.csv') . ' ' .
             /* I18N: Module Configuration */I18N::translate('These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. \'official languages\' for a place hierarchy).') . ' ' .

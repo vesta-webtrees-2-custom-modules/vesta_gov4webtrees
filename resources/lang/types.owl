@@ -14,6 +14,7 @@
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_8">
     <rdfs:label xml:lang="en">populated place</rdfs:label>
     <rdfs:label xml:lang="de">Wohnplatz</rdfs:label>
+    <rdfs:label xml:lang="nl">woonplaats</rdfs:label>
   </owl:Class>
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_6">
     <rdfs:label xml:lang="en">judicial</rdfs:label>
@@ -67,8 +68,10 @@
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_10">
     <rdfs:comment xml:lang="en">places that are no settlements</rdfs:comment>
     <rdfs:comment xml:lang="de">Plätze, die keine Wohnplätze sind</rdfs:comment>
+    <rdfs:comment xml:lang="nl">Overige plaatsen, geen woonplaatsen</rdfs:comment>
     <rdfs:label xml:lang="en">place</rdfs:label>
     <rdfs:label xml:lang="de">Platz</rdfs:label>
+    <rdfs:label xml:lang="nl">plaats</rdfs:label>
   </owl:Class>
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_32">
     <rdfs:comment xml:lang="de">Strukturen unterhalb von Gemeinden </rdfs:comment>
@@ -78,10 +81,15 @@
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_3">
     <rdfs:label xml:lang="en">ecclesiastical (church)</rdfs:label>
     <rdfs:label xml:lang="de">Kirche</rdfs:label>
+    <rdfs:label xml:lang="nl">Kerk</rdfs:label>
   </owl:Class>
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_31">
+    <rdfs:comment xml:lang="en">municipality</rdfs:comment>
     <rdfs:comment xml:lang="de">Gemeinde</rdfs:comment>
+    <rdfs:comment xml:lang="nl">gemeente</rdfs:comment>
+    <rdfs:label xml:lang="en">adm5</rdfs:label>
     <rdfs:label xml:lang="de">adm5</rdfs:label>
+    <rdfs:label xml:lang="nl">adm5</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://gov.genealogy.net/types.owl#group_1"/>
   </owl:Class>
   <owl:Class rdf:about="http://gov.genealogy.net/types.owl#group_2">
@@ -101,6 +109,7 @@
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#129">
     <rdfs:label xml:lang="en">settlement</rdfs:label>
     <rdfs:label xml:lang="de">Wohnplatz</rdfs:label>
+    <rdfs:label xml:lang="nl">woonplaats</rdfs:label>
     <rdfs:label xml:lang="ru">населённый пункт</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_8>
@@ -133,6 +142,7 @@
     <rdfs:label xml:lang="en">realm</rdfs:label>
     <rdfs:label xml:lang="pl">cesarstwo</rdfs:label>
     <rdfs:label xml:lang="de">Kaiserreich</rdfs:label>
+    <rdfs:label xml:lang="nl">keizerrijk</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_26"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
@@ -216,16 +226,17 @@
     <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_27"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
-  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#118">
-    <rdfs:label xml:lang="cs">nádraží</rdfs:label>
+  <j.1:group_9 rdf:about="http://gov.genealogy.net/types.owl#118">
+    <rdfs:label xml:lang="nl">treinstation</rdfs:label>
     <rdfs:label xml:lang="en">train station</rdfs:label>
+    <rdfs:label xml:lang="cs">nádraží</rdfs:label>
     <rdfs:label xml:lang="pl">dworzec kolejowy</rdfs:label>
-    <rdfs:label xml:lang="fr">Gare</rdfs:label>
-    <rdfs:label xml:lang="de">Bahnhof</rdfs:label>
-    <rdfs:label xml:lang="ru">железнодорожный вокзал</rdfs:label>
-    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_9"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
-  </j.1:group_8>
+    <rdfs:label xml:lang="ru">железнодорожный вокзал</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_8"/>
+    <rdfs:label xml:lang="de">Bahnhof</rdfs:label>
+    <rdfs:label xml:lang="fr">Gare</rdfs:label>
+  </j.1:group_9>
   <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#239">
     <rdfs:label xml:lang="de">Verwaltungsamt</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
@@ -375,6 +386,7 @@
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#236">
     <rdfs:label xml:lang="en">houses</rdfs:label>
     <rdfs:label xml:lang="de">Häuser</rdfs:label>
+    <rdfs:label xml:lang="nl">huizen</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_8>
   <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#200">
@@ -403,10 +415,11 @@
   </j.1:group_1>
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#55">
     <owl:sameAs rdf:resource="http://d-nb.info/gnd/4012775-8"/>
-    <rdfs:label xml:lang="cs">vesnice</rdfs:label>
     <rdfs:label xml:lang="en">village</rdfs:label>
+    <rdfs:label xml:lang="cs">vesnice</rdfs:label>
     <rdfs:label xml:lang="pl">wieś</rdfs:label>
     <rdfs:label xml:lang="de">Dorf</rdfs:label>
+    <rdfs:label xml:lang="nl">dorp</rdfs:label>
     <rdfs:label xml:lang="ru">деревня, село</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_8>
@@ -562,9 +575,10 @@
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
   <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#137">
-    <rdfs:label xml:lang="en">region</rdfs:label>
+    <rdfs:label xml:lang="en">region (administrative unit)</rdfs:label>
     <rdfs:label xml:lang="cs">kraj</rdfs:label>
     <rdfs:label xml:lang="de">Region (Gebietskörperschaft)</rdfs:label>
+    <rdfs:label xml:lang="nl">regio</rdfs:label>
     <rdfs:label xml:lang="ru">край</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
@@ -607,7 +621,9 @@
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_3>
   <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#210">
+    <rdfs:label xml:lang="en">church federation</rdfs:label>
     <rdfs:label xml:lang="de">Kirchenbund</rdfs:label>
+    <rdfs:label xml:lang="nl">kerkgenootschap</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_3>
   <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#2">
@@ -1535,13 +1551,13 @@
     <rdfs:label xml:lang="ru">замок</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_8>
-  <j.1:group_10 rdf:about="http://gov.genealogy.net/types.owl#90">
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#90">
     <rdfs:label xml:lang="cs">zaniklé sídlo</rdfs:label>
     <rdfs:label xml:lang="en">abandoned place</rdfs:label>
     <rdfs:label xml:lang="pl">pustkowie</rdfs:label>
     <rdfs:label xml:lang="de">Wüstung</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
-  </j.1:group_10>
+  </j.1:group_8>
   <gov:Type rdf:about="http://gov.genealogy.net/types.owl#107">
     <rdfs:label xml:lang="da">Ø</rdfs:label>
     <rdfs:label xml:lang="de">Insel</rdfs:label>
@@ -1648,10 +1664,11 @@
   </j.1:group_1>
   <j.1:group_3 rdf:about="http://gov.genealogy.net/types.owl#9">
     <owl:sameAs rdf:resource="http://d-nb.info/gnd/4149024-1"/>
-    <rdfs:label xml:lang="en">deanery</rdfs:label>
     <rdfs:label xml:lang="cs">děkanát</rdfs:label>
+    <rdfs:label xml:lang="en">deanery</rdfs:label>
     <rdfs:label xml:lang="pl">Dekanat</rdfs:label>
     <rdfs:label xml:lang="de">Dekanat</rdfs:label>
+    <rdfs:label xml:lang="nl">dekanaat</rdfs:label>
     <rdfs:label xml:lang="ru">деканат</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_3>
@@ -1683,6 +1700,7 @@
     <owl:sameAs rdf:resource="http://d-nb.info/gnd/4142071-8"/>
     <rdfs:label xml:lang="fr">département</rdfs:label>
     <rdfs:label xml:lang="de">Departement</rdfs:label>
+    <rdfs:label xml:lang="nl">departement</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_28"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>

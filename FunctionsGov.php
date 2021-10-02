@@ -2,6 +2,7 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
 use DateInterval;
 use DateTime;
 use Exception;
@@ -19,6 +20,7 @@ use function cal_from_jd;
 use function cal_to_jd;
 use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
+use function route;
 use function str_starts_with;
 
 require_once __DIR__ . '/nusoap/lib/nusoap.php';
@@ -239,6 +241,7 @@ class GovIdPlus {
 
 class GovObject {
 
+  private $id;
   private $lat;
   private $lon;
   private $version;
@@ -270,7 +273,39 @@ class GovObject {
     return $this->parents;
   }
 
-  public function __construct($lat, $lon, $version, $types, $labels, $parents) {
+  public function hasStickyProp(): bool {
+    
+    foreach ($this->getLabels() as $prop) {
+      if ($prop->getSticky()) {
+        return true;
+      }
+    }
+    
+    foreach ($this->getTypes() as $prop) {
+      if ($prop->getSticky()) {
+        return true;
+      }
+    }
+    
+    foreach ($this->getParents() as $prop) {
+      if ($prop->getSticky()) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
+  public function __construct(
+          $id, 
+          $lat, 
+          $lon, 
+          $version, 
+          $types, 
+          $labels, 
+          $parents) {
+    
+    $this->id = $id;
     $this->lat = $lat;
     $this->lon = $lon;
     $this->version = $version;
@@ -279,6 +314,54 @@ class GovObject {
     $this->parents = $parents;
   }
 
+  public function getResolvedLabel(
+          array $languages): ResolvedProperty {
+    
+    $julianDay = FunctionsGov::todayAsJulianDay();
+    
+    //ok to use internal function here
+    $snapshot = FunctionsGov::getGovObjectSnapshot($julianDay, $this->id);
+    
+    //$snapshot->getType();
+            
+    return FunctionsGov::getResolvedLabel(
+            $snapshot->getLabels(), 
+            $languages,
+            $this->getLabels());
+  }
+  
+  public function formatForAdminView(
+          $module,
+          array $languages): string {
+    
+    $julianDay = FunctionsGov::todayAsJulianDay();
+    
+    //ok to use internal function here
+    $snapshot = FunctionsGov::getGovObjectSnapshot($julianDay, $this->id);
+            
+    $label = FunctionsGov::getResolvedLabel(
+            $snapshot->getLabels(), 
+            $languages,
+            $this->getLabels());
+    
+    $type = $snapshot->getType();
+    if (($type === null) && (sizeof($this->types) > 0)) {
+      $typeProp = end($this->types); //last element is the most recent one
+      $type = $typeProp;
+    }
+    
+    if ($type === null) {
+      $resolvedType = '?';
+    } else {
+      $resolvedType = FunctionsGov::resolveTypeDescription($module, $type->getProp(), $languages);
+    }    
+    
+    $url = route(GovData::class, ['gov_id' => $this->id]);
+    $html = '<a href="' . $url . '">' . $label->getProp() . ' (' . $resolvedType . ')' .'</a>';
+    
+    return $html;
+  }
+  
   public function toString() {
     $str = "";
     foreach ($this->getLabels() as $label) {
@@ -296,7 +379,6 @@ class GovObject {
 
     return $str;
   }
-
 }
 
 class GovObjectSnapshot {
@@ -320,11 +402,15 @@ class GovObjectSnapshot {
     return $this->version;
   }
 
+  /**
+   * 
+   * @return array<ResolvedProperty>
+   */
   public function getLabels():array {
     return $this->labels;
   }
 
-  public function getType(): ?int {
+  public function getType(): ?ResolvedProperty {
     return $this->type;
   }
 
@@ -336,7 +422,7 @@ class GovObjectSnapshot {
           $lat, 
           $lon, 
           int $version, 
-          ?int $type, 
+          ?ResolvedProperty $type, 
           array $labels, 
           $parents) {
     
@@ -351,60 +437,14 @@ class GovObjectSnapshot {
   public function toString() {
     $str = "";
     foreach ($this->getLabels() as $label) {
-      $str .= $label->toString() . ";";
+      $str .= $label->getProp()->toString() . ";";
     }
     if (($this->getLat() != null) && ($this->getLon() != null)) {
       $str .= " location: (" . $this->getLat() . "; " . $this->getLon() . ").";
     }
-    $str .= " (type " . $this->getType() . ")";
+    $str .= " (type " . $this->getType()->getProp() . ")";
     foreach ($this->getParents() as $parent) {
       $str .= " parent: " . $parent->toString() . ".";
-    }
-
-    return $str;
-  }
-
-}
-
-class GovProperty {
-
-  private $prop;
-  private $language;
-  private $from;
-  private $to;
-
-  public function getProp() {
-    return $this->prop;
-  }
-
-  public function getLanguage() {
-    return $this->language;
-  }
-
-  public function getFrom() {
-    return $this->from;
-  }
-
-  public function getTo() {
-    return $this->to;
-  }
-
-  public function __construct($prop, $language, $from, $to) {
-    $this->prop = $prop;
-    $this->language = $language;
-    $this->from = $from;
-    $this->to = $to;
-  }
-
-  public function toString() {
-    $str = " " . $this->getProp();
-    if ($this->getFrom() != null) {
-      $ymd = cal_from_jd($this->getFrom(), CAL_GREGORIAN);
-      $str .= " (from " . $ymd["year"] . "-" . $ymd["month"] . "-" . $ymd["day"] . ")";
-    }
-    if ($this->getTo() != null) {
-      $ymd = cal_from_jd($this->getTo(), CAL_GREGORIAN);
-      $str .= " (to " . $ymd["year"] . "-" . $ymd["month"] . "-" . $ymd["day"] . ")";
     }
 
     return $str;
@@ -419,62 +459,262 @@ class FunctionsGov {
   
   //http://gov.genealogy.net/types.owl#group_1
   //with subs:
-  //civil
+  //civil (apparently unused)
   //http://gov.genealogy.net/types.owl#group_2
   //adm0
   //http://gov.genealogy.net/types.owl#group_26
-  //adm1
+  //adm1 Bundesländer u.ä.
   //http://gov.genealogy.net/types.owl#group_27
-  //adm2
+  //adm2 Regierungsbezirke u.ä.
   //http://gov.genealogy.net/types.owl#group_28
-  //adm3
+  //adm3 Kreise (wie Deutschland heute), Amtshauptmannschaften, historische (kreisähnliche) Ämter u.ä.
   //http://gov.genealogy.net/types.owl#group_29
-  //adm4
+  //adm4 Ämter (Ebene zwischen Gemeinde und Kreis), Verwaltungsgemeinschaften, Verbandsgemeinden u.a.
   //http://gov.genealogy.net/types.owl#group_30
-  //adm5
+  //adm5 Gemeinde
   //http://gov.genealogy.net/types.owl#group_31
-  //adm6
+  //adm6 Strukturen unterhalb von Gemeinden
   //http://gov.genealogy.net/types.owl#group_32
-  //excluding
-  //71 'Staatenbund'
-  //77 'Reichskreis'
-  public static $TYPES_ADMINISTRATIVE = array(1, 2, 4, 5, 7, 10, 14, 16, 18, 20, 22, 23, 25, 31, 32, 33, 34, 36, 37, 38, 45, 46, 48, 50, 52, 53, 56, 57, 58, 59, 60, 61, 62, 63, 72, 73, 75, 76, 78, 80, 81, 82, 83, 84, 85, 86, 88, 93, 94, 95, 97, 99, 100, 101, 108, 109, 110, 112, 113, 115, 116, 117, 122, 125, 126, 127, 128, 130, 131, 133, 134, 135, 136, 137, 138, 140, 142, 143, 144, 145, 146, 148, 149, 150, 152, 156, 157, 160, 161, 162, 163, 164, 165, 167, 168, 169, 170, 171, 173, 174, 175, 176, 177, 178, 179, 180, 182, 183, 184, 185, 186, 188, 189, 190, 191, 192, 194, 201, 203, 204, 205, 207, 211, 212, 213, 214, 215, 216, 217, 218, 221, 222, 225, 226, 227, 234, 235, 237, 239, 240, 241, 246, 247, 248, 251, 252, 254, 255, 256, 257, 258, 259, 262, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277);
+  //excluding organizational, see below
   
-  //71 'Staatenbund'
-  //77 'Reichskreis'
-  public static $TYPES_ORGANIZATIONAL = array(71, 77);
+  protected static $TYPES_ADM0 = array(31, 50, 56, /*71,*/ 72, 214);
+  
+  protected static $TYPES_ADM1 = array(7, 16, 25, 33, 34, 58, 59, 130, 133, 142, 160, 168, 221, 256 );
+  
+  protected static $TYPES_ADM2 = array(5, 10, 45, 46, 100, 101, 138, 161, 201, 211, 217, 222, 225);
+  
+  protected static $TYPES_ADM3 = array(32, 36, 37, 53, 57, 63, 75, 78, 88, 99, 110, 126, 134, 146, 149, 171, 185, 186, 203, 204, 207, 212, 223, 241, 239, 270);
+      
+  protected static $TYPES_ADM4 = array(1, 2, /*48,*/ /*94,*/ 97, 122, /*127,*/ 152, 205, 226, 259, 264, 266);
+  
+  protected static $TYPES_ADM5 = array(4, 14, 18, 76, 83, 85, 95, 108, 109, 136, 140, 143, 145, /*148,*/ 150, 154, 162, 163, 165, 169, 180, 213, 218, 227, 246, 255, 257, 258, 267, 268, 269, 271, 272, 273, 274, 275);
+  
+  protected static $TYPES_ADM6 = array(52, 144, 156, 164, 181, 247, 262);
+  
+  protected static $TYPES_WITHOUT_ADM = array(20, 22, 23, 38, 60, 61, 62, 73, /*77,*/ 80, 81, 82, 84, 86, 93, 112, 113, /*115, 116, 117,*/ 125, 128, 131, 135, 137, 157, 167, 170, 173, 174, 175, 176, /*177, 178, 179,*/ 182, 183, /*184,*/ 188, 189, 190, 191, 192, 194, 215, 216, 234, 235, 237, 240, 248, 251, 252, 254, 265, 276, 277);
+  
+  //20 countship adm0 (adm1)
+  //22 dominion adm4?
+  //23 duchy adm0 (adm1)
+  //38 oblast adm1
+  //60 principality adm0
+  //61 grand duchy adm0
+  //62 margravate adm0 (adm1)
+  //71 confederation speziell über adm0
+  //73 Landdrostei adm2
+  //77 Reichskreis speziell über adm0/1
+  //80 Landschaft adm3
+  //81 monastery adm5
+  //82 Domkapitel adm2? or org
+  //84 Kirchspielvogtei adm4 or org
+  //86 part province adm1 liegt brach?
+  //93 Reichsstadt adm0 (adm1)
+  //112 Gespanschaft adm2?
+  //113 comitatus adm2? same as above
+  //115 forestry org!
+  //116 Oberförsterei org!
+  //117 Unterförsterei org!
+  //125 imperial abbey wie Reichsstadt adm0 (adm1)
+  //128 Landgrafschaft adm0 (adm1)
+  //131 Weichbild adm5
+  //135 canton adm4
+  //137 region (administrative unit) adm3
+  //157 Guberniya adm4 u.a.
+  //167 mandate territory adm0
+  //170 district adm4
+  //173 Reichskommissariat adm2 od. adm1
+  //174 general district adm2
+  //175 Kreisgebiet adm3 or adm4
+  //176 protectorate adm1
+  //177 Reichsritterschaft vgl. Reichskreis, org! 
+  //178 Ritterkanton org!
+  //179 Ritterkreis org!
+  //182 Erzstift adm0/1
+  //183 Hochstift adm0/1
+  //184 Kammerschreiberei org!
+  //188 Ritterorden adm0
+  //189 Großpriorat adm2 v Ritterorden
+  //190 Ballei adm3 v Ritterorden
+  //191 Kommende adm4 v Ritterorden
+  //192 zone of occupation adm0
+  //194 Distrikts-Amt ???
+  //215 Reichshälfte speziell über adm0/1
+  //216 Landesteil adm1
+  //234 borough adm4 (3?)
+  //235 unitary authority adm3/4?
+  //237 Siedlungsrat adm5
+  //240 uyezd adm2/3
+  //248 Schulzenamt adm6
+  //251 autonome Gemeinschaft kein text
+  //252 local government kein text
+  //254 Okrug adm3
+  //265 sultanate adm0
+  //276 ???
+  //277 colony (territory) adm0
+  
+  //extra 
+  //223 Landgericht (älterer Ordnung) - primarily in Judicial
+  //154 Honschaft - primarily in Judicial
+  //181 Rotte - primarily settlement
+  
+  //own adjustment
+  //
+  //48 adm4 Samtgemeinde
+  //71 no adm_ 'Staatenbund'
+  //77 no adm_ 'Reichskreis' unclear
+  //94 adm4 Verwaltungsgemeinschaft
+  //115 forestry
+  //116 Oberförsterei
+  //117 Unterförsterei
+  //127 adm4 Verwaltungsverband
+  //148 adm4 Erfüllende Gemeinde
+  //177 no adm_ Reichsritterschaft
+  //178 no adm_ Ritterkanton
+  //179 no adm_ Ritterkreis
+  //184 no adm_ Kammerschreiberei
+  //
+  //plus all from adm6
+  protected static $TYPES_ORGANIZATIONAL = array(48, 71, 77, 94, 115, 116, 117, 127, 148, 177, 178, 179, 184);
           
   //http://gov.genealogy.net/types.owl#group_3
-  public static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
+  protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
   
   //http://gov.genealogy.net/types.owl#group_8
-  public static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
+  protected static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
   
   //http://gov.genealogy.net/types.owl#group_6
-  public static $TYPES_JUDICIAL = array(3, 19, 70, 79, 105, 114, 151, 154, 202, 223, 224, 228);
+  protected static $TYPES_JUDICIAL = array(3, 19, 70, 79, 105, 114, 151, 154, 202, 223, 224, 228);
   
   //http://gov.genealogy.net/types.owl#group_4
-  public static $TYPES_GEOGRAPHIC = array(47, 107);
+  protected static $TYPES_GEOGRAPHIC = array(47, 107);
   
   //http://gov.genealogy.net/types.owl#group_10
-  public static $TYPES_PLACE = array(15, 89, 90, 166);
+  protected static $TYPES_PLACE = array(15, 89, 90, 166);
   
   //http://gov.genealogy.net/types.owl#group_9
-  public static $TYPES_TRANSPORTATION = array(118, 119);
+  protected static $TYPES_TRANSPORTATION = array(118, 119);
 
   //http://gov.genealogy.net/types.owl#group_13
   //other (deprecated)
   
+  //see also
+  //http://wiki-de.genealogy.net/GOV/Mini-GOV
+  //where only select adms are used
+  
+  public static function admTypes(): array {
+    return array_merge(
+            FunctionsGov::$TYPES_ADM0,
+            FunctionsGov::$TYPES_ADM1,
+            FunctionsGov::$TYPES_ADM2,
+            FunctionsGov::$TYPES_ADM3, 
+            FunctionsGov::$TYPES_ADM4,
+            FunctionsGov::$TYPES_ADM5,
+            FunctionsGov::$TYPES_WITHOUT_ADM);
+  }
+  
+  public static function orgTypes(): array {
+    return array_merge(
+            FunctionsGov::$TYPES_ADM6,
+            FunctionsGov::$TYPES_ORGANIZATIONAL);
+  }
+  
+  public static function settlementTypes(): array {
+    return FunctionsGov::$TYPES_SETTLEMENT;
+  }
+  
+  public static function religiousTypes(): array {
+    return FunctionsGov::$TYPES_RELIGIOUS;
+  }
+  
+  public static function judicialTypes(): array {
+    return FunctionsGov::$TYPES_JUDICIAL;
+  }
+  
+  public static function otherTypes(): array {
+    return array_merge(
+                FunctionsGov::$TYPES_GEOGRAPHIC,
+                FunctionsGov::$TYPES_PLACE,
+                FunctionsGov::$TYPES_TRANSPORTATION);
+  }
+  
   public static function allTypes(): array {
-    $ret = array_merge(FunctionsGov::$TYPES_RELIGIOUS, 
-            FunctionsGov::$TYPES_ADMINISTRATIVE,
-            FunctionsGov::$TYPES_SETTLEMENT,
-            FunctionsGov::$TYPES_JUDICIAL,
-            FunctionsGov::$TYPES_GEOGRAPHIC,
-            FunctionsGov::$TYPES_PLACE,
-            FunctionsGov::$TYPES_TRANSPORTATION);
+    $ret = array_merge(
+            FunctionsGov::admTypes(),
+            FunctionsGov::orgTypes(),
+            FunctionsGov::settlementTypes(),
+            FunctionsGov::religiousTypes(), 
+            FunctionsGov::judicialTypes(),
+            FunctionsGov::otherTypes());
     
     return $ret;
+  }
+    
+  public static function getAllGovTypeIds($module, LocaleInterface $locale): array {
+    return FunctionsGov::mapGovTypeIds($module, $locale, FunctionsGov::allTypes());
+  }
+  
+  public static function getGovTypeIdsByTypeGroup($module, LocaleInterface $locale): array {
+    $typeGroups = [];    
+    
+    $typeGroups[I18N::translate('Administrative (level %1$s)','0')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_ADM0);
+
+    $typeGroups[I18N::translate('Administrative (level %1$s)','1')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_ADM1);
+
+    $typeGroups[I18N::translate('Administrative (level %1$s)','2')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_ADM2);
+
+    $typeGroups[I18N::translate('Administrative (level %1$s)','3')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_ADM3);
+
+    $typeGroups[I18N::translate('Administrative (level %1$s)','4')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_ADM4);
+
+    $typeGroups[I18N::translate('Administrative (level %1$s)','5')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_ADM5);
+
+    $typeGroups[I18N::translate('Administrative (other)')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::$TYPES_WITHOUT_ADM);
+    
+    $typeGroups[I18N::translate('Organizational')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::orgTypes());
+    
+    $typeGroups[I18N::translate('Settlement')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::settlementTypes());
+    
+    $typeGroups[I18N::translate('Religious')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::religiousTypes());
+    
+    $typeGroups[I18N::translate('Judicial')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::judicialTypes());
+    
+    $typeGroups[I18N::translate('Other')] = FunctionsGov::mapGovTypeIds(
+            $module, $locale, FunctionsGov::otherTypes());
+    
+    return $typeGroups;
+  }
+  
+  public static function mapGovTypeIds(
+          $module, 
+          LocaleInterface $locale, 
+          array $typeIds): array {
+    
+    $languagesForTypes = 
+            $module->getResolvedLanguagesForTypes($locale);
+    
+    $types = new Collection($typeIds);
+    
+    return $types->mapWithKeys(static function (int $key) use ($module, $languagesForTypes): array {
+                //$desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
+                $desc = FunctionsGov::resolveTypeDescription($module, $key, $languagesForTypes);
+                if ($desc !== null) {
+                  return [$key => $desc . " (" . $key . ")"];
+                }
+                return [$key => "".$key];
+            })
+            ->sort('\Fisharebest\Webtrees\I18N::strcasecmp')
+            ->toArray();
   }
   
   public static function clear() {
@@ -500,6 +740,18 @@ class FunctionsGov {
     //keep ids!
   }
 
+  public static function allGovIds(): array {
+    $rows = DB::table('gov_objects')
+            ->get();
+
+    $ret = array();
+    foreach ($rows as $row) {
+      $ret[$row->gov_id] = $row->gov_id;
+    }
+
+    return $ret;
+  }
+  
   public static function getGovId($name): ?string {
     $row = DB::table('gov_ids')
             ->where('name', '=', $name)
@@ -742,7 +994,7 @@ class FunctionsGov {
   
   public static function toLang($locale) {
 
-    //currently, only 'eng','rus','dut' seem to have translated descriptions at all (and even these are incomplete)
+    //note: currently, only 'eng','rus','dut' seem to have translated descriptions at all (and even these are incomplete)
     if (substr($locale, 0, 2) === 'de') {
       return 'deu';
     }
@@ -894,13 +1146,19 @@ class FunctionsGov {
     return null;
   }
   
-  public static function retrieveGovObject($module, $id) {
-    $gov = FunctionsGov::getGovObject($id);
-    if ($gov != null) {
-      return $gov;
-    }
+  public static function retrieveGovObject(
+          $module, 
+          $id,
+          bool $forceReload = false): ?GovObject {
+    
+    if (!$forceReload) {
+      $gov = FunctionsGov::getGovObject($id);
+      if ($gov != null) {
+        return $gov;
+      }
+    }    
 
-    //not loaded at all
+    //not loaded at all, or force reload
     $gov = FunctionsGov::loadGovObject($module, $id);
     if ($gov == null) {
       return null;
@@ -927,20 +1185,171 @@ class FunctionsGov {
     $types = FunctionsGov::getTypes($id);
     $labels = FunctionsGov::getLabels($id);
     $parents = FunctionsGov::getParents($id);
-    return new GovObject($lat, $lon, $version, $types, $labels, $parents);
+    return new GovObject($id, $lat, $lon, $version, $types, $labels, $parents);
   }
+  
+  public static function setPropLabel(
+          GovProperty $prop) {
+    
+    if ($prop->getSticky()) {      
+      DB::table('gov_labels')
+                ->where('key', '=', $prop->getKey())
+                ->update([
+                    'label' => $prop->getProp(),
+                    'language' => $prop->getLanguage(),
+                    'from' => $prop->getFrom(),
+                    'to' => $prop->getTo(),
+                ]);
+    
+      return;
+    }
+    
+    //create new sticky row
+    $insertData = [
+            'gov_id' => $prop->getGovId(),
+            'label' => $prop->getProp(),
+            'language' => $prop->getLanguage(),
+            'from' => $prop->getFrom(),
+            'to' => $prop->getTo(),
+            'sticky' => true,
+        ];
 
+    DB::table('gov_labels')->insert($insertData);    
+  }
+  
+  public static function setPropType(
+          GovProperty $prop) {
+    
+    if ($prop->getSticky()) {      
+      DB::table('gov_types')
+                ->where('key', '=', $prop->getKey())
+                ->update([
+                    'type' => $prop->getProp(),
+                    'from' => $prop->getFrom(),
+                    'to' => $prop->getTo(),
+                ]);
+    
+      return;
+    }
+    
+    //create new sticky row
+    $insertData = [
+            'gov_id' => $prop->getGovId(),
+            'type' => $prop->getProp(),
+            'from' => $prop->getFrom(),
+            'to' => $prop->getTo(),
+            'sticky' => true,
+        ];
+
+    DB::table('gov_types')->insert($insertData);    
+  }
+  
+  public static function setPropParent(
+          GovProperty $prop) {
+    
+    if ($prop->getSticky()) {      
+      DB::table('gov_parents')
+                ->where('key', '=', $prop->getKey())
+                ->update([
+                    'parent_id' => $prop->getProp(),
+                    'from' => $prop->getFrom(),
+                    'to' => $prop->getTo(),
+                ]);
+    
+      return;
+    }
+    
+    //create new sticky row
+    $insertData = [
+            'gov_id' => $prop->getGovId(),
+            'parent_id' => $prop->getProp(),
+            'from' => $prop->getFrom(),
+            'to' => $prop->getTo(),
+            'sticky' => true,
+        ];
+
+    DB::table('gov_parents')->insert($insertData);    
+  }
+  
+  public static function deletePropIfSticky(
+          string $type, 
+          int $key) {
+    
+    if ($type == 'type') {
+      DB::table('gov_types')
+            ->where('key', '=', $key)
+            ->where('sticky', '=', true)
+            ->delete();
+      
+      return;
+    }
+    
+    if ($type == 'label') {
+      DB::table('gov_labels')
+            ->where('key', '=', $key)
+            ->where('sticky', '=', true)
+            ->delete();
+      
+      return;
+    }
+    
+    if ($type == 'parent') {
+      DB::table('gov_parents')
+            ->where('key', '=', $key)
+            ->where('sticky', '=', true)
+            ->delete();
+      
+      return;
+    }
+  }
+  
+  public static function getProp(
+          string $type, 
+          int $key): ?GovProperty {
+    
+    if ($type == 'type') {
+      $row = DB::table('gov_types')
+            ->where('key', '=', $key)
+            ->first();
+      
+      if ($row !== null) {
+        return new GovProperty($row->key, $row->gov_id, $row->type, null, $row->from, $row->to, $row->sticky);
+      }
+    } else if ($type == 'label') {
+      $row = DB::table('gov_labels')
+            ->where('key', '=', $key)
+            ->first();
+      
+      if ($row !== null) {
+        return new GovProperty($row->key, $row->gov_id, $row->label, $row->language, $row->from, $row->to, $row->sticky);
+      }
+    } else if ($type == 'parent') {
+      $row = DB::table('gov_parents')
+            ->where('key', '=', $key)
+            ->first();
+      
+      if ($row !== null) {
+        return new GovProperty($row->key, $row->gov_id, $row->parent_id, null, $row->from, $row->to, $row->sticky);
+      }
+    }
+    
+    return null;
+  }
+  
   /**
    * return array (of GovProperty)
    */
   public static function getTypes($id) {
     $rows = DB::table('gov_types')
             ->where('gov_id', '=', $id)
+            ->orderByDesc('sticky')
+            ->orderBy('from')
+            ->orderBy('to')
             ->get();
 
     $props = array();
     foreach ($rows as $row) {
-      $props[] = new GovProperty($row->type, null, $row->from, $row->to);
+      $props[] = new GovProperty($row->key, $row->gov_id, $row->type, null, $row->from, $row->to, $row->sticky);
     }
 
     return $props;
@@ -949,11 +1358,15 @@ class FunctionsGov {
   public static function getLabels($id) {
     $rows = DB::table('gov_labels')
             ->where('gov_id', '=', $id)
+            ->orderByDesc('sticky')
+            ->orderBy('from')
+            ->orderBy('to')
+            ->orderBy('language')
             ->get();
 
     $props = array();
     foreach ($rows as $row) {
-      $props[] = new GovProperty($row->label, $row->language, $row->from, $row->to);
+      $props[] = new GovProperty($row->key, $row->gov_id, $row->label, $row->language, $row->from, $row->to, $row->sticky);
     }
 
     return $props;
@@ -962,11 +1375,14 @@ class FunctionsGov {
   public static function getParents($id) {
     $rows = DB::table('gov_parents')
             ->where('gov_id', '=', $id)
+            ->orderByDesc('sticky')
+            ->orderBy('from')
+            ->orderBy('to')
             ->get();
 
     $props = array();
     foreach ($rows as $row) {
-      $props[] = new GovProperty($row->parent_id, null, $row->from, $row->to);
+      $props[] = new GovProperty($row->key, $row->gov_id, $row->parent_id, null, $row->from, $row->to, $row->sticky);
     }
 
     return $props;
@@ -1098,7 +1514,7 @@ class FunctionsGov {
     return SoapWrapper::checkObjectId($module, $id);
   }
   
-  public static function loadGovObject($module, $id) {
+  public static function loadGovObject($module, $id): ?GovObject {
 
     //error_log("LOAD " . $id);
     
@@ -1113,9 +1529,18 @@ class FunctionsGov {
 
     $lat = null;
     $lon = null;
+    
     if (property_exists($place, "position")) {
       $lat = $place->position->lat;
       $lon = $place->position->lon;
+      
+      $type = $place->position->type;
+      if ('c' == $type) {
+        //calculated, drop excessive precision which is mainly an artifact of floating point representation anyway
+        //4 decimal places ~10 metres
+        $lat = round($lat, 4);
+        $lon = round($lon, 4);
+      }
     }
     $types = array();
     $labels = array();
@@ -1126,12 +1551,12 @@ class FunctionsGov {
         foreach ($place->type as $key => $type) {
           $from = FunctionsGov::getBeginAsJulianDate($type);
           $to = FunctionsGov::getEndAsJulianDateExclusively($type);
-          $types[] = new GovProperty($type->value, null, $from, $to);
+          $types[] = new GovProperty(-1, $id, $type->value, null, $from, $to, false);
         }
       } else if ($place->type != null) {
         $from = FunctionsGov::getBeginAsJulianDate($place->type);
         $to = FunctionsGov::getEndAsJulianDateExclusively($place->type);
-        $types[] = new GovProperty($place->type->value, null, $from, $to);
+        $types[] = new GovProperty(-1, $id, $place->type->value, null, $from, $to, false);
       }
     }
 
@@ -1144,7 +1569,7 @@ class FunctionsGov {
           if (property_exists($label, "lang")) {
             $lang = $label->lang;
           }
-          $labels[] = new GovProperty($label->value, $lang, $from, $to);
+          $labels[] = new GovProperty(-1, $id, $label->value, $lang, $from, $to, false);
         }
       } else if ($place->name != null) {
         $from = FunctionsGov::getBeginAsJulianDate($place->name);
@@ -1153,7 +1578,7 @@ class FunctionsGov {
         if (property_exists($place->name, "lang")) {
           $lang = $place->name->lang;
         }
-        $labels[] = new GovProperty($place->name->value, $lang, $from, $to);
+        $labels[] = new GovProperty(-1, $id, $place->name->value, $lang, $from, $to, false);
       }
     }
     
@@ -1193,11 +1618,11 @@ class FunctionsGov {
     foreach ($rawParents as $parent) {
       $from = FunctionsGov::getBeginAsJulianDate($parent);
       $to = FunctionsGov::getEndAsJulianDateExclusively($parent);
-      $parents[] = new GovProperty($parent->ref, null, $from, $to);
+      $parents[] = new GovProperty(-1, $id, $parent->ref, null, $from, $to, false);
     }
         
     $version = round(microtime(true) * 1000);
-    return new GovObject($lat, $lon, $version, $types, $labels, $parents);
+    return new GovObject($id, $lat, $lon, $version, $types, $labels, $parents);
   }
 
   public static function getGovObjectLanguageOverrides(
@@ -1235,11 +1660,11 @@ class FunctionsGov {
     return [];
   }
   
-  //should only be used internally! use retrieveGovObjectSnapshot instead!
+  //should only be used internally (or if you're certain the $id is loaded)! 
+  //otherwise use retrieveGovObjectSnapshot instead!
   public static function getGovObjectSnapshot(
           $julianDay, 
-          $id, 
-          string $lang): ?GovObjectSnapshot {
+          $id): ?GovObjectSnapshot {
     
     $row = DB::table('gov_objects')
             ->where('gov_id', '=', $id)
@@ -1271,7 +1696,10 @@ class FunctionsGov {
             $parents);
   }
 
-  public static function getTypeSnapshot($julianDay, $id): ?int {
+  public static function getTypeSnapshot(
+          string $julianDay, 
+          string $id): ?ResolvedProperty {
+    
     $row = DB::table('gov_types')
             ->where('gov_id', '=', $id)
             ->where(function($q) use ($julianDay) {
@@ -1280,15 +1708,23 @@ class FunctionsGov {
             ->where(function($q) use ($julianDay) {
               $q->whereNull('to')->orWhere('to', '>', $julianDay);
             })
+            ->orderBy('sticky', 'desc') //prefer sticky
             ->first();
 
     if ($row == null) {
       return null;
     }
 
-    return $row->type;
+    return new ResolvedProperty($row->type, $row->sticky);
   }
 
+  /**
+   * 
+   * @param type $julianDay
+   * @param type $id
+   * @param bool $restrictToSticky
+   * @return array<ResolvedProperty>
+   */
   public static function retrieveLabels(
           $julianDay, 
           $id): array {
@@ -1303,10 +1739,15 @@ class FunctionsGov {
             })
             ->orderBy('language', 'asc') //in order to obtain a consistent fallback
             ->get();
-
+            
     $retrieved = [];
+    
+    //pick any, per language
     foreach ($rows as $row) {
-      $retrieved[$row->language] = $row->label;
+      //but prefer stickies
+      if (!array_key_exists($row->language, $retrieved) || $row->sticky) {
+        $retrieved[$row->language] = new ResolvedProperty($row->label, $row->sticky);
+      }
     }
     
     return $retrieved;
@@ -1314,14 +1755,49 @@ class FunctionsGov {
   
   /**
    * 
-   * @param array $labelsIn
+   * @param array<string => ResolvedProperty> $labels (keyed by language)
+   * @param array $languages
+   * @return ResolvedProperty
+   */
+  public static function getResolvedLabel(
+          array $labels,
+          array $languages,
+          array $fallbackLabels = null): ResolvedProperty {
+    
+    $resolvedLabels = FunctionsGov::resolveLabels($labels, $languages, $fallbackLabels);
+    $label = array_shift($resolvedLabels);
+    
+    if (sizeof($resolvedLabels) === 0) {
+      return $label;
+    }    
+    
+    $add = [];
+    $sticky = $label->getSticky();
+    
+    foreach ($resolvedLabels as $additional) {
+      $add []= $additional->getProp();
+      $sticky = $sticky || $additional->getSticky();
+    }
+    
+    return new ResolvedProperty(
+            $label->getProp() . ' ('. implode('/', $add) . ')', 
+            $sticky);
+  }
+  
+  /**
+   * 
+   * @param array<string => ResolvedProperty> $labelsIn (keyed by language)
    * @param array $languages return label in first language from this list. 
    * Additionally return any other labels matching upper cased languages from this list.
    * As a final fallback, return any non-german label
+   * 
+   * @return array<ResolvedProperty>
+   * 
    */
   public static function resolveLabels(
           array $labelsIn,
-          array $languages):array {
+          array $languages,
+          array $fallbackLabels = null): array {
     
     $main = null;
     $labelsOut = array();
@@ -1347,7 +1823,7 @@ class FunctionsGov {
       }      
     }
     
-    $mainDeu = '...';
+    $mainDeu = new ResolvedProperty('...', false);
     if ($main === null) {
       foreach ($labelsIn as $key => $value) {
         if ($key === "deu") {
@@ -1356,6 +1832,12 @@ class FunctionsGov {
           $main = $value; //anything will do ... (but return a consistent fallback!)
           break;
         }
+      }
+    }
+    
+    if ($main === null) {
+      if ($fallbackLabels !== null) {
+        return FunctionsGov::resolveLabels($fallbackLabels, $languages);
       }
     }
     
@@ -1371,12 +1853,11 @@ class FunctionsGov {
           $module, 
           $julianDay, 
           $id, 
-          int $version, 
-          string $locale): ?GovObjectSnapshot {
+          int $version): ?GovObjectSnapshot {
     
-    $lang = FunctionsGov::toLang($locale);
+    //$lang = FunctionsGov::toLang($locale);
 
-    $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
+    $gov = FunctionsGov::getGovObjectSnapshot($julianDay, $id);
     if ($gov != null) {
       if ($gov->getVersion() >= $version) {
         return $gov;
@@ -1390,7 +1871,7 @@ class FunctionsGov {
     }
 
     FunctionsGov::setGovObject($id, $gov);
-    return FunctionsGov::getGovObjectSnapshot($julianDay, $id, $lang);
+    return FunctionsGov::getGovObjectSnapshot($julianDay, $id);
   }
 
   public static function loadNonLoaded($module, $ids, $version) {
@@ -1420,8 +1901,8 @@ class FunctionsGov {
   public static function findGovParentOfType(
           $module, 
           string $id, 
-          $gov, 
-          $julianDay, 
+          /*GovObject|GovObjectSnapshot*/ $gov, 
+          $julianDay,
           $types, 
           $version): GovIdPlus {
     
@@ -1433,7 +1914,13 @@ class FunctionsGov {
     if (count($ids) == 0) {
       return GovIdPlus::empty();
     }
-    return FunctionsGov::findGovParentOfTypeViaIds($module, $id, $ids, $julianDay, $types, $version);
+    return FunctionsGov::findGovParentOfTypeViaIds(
+            $module, 
+            $id, 
+            $ids, 
+            $julianDay, 
+            $types, 
+            $version);
   }
 
   public static function findGovParentOfTypeViaIds(
@@ -1458,7 +1945,7 @@ class FunctionsGov {
             ->where(function($q) use ($types) {
               //sticky type supersedes other definitions, so we must load as well
               $q->whereIn('gov_types.type', $types)->orWhere('gov_types.sticky', '=', true);
-            })            
+            })
             ->where(function($q) use ($julianDay) {
               $q->whereNull('gov_types.from')->orWhere('gov_types.from', '<=', $julianDay);
             })
@@ -1644,22 +2131,46 @@ class FunctionsGov {
 
     return null;
   }
-
-  public static function getGovTypeIds($module, LocaleInterface $locale): array {
-    $types = new Collection(self::allTypes());
+  
+  public static function getGovLanguages(): array {
+    //seems sensible to restrict to this
+    $activeLocales = new Collection(I18N::activeLocales());
     
-    [$overridesFilename, $languages, $languagesForTypes] = 
-            $module->getLanguagesAndLanguagesForTypes($locale);
-    
-    return $types->mapWithKeys(static function (int $key) use ($module, $languagesForTypes): array {
-                //$desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
-                $desc = FunctionsGov::resolveTypeDescription($module, $key, $languagesForTypes);
-                if ($desc !== null) {
-                  return [$key => $desc . " (" . $key . ")"];
-                }
-                return [$key => "".$key];
+    return $activeLocales
+            ->sort(static function (LocaleInterface $x, LocaleInterface $y): int {
+                return $x->endonymSortable() <=> $y->endonymSortable();
             })
-            ->sort('\Fisharebest\Webtrees\I18N::strcasecmp')
+            
+            //TODO should merge multiple endonyms here (AE/BE etc) 
+            ->mapWithKeys(static function (LocaleInterface $locale): array {
+              $lang = FunctionsGov::toLang($locale->languageTag());
+              $endonym = $locale->endonym();
+              return [$lang => $endonym];
+            })
+            ->unique()
             ->toArray();
+  }
+  
+  public static function aToGovServer(
+          string $id,
+          string $label,
+          ?string $title = null): string {
+    
+    $str = '>';
+    if ($title !== null) {
+      $str = ' title="' . $title . '">';
     }
+    
+    return '<a href="http://gov.genealogy.net/item/show/' . $id . '" target="_blank"' . $str . $label . '</a>';
+  }
+  
+  public static function todayAsJulianDay(): string {
+    $dateTime = new DateTime();
+    $dateTime->format('Y-m-d');
+    return cal_to_jd(
+              CAL_GREGORIAN, 
+              $dateTime->format("m"), 
+              $dateTime->format("d"), 
+              $dateTime->format("Y"));
+  }
 }
