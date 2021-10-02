@@ -100,7 +100,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     //migrate (we need the module name here to store the setting)
     $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 3);
     
-    $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 4);
+    $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 5);
     
     $router_container = app(RouterContainer::class);
     assert($router_container instanceof RouterContainer);

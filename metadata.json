@@ -98,5 +98,10 @@
 		"from": "2.0.12",
 		"to": "2.0.17",
 		"changelog": ["Option to modify all GOV data locally.", "Extended and improved handling of 'organizational' GOV object types."]
+	},
+	{
+		"version": "2.0.16.6.1",
+		"from": "2.0.12",
+		"to": "2.0.17"
 	}
 ]
