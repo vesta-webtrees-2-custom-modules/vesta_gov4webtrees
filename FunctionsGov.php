@@ -783,6 +783,12 @@ class FunctionsGov {
   public static function getNamesMappedToGovIds(Collection $ids): Collection {    
     return DB::table('gov_ids')
             ->whereIn('gov_id', $ids->toArray())
+            
+            //newest first! (likely to be the most relevant)
+            //do we instead need a way to mark mapping specifically as 'use for back-mapping'?
+            //(in case same GOV id is actually and intentionally used for more than one place)
+            ->orderByDesc('id') 
+            
             ->get()
             ->map(function (stdClass $row): string {
                 return $row->name;

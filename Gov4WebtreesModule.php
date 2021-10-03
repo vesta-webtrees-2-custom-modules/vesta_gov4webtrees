@@ -21,6 +21,7 @@ use DateTime;
 use Fisharebest\ExtCalendar\GregorianCalendar;
 use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Fact;
+use Fisharebest\Webtrees\Place;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
 use Fisharebest\Webtrees\Http\Middleware\AuthAdministrator;
@@ -678,30 +679,50 @@ class Gov4WebtreesModule extends AbstractModule implements
   }
 
   public function gov2plac(GovReference $gov, Tree $tree): ?PlaceStructure {
+    
     $ids = new Collection([$gov->getId()]);
-    $place_id = FunctionsGov::getNamesMappedToGovIds($ids)->first();    
-    if ($place_id === null) {
+    $valid_place_id = FunctionsGov::getNamesMappedToGovIds($ids)
+            //there may be more than one mapping, we use the first for which a place exists
+            ->filter(function (string $place_id) use ($tree): bool {
+    
+                // Request for a non-existent place?
+
+                //WTF SearchService
+                $query = implode(',',explode(', ', $place_id));
+                //searching for 'x' may find place 'x, y, z'
+                //we're only interested in exact matches!
+                //there should be a better SearchService method for this!
+
+                $place = $this->search_service->searchPlaces($tree, $query, 0, 1)
+                        ->filter(function (Place $place) use ($place_id): bool {
+                          return ($place->gedcomName() == $place_id);
+                        })
+                        ->first();
+
+                if ($place === null) {
+                  //gov id has been mapped, but place no longer exists (at least not in this tree)
+                  //or it's a gov-id retrieved e.g. via gov parent hierarchy
+                  return false;
+                }
+
+                return true;
+            })
+            ->first();
+    
+    if ($valid_place_id === null) {
       //we haven't mapped this gov id at all, cannot use the $place_id
       //(we mustn't use the gov name of the place - it may clash with other placenames!)
-      return null;
-    }
-
-    // Request for a non-existent place?
-    
-    //WTF SearchService
-    $query = implode(',',explode(', ', $place_id));
-    $place = $this->search_service->searchPlaces($tree, $query, 0, 1)            
-            ->first();
-            
-    if ($place === null) {
+      
+      //or
+      
       //gov id has been mapped, but place no longer exists (at least not in this tree)
-      //or its a gov-id retrieved e.g. via gov parent hierarchy
+      //or it's a gov-id retrieved e.g. via gov parent hierarchy
       return null;
     }
     
     //set the _GOV tag to make further operations on this object more efficient 
     //(we don't have to look it up again)
-    return PlaceStructure::fromNameAndGov($place_id, $gov->getId(), $tree);
+    return PlaceStructure::fromNameAndGov($valid_place_id, $gov->getId(), $tree);
   }
   
   ////////////////////////////////////////////////////////////////////////////////
