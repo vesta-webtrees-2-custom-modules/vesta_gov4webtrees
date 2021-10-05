@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-01-07 01:04+0000\n"
-"Last-Translator: Bernd Schwendinger <b0ernie@gmx.net>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
+"PO-Revision-Date: 2021-10-05 21:05+0000\n"
+"Last-Translator: Richard Cissée <ric@richard-cissee.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -52,21 +53,24 @@ msgstr "Nach der aktuellen GOV-Spezifikation sollten Objekte vom Typ \"Siedlung\
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
 msgstr ""
+"Zusätzlich überprüft das Modul, ob für die entsprechende GOV id, oder "
+"irgendeine in der Hierarchie oberhalb liegende, ein Eintrag in der "
+"Sprachdatei '%1$s' existiert."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Administrative"
-msgstr ""
+msgstr "administrativ"
 
 #: FunctionsGov.php:659 FunctionsGov.php:662 FunctionsGov.php:665
 #: FunctionsGov.php:668 FunctionsGov.php:671 FunctionsGov.php:674
 #, php-format
 msgid "Administrative (level %1$s)"
-msgstr ""
+msgstr "administrativ (Stufe %1$s)"
 
 #: FunctionsGov.php:677
 msgid "Administrative (other)"
-msgstr ""
+msgstr "Administrativ (andere)"
 
 #: Gov4WebtreesModule.php:1116
 msgid "Administrative levels"
