@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-06-07 22:32+0000\n"
+"PO-Revision-Date: 2021-10-05 15:02+0000\n"
 "Last-Translator: Josef Prause <josef.prause@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -90,6 +91,9 @@ msgstr "Jako konečný záchytný bod určit název místa podle tohoto zatrháv
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr ""
+"Zatrhněte tuto volbu, jestliže chcete, aby se v hierarchiích zobrazovaly "
+"organizace, např. Spojené národy jako objekt vyšší úrovně nad svrchovanými "
+"entitami."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -115,6 +119,8 @@ msgstr "Požadavky směrem k serveru GOV provádět skrze NuSOAP, nikoliv s pou�
 #: Gov4WebtreesModuleTrait.php:219
 msgid "For a given place, this module displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Pro dané místo tento modul zobrazí jeden nebo více názvů porovnáním "
+"dostupných názvů se seznamem jazyků v souladu s následujcí strategií:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:178
@@ -125,6 +131,8 @@ msgstr "Pro události s rozsahem data použít středové datum"
 #: Gov4WebtreesModuleTrait.php:161
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
 msgstr ""
+"Pro jemnější nastavení a prohlížení seznamu typů nebo skupin typů nutno "
+"editovat údaje GOV lokálně."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -155,6 +163,8 @@ msgstr "GOV idy se normálně ukládají mimo údaje GEDCOM, ale je možno je uk
 #, php-format
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
+"Objekty GOV náleží k různým skupinám typů. Hierarchie míst GOV je založena "
+"na objektech skupiny typů ' %1$s'."
 
 #: Gov4WebtreesModule.php:337
 #, php-format
@@ -169,6 +179,8 @@ msgstr "GOV hierarchie místa byla znovu načtena ze serveru GOV."
 #: Gov4WebtreesModuleTrait.php:53
 msgid "Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group."
 msgstr ""
+"Skrýt objekt a zastavit hierarchii míst v tomto bodě jeho přemístěním k "
+"nějaké irelevantní skupině typů."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -194,6 +206,8 @@ msgstr "Není-li zvoleno, preferuje se libovolný jiný jazyk než němčina. "
 #: Gov4WebtreesModuleTrait.php:143 Gov4WebtreesModuleTrait.php:151
 msgid "In any case, they are still used as fallbacks to determine further higher-level objects."
 msgstr ""
+"V každém případě se použijí jako záložní pro určení dalších objektů vyšší "
+"úrovně."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:52
