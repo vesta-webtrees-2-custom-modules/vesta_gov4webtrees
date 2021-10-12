@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-10-03 09:07+0000\n"
+"PO-Revision-Date: 2021-10-12 12:06+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
@@ -52,7 +52,10 @@ msgstr "Volgens de huidige GOV-specificatie worden nederzettingen niet veronders
 #: Gov4WebtreesModuleTrait.php:221
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
-msgstr "Bovendien controleert de module of de betreffende GOV-id, of een van de ouders binnen de hiërarchie, een taal heeft gedefinieerd in het csv-bestand '%1$s'."
+msgstr ""
+"Bovendien controleert de module of de betreffende GOV-ID, of een van de "
+"ouders binnen de hiërarchie, een taal heeft gedefinieerd in het csv-bestand "
+"'%1$s'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
@@ -76,7 +79,10 @@ msgstr "Bestuursniveaus"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:38
 msgid "All data (except for the mapping of places to GOV ids, which has to be done manually) is retrieved from the GOV server and cached internally."
-msgstr "Alle gegevens (behalve de toewijzing van plaatsen aan GOV-id's, die handmatig moeten worden gedaan) worden opgehaald van de GOV-server en intern in de cache opgeslagen."
+msgstr ""
+"Alle gegevens (behalve de toewijzing van plaatsen aan GOV-ID's, die "
+"handmatig moeten worden gedaan) worden opgehaald van de GOV-server en intern "
+"in de cache opgeslagen."
 
 #. I18N: Module Configuration
 #. I18N::translate('Determines strategy in case the place name is not available in the current or any additional language (for the given date): ') .
@@ -110,7 +116,9 @@ msgstr ""
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
-msgstr "Een tooltip weergeven die de bron van het GOV-id aangeeft. Dit is vooral bedoeld voor debugging."
+msgstr ""
+"Een tooltip weergeven die de bron van het GOV-ID aangeeft. Dit is vooral "
+"bedoeld voor debugging."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:237
@@ -140,26 +148,28 @@ msgstr ""
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
 msgid "GOV Id Management"
-msgstr "GOV-id-beheer"
+msgstr "GOV-ID-beheer"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
-msgstr "GOV-id"
+msgstr "GOV-ID"
 
 #: EditGovMappingController.php:84
 #, php-format
 msgid "GOV id for %1$s has been removed."
-msgstr "GOV-id voor %1$s is verwijderd."
+msgstr "GOV-ID voor %1$s is verwijderd."
 
 #: EditGovMappingController.php:106
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
-msgstr "GOV-id voor %1$s is ingesteld op %2$s."
+msgstr "GOV-ID voor %1$s is ingesteld op %2$s."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:40
 msgid "GOV ids are stored outside GEDCOM data by default, but ids stored via _GOV tags are also supported."
-msgstr "GOV-id's worden standaard buiten GEDCOM-gegevens opgeslagen, maar id's die zijn opgeslagen via _GOV-tags worden ook ondersteund."
+msgstr ""
+"GOV-ID's worden standaard buiten GEDCOM-gegevens opgeslagen, maar ID's die "
+"zijn opgeslagen via _GOV-labels worden ook ondersteund."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
@@ -230,12 +240,17 @@ msgstr ""
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
 msgid "In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data."
-msgstr "In het bijzonder kan de aangepaste module Gedeelde plaatsen worden gebruikt om GOV-id's binnen GEDCOM-gegevens te beheren."
+msgstr ""
+"In het bijzonder kan de aangepaste module Gedeelde plaatsen worden gebruikt "
+"om GOV-ID's binnen GEDCOM-gegevens te beheren."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:96
 msgid "In this case, the GOV ids are stored in a separate database table, which has to be managed manually when moving the respective tree to a different webtrees installation. "
-msgstr "In dit geval worden de GOV-id's opgeslagen in een aparte databasetabel, die handmatig moet worden beheerd wanneer de betreffende boom naar een andere webtrees-installatie wordt verplaatst. "
+msgstr ""
+"In dit geval worden de GOV-ID's opgeslagen in een aparte databasetabel, die "
+"handmatig moet worden beheerd wanneer de betreffende boom naar een andere "
+"webtrees-installatie wordt verplaatst. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:229
@@ -245,7 +260,9 @@ msgstr "Internen (indien nodig automatisch aangepast)"
 #: EditGovMappingController.php:95
 #: resources/views/script/select2-initializer-gov.phtml:15
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
-msgstr "Ongeldig GOV-id! Geldige GOV-ids zijn bijvoorbeeld 'EITTZE_W3091', 'object_1086218'."
+msgstr ""
+"Ongeldig GOV-ID! Geldige GOV-OD's zijn bijvoorbeeld 'EITTZE_W3091', "
+"'object_1086218'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -274,16 +291,18 @@ msgstr "Lokale wijzigingen blijven behouden."
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
 msgid "Look up a matching GOV id on the GOV server"
-msgstr "Zoek een overeenkomende GOV-id op de GOV-server"
+msgstr "Zoek een overeenkomende GOV-ID op de GOV-server"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:79
 msgid "Mappings of places to GOV ids are not affected."
-msgstr "Toewijzingen van plaatsen naar GOV-id's worden niet beïnvloed."
+msgstr "Toewijzingen van plaatsen naar GOV-ID's worden niet beïnvloed."
 
 #: resources/views/edit/gov-id-edit-control.phtml:33
 msgid "Note: The mapping from place to GOV id is stored outside the gedcom data."
-msgstr "Opmerking: De toewijzing van plaats naar GOV-id wordt buiten de gedcom-gegevens opgeslagen."
+msgstr ""
+"Opmerking: De toewijzing van plaats naar GOV-ID wordt buiten de GEDCOM-"
+"gegevens opgeslagen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:152
@@ -336,7 +355,9 @@ msgstr "Buiten GEDCOM-gegevens - bewerkbaar voor iedereen (inclusief bezoekers)"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:90
 msgid "Particularly useful in order to manage GOV ids via the Shared Places module. Ids are stored and exportable via GEDCOM tags. "
-msgstr "Vooral handig om GOV-ids te beheren via de Gedeelde plaatsen module. Id's worden opgeslagen en geëxporteerd via GEDCOM tags. "
+msgstr ""
+"Vooral handig om GOV-ID's te beheren via de Gedeelde plaatsen module. ID's "
+"worden opgeslagen en geëxporteerd via GEDCOM-labels. "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:37
@@ -364,17 +385,17 @@ msgstr "Religieus"
 
 #: Gov4WebtreesModule.php:448
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
-msgstr "Stel GOV-id opnieuw in en herlaad de GOV-plaatshiërarchie"
+msgstr "Stel GOV-ID opnieuw in en herlaad de GOV-plaatshiërarchie"
 
 #: EditGovMappingController.php:57
 #, php-format
 msgid "Reset GOV id for %1$s"
-msgstr "Stel GOV-id opnieuw in voor %1$s"
+msgstr "Stel GOV-ID opnieuw in voor %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:34
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
 msgstr ""
-"Sla de huidige id op om de plaatshiërarchie opnieuw te laden van de GOV-"
+"Sla de huidige ID op om de plaatshiërarchie opnieuw te laden van de GOV-"
 "server."
 
 #. I18N: Module Configuration
@@ -386,12 +407,12 @@ msgstr ""
 
 #: Gov4WebtreesModule.php:446
 msgid "Set GOV id (outside GEDCOM)"
-msgstr "Stel GOV-id in"
+msgstr "Stel GOV-ID in"
 
 #: EditGovMappingController.php:55
 #, php-format
 msgid "Set GOV id for %1$s"
-msgstr "Stel GOV-id in voor %1$s"
+msgstr "Stel GOV-ID in voor %1$s"
 
 #. I18N: Module Configuration
 #: FunctionsGov.php:683 Gov4WebtreesModuleTrait.php:148
@@ -499,7 +520,7 @@ msgstr "Wanneer deze optie is uitgeschakeld, wordt een alternatief besturingsele
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:86
 msgid "Where to edit and store GOV ids"
-msgstr "Waar moeten de GOV-id's worden bewerkt en opgeslagen"
+msgstr "Waar moeten de GOV-ID's worden bewerkt en opgeslagen"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:89
@@ -514,7 +535,7 @@ msgstr "U kunt dit csv-bestand aanmaken en wijzigen op basis van uw persoonlijke
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
-msgstr "U kunt ook een lege id opslaan om de toewijzing te verwijderen."
+msgstr "U kunt ook een leeg ID opslaan om de toewijzing te verwijderen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:49
