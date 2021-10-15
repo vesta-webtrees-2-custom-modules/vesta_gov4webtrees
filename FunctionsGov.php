@@ -1537,17 +1537,24 @@ class FunctionsGov {
     $lon = null;
     
     if (property_exists($place, "position")) {
-      $lat = $place->position->lat;
-      $lon = $place->position->lon;
+      $position = $place->position;
       
-      $type = $place->position->type;
-      if ('c' == $type) {
-        //calculated, drop excessive precision which is mainly an artifact of floating point representation anyway
-        //4 decimal places ~10 metres
-        $lat = round($lat, 4);
-        $lon = round($lon, 4);
+      if (property_exists($position, "lat") && property_exists($position, "lon")) {
+        $lat = $position->lat;
+        $lon = $position->lon;
+      
+        if (property_exists($position, "type")) {
+          $type = $position->type;
+          if ('c' == $type) {
+            //calculated, drop excessive precision which is mainly an artifact of floating point representation anyway
+            //4 decimal places ~10 metres
+            $lat = round($lat, 4);
+            $lon = round($lon, 4);
+          }
+        }
       }
     }
+    
     $types = array();
     $labels = array();
     $parents = array();
