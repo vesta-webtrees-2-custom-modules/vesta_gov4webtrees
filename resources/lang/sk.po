@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-06-03 15:33+0000\n"
+"PO-Revision-Date: 2021-12-06 09:51+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -56,17 +57,17 @@ msgstr "Dodatočne modul kontroluje, či príslušné GOV-id, alebo ktorékoľve
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Administrative"
-msgstr ""
+msgstr "administratívny"
 
 #: FunctionsGov.php:659 FunctionsGov.php:662 FunctionsGov.php:665
 #: FunctionsGov.php:668 FunctionsGov.php:671 FunctionsGov.php:674
 #, php-format
 msgid "Administrative (level %1$s)"
-msgstr ""
+msgstr "administratívny (úroveň %1$s)"
 
 #: FunctionsGov.php:677
 msgid "Administrative (other)"
-msgstr ""
+msgstr "administratívny (ostatné)"
 
 #: Gov4WebtreesModule.php:1116
 msgid "Administrative levels"
@@ -90,6 +91,9 @@ msgstr "Ako konečný záchytný bod použiť názov miesta podľa tohto checkbo
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr ""
+"Aktivujte túto voľbu, keď chcete, aby sa naďalej zobrazovali v hierarchii "
+"zobrazovali organizácie, napr. Spojené národy, ako nadradené objekty "
+"suverénnych jednotiek."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -115,6 +119,8 @@ msgstr "Vykonáva požiadavky na GOV-server prostredníctvom NuSOAP namiesto nat
 #: Gov4WebtreesModuleTrait.php:219
 msgid "For a given place, this module displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Pre dané miesto zobrazuje tento modul jedno, alebo viac názvov na základe "
+"zoznamu jazykov podľa nasledujúcej stratégie:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:178
@@ -237,7 +243,7 @@ msgstr "Tento súbor nebude prepisovaný pri nasledujúcich aktualizáciách."
 
 #: FunctionsGov.php:689
 msgid "Judicial"
-msgstr ""
+msgstr "justičné"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
@@ -247,7 +253,7 @@ msgstr "Lokálne GOV-údaje"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:80
 msgid "Local modifications are preserved."
-msgstr ""
+msgstr "Lokálne modifikácie sa zachovajú."
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
@@ -277,6 +283,8 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:50
 msgid "Obvious mistakes should be corrected on the GOV server itself, but there may be cases where this is not easily possible."
 msgstr ""
+"Zjavné chyby by sa mali korigovať priamo na servery GOV, napriek tomu môžu "
+"existovať prípady, keď to nie je možné."
 
 #. I18N: Module Configuration
 #. I18N: Module Configuration
@@ -285,11 +293,11 @@ msgstr ""
 #: FunctionsGov.php:680 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
-msgstr ""
+msgstr "Organizačné"
 
 #: FunctionsGov.php:692
 msgid "Other"
-msgstr ""
+msgstr "Iné"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:179
@@ -319,7 +327,7 @@ msgstr "Hierarchia miest je zobrazená historicky, t.j. zodpovedajúco dátumu p
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Place hierarchy"
-msgstr ""
+msgstr "Hierarchia miest"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:206
@@ -333,7 +341,7 @@ msgstr "Linky a texty miest"
 
 #: FunctionsGov.php:686
 msgid "Religious"
-msgstr ""
+msgstr "Náboženské"
 
 #: Gov4WebtreesModule.php:448
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -485,7 +493,7 @@ msgstr "Môžete uložiť aj prázdny identifikátor aby ste zrušili prepojenie
 #: Gov4WebtreesModuleTrait.php:49
 #, php-format
 msgid "You may modify all data retrieved from the GOV server %1$s."
-msgstr ""
+msgstr "Môžete upravovať všetky údaje získané zo serveru GOV %1$s."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:122
@@ -510,7 +518,7 @@ msgstr "Pre udalosti bez dátumu sa použije súčasná hierarchia, bez ohľadu 
 #. I18N: Module Configuration; a link target
 #: Gov4WebtreesModuleTrait.php:33 Gov4WebtreesModuleTrait.php:60
 msgid "here"
-msgstr ""
+msgstr "tu"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:213
@@ -545,7 +553,7 @@ msgstr "neznámy GOV typ (možno novovytvorený?)"
 
 #: Gov4WebtreesModule.php:1106
 msgid "with local modifications"
-msgstr ""
+msgstr "s lokálnymi úpravami"
 
 #~ msgid "Allow objects of type 'confederation' in hierarchy"
 #~ msgstr "Povoliť v hierarchii objekty typu „konfederácia (Staatenbund)“"
