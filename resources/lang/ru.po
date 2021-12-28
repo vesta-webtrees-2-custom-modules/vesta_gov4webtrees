@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-12-28 12:27+0000\n"
+"PO-Revision-Date: 2021-12-28 12:42+0000\n"
 "Last-Translator: Олег <uolega@yandex.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
@@ -165,6 +165,8 @@ msgstr "Идентификаторы GOV по умолчанию хранятс�
 #, php-format
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
+"Объекты GOV принадлежат к разным группам типов. Иерархия мест GOV основана "
+"на объектах группы типов \" %1$s\"."
 
 #: Gov4WebtreesModule.php:337
 #, php-format
@@ -179,6 +181,8 @@ msgstr "Иерархия мест GOV была перезагружена с с�
 #: Gov4WebtreesModuleTrait.php:53
 msgid "Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group."
 msgstr ""
+"Скройте объект и остановите иерархию места в этой точке, переместив его в "
+"группу нерелевантных типов."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -204,16 +208,23 @@ msgstr "Если этот флажок не установлен, предпоч
 #: Gov4WebtreesModuleTrait.php:143 Gov4WebtreesModuleTrait.php:151
 msgid "In any case, they are still used as fallbacks to determine further higher-level objects."
 msgstr ""
+"В любом случае они по-прежнему используются как резервные для определения "
+"дальнейших объектов более высокого уровня."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:52
 msgid "In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences)."
 msgstr ""
+"В общем, скройте объект, сохранив общую иерархию мест, переместив его в "
+"группу скрытых типов (см. Настройки)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:51
 msgid "In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire)."
 msgstr ""
+"В частности, вы можете захотеть локально отменить некоторые противоречивые "
+"изменения, сделанные на сервере GOV (например, тип объекта Священной Римской "
+"Империи)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
@@ -247,7 +258,7 @@ msgstr "При последующих обновлениях он не буде�
 
 #: FunctionsGov.php:689
 msgid "Judicial"
-msgstr ""
+msgstr "Судебный"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
@@ -257,7 +268,7 @@ msgstr "Данные местного правительства"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:80
 msgid "Local modifications are preserved."
-msgstr ""
+msgstr "Сохранены локальные модификации."
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
@@ -282,11 +293,16 @@ msgstr "Примечание. В конечном итоге, вероятно, 
 #: Gov4WebtreesModuleTrait.php:140
 msgid "Objects of this type strictly do not belong to the administrative hierarchy in the sense that they are no territorial entities (Gebietskörperschaften)."
 msgstr ""
+"Объекты этого типа строго не относятся к административной иерархии в том "
+"смысле, что они не являются территориальными образованиями "
+"(Gebietskörperschaften)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:50
 msgid "Obvious mistakes should be corrected on the GOV server itself, but there may be cases where this is not easily possible."
 msgstr ""
+"Очевидные ошибки следует исправлять на самом сервере GOV, но могут быть "
+"случаи, когда это сделать нелегко."
 
 #. I18N: Module Configuration
 #. I18N: Module Configuration
@@ -295,11 +311,11 @@ msgstr ""
 #: FunctionsGov.php:680 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
-msgstr ""
+msgstr "Организационная"
 
 #: FunctionsGov.php:692
 msgid "Other"
-msgstr ""
+msgstr "Другой"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:179
@@ -329,7 +345,7 @@ msgstr "Иерархия мест отображается историческ�
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Place hierarchy"
-msgstr ""
+msgstr "Иерархия места"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:206
@@ -343,7 +359,7 @@ msgstr "Поместите текст и ссылки"
 
 #: FunctionsGov.php:686
 msgid "Religious"
-msgstr ""
+msgstr "Религиозный"
 
 #: Gov4WebtreesModule.php:448
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -363,6 +379,7 @@ msgstr "Сохраните текущий идентификатор, чтобы
 #, php-format
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr ""
+"См. Также %1$s для ознакомления с исходным списком типов и описанием типов."
 
 #: Gov4WebtreesModule.php:446
 msgid "Set GOV id (outside GEDCOM)"
@@ -376,7 +393,7 @@ msgstr "Установить идентификатор GOV для %1$s"
 #. I18N: Module Configuration
 #: FunctionsGov.php:683 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
-msgstr ""
+msgstr "Поселок"
 
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
@@ -385,6 +402,9 @@ msgstr ""
 #, php-format
 msgid "Several object types that are part of this type group in the original model can be seen as problematic in this context, and have been moved to a custom '%1$s' type group."
 msgstr ""
+"Некоторые типы объектов, которые являются частью этой группы типов в "
+"исходной модели, могут рассматриваться как проблемные в этом контексте и "
+"были перемещены в настраиваемую группу типов \" %1$s \"."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:108
@@ -400,7 +420,7 @@ msgstr "Показать дополнительную информацию"
 #: Gov4WebtreesModuleTrait.php:139 Gov4WebtreesModuleTrait.php:148
 #, php-format
 msgid "Show objects of type group '%1$s' in hierarchy"
-msgstr ""
+msgstr "Показать объекты группы типов \"%1$s\" в иерархии"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:77
@@ -436,6 +456,8 @@ msgstr "Эта опция в основном существует для дем
 #: Gov4WebtreesModuleTrait.php:150
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
 msgstr ""
+"Однако эта политика не соблюдалась строго. Установите этот флажок, если вы "
+"по-прежнему хотите отображать поселения в иерархиях."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
@@ -495,7 +517,7 @@ msgstr "Вы также можете сохранить пустой идент�
 #: Gov4WebtreesModuleTrait.php:49
 #, php-format
 msgid "You may modify all data retrieved from the GOV server %1$s."
-msgstr ""
+msgstr "Вы можете изменить все данные, полученные с сервера GOV %1$s."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:122
@@ -520,7 +542,7 @@ msgstr "для событий без даты будет использоват�
 #. I18N: Module Configuration; a link target
 #: Gov4WebtreesModuleTrait.php:33 Gov4WebtreesModuleTrait.php:60
 msgid "here"
-msgstr ""
+msgstr "здесь"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:213
@@ -551,11 +573,11 @@ msgstr "Cегодня"
 
 #: FunctionsGov.php:1113
 msgid "unknown GOV type (newly introduced?)"
-msgstr ""
+msgstr "неизвестный тип GOV (недавно введенный?)"
 
 #: Gov4WebtreesModule.php:1106
 msgid "with local modifications"
-msgstr ""
+msgstr "с местными изменениями"
 
 #~ msgid "Allow objects of type 'confederation' in hierarchy"
 #~ msgstr "Разрешить объекты типа \"конфедерация\" в иерархии"
