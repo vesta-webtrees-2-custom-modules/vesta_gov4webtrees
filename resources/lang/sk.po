@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2022-01-15 14:54+0000\n"
+"PO-Revision-Date: 2022-01-15 17:54+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -32,7 +32,9 @@ msgstr "„Klasický“ mód."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:214
 msgid "(Why is German in particular singled out like this? Because the GOV gazetteer is currently rather German-language centric, and therefore many places have German names)."
-msgstr "(Prečo je nemčina takto mimoradne vyzdvihnutá? GOV databáza je v súčasnosti veľmi orientovaná na nemčinu a preto má mnoho mies nemecké názvy)."
+msgstr ""
+"(Prečo je nemčina takto mimoriadne vyzdvihnutá? GOV databáza je v súčasnosti "
+"veľmi orientovaná na nemčinu a preto má mnoho miest nemecké názvy)."
 
 #: Gov4WebtreesModuleTrait.php:26
 msgid "A module integrating GOV (historic gazetteer) data."
@@ -52,7 +54,9 @@ msgstr "Podľa aktuálnych špecifikácií GOV by objekty typu „Sídlo (Siedlu
 #: Gov4WebtreesModuleTrait.php:221
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
-msgstr "Dodatočne modul kontroluje, či príslušné GOV-id, alebo ktorékoľvek z hierarchie nad ním, má zadefinované jazyky v csv-súbore „%1$s“."
+msgstr ""
+"Modul dodatočne kontroluje, či príslušné GOV-id, alebo ktorékoľvek z "
+"hierarchie nad ním, má názov v jazyku zadefinovanom v csv-súbore „%1$s“."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
@@ -92,8 +96,8 @@ msgstr "Ako konečný záchytný bod použiť názov miesta podľa tohto checkbo
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr ""
 "Aktivujte túto voľbu, keď chcete, aby sa naďalej zobrazovali v hierarchii "
-"zobrazovali organizácie, napr. Spojené národy, ako nadradené objekty "
-"suverénnych jednotiek."
+"zobrazovali organizácie, napr. OSNS ako nadradený objekt suverénnych "
+"jednotiek."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -163,6 +167,8 @@ msgstr "GOV id sa štandardne ukladajú mimo GEDCOM, ale je podporované aj ich 
 #, php-format
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
+"GOV objekty patria k rôznym skupinám typov. GOV hierarchia miest je založená "
+"na objektoch skupiny typov „%1$s“."
 
 #: Gov4WebtreesModule.php:337
 #, php-format
@@ -177,6 +183,8 @@ msgstr "Z GOV servera bola znovu načítaná GOV hierarchia miesta."
 #: Gov4WebtreesModuleTrait.php:53
 msgid "Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group."
 msgstr ""
+"Skryte objekt a zastavte hierarchiu miest na tomto mieste presunom do "
+"irelevantnej skupiny typov."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
