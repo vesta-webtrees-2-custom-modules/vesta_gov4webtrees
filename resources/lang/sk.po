@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2022-01-15 17:54+0000\n"
+"PO-Revision-Date: 2022-01-15 21:54+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -210,16 +210,23 @@ msgstr "Ak nie je zvolené, použije sa iný jazyk ako nemčina. "
 #: Gov4WebtreesModuleTrait.php:143 Gov4WebtreesModuleTrait.php:151
 msgid "In any case, they are still used as fallbacks to determine further higher-level objects."
 msgstr ""
+"V každom prípade sa použijú ako záchytný bod na zistenie objektov vyššej "
+"úrovne."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:52
 msgid "In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences)."
 msgstr ""
+"Vo všeobecnosti, ukryte objekt, pri zachovaní hierarchie miest tak, že jeho "
+"typ predefinujete na jeden z typov v skrytej skupine typov (pozri "
+"nastavenia)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:51
 msgid "In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire)."
 msgstr ""
+"Možno budete chcieť vrátiť lokálne niektoré kontroverzné zmeny, ktoré sa "
+"udiali na GOV-serveri (napr. typ objektu Svätej ríše rímskej)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
@@ -282,7 +289,9 @@ msgstr "Poznámka: Prepojenie medzi miestom a GOV id je uložené mimo GEDCOM ú
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:152
 msgid "Note: Ultimately it's probably preferable to correct the respective GOV data itself."
-msgstr "Upozornenie: V zásade je lepšie spraviť opravu príslušných údajov na GOV-serveri."
+msgstr ""
+"Poznámka: V zásade je lepšie spraviť opravu príslušných údajov na GOV-"
+"serveri."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:140
