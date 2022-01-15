@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-12-06 09:51+0000\n"
+"PO-Revision-Date: 2022-01-15 14:54+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -131,6 +131,8 @@ msgstr "Pre udalosti s intervalom dátumov použiť dátum uprostred intervalu"
 #: Gov4WebtreesModuleTrait.php:161
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
 msgstr ""
+"Pre podrobnejšie nastavenie a pre zobrazenie zoznamu typov a skupín typov "
+"upravte GOV údaje lokálne."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
