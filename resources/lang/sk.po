@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2022-01-15 21:54+0000\n"
+"PO-Revision-Date: 2022-01-17 08:38+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -297,6 +297,8 @@ msgstr ""
 #: Gov4WebtreesModuleTrait.php:140
 msgid "Objects of this type strictly do not belong to the administrative hierarchy in the sense that they are no territorial entities (Gebietskörperschaften)."
 msgstr ""
+"Objekty tohto druhu striktne nepatria do administratívnej hierarchie v tom "
+"zmysle, že nie sú územnými celkami."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:50
@@ -379,7 +381,7 @@ msgstr "Uložte aktuálny identifikátor, aby sa znovunačítala hierarchia mies
 #: Gov4WebtreesModuleTrait.php:162
 #, php-format
 msgid "See also %1$s for the original list of types and type descriptions."
-msgstr ""
+msgstr "Pozrite aj %1$s pôvodný zoznam typov a popis typov."
 
 #: Gov4WebtreesModule.php:446
 msgid "Set GOV id (outside GEDCOM)"
@@ -393,7 +395,7 @@ msgstr "Nastaviť identifikátor GOV pre %1$s"
 #. I18N: Module Configuration
 #: FunctionsGov.php:683 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
-msgstr ""
+msgstr "Sídlo"
 
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
@@ -402,6 +404,9 @@ msgstr ""
 #, php-format
 msgid "Several object types that are part of this type group in the original model can be seen as problematic in this context, and have been moved to a custom '%1$s' type group."
 msgstr ""
+"Viaceré typy objektov, ktoré v pôvodnom modeli sú súčasťou tejto skupiny sa "
+"v tomto kontexte môžu vnímať ako problematické a boli presunuté do "
+"samostatnej skupiny typov „%1$s“."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:108
@@ -417,7 +422,7 @@ msgstr "Ukázať dodatočné informácie"
 #: Gov4WebtreesModuleTrait.php:139 Gov4WebtreesModuleTrait.php:148
 #, php-format
 msgid "Show objects of type group '%1$s' in hierarchy"
-msgstr ""
+msgstr "Zobraziť v hierarchii objekty skupiny typov „%1$s“"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:77
@@ -453,6 +458,8 @@ msgstr "Táto voľba je určená hlavne pre ukážkový server a neodporúča sa
 #: Gov4WebtreesModuleTrait.php:150
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
 msgstr ""
+"Táto zásada však nebola strikte dodržiavaná. Zvoľte túto možnosť, ak chcete "
+"zobraziť sídla v hierarchii."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
