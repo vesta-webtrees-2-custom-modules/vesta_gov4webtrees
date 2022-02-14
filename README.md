@@ -11,6 +11,7 @@ See [here](https://github.com/vesta-webtrees-2-custom-modules/vesta_common/blob/
 ## Contents
 
 * [Features](#features)
+* [Disclosure to third parties](#disclosure)
 * [Demo](#demo)
 * [Download](#download)
 * [Installation](#installation)
@@ -35,6 +36,12 @@ When creating or updating shared places, the GOV id edit controls are supported:
 
 3. Alternatively, GOV ids may always be set via a custom _GOV tag under the respective PLAC tag (for a specific fact or event). This is not recommended, and there are no edit controls to support this. The module still displays the place hierarchies in this case though.
 
+### Disclosure to third parties<a name="disclosure"/>
+
+Data is obtained from the GOV server via webservices, as described [here](http://gov.genealogy.net/services/). 
+The module only uses these webservices to read data, the 'ChangeService', which would require a username and password, is not used.
+At no point any kind of personal information related to the webtrees user is transferred, nor the user's IP address.
+You may still prefer to point out the use of this third party in your website's privacy policy.
 
 ### Demo<a name="demo"/>
 
@@ -42,7 +49,7 @@ Access a demo of the module [here](https://cissee.de/gov4webtrees2Demo). Feel fr
 
 ### Download<a name="download"/>
 
-* Current version: 2.0.19.1.0
+* Current version: 2.0.19.2.0
 * Based on and tested with webtrees 2.0.19. Requires webtrees 2.0.12 or later.
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
