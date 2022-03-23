@@ -2004,7 +2004,7 @@ class FunctionsGov {
     return $id1;
   }
 
-  protected function fromRow(
+  protected static function fromRow(
           $rows,
           $disregardedIds): GovIdPlus {
    

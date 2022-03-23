@@ -195,6 +195,9 @@ class Gov4WebtreesModule extends AbstractModule implements
       } else if ('_jc-theme-justlight_' === $themeName) {
         //and the custom 'JustLight' theme
         $themeName = 'minimal';
+      } else if ('_jc-theme-justlight2_' === $themeName) {
+        //and the custom 'JustLight' theme, version 2
+        $themeName = 'minimal';
       } else {
         //default
         $themeName = 'webtrees';
