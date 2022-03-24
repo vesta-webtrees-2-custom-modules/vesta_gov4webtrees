@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2021-10-02 13:49+0200\n"
-"PO-Revision-Date: 2021-06-03 11:33+0000\n"
+"PO-Revision-Date: 2022-03-24 10:56+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -56,17 +57,17 @@ msgstr "De plus, le module vérifie si chaque ID GOV, ou l'un de ses parents dan
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Administrative"
-msgstr ""
+msgstr "Administratif"
 
 #: FunctionsGov.php:659 FunctionsGov.php:662 FunctionsGov.php:665
 #: FunctionsGov.php:668 FunctionsGov.php:671 FunctionsGov.php:674
 #, php-format
 msgid "Administrative (level %1$s)"
-msgstr ""
+msgstr "Administratif (niveau %1$s)"
 
 #: FunctionsGov.php:677
 msgid "Administrative (other)"
-msgstr ""
+msgstr "Administratif (autre)"
 
 #: Gov4WebtreesModule.php:1116
 msgid "Administrative levels"
@@ -90,6 +91,9 @@ msgstr "En guise de solution de secours finale, déterminez le nom de lieu en fo
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr ""
+"Cochez cette option si vous souhaitez toujours que les organisations "
+"apparaissent dans les hiérarchies, par ex. l'Organisation des Nations Unies "
+"en tant qu'objet de niveau supérieur d'entités souveraines."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -115,6 +119,8 @@ msgstr "Exécutez les requêtes vers le serveur GOV via NuSOAP, plutôt que d'ut
 #: Gov4WebtreesModuleTrait.php:219
 msgid "For a given place, this module displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Pour un lieu donné, ce module affiche un ou plusieurs noms en comparant les "
+"noms disponibles à une liste de langues, selon la stratégie suivante :"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:178
@@ -125,6 +131,8 @@ msgstr "Pour les événements avec une plage de dates, utilisez la date médiane
 #: Gov4WebtreesModuleTrait.php:161
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
 msgstr ""
+"Pour des ajustements plus précis et pour afficher la liste des types et des "
+"groupes de types, modifiez les données GOV localement."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -155,6 +163,8 @@ msgstr "Les identifiants GOV sont stockés en dehors des données GEDCOM par dé
 #, php-format
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
+"Les objets GOV appartiennent à différents groupes de types. La hiérarchie "
+"des lieux GOV est basée sur les objets du groupe de type '%1$s'."
 
 #: Gov4WebtreesModule.php:337
 #, php-format
@@ -169,6 +179,8 @@ msgstr "La hiérarchie des lieux GOV a été rechargée à partir du serveur GOV
 #: Gov4WebtreesModuleTrait.php:53
 msgid "Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group."
 msgstr ""
+"Masquez un objet et arrêtez la hiérarchie des lieux à ce stade en le "
+"déplaçant vers un groupe de types non pertinent."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -194,16 +206,23 @@ msgstr "Si elle n'est pas cochée, préférez une langue autre que l'allemand ; 
 #: Gov4WebtreesModuleTrait.php:143 Gov4WebtreesModuleTrait.php:151
 msgid "In any case, they are still used as fallbacks to determine further higher-level objects."
 msgstr ""
+"Dans tous les cas, ils sont toujours utilisés comme solutions de repli pour "
+"déterminer d'autres objets de niveau supérieur."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:52
 msgid "In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences)."
 msgstr ""
+"En général, masquez un objet tout en préservant la hiérarchie globale des "
+"lieux en le déplaçant vers un groupe de type masqué (voir préférences)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:51
 msgid "In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire)."
 msgstr ""
+"En particulier, vous souhaiterez peut-être annuler localement certaines "
+"modifications controversées apportées au serveur GOV (comme le type d'objet "
+"du Saint Empire romain)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
@@ -237,7 +256,7 @@ msgstr "Il ne sera pas écrasé par les mises à jour ultérieures."
 
 #: FunctionsGov.php:689
 msgid "Judicial"
-msgstr ""
+msgstr "Judiciaire"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
@@ -247,7 +266,7 @@ msgstr "Données GOV locales"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:80
 msgid "Local modifications are preserved."
-msgstr ""
+msgstr "Les modifications locales sont préservées."
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
@@ -272,11 +291,16 @@ msgstr "Remarque : en fin de compte, il est probablement préférable de corrige
 #: Gov4WebtreesModuleTrait.php:140
 msgid "Objects of this type strictly do not belong to the administrative hierarchy in the sense that they are no territorial entities (Gebietskörperschaften)."
 msgstr ""
+"Les objets de ce type n'appartiennent strictement pas à la hiérarchie "
+"administrative en ce sens qu'ils ne sont pas des entités territoriales "
+"(Gebietskörperschaften)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:50
 msgid "Obvious mistakes should be corrected on the GOV server itself, but there may be cases where this is not easily possible."
 msgstr ""
+"Les erreurs évidentes doivent être corrigées sur le serveur GOV lui-même, "
+"mais il peut y avoir des cas où cela n'est pas facilement possible."
 
 #. I18N: Module Configuration
 #. I18N: Module Configuration
@@ -285,11 +309,11 @@ msgstr ""
 #: FunctionsGov.php:680 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
-msgstr ""
+msgstr "Organisationnel"
 
 #: FunctionsGov.php:692
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:179
@@ -319,7 +343,7 @@ msgstr "Les hiérarchies de lieux sont affichées historiquement, c'est-à-dire 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Place hierarchy"
-msgstr ""
+msgstr "Hiérarchie des lieux"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:206
@@ -333,7 +357,7 @@ msgstr "Texte et liens du lieu"
 
 #: FunctionsGov.php:686
 msgid "Religious"
-msgstr ""
+msgstr "Religieux"
 
 #: Gov4WebtreesModule.php:448
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -353,6 +377,8 @@ msgstr "Enregistrez l'identifiant actuel afin de recharger les données de la hi
 #, php-format
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr ""
+"Voir aussi %1$s pour la liste originale des types et des descriptions de "
+"type."
 
 #: Gov4WebtreesModule.php:446
 msgid "Set GOV id (outside GEDCOM)"
@@ -366,7 +392,7 @@ msgstr "Définir l'identifiant GOV pour %1$s"
 #. I18N: Module Configuration
 #: FunctionsGov.php:683 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
-msgstr ""
+msgstr "Règlement"
 
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
@@ -375,6 +401,9 @@ msgstr ""
 #, php-format
 msgid "Several object types that are part of this type group in the original model can be seen as problematic in this context, and have been moved to a custom '%1$s' type group."
 msgstr ""
+"Plusieurs types d'objets qui font partie de ce groupe de types dans le "
+"modèle d'origine peuvent être considérés comme problématiques dans ce "
+"contexte et ont été déplacés vers un groupe de types personnalisé '%1$s'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:108
@@ -390,7 +419,7 @@ msgstr "Afficher des informations supplémentaires"
 #: Gov4WebtreesModuleTrait.php:139 Gov4WebtreesModuleTrait.php:148
 #, php-format
 msgid "Show objects of type group '%1$s' in hierarchy"
-msgstr ""
+msgstr "Afficher les objets du groupe de type '%1$s' dans la hiérarchie"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:77
@@ -426,6 +455,9 @@ msgstr "Cette option existe principalement pour les serveurs de démonstration e
 #: Gov4WebtreesModuleTrait.php:150
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
 msgstr ""
+"Cette politique n'a cependant pas été strictement suivie. Cochez cette "
+"option si vous souhaitez toujours afficher les décomptes dans les "
+"hiérarchies."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
@@ -485,7 +517,7 @@ msgstr "Vous pouvez également enregistrer un identifiant vide afin de supprimer
 #: Gov4WebtreesModuleTrait.php:49
 #, php-format
 msgid "You may modify all data retrieved from the GOV server %1$s."
-msgstr ""
+msgstr "Vous pouvez modifier toutes les données extraites du serveur GOV %1$s."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:122
@@ -545,7 +577,7 @@ msgstr "type de GOV inconnu (récemment introduit ?)"
 
 #: Gov4WebtreesModule.php:1106
 msgid "with local modifications"
-msgstr ""
+msgstr "avec des modifications locales"
 
 #~ msgid "Allow objects of type 'confederation' in hierarchy"
 #~ msgstr "Autoriser les objets de type «confédération» dans la hiérarchie"
