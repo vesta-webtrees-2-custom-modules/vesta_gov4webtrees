@@ -10,6 +10,7 @@ use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Http\ViewResponseTrait;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\Webtrees;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Swoole\Http\Request;
@@ -35,7 +36,10 @@ class EditGovMappingController {
    *
    * @return Response
    */
-  public function editGovMapping(ServerRequestInterface $request, Tree $tree): ResponseInterface {
+  public function editGovMapping(
+          ServerRequestInterface $request, 
+          Tree $tree): ResponseInterface {
+      
     //set delay here to mimic slow servers and to test whether select2 is properly initialized (issue #9)
     //sleep(2);
 
@@ -57,7 +61,13 @@ class EditGovMappingController {
       $title = I18N::translate('Reset GOV id for %1$s', $placeName);
     }
     
-    $html = view($this->module->name() . '::modals/edit-gov-mapping', [
+    if (str_starts_with(Webtrees::VERSION, '2.1')) {
+        $viewName = $this->module->name() . '::modals/edit-gov-mapping';
+    } else {
+        $viewName = $this->module->name() . '::modals/edit-gov-mapping_20';
+    }
+    
+    $html = view($viewName, [
                 'moduleName' => $this->module->name(),
                 'placeName' => $placeName,
                 'title' => $title,
@@ -88,13 +98,18 @@ class EditGovMappingController {
     }
     
     //test whether id is valid
-    $gov = FunctionsGov::loadGovObject($this->module, $govId);
+    try {
+        $gov = FunctionsGov::loadGovObject($this->module, $govId);
+    } catch (GOVServerUnavailableException $e) {
+        $error = $this->module->messageGovServerUnavailable();
+      
+        return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
+    }
     
     //unexpected to occur anymore now that we validate via select2GovId (where the same I18N string is used)
     if ($gov == null) {
       $error = I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.');
       
-      //try again
       return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
     }
     
@@ -109,7 +124,10 @@ class EditGovMappingController {
     return response();
   }
 
-  public function select2GovId(ServerRequestInterface $request): ResponseInterface {
+  //webtrees 2.0
+  public function select2GovId(
+          ServerRequestInterface $request): ResponseInterface {
+      
       //$page  = (int) ($request->getParsedBody()['page'] ?? 1);
       $govId = $request->getParsedBody()['q'] ?? '';
 

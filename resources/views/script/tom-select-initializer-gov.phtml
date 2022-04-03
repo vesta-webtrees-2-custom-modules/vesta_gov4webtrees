@@ -1,0 +1,69 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+
+  //a javascript block
+  
+  //ultimately inserted into ajax-modal-vesta (if used within modal)
+  //or used directly, anyway:
+  //
+  //generalizes and replaces original script from ajax.phtml (modal) or as in e.g. trees-privacy.phtml (used directly):
+  
+  /*
+  // Activate autocomplete fields
+  this.querySelectorAll('.tom-select').forEach(element => webtrees.initializeTomSelect(element));
+   */
+?>
+
+/**
+ * Initialize a tom-select input
+ * @param {Element} element
+ * @returns {TomSelect}
+ */
+webtrees.initializeTomSelectGov = function (element) {
+    
+    if (element.tomselect) {
+      return element.tomselect;
+    }
+
+    let options = {};
+
+    options = {
+      <?php
+        //MUST be set, otherwise we always end up in no_results
+      ?>
+      valueField: 'id',
+      
+      plugins: ['dropdown_input','remove_button'],
+      render: {
+        item: (data, escape) => '<div>' + data.text + '</div>',
+        option: (data, escape) => '<div>' + data.text + '</div>',
+        not_loading: (data, escape) => '<div class="no-results"><?= I18N::translate("Please enter at least 10 characters.")?></div>',
+        no_results: (data, escape) => '<div class="no-results"><?= I18N::translate("Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.") ?></div>',
+      },
+      shouldLoad: function (query) {
+        <?php
+        //usually 12, but there are some shorter ones, such as adm_368372
+        //see https://github.com/orchidjs/tom-select/issues/12
+        ?>
+        return query.length >= 10;
+      },
+      load: function (query, callback) {
+        
+        var url = element.dataset.url + '&query=' + encodeURIComponent(query);
+        
+        fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                    callback(json.items);
+            }).catch(()=>{
+                    callback();
+            });
+      },
+    };
+
+    return new TomSelect(element, options);
+}
+
+// Activate autocomplete fields
+this.querySelectorAll('.tom-select-gov').forEach(element => webtrees.initializeTomSelectGov(element));

@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2021-10-02 13:49+0200\n"
+"POT-Creation-Date: 2022-04-03 20:23+0200\n"
 "PO-Revision-Date: 2021-11-19 21:50+0000\n"
 "Last-Translator: Bernd Schwendinger <b0ernie@gmx.net>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,10 +51,7 @@ msgstr "Nach der aktuellen GOV-Spezifikation sollten Objekte vom Typ \"Siedlung\
 #: Gov4WebtreesModuleTrait.php:221
 #, php-format
 msgid "Additionally, the module checks if the respective GOV id, or any of its parents within the hierarchy, has languages defined in the csv file '%1$s'."
-msgstr ""
-"Zusätzlich überprüft das Modul, ob für die entsprechende GOV id, oder "
-"irgendeine in der Hierarchie oberhalb liegende, ein Eintrag in der "
-"Sprachdatei '%1$s' existiert."
+msgstr "Zusätzlich überprüft das Modul, ob für die entsprechende GOV id, oder irgendeine in der Hierarchie oberhalb liegende, ein Eintrag in der Sprachdatei '%1$s' existiert."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
@@ -72,7 +68,7 @@ msgstr "administrativ (Stufe %1$s)"
 msgid "Administrative (other)"
 msgstr "Administrativ (andere)"
 
-#: Gov4WebtreesModule.php:1116
+#: Gov4WebtreesModule.php:1189
 msgid "Administrative levels"
 msgstr "Verwaltungsebenen"
 
@@ -86,19 +82,14 @@ msgstr "Alle Daten (mit Ausnahme der Zuordnung von Orten zu GOV-IDs, die manuell
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:210
 msgid "As a final fallback, determine the place name according to this checkbox:"
-msgstr ""
-"Als letzte Rückfallebene können Sie den Ortsnamen anhand dieses "
-"Kontrollkästchens bestimmen:"
+msgstr "Als letzte Rückfallebene können Sie den Ortsnamen anhand dieses Kontrollkästchens bestimmen:"
 
 #. I18N: Module Configuration
 #. I18N::translate('They often overlap with other objects, which would lead to confusing hierarchies in cases where objects have more than one parent object at a specific time.') . ' ' .
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
-msgstr ""
-"Aktivieren Sie diese Option, wenn Sie möchten, dass Organisationen weiterhin "
-"in Hierarchien erscheinen, z. B. die Vereinten Nationen als übergeordnetes "
-"Objekt souveräner Einheiten."
+msgstr "Aktivieren Sie diese Option, wenn Sie möchten, dass Organisationen weiterhin in Hierarchien erscheinen, z. B. die Vereinten Nationen als übergeordnetes Objekt souveräner Einheiten."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -110,10 +101,21 @@ msgstr "Kompakte Anzeige (Verwaltungsebenen nur als Tooltips)"
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr "Folglich können Ortshierarchieinformationen nur indirekt über die GOV-Website geändert werden."
 
+#: resources/views/admin/gov-data-list.phtml:21
+#: resources/views/admin/gov-data.phtml:24
+msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
+msgstr ""
+
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr "Zeigt einen Tooltip an, der die Quelle der GOV-ID angibt. Dieser ist hauptsächlich zur Fehleranalyse gedacht."
+
+#: Http/RequestHandlers/GovDataEdit.php:88
+#: Http/RequestHandlers/GovDataEdit.php:89
+#, php-format
+msgid "Edit %1$s for %2$s"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:237
@@ -123,10 +125,7 @@ msgstr "Führt Anfragen an den GOV-Server über NuSOAP aus, anstatt den nativen 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:219
 msgid "For a given place, this module displays one or more names by matching the available names against a list of languages, according to the following strategy:"
-msgstr ""
-"Dieses Modul zeigt für einen bestimmten Ort einen oder mehrere Namen an, "
-"indem es die verfügbaren Namen mit einer Liste von Sprachen abgleicht, und "
-"zwar nach der folgenden Strategie:"
+msgstr "Dieses Modul zeigt für einen bestimmten Ort einen oder mehrere Namen an, indem es die verfügbaren Namen mit einer Liste von Sprachen abgleicht, und zwar nach der folgenden Strategie:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:178
@@ -136,25 +135,62 @@ msgstr "Für Ereignisse mit Zeitspanne bitte das gemittelte Datum nutzen"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:161
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
+msgstr "Für feinere Anpassungen und um die Liste der Typen und Typengruppen anzuzeigen, bearbeiten Sie die GOV-Daten lokal."
+
+#: resources/views/admin/gov-data-edit.phtml:89
+#: resources/views/admin/gov-data.phtml:32
+#: resources/views/admin/gov-data.phtml:99
+#: resources/views/admin/gov-data.phtml:169
+msgid "From"
 msgstr ""
-"Für feinere Anpassungen und um die Liste der Typen und Typengruppen "
-"anzuzeigen, bearbeiten Sie die GOV-Daten lokal."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
 msgid "GOV Id Management"
 msgstr "GOV-ID Verwaltung"
 
+#: Http/RequestHandlers/GovDataEdit.php:71
+#: resources/views/admin/gov-data.phtml:30
+#: resources/views/admin/gov-data.phtml:84
+msgid "GOV Name"
+msgstr ""
+
+#: Http/RequestHandlers/GovDataEdit.php:69
+#: resources/views/admin/gov-data.phtml:98
+#: resources/views/admin/gov-data.phtml:154
+msgid "GOV Object Type"
+msgstr ""
+
+#: Http/RequestHandlers/GovDataEdit.php:73
+#: resources/views/admin/gov-data.phtml:168
+#: resources/views/admin/gov-data.phtml:222
+msgid "GOV Parent"
+msgstr ""
+
+#: Http/RequestHandlers/GovData.php:71 Http/RequestHandlers/GovDataEdit.php:94
+#: Http/RequestHandlers/GovDataList.php:45
+msgid "GOV data"
+msgstr ""
+
+#: resources/views/admin/gov-data-list.phtml:33
+msgid "GOV data for"
+msgstr ""
+
+#: Http/RequestHandlers/GovData.php:65 Http/RequestHandlers/GovData.php:66
+#, php-format
+msgid "GOV data for %1$s"
+msgstr ""
+
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
 msgstr "GOV-ID"
 
-#: EditGovMappingController.php:84
+#: EditGovMappingController.php:94
 #, php-format
 msgid "GOV id for %1$s has been removed."
 msgstr "GOV-ID für %1$s wurde entfernt."
 
-#: EditGovMappingController.php:106
+#: EditGovMappingController.php:121
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr "GOV-ID für %1$s wurde auf %2$s gesetzt."
@@ -168,25 +204,25 @@ msgstr "GOV-IDs werden standardmäßig außerhalb der GEDCOM-Daten gespeichert, 
 #: Gov4WebtreesModuleTrait.php:158
 #, php-format
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
-msgstr ""
-"GOV-Objekte gehören zu verschiedenen Typgruppen. Die GOV-Ortshierarchie "
-"basiert auf Objekten der Typgruppe '%1$s'."
+msgstr "GOV-Objekte gehören zu verschiedenen Typgruppen. Die GOV-Ortshierarchie basiert auf Objekten der Typgruppe '%1$s'."
 
-#: Gov4WebtreesModule.php:337
+#: Gov4WebtreesModule.php:398
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr "Die GOV-Ortshierarchie für %1$s wurde vom GOV-Server geladen."
 
-#: Gov4WebtreesModule.php:339
+#: Gov4WebtreesModule.php:400
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr "Die GOV-Ortshierarchie wurde vom GOV-Server geladen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:53
 msgid "Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group."
+msgstr "Blenden Sie ein Objekt aus und stoppen Sie die Ortshierarchie an diesem Punkt, indem Sie es in eine irrelevante Typgruppe verschieben."
+
+#: resources/views/admin/gov-data-list.phtml:27
+msgid "Hide data without local modifications"
 msgstr ""
-"Blenden Sie ein Objekt aus und stoppen Sie die Ortshierarchie an diesem "
-"Punkt, indem Sie es in eine irrelevante Typgruppe verschieben."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -211,25 +247,17 @@ msgstr "Wenn deaktiviert, wird einer anderen Sprache als Deutsch der Vorzug gege
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:143 Gov4WebtreesModuleTrait.php:151
 msgid "In any case, they are still used as fallbacks to determine further higher-level objects."
-msgstr ""
-"In jedem Fall werden sie weiterhin als Rückfallebene verwendet, um weitere "
-"übergeordnete Objekte zu ermitteln."
+msgstr "In jedem Fall werden sie weiterhin als Rückfallebene verwendet, um weitere übergeordnete Objekte zu ermitteln."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:52
 msgid "In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences)."
-msgstr ""
-"Im Allgemeinen können Sie ein Objekt unter Beibehaltung der gesamten "
-"Ortshierarchie ausblenden, indem Sie es in eine ausgeblendete Typgruppe "
-"verschieben (siehe Einstellungen)."
+msgstr "Im Allgemeinen können Sie ein Objekt unter Beibehaltung der gesamten Ortshierarchie ausblenden, indem Sie es in eine ausgeblendete Typgruppe verschieben (siehe Einstellungen)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:51
 msgid "In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire)."
-msgstr ""
-"Insbesondere möchten Sie vielleicht einige umstrittene Änderungen, die auf "
-"dem GOV-Server vorgenommen wurden, lokal rückgängig machen (z. B. den "
-"Objekttyp des Heiligen Römischen Reiches)."
+msgstr "Insbesondere möchten Sie vielleicht einige umstrittene Änderungen, die auf dem GOV-Server vorgenommen wurden, lokal rückgängig machen (z. B. den Objekttyp des Heiligen Römischen Reiches)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
@@ -246,7 +274,7 @@ msgstr "In diesem Fall werden die GOV-IDs in separaten Tabellen gespeichert, wel
 msgid "Internals (adjusted automatically if necessary)"
 msgstr "Interna (automatische Anpassung sofern erforderlich)"
 
-#: EditGovMappingController.php:95
+#: EditGovMappingController.php:111
 #: resources/views/script/select2-initializer-gov.phtml:15
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
 msgstr "Keine zulässige GOV-ID! Zulässige IDs haben die Form 'EITTZE_W3091', 'object_1086218' etc."
@@ -297,16 +325,12 @@ msgstr "Hinweis: Letzlich dürfte die Korrektur der korrespondierenden GOV-Daten
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:140
 msgid "Objects of this type strictly do not belong to the administrative hierarchy in the sense that they are no territorial entities (Gebietskörperschaften)."
-msgstr ""
-"Objekte dieser Art gehören streng genommen nicht zur Verwaltungshierarchie "
-"in dem Sinne, da sie keine Gebietskörperschaften sind."
+msgstr "Objekte dieser Art gehören streng genommen nicht zur Verwaltungshierarchie in dem Sinne, da sie keine Gebietskörperschaften sind."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:50
 msgid "Obvious mistakes should be corrected on the GOV server itself, but there may be cases where this is not easily possible."
-msgstr ""
-"Offensichtliche Fehler sollten auf dem GOV-Server selbst korrigiert werden, "
-"doch kann es Fälle geben, in denen dies nicht ohne weiteres möglich ist."
+msgstr "Offensichtliche Fehler sollten auf dem GOV-Server selbst korrigiert werden, doch kann es Fälle geben, in denen dies nicht ohne weiteres möglich ist."
 
 #. I18N: Module Configuration
 #. I18N: Module Configuration
@@ -365,11 +389,18 @@ msgstr "Orts-Text und -Verknüpfung"
 msgid "Religious"
 msgstr "Religiös"
 
-#: Gov4WebtreesModule.php:448
+#: resources/views/admin/gov-data.phtml:84
+#: resources/views/admin/gov-data.phtml:154
+#: resources/views/admin/gov-data.phtml:222
+#, php-format
+msgid "Remove this %1$s?"
+msgstr ""
+
+#: Gov4WebtreesModule.php:504
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "GOV-ID anpassen (außerhalb der GEDCOM-Daten) und die Ortshierarchie neu laden"
 
-#: EditGovMappingController.php:57
+#: EditGovMappingController.php:61
 #, php-format
 msgid "Reset GOV id for %1$s"
 msgstr "GOV-ID für %1$s anpassen"
@@ -382,14 +413,13 @@ msgstr "Um die Ortshierarchie neu vom GOV-Server zu laden, aktuelle GOV-Id speic
 #: Gov4WebtreesModuleTrait.php:162
 #, php-format
 msgid "See also %1$s for the original list of types and type descriptions."
-msgstr ""
-"Siehe auch %1$s für die ursprüngliche Liste der Typen und Typbeschreibungen."
+msgstr "Siehe auch %1$s für die ursprüngliche Liste der Typen und Typbeschreibungen."
 
-#: Gov4WebtreesModule.php:446
+#: Gov4WebtreesModule.php:502
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "GOV-ID setzen (außerhalb der GEDCOM-Daten)"
 
-#: EditGovMappingController.php:55
+#: EditGovMappingController.php:59
 #, php-format
 msgid "Set GOV id for %1$s"
 msgstr "GOV-ID für %1$s setzen"
@@ -405,10 +435,7 @@ msgstr "Siedlung"
 #: Gov4WebtreesModuleTrait.php:160
 #, php-format
 msgid "Several object types that are part of this type group in the original model can be seen as problematic in this context, and have been moved to a custom '%1$s' type group."
-msgstr ""
-"Mehrere Objekttypen, die im ursprünglichen Modell Teil dieser Typgruppe "
-"sind, können in diesem Zusammenhang als problematisch angesehen werden und "
-"wurden in die benutzerdefinierte Typgruppe \"%1$s\" verschoben."
+msgstr "Mehrere Objekttypen, die im ursprünglichen Modell Teil dieser Typgruppe sind, können in diesem Zusammenhang als problematisch angesehen werden und wurden in die benutzerdefinierte Typgruppe \"%1$s\" verschoben."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:108
@@ -434,11 +461,9 @@ msgstr "Anschließend werden wieder alle Daten vom GOV-Server abgerufen. "
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:218
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
-msgstr ""
-"Der GOV-Server bietet Ortsnamen in verschiedenen Sprachen an. Es gibt jedoch "
-"kein Konzept einer \"offiziellen Sprache\" für einen Ort."
+msgstr "Der GOV-Server bietet Ortsnamen in verschiedenen Sprachen an. Es gibt jedoch kein Konzept einer \"offiziellen Sprache\" für einen Ort."
 
-#: Gov4WebtreesModule.php:133
+#: Gov4WebtreesModule.php:150
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr "Der GOV-Server scheint zeitweise nicht erreichbar zu sein."
@@ -451,10 +476,7 @@ msgstr "Die aktuelle Benutzersprache hat immer die höchste Priorität."
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:222
 msgid "These languages are then used, in the given order, either as fallbacks, or (if upper-cased) as additional languages (i.e. 'official languages' for a place hierarchy)."
-msgstr ""
-"Diese Sprachen werden dann in der angegebenen Reihenfolge entweder als "
-"Ausweichsprachen oder (bei Großschreibung) als zusätzliche Sprachen (d. h. "
-"\"Amtssprachen\" für eine Ortshierarchie) verwendet."
+msgstr "Diese Sprachen werden dann in der angegebenen Reihenfolge entweder als Ausweichsprachen oder (bei Großschreibung) als zusätzliche Sprachen (d. h. \"Amtssprachen\" für eine Ortshierarchie) verwendet."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:102
@@ -464,9 +486,14 @@ msgstr "Diese Option ist hauptsächlich für Demo-Server vorgesehen und wird and
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:150
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
+msgstr "Diese Richtlinie wurde jedoch nicht streng befolgt. Aktivieren Sie diese Option, wenn Sie weiterhin Siedlungen in Hierarchien anzeigen möchten."
+
+#: resources/views/admin/gov-data-edit.phtml:100
+#: resources/views/admin/gov-data.phtml:33
+#: resources/views/admin/gov-data.phtml:100
+#: resources/views/admin/gov-data.phtml:170
+msgid "To"
 msgstr ""
-"Diese Richtlinie wurde jedoch nicht streng befolgt. Aktivieren Sie diese "
-"Option, wenn Sie weiterhin Siedlungen in Hierarchien anzeigen möchten."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
@@ -516,9 +543,7 @@ msgstr "Innerhalb der GEDCOM-Daten (mittels anderem benutzerdefinierten Modul). 
 #: Gov4WebtreesModuleTrait.php:223
 #, php-format
 msgid "You can create and modify this csv file according to your personal preferences, see '%1$s' for an example."
-msgstr ""
-"Sie können diese CSV-Datei nach Ihren persönlichen Vorlieben erstellen und "
-"ändern, siehe \"%1$s\" für ein Beispiel."
+msgstr "Sie können diese CSV-Datei nach Ihren persönlichen Vorlieben erstellen und ändern, siehe \"%1$s\" für ein Beispiel."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
@@ -565,7 +590,7 @@ msgstr "begründet durch die Annahme, dass Ortsnamen in der regionalen Sprache g
 msgid "present time"
 msgstr "Gegenwart"
 
-#: Gov4WebtreesModule.php:392 Gov4WebtreesModule.php:430
+#: Gov4WebtreesModule.php:441 Gov4WebtreesModule.php:486
 msgid "reload the GOV place hierarchy"
 msgstr "Ortshierarchie neu laden"
 
@@ -574,19 +599,19 @@ msgstr "Ortshierarchie neu laden"
 msgid "reset all cached data once"
 msgstr "Zurücksetzen aller zwischengespeicherten Daten auf einmal"
 
-#: Gov4WebtreesModule.php:992
+#: Gov4WebtreesModule.php:1066
 msgid "this place does not exist at this point in time"
 msgstr "diesen Ort gibt es zu diesem Zeitpunkt nicht"
 
-#: Gov4WebtreesModule.php:552 Gov4WebtreesModule.php:759
+#: Gov4WebtreesModule.php:614 Gov4WebtreesModule.php:837
 msgid "today"
 msgstr "heute"
 
-#: FunctionsGov.php:1113
+#: FunctionsGov.php:1119
 msgid "unknown GOV type (newly introduced?)"
 msgstr "unbekannter GOV-Typ (neu eingeführt?)"
 
-#: Gov4WebtreesModule.php:1106
+#: Gov4WebtreesModule.php:1179
 msgid "with local modifications"
 msgstr "mit lokalen Änderungen"
 

@@ -17,15 +17,15 @@ e(route('module', [
     <div class="modal-body">
         <div id="edit-gov-id-error"></div>
         
-        <?= view($moduleName . '::edit/gov-id-edit-control', [
+        <?= view($moduleName . '::edit/gov-id-edit-control_20', [
             'moduleName' => $moduleName, 
             'withLabel' => true, 
             'id' => 'gov-id',
             'name' => 'gov-id',
             'placeName' => $placeName, 
-            'placeNameSelector' => null, 
+            'placeNameInputSelector' => null, 
             'internal' => true, 
-            'selectInitializer' => null, //we're within a modal: initialize elsewhere!
+            'select2Initializer' => null, //we're within a modal: initialize elsewhere!
             'govId' => $govId]) ?>
     </div>
 

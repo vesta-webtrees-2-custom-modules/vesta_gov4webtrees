@@ -23,8 +23,8 @@ if (!$thePlace) {
     <?php 
       //TODO we should cutoff, for href, at first comma
     ?>
-    <?php if ($placeNameSelector !== null): ?>
-        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/extended" onclick="var REF = $('<?= $placeNameSelector ?>'); var VAL = (REF[0].tagName.toLowerCase() === 'input'?REF.val():REF.text()); window.open((VAL !== '')?'http://gov.genealogy.net/search/name/?name='+VAL:'http://gov.genealogy.net/search/extended'); return false;" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+    <?php if ($placeNameInputSelector !== null): ?>
+        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/extended" onclick="var REF = $('<?= $placeNameInputSelector ?>'); window.open((REF.val() !== '')?'http://gov.genealogy.net/search/name/?name='+REF.val():'http://gov.genealogy.net/search/extended'); return false;" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     <?php else: ?>
         <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     <?php endif ?>    
@@ -39,19 +39,20 @@ if (!$thePlace) {
 
 <?php
   //data-minimum-input-length: usually 12, but there are some shorter ones, such as adm_368372
-  //moved to tom-select-initializer-gov.html  
-
-  //TODO handle in tom-select  
-  //data-ajax--delay="350"
 ?>
 
 <select
     autocomplete="off"
-    class="form-control tom-select-gov"
-    data-url="<?= e(route('module', [
+    class="form-control select2gov"
+    data-ajax--delay="350"
+    data-minimum-input-length="10"
+    data-ajax--type="POST"
+    data-ajax--url="<?= e(route('module', [
         'module' => $moduleName,
-        'action' => 'TomSelectGovId',
+        'action' => 'Select2GovId',
     ])) ?>"
+    data-allow-clear="true"
+    data-placeholder=""
     id="<?= $id ?>"
     name="<?= $name ?>"
     style="width:100%"
@@ -66,12 +67,11 @@ if (!$thePlace) {
 </select>
 
 <?php View::push('javascript') ?>
-<?php if ($selectInitializer === null): /* cf ajax.phtml (in case this is used as a modal, or part thereof) */
+<?php if ($select2Initializer === null): /* cf ajax.phtml (in case this is used as a modal, or part thereof), with adjustment for 'noResults' */
 //nothing to do, handled elsewhere
  
 //this fixes issue #9.  
 //apparently, there is no way to properly and consistently (fast vs slow servers) initialize select2 within modal via script loaded via ajax.
-//webtrees 2.1: not sure if this is also the case for tomselect? Probably not.
 //
 //note that in any case we'd keep adding more event listeners every time the content is loaded via ajax,
 //so anyway, it seems better to initialize from placeholder, as in ajax.phtml;
@@ -79,10 +79,16 @@ if (!$thePlace) {
 //
 //by the way: why are we even loading modal content via ajax? seems clumsy.
 ?>
-<?php else: /* cf webtrees.js */ ?>
+<?php else: /* cf webtrees.js, with adjustment for 'noResults' */ ?>
 <script>
 $(function() {
-  <?= $selectInitializer ?>
+  <?= $select2Initializer ?>
+  //do we really need this?
+  //$("select.select2gov:not([multiple])")
+  //  .on("select2:unselect", function (evt) {
+  //      $(evt.delegateTarget).html("<option value=\"\" selected></option>");
+  //  });
+   
 });
 </script>
 <?php endif ?>

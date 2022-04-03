@@ -8,6 +8,7 @@ use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\Gov4WebtreesModule;
 use Cissee\WebtreesExt\MoreI18N;
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
 use Fisharebest\Webtrees\Http\ViewResponseTrait;
 use Fisharebest\Webtrees\I18N;
 use Psr\Http\Message\ResponseInterface;
@@ -66,7 +67,7 @@ class GovData implements RequestHandlerInterface
         $titlePlus = I18N::translate('GOV data for %1$s', $icon . FunctionsGov::aToGovServer($govId, $label));
 
         $breadcrumbs[route(ControlPanel::class)] = MoreI18N::xlate('Control panel');
-        $breadcrumbs[route('modules')] = MoreI18N::xlate('Modules');
+        $breadcrumbs[route(ModulesAllPage::class)] = MoreI18N::xlate('Modules');
         $breadcrumbs[$this->module->getConfigLink()] = $this->module->title();
         $breadcrumbs[route(GovDataList::class)] = I18N::translate('GOV data');
         $breadcrumbs[] = $label;

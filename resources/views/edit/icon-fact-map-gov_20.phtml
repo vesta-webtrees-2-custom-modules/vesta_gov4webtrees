@@ -1,10 +1,9 @@
 <button 
     class="btn btn-link btn-sm" 
     type="button" 
-    data-bs-toggle="modal" 
-    data-bs-backdrop="static"
-    data-bs-target="#wt-ajax-modal-vesta" 
-    data-wt-href="<?=
+    data-toggle="modal" 
+    data-target="#wt-ajax-modal-vesta" 
+    data-href="<?=
     e(route('module', [
         'module' => $moduleName,
         'action' => 'EditGovMapping',
@@ -12,7 +11,7 @@
         'tree' => $fact->record()->tree()->name()
     ]));
     ?>" 
-    data-wt-select-id="<?= 'UNUSED' ?>" 
+    data-select-id="<?= 'UNUSED' ?>" 
     title="<?= $title ?>">
         <?= view($moduleName . '::icons/map-gov') ?>
         <span class="sr-only"><?= $title ?></span>

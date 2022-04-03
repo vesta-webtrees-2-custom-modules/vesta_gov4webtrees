@@ -9,6 +9,7 @@ use Exception;
 use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Registry;
+use Fisharebest\Webtrees\Webtrees;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
 use nusoap_client;
@@ -705,14 +706,22 @@ class FunctionsGov {
     
     $types = new Collection($typeIds);
     
-    return $types->mapWithKeys(static function (int $key) use ($module, $languagesForTypes): array {
+    $ret = $types->mapWithKeys(static function (int $key) use ($module, $languagesForTypes): array {
                 //$desc = FunctionsGov::retrieveTypeDescription($module, "".$key, $locale);
                 $desc = FunctionsGov::resolveTypeDescription($module, $key, $languagesForTypes);
                 if ($desc !== null) {
                   return [$key => $desc . " (" . $key . ")"];
                 }
                 return [$key => "".$key];
-            })
+            });
+    
+    if (str_starts_with(Webtrees::VERSION, '2.1')) {
+        return $ret
+            ->sort(I18N::comparator())
+            ->toArray();
+    }
+            
+    return $ret
             ->sort('\Fisharebest\Webtrees\I18N::strcasecmp')
             ->toArray();
   }
