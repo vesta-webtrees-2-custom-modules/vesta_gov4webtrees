@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-03 20:23+0200\n"
+"POT-Creation-Date: 2022-04-04 10:30+0200\n"
 "PO-Revision-Date: 2020-11-22 12:28+0000\n"
 "Last-Translator: Luca Bighi <luca74@email.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/it/>\n"
@@ -58,13 +58,13 @@ msgstr ""
 msgid "Administrative"
 msgstr ""
 
-#: FunctionsGov.php:659 FunctionsGov.php:662 FunctionsGov.php:665
-#: FunctionsGov.php:668 FunctionsGov.php:671 FunctionsGov.php:674
+#: FunctionsGov.php:660 FunctionsGov.php:663 FunctionsGov.php:666
+#: FunctionsGov.php:669 FunctionsGov.php:672 FunctionsGov.php:675
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:677
+#: FunctionsGov.php:678
 msgid "Administrative (other)"
 msgstr ""
 
@@ -102,7 +102,9 @@ msgid "Consequently, place hierarchy information can only be changed indirectly,
 msgstr "Di conseguenza le informazioni sulla gerarchia dei luoghi possono essere cambiate solo, indirettamente, tramite il sito GOV."
 
 #: resources/views/admin/gov-data-list.phtml:21
+#: resources/views/admin/gov-data-list_20.phtml:21
 #: resources/views/admin/gov-data.phtml:24
+#: resources/views/admin/gov-data_20.phtml:24
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
 msgstr ""
 
@@ -111,8 +113,8 @@ msgstr ""
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr "Mosta un tooltip indicante l'origine del GOV-id. E' pensata principalmente per il debug."
 
-#: Http/RequestHandlers/GovDataEdit.php:88
 #: Http/RequestHandlers/GovDataEdit.php:89
+#: Http/RequestHandlers/GovDataEdit.php:90
 #, php-format
 msgid "Edit %1$s for %2$s"
 msgstr ""
@@ -141,6 +143,9 @@ msgstr ""
 #: resources/views/admin/gov-data.phtml:32
 #: resources/views/admin/gov-data.phtml:99
 #: resources/views/admin/gov-data.phtml:169
+#: resources/views/admin/gov-data_20.phtml:32
+#: resources/views/admin/gov-data_20.phtml:99
+#: resources/views/admin/gov-data_20.phtml:169
 msgid "From"
 msgstr ""
 
@@ -149,39 +154,41 @@ msgstr ""
 msgid "GOV Id Management"
 msgstr "Gestione dei GOV-id"
 
-#: Http/RequestHandlers/GovDataEdit.php:71
+#: Http/RequestHandlers/GovDataEdit.php:72
 #: resources/views/admin/gov-data.phtml:30
-#: resources/views/admin/gov-data.phtml:84
+#: resources/views/admin/gov-data_20.phtml:30
 msgid "GOV Name"
 msgstr ""
 
-#: Http/RequestHandlers/GovDataEdit.php:69
+#: Http/RequestHandlers/GovDataEdit.php:70
 #: resources/views/admin/gov-data.phtml:98
-#: resources/views/admin/gov-data.phtml:154
+#: resources/views/admin/gov-data_20.phtml:98
 msgid "GOV Object Type"
 msgstr ""
 
-#: Http/RequestHandlers/GovDataEdit.php:73
+#: Http/RequestHandlers/GovDataEdit.php:74
 #: resources/views/admin/gov-data.phtml:168
-#: resources/views/admin/gov-data.phtml:222
+#: resources/views/admin/gov-data_20.phtml:168
 msgid "GOV Parent"
 msgstr ""
 
-#: Http/RequestHandlers/GovData.php:71 Http/RequestHandlers/GovDataEdit.php:94
-#: Http/RequestHandlers/GovDataList.php:45
+#: Http/RequestHandlers/GovData.php:74 Http/RequestHandlers/GovDataEdit.php:95
+#: Http/RequestHandlers/GovDataList.php:47
 msgid "GOV data"
 msgstr ""
 
 #: resources/views/admin/gov-data-list.phtml:33
+#: resources/views/admin/gov-data-list_20.phtml:33
 msgid "GOV data for"
 msgstr ""
 
-#: Http/RequestHandlers/GovData.php:65 Http/RequestHandlers/GovData.php:66
+#: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
 #, php-format
 msgid "GOV data for %1$s"
 msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
+#: resources/views/edit/gov-id-edit-control_20.phtml:16
 msgid "GOV id"
 msgstr "GOV-id"
 
@@ -221,6 +228,7 @@ msgid "Hide an object and stop the place hierarchy at that point by moving it to
 msgstr ""
 
 #: resources/views/admin/gov-data-list.phtml:27
+#: resources/views/admin/gov-data-list_20.phtml:27
 msgid "Hide data without local modifications"
 msgstr ""
 
@@ -279,6 +287,10 @@ msgstr "Interni (aggiustati automaticamente se necessario)"
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
 msgstr "GOV-id non valido! Esempi di GOV-id validi sono 'EITTZE_W3091', 'object_1086218'."
 
+#: resources/views/script/tom-select-initializer-gov.phtml:42
+msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
+msgstr ""
+
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
 msgid "It is recommended to use only one of the following options. You may also (temporarily) disable all editing via unchecking all of them."
@@ -289,7 +301,7 @@ msgstr "E' raccomando l'uso di una sola delle seguenti opzioni. Puoi anche (temp
 msgid "It will not be overwritten by subsequent updates."
 msgstr ""
 
-#: FunctionsGov.php:689
+#: FunctionsGov.php:690
 msgid "Judicial"
 msgstr ""
 
@@ -305,6 +317,8 @@ msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
+#: resources/views/edit/gov-id-edit-control_20.phtml:27
+#: resources/views/edit/gov-id-edit-control_20.phtml:29
 msgid "Look up a matching GOV id on the GOV server"
 msgstr "Cerca un GOV-id corrispondente nel server GOV"
 
@@ -314,6 +328,7 @@ msgid "Mappings of places to GOV ids are not affected."
 msgstr "la corrispondenza trai i luoghi e i GOV-id non viene modificata."
 
 #: resources/views/edit/gov-id-edit-control.phtml:33
+#: resources/views/edit/gov-id-edit-control_20.phtml:33
 msgid "Note: The mapping from place to GOV id is stored outside the gedcom data."
 msgstr "Nota: La corrispondenza tra i luoghi e i GOV-id sono salvati all'esterno dei dati gedcom."
 
@@ -336,12 +351,12 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:680 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:681 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
-#: FunctionsGov.php:692
+#: FunctionsGov.php:693
 msgid "Other"
 msgstr ""
 
@@ -385,15 +400,30 @@ msgstr ""
 msgid "Place text and links"
 msgstr "Testo e link del luogo"
 
-#: FunctionsGov.php:686
+#: resources/views/script/tom-select-initializer-gov.phtml:41
+msgid "Please enter at least 10 characters."
+msgstr ""
+
+#: FunctionsGov.php:687
 msgid "Religious"
 msgstr ""
 
+#. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:84
+#: resources/views/admin/gov-data_20.phtml:84
+msgid "Remove this GOV Name?"
+msgstr ""
+
+#. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
+#: resources/views/admin/gov-data_20.phtml:154
+msgid "Remove this GOV Object Type?"
+msgstr ""
+
+#. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:222
-#, php-format
-msgid "Remove this %1$s?"
+#: resources/views/admin/gov-data_20.phtml:222
+msgid "Remove this GOV Parent?"
 msgstr ""
 
 #: Gov4WebtreesModule.php:504
@@ -406,6 +436,7 @@ msgid "Reset GOV id for %1$s"
 msgstr "Reimposta il GOV-id per %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:34
+#: resources/views/edit/gov-id-edit-control_20.phtml:34
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
 msgstr "Salva l'id corrente per poter ricaricare i dati della gerarchia dei luoghi dal server GOV."
 
@@ -425,7 +456,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Imposta il GOV-id per %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:683 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:684 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
@@ -492,6 +523,9 @@ msgstr ""
 #: resources/views/admin/gov-data.phtml:33
 #: resources/views/admin/gov-data.phtml:100
 #: resources/views/admin/gov-data.phtml:170
+#: resources/views/admin/gov-data_20.phtml:33
+#: resources/views/admin/gov-data_20.phtml:100
+#: resources/views/admin/gov-data_20.phtml:170
 msgid "To"
 msgstr ""
 
@@ -546,6 +580,7 @@ msgid "You can create and modify this csv file according to your personal prefer
 msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
+#: resources/views/edit/gov-id-edit-control_20.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
 msgstr "Puoi anche salvare un id vuoto per scollegare il luogo."
 
@@ -607,7 +642,7 @@ msgstr ""
 msgid "today"
 msgstr "oggi"
 
-#: FunctionsGov.php:1119
+#: FunctionsGov.php:1128
 msgid "unknown GOV type (newly introduced?)"
 msgstr ""
 
