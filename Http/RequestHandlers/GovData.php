@@ -11,11 +11,13 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
 use Fisharebest\Webtrees\Http\ViewResponseTrait;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Webtrees;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use function redirect;
 use function route;
+use function str_starts_with;
 
 /**
  * Show GOV data from the GOV server, and local modifications.
@@ -74,6 +76,12 @@ class GovData implements RequestHandlerInterface
         
         $this->layout = 'layouts/administration';
 
+        if (str_starts_with(Webtrees::VERSION, '2.1')) {
+            $view = $this->module->name() . '::admin/gov-data';
+        } else {
+            $view = $this->module->name() . '::admin/gov-data_20';
+        }
+        
         return $this->viewResponse($this->module->name() . '::admin/gov-data', [
             'title'             => $title,
             'breadcrumbs'       => $breadcrumbs,

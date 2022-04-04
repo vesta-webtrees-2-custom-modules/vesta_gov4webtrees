@@ -81,7 +81,7 @@ use Vesta\Model\DateUtils;
                 <?php if ($prop->getSticky()): ?>
                     <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>">
                         <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Name?') ?>">
+                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Name?') ?>">
                             <?= view('icons/delete') ?>
                         </button>
                     </form>
@@ -151,7 +151,7 @@ use Vesta\Model\DateUtils;
                 <?php if ($prop->getSticky()): ?>
                     <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>">
                         <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Object Type?') ?>">
+                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Object Type?') ?>">
                             <?= view('icons/delete') ?>
                         </button>
                     </form>
@@ -219,7 +219,7 @@ use Vesta\Model\DateUtils;
                 <?php if ($prop->getSticky()): ?>
                     <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'parent', 'key' => $prop->getKey()])) ?>">
                         <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Parent?') ?>">
+                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Parent?') ?>">
                             <?= view('icons/delete') ?>
                         </button>
                     </form>
