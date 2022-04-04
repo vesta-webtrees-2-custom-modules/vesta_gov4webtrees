@@ -455,8 +455,8 @@ class GovObjectSnapshot {
 
 class FunctionsGov {
 
-  //TODO update regularly! Last update: 2021/05. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
-  public static $MAX_KNOWN_TYPE = 277;
+  //TODO update regularly! Last update: 2022/04. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+  public static $MAX_KNOWN_TYPE = 278;
   
   //http://gov.genealogy.net/types.owl#group_1
   //with subs:
@@ -488,7 +488,7 @@ class FunctionsGov {
       
   protected static $TYPES_ADM4 = array(1, 2, /*48,*/ /*94,*/ 97, 122, /*127,*/ 152, 205, 226, 259, 264, 266);
   
-  protected static $TYPES_ADM5 = array(4, 14, 18, 76, 83, 85, 95, 108, 109, 136, 140, 143, 145, /*148,*/ 150, 154, 162, 163, 165, 169, 180, 213, 218, 227, 246, 255, 257, 258, 267, 268, 269, 271, 272, 273, 274, 275);
+  protected static $TYPES_ADM5 = array(4, 14, 18, 76, 83, 85, 95, 108, 109, 136, 140, 143, 145, /*148,*/ 150, 154, 162, 163, 165, 169, 180, 213, 218, 227, 246, 255, 257, 258, 267, 268, 269, 271, 272, 273, 274, 275, 278);
   
   protected static $TYPES_ADM6 = array(52, 144, 156, 164, 181, 247, 262);
   
