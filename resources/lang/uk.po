@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-04 10:30+0200\n"
+"POT-Creation-Date: 2022-04-06 21:40+0200\n"
 "PO-Revision-Date: 2021-06-15 07:32+0000\n"
 "Last-Translator: z-yurets <zaharchenko.yurij@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
@@ -58,17 +58,17 @@ msgstr "Крім того, модуль перевіряє, чи має відп
 msgid "Administrative"
 msgstr ""
 
-#: FunctionsGov.php:660 FunctionsGov.php:663 FunctionsGov.php:666
-#: FunctionsGov.php:669 FunctionsGov.php:672 FunctionsGov.php:675
+#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
+#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:678
+#: FunctionsGov.php:679
 msgid "Administrative (other)"
 msgstr ""
 
-#: Gov4WebtreesModule.php:1189
+#: Gov4WebtreesModule.php:1191
 msgid "Administrative levels"
 msgstr "Адміністративні рівні"
 
@@ -301,7 +301,7 @@ msgstr "Рекомендується використовувати лише о�
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Він не буде замінений під час наступних оновлень."
 
-#: FunctionsGov.php:690
+#: FunctionsGov.php:691
 msgid "Judicial"
 msgstr ""
 
@@ -351,12 +351,12 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:681 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
-#: FunctionsGov.php:693
+#: FunctionsGov.php:694
 msgid "Other"
 msgstr ""
 
@@ -404,7 +404,7 @@ msgstr "Розмістіть текст та посилання"
 msgid "Please enter at least 10 characters."
 msgstr ""
 
-#: FunctionsGov.php:687
+#: FunctionsGov.php:688
 msgid "Religious"
 msgstr ""
 
@@ -456,7 +456,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Встановити ідентифікатор GOV для %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:684 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
@@ -634,7 +634,7 @@ msgstr "перезавантажити ієрархію місця GOV"
 msgid "reset all cached data once"
 msgstr "скинути всі кешовані дані один раз"
 
-#: Gov4WebtreesModule.php:1066
+#: Gov4WebtreesModule.php:1067
 msgid "this place does not exist at this point in time"
 msgstr "на даний момент цього місця не існує"
 
@@ -642,11 +642,11 @@ msgstr "на даний момент цього місця не існує"
 msgid "today"
 msgstr "сьогодні"
 
-#: FunctionsGov.php:1128
+#: FunctionsGov.php:1129
 msgid "unknown GOV type (newly introduced?)"
 msgstr "невідомий тип GOV (нещодавно введений?)"
 
-#: Gov4WebtreesModule.php:1179
+#: Gov4WebtreesModule.php:1181
 msgid "with local modifications"
 msgstr ""
 

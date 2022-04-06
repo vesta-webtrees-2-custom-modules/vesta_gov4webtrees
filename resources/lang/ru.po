@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-04 10:30+0200\n"
+"POT-Creation-Date: 2022-04-06 21:40+0200\n"
 "PO-Revision-Date: 2022-04-05 07:39+0000\n"
 "Last-Translator: Олег <uolega@yandex.ru>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.12-dev\n"
 
 #. I18N: Module Configuration
@@ -60,17 +58,17 @@ msgstr "Кроме того, модуль проверяет, есть ли у �
 msgid "Administrative"
 msgstr "Административный"
 
-#: FunctionsGov.php:660 FunctionsGov.php:663 FunctionsGov.php:666
-#: FunctionsGov.php:669 FunctionsGov.php:672 FunctionsGov.php:675
+#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
+#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "Административный (уровень %1$s)"
 
-#: FunctionsGov.php:678
+#: FunctionsGov.php:679
 msgid "Administrative (other)"
 msgstr "Административное (другое)"
 
-#: Gov4WebtreesModule.php:1189
+#: Gov4WebtreesModule.php:1191
 msgid "Administrative levels"
 msgstr "Административные уровни"
 
@@ -108,12 +106,7 @@ msgstr "Следовательно, информация об иерархии �
 #: resources/views/admin/gov-data.phtml:24
 #: resources/views/admin/gov-data_20.phtml:24
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
-msgstr ""
-"Данные, полученные с сервера GOV. Отредактированные данные будут храниться "
-"как локальные модификации (вне GEDCOM, как и оригинальные данные). "
-"Отредактированные данные всегда имеют приоритет над оригинальными данными. "
-"Они не будут удалены при перезагрузке иерархий, но могут быть удалены явно "
-"здесь. Никакие данные не передаются на сервер GOV."
+msgstr "Данные, полученные с сервера GOV. Отредактированные данные будут храниться как локальные модификации (вне GEDCOM, как и оригинальные данные). Отредактированные данные всегда имеют приоритет над оригинальными данными. Они не будут удалены при перезагрузке иерархий, но могут быть удалены явно здесь. Никакие данные не передаются на сервер GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
@@ -296,9 +289,7 @@ msgstr "Недействительный идентификатор GOV! Доп�
 
 #: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
-msgstr ""
-"Неверный идентификатор GOV! Действительными идентификаторами GOV являются, "
-"например, \\'EITTZE_W3091\\', \\'object_1086218\\'."
+msgstr "Неверный идентификатор GOV! Действительными идентификаторами GOV являются, например, \\'EITTZE_W3091\\', \\'object_1086218\\'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -310,7 +301,7 @@ msgstr "Рекомендуется использовать только оди�
 msgid "It will not be overwritten by subsequent updates."
 msgstr "При последующих обновлениях он не будет перезаписан."
 
-#: FunctionsGov.php:690
+#: FunctionsGov.php:691
 msgid "Judicial"
 msgstr "Судебный"
 
@@ -360,12 +351,12 @@ msgstr "Очевидные ошибки следует исправлять на
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:681 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Организационная"
 
-#: FunctionsGov.php:693
+#: FunctionsGov.php:694
 msgid "Other"
 msgstr "Другой"
 
@@ -413,7 +404,7 @@ msgstr "Поместите текст и ссылки"
 msgid "Please enter at least 10 characters."
 msgstr "Пожалуйста, введите не менее 10 символов."
 
-#: FunctionsGov.php:687
+#: FunctionsGov.php:688
 msgid "Religious"
 msgstr "Религиозный"
 
@@ -465,7 +456,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Установить идентификатор GOV для %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:684 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Поселок"
 
@@ -643,7 +634,7 @@ msgstr "перезагрузить иерархию мест GOV"
 msgid "reset all cached data once"
 msgstr "сбросить все кэшированные данные один раз"
 
-#: Gov4WebtreesModule.php:1066
+#: Gov4WebtreesModule.php:1067
 msgid "this place does not exist at this point in time"
 msgstr "это место не существует на данный момент"
 
@@ -651,11 +642,11 @@ msgstr "это место не существует на данный момен
 msgid "today"
 msgstr "Cегодня"
 
-#: FunctionsGov.php:1128
+#: FunctionsGov.php:1129
 msgid "unknown GOV type (newly introduced?)"
 msgstr "неизвестный тип GOV (недавно введенный?)"
 
-#: Gov4WebtreesModule.php:1179
+#: Gov4WebtreesModule.php:1181
 msgid "with local modifications"
 msgstr "с местными изменениями"
 

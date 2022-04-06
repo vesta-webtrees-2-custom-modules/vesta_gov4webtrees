@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-04 10:30+0200\n"
+"POT-Creation-Date: 2022-04-06 21:40+0200\n"
 "PO-Revision-Date: 2022-01-17 08:56+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -58,17 +58,17 @@ msgstr "Modul dodatočne kontroluje, či príslušné GOV-id, alebo ktorékoľve
 msgid "Administrative"
 msgstr "Administratívny"
 
-#: FunctionsGov.php:660 FunctionsGov.php:663 FunctionsGov.php:666
-#: FunctionsGov.php:669 FunctionsGov.php:672 FunctionsGov.php:675
+#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
+#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "Administratívny (úroveň %1$s)"
 
-#: FunctionsGov.php:678
+#: FunctionsGov.php:679
 msgid "Administrative (other)"
 msgstr "Administratívny (ostatné)"
 
-#: Gov4WebtreesModule.php:1189
+#: Gov4WebtreesModule.php:1191
 msgid "Administrative levels"
 msgstr "Administratívne úrovne"
 
@@ -301,7 +301,7 @@ msgstr "Odporúča sa použiť len jednu z nasledujúcich možností. Môžete d
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Tento súbor nebude prepisovaný pri nasledujúcich aktualizáciách."
 
-#: FunctionsGov.php:690
+#: FunctionsGov.php:691
 msgid "Judicial"
 msgstr "justičné"
 
@@ -351,12 +351,12 @@ msgstr "Zjavné chyby by sa mali korigovať priamo na serveri GOV, napriek tomu 
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:681 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Organizačné"
 
-#: FunctionsGov.php:693
+#: FunctionsGov.php:694
 msgid "Other"
 msgstr "Iné"
 
@@ -404,7 +404,7 @@ msgstr "Linky a texty miest"
 msgid "Please enter at least 10 characters."
 msgstr ""
 
-#: FunctionsGov.php:687
+#: FunctionsGov.php:688
 msgid "Religious"
 msgstr "Náboženské"
 
@@ -456,7 +456,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Nastaviť identifikátor GOV pre %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:684 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Sídlo"
 
@@ -634,7 +634,7 @@ msgstr "znovunačítať GOV hierarchiu miesta"
 msgid "reset all cached data once"
 msgstr "Znovu načítať všetky údaje v medzipamäti"
 
-#: Gov4WebtreesModule.php:1066
+#: Gov4WebtreesModule.php:1067
 msgid "this place does not exist at this point in time"
 msgstr "toto miesto v danom období neexistuje"
 
@@ -642,11 +642,11 @@ msgstr "toto miesto v danom období neexistuje"
 msgid "today"
 msgstr "v súčasnosti"
 
-#: FunctionsGov.php:1128
+#: FunctionsGov.php:1129
 msgid "unknown GOV type (newly introduced?)"
 msgstr "neznámy GOV typ (možno novovytvorený?)"
 
-#: Gov4WebtreesModule.php:1179
+#: Gov4WebtreesModule.php:1181
 msgid "with local modifications"
 msgstr "s lokálnymi úpravami"
 
