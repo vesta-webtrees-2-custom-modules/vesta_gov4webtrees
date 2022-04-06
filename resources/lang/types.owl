@@ -273,10 +273,11 @@
     <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_29"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
-  <j.1:group_13 rdf:about="http://gov.genealogy.net/types.owl#198">
-    <rdfs:label xml:lang="de">veraltet (früher: Bundesverwaltungsgericht)</rdfs:label>
+  <j.1:group_6 rdf:about="http://gov.genealogy.net/types.owl#198">
+    <rdfs:label xml:lang="en">Supreme Court</rdfs:label>
+    <rdfs:label xml:lang="de">Oberstes Gericht</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
-  </j.1:group_13>
+  </j.1:group_6>
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#68">
     <rdfs:label xml:lang="de">Hauptort</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
@@ -646,12 +647,10 @@
     <rdfs:label xml:lang="fr">cimetière</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_10"/>
   </gov:Type>
-  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#181">
+  <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#181">
     <rdfs:label xml:lang="de">Rotte</rdfs:label>
-    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_32"/>
-    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_8"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
-  </j.1:group_1>
+  </j.1:group_8>
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#193">
     <rdfs:label xml:lang="de">Alm</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
@@ -1035,9 +1034,12 @@
     <rdfs:label xml:lang="ru">губерния</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
-  <j.1:group_ rdf:about="http://gov.genealogy.net/types.owl#278">
+  <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#278">
+    <rdfs:label xml:lang="de">Munizipium</rdfs:label>
+    <rdfs:label xml:lang="pt">municipio</rdfs:label>
+    <rdf:type rdf:resource="http://gov.genealogy.net/types.owl#group_31"/>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
-  </j.1:group_>
+  </j.1:group_1>
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#121">
     <rdfs:label xml:lang="en">colony</rdfs:label>
     <rdfs:label xml:lang="pl">kolonia</rdfs:label>
@@ -1251,6 +1253,7 @@
   </j.1:group_1>
   <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#252">
     <rdfs:label xml:lang="en">local government</rdfs:label>
+    <rdfs:label xml:lang="de">local government</rdfs:label>
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
   <j.1:group_8 rdf:about="http://gov.genealogy.net/types.owl#39">
@@ -1294,7 +1297,6 @@
     <rdf:type rdf:resource="http://gov.genealogy.net/ontology.owl#Type"/>
   </j.1:group_1>
   <j.1:group_1 rdf:about="http://gov.genealogy.net/types.owl#168">
-    <owl:sameAs rdf:resource="http://d-nb.info/gnd/4145203-3"/>
     <rdfs:label xml:lang="fr">comté</rdfs:label>
     <rdfs:label xml:lang="de">Provinz (schwedisch)</rdfs:label>
     <rdfs:label xml:lang="sv">län</rdfs:label>

@@ -1063,7 +1063,9 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
                 $hierarchy .= ', ';
             }
 
+            //also occurs if types.owl isn't up-to-date unfortunately (misleading).
             $nullType = I18N::translate('this place does not exist at this point in time');
+            
             $typeAndLabel = $data['type'] . ' ' . $data['label'];
             if ($data['type'] === null) {
                 $typeAndLabel = $data['label'] . ' (' . $nullType . ')';

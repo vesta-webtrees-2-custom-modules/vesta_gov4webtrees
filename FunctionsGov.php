@@ -456,6 +456,7 @@ class GovObjectSnapshot {
 class FunctionsGov {
 
   //TODO update regularly! Last update: 2022/04. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+  //also update types.owl in resources!
   public static $MAX_KNOWN_TYPE = 278;
   
   //http://gov.genealogy.net/types.owl#group_1
