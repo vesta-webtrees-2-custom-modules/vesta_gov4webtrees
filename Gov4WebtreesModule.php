@@ -871,7 +871,7 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
     public function linkIcon($view, $title, $url) {
         return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
                 view($view) .
-                '<span class="sr-only">' . $title . '</span>' .
+                '<span class="visually-hidden">' . $title . '</span>' .
                 '</a>';
     }
 

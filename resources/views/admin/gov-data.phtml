@@ -71,7 +71,7 @@ use Vesta\Model\DateUtils;
             <td>
                 <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
                     <?= view('icons/edit') ?>
-                    <span class="sr-only">
+                    <span class="visually-hidden">
                         <?= MoreI18N::xlate('Edit') ?>
                     </span>
                 </a>
@@ -141,7 +141,7 @@ use Vesta\Model\DateUtils;
             <td>
                 <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
                     <?= view('icons/edit') ?>
-                    <span class="sr-only">
+                    <span class="visually-hidden">
                         <?= MoreI18N::xlate('Edit') ?>
                     </span>
                 </a>
@@ -209,7 +209,7 @@ use Vesta\Model\DateUtils;
             <td>
                 <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type'  => 'parent', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
                     <?= view('icons/edit') ?>
-                    <span class="sr-only">
+                    <span class="visually-hidden">
                         <?= MoreI18N::xlate('Edit') ?>
                     </span>
                 </a>
