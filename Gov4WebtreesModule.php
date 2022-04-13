@@ -435,8 +435,14 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
 
             $govReference = new GovReference($fact->value(), new Trace(""));
 
+            if (str_starts_with(Webtrees::VERSION, '2.1')) {
+                $viewName = $this->name() . '::edit/icon-fact-reload-gov';
+            } else {
+                $viewName = $this->name() . '::edit/icon-fact-reload-gov_20';
+            }
+        
             //allow to reload the gov hierarchy
-            $html = view($this->name() . '::edit/icon-fact-reload-gov', [
+            $html = view($viewName, [
                 'moduleName' => $this->name(),
                 'title' => I18N::translate('reload the GOV place hierarchy'),
                 'route' => route('module', [
@@ -480,8 +486,14 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
                 return GenericViewElement::createEmpty();
             }
 
+            if (str_starts_with(Webtrees::VERSION, '2.1')) {
+                $viewName = $this->name() . '::edit/icon-fact-reload-gov';
+            } else {
+                $viewName = $this->name() . '::edit/icon-fact-reload-gov_20';
+            }
+            
             //allow to reload the gov hierarchy
-            $html = view($this->name() . '::edit/icon-fact-reload-gov', [
+            $html = view($viewName, [
                 'moduleName' => $this->name(),
                 'title' => I18N::translate('reload the GOV place hierarchy'),
                 'route' => route('module', [
@@ -869,9 +881,16 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
     }
 
     public function linkIcon($view, $title, $url) {
-        return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
+        if (str_starts_with(Webtrees::VERSION, '2.1')) {
+            return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
                 view($view) .
                 '<span class="visually-hidden">' . $title . '</span>' .
+                '</a>';
+        }
+        
+        return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
+                view($view) .
+                '<span class="sr-only">' . $title . '</span>' .
                 '</a>';
     }
 

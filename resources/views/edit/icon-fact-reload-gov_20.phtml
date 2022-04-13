@@ -1,0 +1,21 @@
+<a class="btn btn-link btn-sm" href="#" onclick="return reload_gov('<?= $route ?>');" title="<?= $title ?>">
+    <?= view($moduleName . '::icons/map-gov') ?>
+    <span class="sr-only"><?= $title ?></span>
+</a>
+<script>
+  function reload_gov(route)
+  {
+      $.post(
+          route,
+          {},
+          function () {
+              //additionally scroll to top in order to show the flash message
+              window.onbeforeunload = function () {
+                window.scrollTo(0, 0);
+              };
+              document.location.reload();
+          }
+      );
+      return false;
+  }
+</script>
