@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2022-04-06 21:40+0200\n"
-"PO-Revision-Date: 2021-11-19 21:50+0000\n"
+"PO-Revision-Date: 2022-04-15 19:11+0000\n"
 "Last-Translator: Bernd Schwendinger <b0ernie@gmx.net>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -107,6 +108,11 @@ msgstr "Folglich können Ortshierarchieinformationen nur indirekt über die GOV-
 #: resources/views/admin/gov-data_20.phtml:24
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
 msgstr ""
+"Vom GOV-Server stammende Daten. Bearbeitete Daten werden als lokale "
+"Modifikationen gespeichert (außerhalb von GEDCOM, genau wie die "
+"Originaldaten). Bearbeitete Daten haben immer Vorrang vor Originaldaten. Sie "
+"werden nicht gelöscht, wenn Hierarchien neu geladen werden, sie können hier "
+"aber gelöscht werden. Es werden keine Daten an den GOV-Server übertragen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
@@ -117,7 +123,7 @@ msgstr "Zeigt einen Tooltip an, der die Quelle der GOV-ID angibt. Dieser ist hau
 #: Http/RequestHandlers/GovDataEdit.php:90
 #, php-format
 msgid "Edit %1$s for %2$s"
-msgstr ""
+msgstr "Bearbeiten %1$s für %2$s"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:237
@@ -147,7 +153,7 @@ msgstr "Für feinere Anpassungen und um die Liste der Typen und Typengruppen anz
 #: resources/views/admin/gov-data_20.phtml:99
 #: resources/views/admin/gov-data_20.phtml:169
 msgid "From"
-msgstr ""
+msgstr "Von"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -158,34 +164,34 @@ msgstr "GOV-ID Verwaltung"
 #: resources/views/admin/gov-data.phtml:30
 #: resources/views/admin/gov-data_20.phtml:30
 msgid "GOV Name"
-msgstr ""
+msgstr "GOV-Name"
 
 #: Http/RequestHandlers/GovDataEdit.php:70
 #: resources/views/admin/gov-data.phtml:98
 #: resources/views/admin/gov-data_20.phtml:98
 msgid "GOV Object Type"
-msgstr ""
+msgstr "GOV-Objekttyp"
 
 #: Http/RequestHandlers/GovDataEdit.php:74
 #: resources/views/admin/gov-data.phtml:168
 #: resources/views/admin/gov-data_20.phtml:168
 msgid "GOV Parent"
-msgstr ""
+msgstr "Übergeordnetes GOV-Element"
 
 #: Http/RequestHandlers/GovData.php:74 Http/RequestHandlers/GovDataEdit.php:95
 #: Http/RequestHandlers/GovDataList.php:47
 msgid "GOV data"
-msgstr ""
+msgstr "GOV-Daten"
 
 #: resources/views/admin/gov-data-list.phtml:33
 #: resources/views/admin/gov-data-list_20.phtml:33
 msgid "GOV data for"
-msgstr ""
+msgstr "GOV-Daten für"
 
 #: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
 #, php-format
 msgid "GOV data for %1$s"
-msgstr ""
+msgstr "GOV-Daten für %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 #: resources/views/edit/gov-id-edit-control_20.phtml:16
@@ -230,7 +236,7 @@ msgstr "Blenden Sie ein Objekt aus und stoppen Sie die Ortshierarchie an diesem 
 #: resources/views/admin/gov-data-list.phtml:27
 #: resources/views/admin/gov-data-list_20.phtml:27
 msgid "Hide data without local modifications"
-msgstr ""
+msgstr "Daten ohne lokale Änderungen ausblenden"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -290,6 +296,8 @@ msgstr "Keine zulässige GOV-ID! Zulässige IDs haben die Form 'EITTZE_W3091', '
 #: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
 msgstr ""
+"Ungültige GOV-ID! Gültige GOV-IDs sind z.B. \\'EITTZE_W3091\\', \\'"
+"object_1086218\\'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -402,7 +410,7 @@ msgstr "Orts-Text und -Verknüpfung"
 
 #: resources/views/script/tom-select-initializer-gov.phtml:41
 msgid "Please enter at least 10 characters."
-msgstr ""
+msgstr "Bitte mindestens 10 Zeichen eingeben."
 
 #: FunctionsGov.php:688
 msgid "Religious"
@@ -412,19 +420,19 @@ msgstr "Religiös"
 #: resources/views/admin/gov-data.phtml:84
 #: resources/views/admin/gov-data_20.phtml:84
 msgid "Remove this GOV Name?"
-msgstr ""
+msgstr "Diesen GOV-Namen entfernen?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
 #: resources/views/admin/gov-data_20.phtml:154
 msgid "Remove this GOV Object Type?"
-msgstr ""
+msgstr "Diesen GOV-Objekttyp entfernen?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:222
 #: resources/views/admin/gov-data_20.phtml:222
 msgid "Remove this GOV Parent?"
-msgstr ""
+msgstr "Dieses übergeordnete GOV-Element entfernen?"
 
 #: Gov4WebtreesModule.php:504
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -527,7 +535,7 @@ msgstr "Diese Richtlinie wurde jedoch nicht streng befolgt. Aktivieren Sie diese
 #: resources/views/admin/gov-data_20.phtml:100
 #: resources/views/admin/gov-data_20.phtml:170
 msgid "To"
-msgstr ""
+msgstr "Zu"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
