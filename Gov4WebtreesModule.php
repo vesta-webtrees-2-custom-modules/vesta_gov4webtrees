@@ -368,7 +368,7 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
         if (!str_starts_with(Webtrees::VERSION, '2.1')) {
             throw new \Exception;
         }
-
+        
         $requestHandler = new TomSelectGovId($this);
         return $requestHandler->handle($request);
     }
@@ -428,7 +428,7 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
             return GenericViewElement::createEmpty();
         }
 
-        [, $tag] = explode(':', $fact->tag());
+        $tag = explode(':', $fact->tag())[1];
 
         if ($tag === '_GOV') {
             //direct gov tag (on place or shared place)

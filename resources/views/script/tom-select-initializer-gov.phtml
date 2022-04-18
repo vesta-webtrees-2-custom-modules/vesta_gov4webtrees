@@ -2,7 +2,7 @@
 
 use Fisharebest\Webtrees\I18N;
 
-  //a javascript block
+  //a javascript block, within script tag
   
   //ultimately inserted into ajax-modal-vesta (if used within modal)
   //or used directly, anyway:
@@ -50,7 +50,15 @@ webtrees.initializeTomSelectGov = function (element) {
       },
       load: function (query, callback) {
         
-        var url = element.dataset.url + '&query=' + encodeURIComponent(query);
+        <?php
+        //depending on whether 'pretty urls' are enabled,
+        //the url may or may not already contain a query param
+        //in any case it's safer to use api. Do not encodeURIComponent, that's done internally!
+        ?>
+        var url_ = new URL(element.dataset.url);
+        url_.searchParams.set('query', query);
+        
+        var url = url_.href;
         
         fetch(url)
             .then(response => response.json())
