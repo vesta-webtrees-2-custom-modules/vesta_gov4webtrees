@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-06 21:40+0200\n"
+"POT-Creation-Date: 2022-04-24 21:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,13 +42,13 @@ msgstr ""
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr ""
 
-#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
-#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
+#: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
+#: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:679
+#: FunctionsGov.php:663
 msgid "Administrative (other)"
 msgstr ""
 
@@ -56,71 +56,75 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:669 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
-#: FunctionsGov.php:688
+#: FunctionsGov.php:672
 msgid "Religious"
 msgstr ""
 
-#: FunctionsGov.php:691
+#: FunctionsGov.php:675
 msgid "Judicial"
 msgstr ""
 
-#: FunctionsGov.php:694
+#: FunctionsGov.php:678
 msgid "Other"
 msgstr ""
 
-#: FunctionsGov.php:1129
+#: FunctionsGov.php:1110
 msgid "unknown GOV type (newly introduced?)"
 msgstr ""
 
-#: Gov4WebtreesModule.php:150
+#: Gov4WebtreesModule.php:159
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr ""
 
-#: Gov4WebtreesModule.php:398
+#: Gov4WebtreesModule.php:407
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr ""
 
-#: Gov4WebtreesModule.php:400
+#: Gov4WebtreesModule.php:409
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr ""
 
-#: Gov4WebtreesModule.php:441 Gov4WebtreesModule.php:486
+#: Gov4WebtreesModule.php:456 Gov4WebtreesModule.php:507
 msgid "reload the GOV place hierarchy"
 msgstr ""
 
-#: Gov4WebtreesModule.php:502
+#: Gov4WebtreesModule.php:523
 msgid "Set GOV id (outside GEDCOM)"
 msgstr ""
 
-#: Gov4WebtreesModule.php:504
+#: Gov4WebtreesModule.php:525
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr ""
 
-#: Gov4WebtreesModule.php:614 Gov4WebtreesModule.php:837
+#: Gov4WebtreesModule.php:576
+msgid "GOV Hierarchies"
+msgstr ""
+
+#: Gov4WebtreesModule.php:777 Gov4WebtreesModule.php:1000
 msgid "today"
 msgstr ""
 
-#: Gov4WebtreesModule.php:1067
+#: Gov4WebtreesModule.php:1237
 msgid "this place does not exist at this point in time"
 msgstr ""
 
-#: Gov4WebtreesModule.php:1181
+#: Gov4WebtreesModule.php:1351
 msgid "with local modifications"
 msgstr ""
 
-#: Gov4WebtreesModule.php:1191
+#: Gov4WebtreesModule.php:1361
 msgid "Administrative levels"
 msgstr ""
 

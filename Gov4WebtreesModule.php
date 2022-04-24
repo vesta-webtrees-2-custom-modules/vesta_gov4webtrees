@@ -25,8 +25,10 @@ use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Functions\Functions;
+use Fisharebest\Webtrees\GedcomRecord;
 use Fisharebest\Webtrees\Http\Middleware\AuthAdministrator;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Location;
 use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
@@ -69,7 +71,14 @@ use function route;
 use function view;
 
 class Gov4WebtreesModule extends AbstractModule implements
-ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlobalInterface, IndividualFactsTabExtenderInterface, FunctionsPlaceInterface, PrintFunctionsPlaceInterface, GovIdEditControlsInterface {
+    ModuleCustomInterface, 
+    ModuleMetaInterface, 
+    ModuleConfigInterface, 
+    ModuleExtGlobalInterface, 
+    IndividualFactsTabExtenderInterface, 
+    FunctionsPlaceInterface, 
+    PrintFunctionsPlaceInterface, 
+    GovIdEditControlsInterface {
 
     //cannot use original AbstractModule because we override setPreference, setName
     use ModuleCustomTrait,
@@ -529,7 +538,146 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
 
         return GenericViewElement::create($html);
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
 
+    public function hFactsTabGetOutputBeforeTab(
+        GedcomRecord $record): GenericViewElement {
+        
+        //loadded uncondditionally anyway!
+        //$pre = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
+	//return new GenericViewElement($pre, '');
+        
+        return GenericViewElement::createEmpty();
+    }
+  
+    public function hFactsTabGetStyleadds() {
+	$styleadds = array();
+	$styleadds['gov-history'] = 'wt-gov-history-fact-pfh collapse'; //see style.css, and hFactsTabGetOutputInDBox
+	return $styleadds;
+    }
+
+    public function hFactsTabGetOutputInDBox(
+        GedcomRecord $record): GenericViewElement {
+        
+        //TODO CONT HERE
+        return GenericViewElement::createEmpty();
+        
+        if (!($record instanceof Location)) {
+            return GenericViewElement::createEmpty();
+        }
+        
+	return $this->getOutputInDescriptionBox(
+            true, 
+            'show-gov-history-factstab', 
+            'wt-gov-history-fact-pfh', 
+            I18N::translate('GOV Hierarchies'));
+    }
+  
+    protected function getOutputInDescriptionBox(
+        bool $toggleable, 
+        string $id, 
+        string $targetClass,           
+        string $label) {
+      
+        ob_start();
+        if ($toggleable) {
+          ?>
+          <label>
+              <input id="<?php echo $id; ?>" type="checkbox" data-bs-toggle="collapse" data-bs-target=".<?php echo $targetClass; ?>" data-wt-persist="<?php echo $targetClass; ?>" autocomplete="off">
+              <?php echo $label; ?>
+          </label>
+          <?php
+        }
+
+        return new GenericViewElement(ob_get_clean(), '');
+    }
+  
+    public function hFactsTabGetOutputAfterTab(
+        GedcomRecord $record,
+        bool $ajax): GenericViewElement {
+        
+        if (!$ajax) {
+            //nothing to do - in fact must not initialize twice!
+            return GenericViewElement::createEmpty();
+        }
+        
+        return $this->getOutputAfterTab(true, 'show-gov-history-factstab');
+    }
+  
+    protected function getOutputAfterTab(
+        bool $toggleable, 
+        string $toggle): GenericViewElement {
+        
+        $post = "";
+
+        if ($toggleable) {
+          $post = $this->getScript($toggle);
+        }
+
+        return new GenericViewElement('', $post);
+    }
+
+    protected function getScript($toggle) {
+        ob_start();
+        ?>
+        <script>
+          webtrees.persistentToggle(document.querySelector('#<?php echo $toggle; ?>'));
+        </script>
+        <?php
+        return ob_get_clean();
+    }
+    
+    public function hFactsTabGetAdditionalFacts(
+        GedcomRecord $record) {
+        
+        //TODO CONT HERE
+        return [];
+        
+        if (!($record instanceof Location)) {
+            return [];
+        }
+        
+	return $this->govHierarchiesAsFacts($record);
+    }
+    
+    protected function govHierarchiesAsFacts(
+        Location $location) {
+        
+        $loc = $location->xref();
+        if ($loc === '') {
+            //dummy record, should at least have PLAC
+            //
+            //cf PlaceStructure
+            $placerec = ReportParserGenerate::getSubRecord(1, '1 PLAC', $location->gedcom());
+            
+            $ps = PlaceStructure::fromName($placerec, $loc, $location->tree());
+            if ($ps === null) {
+                return [];
+            }
+            $gov = FunctionsPlaceUtils::plac2gov($this, $ps, false);
+        } else {
+            $gov = FunctionsPlaceUtils::loc2gov($this, new LocReference($loc, $location->tree(), new Trace('')));
+        }
+        
+        if ($gov === null) {
+            return [];
+        }
+        
+        return $this->govHierarchiesAsFactsViaGov($gov);
+    }
+    
+    protected function govHierarchiesAsFactsViaGov(
+        GovReference $gov) {        
+        
+        
+        return [];
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
 
     public static function plac2govViaMappingTable(PlaceStructure $place): ?string {
@@ -604,7 +752,10 @@ ModuleCustomInterface, ModuleMetaInterface, ModuleConfigInterface, ModuleExtGlob
         return new MapCoordinates($gov->getLat(), $gov->getLon(), $trace);
     }
 
-    public function gov2html(GovReference $govReference, Tree $tree): ?GenericViewElement {
+    public function gov2html(
+        GovReference $govReference, 
+        Tree $tree): ?GenericViewElement {
+        
         $locale = I18N::locale();
 
         $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));

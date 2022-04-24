@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-06 21:40+0200\n"
+"POT-Creation-Date: 2022-04-24 21:11+0200\n"
 "PO-Revision-Date: 2022-04-04 15:07+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
@@ -58,17 +58,17 @@ msgstr "Bovendien controleert de module of de betreffende GOV-ID, of een van de 
 msgid "Administrative"
 msgstr "Bestuurlijk"
 
-#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
-#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
+#: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
+#: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "Bestuurlijk (niveau %1$s)"
 
-#: FunctionsGov.php:679
+#: FunctionsGov.php:663
 msgid "Administrative (other)"
 msgstr "Bestuurlijk (overig)"
 
-#: Gov4WebtreesModule.php:1191
+#: Gov4WebtreesModule.php:1361
 msgid "Administrative levels"
 msgstr "Bestuursniveaus"
 
@@ -149,6 +149,10 @@ msgstr "Voor meer fijnmazige aanpassingen en om de lijst met typen en typegroepe
 msgid "From"
 msgstr "Van"
 
+#: Gov4WebtreesModule.php:576
+msgid "GOV Hierarchies"
+msgstr ""
+
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
 msgid "GOV Id Management"
@@ -213,12 +217,12 @@ msgstr "GOV-ID's worden standaard buiten GEDCOM-gegevens opgeslagen, maar ID's d
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr "GOV-objecten behoren tot verschillende typegroepen. De GOV-plaatshiërarchie is gebaseerd op objecten van de typegroep '%1$s'."
 
-#: Gov4WebtreesModule.php:398
+#: Gov4WebtreesModule.php:407
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr "GOV-plaatshiërarchie voor %1$s is herladen vanaf GOV-server."
 
-#: Gov4WebtreesModule.php:400
+#: Gov4WebtreesModule.php:409
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr "GOV-plaatshiërarchie is opnieuw geladen vanaf GOV-server."
 
@@ -301,7 +305,7 @@ msgstr "Het wordt aanbevolen om slechts één van de volgende opties te gebruike
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Het wordt niet overschreven door latere updates."
 
-#: FunctionsGov.php:691
+#: FunctionsGov.php:675
 msgid "Judicial"
 msgstr "Gerechtelijk"
 
@@ -351,12 +355,12 @@ msgstr "Kennelijke fouten moeten worden gecorrigeerd op de GOV-server zelf, maar
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Organisatorisch"
 
-#: FunctionsGov.php:694
+#: FunctionsGov.php:678
 msgid "Other"
 msgstr "Overige"
 
@@ -404,7 +408,7 @@ msgstr "Plaatstekst en koppelingen"
 msgid "Please enter at least 10 characters."
 msgstr "Voer ten minste 10 tekens in."
 
-#: FunctionsGov.php:688
+#: FunctionsGov.php:672
 msgid "Religious"
 msgstr "Religieus"
 
@@ -426,7 +430,7 @@ msgstr "Dit GOV-objecttype verwijderen?"
 msgid "Remove this GOV Parent?"
 msgstr "Deze GOV-ouder verwijderen?"
 
-#: Gov4WebtreesModule.php:504
+#: Gov4WebtreesModule.php:525
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "Stel GOV-ID opnieuw in en herlaad de GOV-plaatshiërarchie"
 
@@ -446,7 +450,7 @@ msgstr "Sla de huidige ID op om de plaatshiërarchie opnieuw te laden van de GOV
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr "Zie ook %1$s voor de oorspronkelijke lijst met typen en typebeschrijvingen."
 
-#: Gov4WebtreesModule.php:502
+#: Gov4WebtreesModule.php:523
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "Stel GOV-ID in"
 
@@ -456,7 +460,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Stel GOV-ID in voor %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:669 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Nederzetting"
 
@@ -494,7 +498,7 @@ msgstr "Vervolgens worden alle gegevens weer opgehaald van de GOV-server. "
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr "De GOV-server biedt plaatsnamen in verschillende talen. Er is echter geen concept van een 'officiële taal' voor een plaats."
 
-#: Gov4WebtreesModule.php:150
+#: Gov4WebtreesModule.php:159
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr "De GOV-server lijkt tijdelijk niet beschikbaar."
@@ -625,7 +629,7 @@ msgstr "ingegeven door de veronderstelling dat plaatsnamen in de lokale taal in 
 msgid "present time"
 msgstr "huidige tijd"
 
-#: Gov4WebtreesModule.php:441 Gov4WebtreesModule.php:486
+#: Gov4WebtreesModule.php:456 Gov4WebtreesModule.php:507
 msgid "reload the GOV place hierarchy"
 msgstr "herlaad de GOV-plaatshiërarchie"
 
@@ -634,19 +638,19 @@ msgstr "herlaad de GOV-plaatshiërarchie"
 msgid "reset all cached data once"
 msgstr "reset alle gegevens in de cache één keer"
 
-#: Gov4WebtreesModule.php:1067
+#: Gov4WebtreesModule.php:1237
 msgid "this place does not exist at this point in time"
 msgstr "deze plaats bestaat niet op dit moment"
 
-#: Gov4WebtreesModule.php:614 Gov4WebtreesModule.php:837
+#: Gov4WebtreesModule.php:777 Gov4WebtreesModule.php:1000
 msgid "today"
 msgstr "vandaag"
 
-#: FunctionsGov.php:1129
+#: FunctionsGov.php:1110
 msgid "unknown GOV type (newly introduced?)"
 msgstr "onbekend GOV-type (nieuw geïntroduceerd?)"
 
-#: Gov4WebtreesModule.php:1181
+#: Gov4WebtreesModule.php:1351
 msgid "with local modifications"
 msgstr "met lokale wijzigingen"
 

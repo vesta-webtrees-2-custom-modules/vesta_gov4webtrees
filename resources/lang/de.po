@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-06 21:40+0200\n"
+"POT-Creation-Date: 2022-04-24 21:11+0200\n"
 "PO-Revision-Date: 2022-04-15 19:11+0000\n"
 "Last-Translator: Bernd Schwendinger <b0ernie@gmx.net>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,17 +58,17 @@ msgstr "Zusätzlich überprüft das Modul, ob für die entsprechende GOV id, ode
 msgid "Administrative"
 msgstr "administrativ"
 
-#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
-#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
+#: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
+#: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "administrativ (Stufe %1$s)"
 
-#: FunctionsGov.php:679
+#: FunctionsGov.php:663
 msgid "Administrative (other)"
 msgstr "Administrativ (andere)"
 
-#: Gov4WebtreesModule.php:1191
+#: Gov4WebtreesModule.php:1361
 msgid "Administrative levels"
 msgstr "Verwaltungsebenen"
 
@@ -107,12 +106,7 @@ msgstr "Folglich können Ortshierarchieinformationen nur indirekt über die GOV-
 #: resources/views/admin/gov-data.phtml:24
 #: resources/views/admin/gov-data_20.phtml:24
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
-msgstr ""
-"Vom GOV-Server stammende Daten. Bearbeitete Daten werden als lokale "
-"Modifikationen gespeichert (außerhalb von GEDCOM, genau wie die "
-"Originaldaten). Bearbeitete Daten haben immer Vorrang vor Originaldaten. Sie "
-"werden nicht gelöscht, wenn Hierarchien neu geladen werden, sie können hier "
-"aber gelöscht werden. Es werden keine Daten an den GOV-Server übertragen."
+msgstr "Vom GOV-Server stammende Daten. Bearbeitete Daten werden als lokale Modifikationen gespeichert (außerhalb von GEDCOM, genau wie die Originaldaten). Bearbeitete Daten haben immer Vorrang vor Originaldaten. Sie werden nicht gelöscht, wenn Hierarchien neu geladen werden, sie können hier aber gelöscht werden. Es werden keine Daten an den GOV-Server übertragen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
@@ -154,6 +148,10 @@ msgstr "Für feinere Anpassungen und um die Liste der Typen und Typengruppen anz
 #: resources/views/admin/gov-data_20.phtml:169
 msgid "From"
 msgstr "Von"
+
+#: Gov4WebtreesModule.php:576
+msgid "GOV Hierarchies"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -219,12 +217,12 @@ msgstr "GOV-IDs werden standardmäßig außerhalb der GEDCOM-Daten gespeichert, 
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr "GOV-Objekte gehören zu verschiedenen Typgruppen. Die GOV-Ortshierarchie basiert auf Objekten der Typgruppe '%1$s'."
 
-#: Gov4WebtreesModule.php:398
+#: Gov4WebtreesModule.php:407
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr "Die GOV-Ortshierarchie für %1$s wurde vom GOV-Server geladen."
 
-#: Gov4WebtreesModule.php:400
+#: Gov4WebtreesModule.php:409
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr "Die GOV-Ortshierarchie wurde vom GOV-Server geladen."
 
@@ -295,9 +293,7 @@ msgstr "Keine zulässige GOV-ID! Zulässige IDs haben die Form 'EITTZE_W3091', '
 
 #: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
-msgstr ""
-"Ungültige GOV-ID! Gültige GOV-IDs sind z.B. \\'EITTZE_W3091\\', \\'"
-"object_1086218\\'."
+msgstr "Ungültige GOV-ID! Gültige GOV-IDs sind z.B. \\'EITTZE_W3091\\', \\'object_1086218\\'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -309,7 +305,7 @@ msgstr "Es wird empfohlen eine der folgenden Optionen zu nutzen. Man kann auch z
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Es wird durch spätere Aktualisierungen nicht überschrieben."
 
-#: FunctionsGov.php:691
+#: FunctionsGov.php:675
 msgid "Judicial"
 msgstr "Justiziell"
 
@@ -359,12 +355,12 @@ msgstr "Offensichtliche Fehler sollten auf dem GOV-Server selbst korrigiert werd
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Organisatorisch"
 
-#: FunctionsGov.php:694
+#: FunctionsGov.php:678
 msgid "Other"
 msgstr "Sonstige"
 
@@ -412,7 +408,7 @@ msgstr "Orts-Text und -Verknüpfung"
 msgid "Please enter at least 10 characters."
 msgstr "Bitte mindestens 10 Zeichen eingeben."
 
-#: FunctionsGov.php:688
+#: FunctionsGov.php:672
 msgid "Religious"
 msgstr "Religiös"
 
@@ -434,7 +430,7 @@ msgstr "Diesen GOV-Objekttyp entfernen?"
 msgid "Remove this GOV Parent?"
 msgstr "Dieses übergeordnete GOV-Element entfernen?"
 
-#: Gov4WebtreesModule.php:504
+#: Gov4WebtreesModule.php:525
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "GOV-ID anpassen (außerhalb der GEDCOM-Daten) und die Ortshierarchie neu laden"
 
@@ -454,7 +450,7 @@ msgstr "Um die Ortshierarchie neu vom GOV-Server zu laden, aktuelle GOV-Id speic
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr "Siehe auch %1$s für die ursprüngliche Liste der Typen und Typbeschreibungen."
 
-#: Gov4WebtreesModule.php:502
+#: Gov4WebtreesModule.php:523
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "GOV-ID setzen (außerhalb der GEDCOM-Daten)"
 
@@ -464,7 +460,7 @@ msgid "Set GOV id for %1$s"
 msgstr "GOV-ID für %1$s setzen"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:669 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Siedlung"
 
@@ -502,7 +498,7 @@ msgstr "Anschließend werden wieder alle Daten vom GOV-Server abgerufen. "
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr "Der GOV-Server bietet Ortsnamen in verschiedenen Sprachen an. Es gibt jedoch kein Konzept einer \"offiziellen Sprache\" für einen Ort."
 
-#: Gov4WebtreesModule.php:150
+#: Gov4WebtreesModule.php:159
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr "Der GOV-Server scheint zeitweise nicht erreichbar zu sein."
@@ -633,7 +629,7 @@ msgstr "begründet durch die Annahme, dass Ortsnamen in der regionalen Sprache g
 msgid "present time"
 msgstr "Gegenwart"
 
-#: Gov4WebtreesModule.php:441 Gov4WebtreesModule.php:486
+#: Gov4WebtreesModule.php:456 Gov4WebtreesModule.php:507
 msgid "reload the GOV place hierarchy"
 msgstr "Ortshierarchie neu laden"
 
@@ -642,19 +638,19 @@ msgstr "Ortshierarchie neu laden"
 msgid "reset all cached data once"
 msgstr "Zurücksetzen aller zwischengespeicherten Daten auf einmal"
 
-#: Gov4WebtreesModule.php:1067
+#: Gov4WebtreesModule.php:1237
 msgid "this place does not exist at this point in time"
 msgstr "diesen Ort gibt es zu diesem Zeitpunkt nicht"
 
-#: Gov4WebtreesModule.php:614 Gov4WebtreesModule.php:837
+#: Gov4WebtreesModule.php:777 Gov4WebtreesModule.php:1000
 msgid "today"
 msgstr "heute"
 
-#: FunctionsGov.php:1129
+#: FunctionsGov.php:1110
 msgid "unknown GOV type (newly introduced?)"
 msgstr "unbekannter GOV-Typ (neu eingeführt?)"
 
-#: Gov4WebtreesModule.php:1181
+#: Gov4WebtreesModule.php:1351
 msgid "with local modifications"
 msgstr "mit lokalen Änderungen"
 

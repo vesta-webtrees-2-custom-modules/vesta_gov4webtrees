@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-06 21:40+0200\n"
+"POT-Creation-Date: 2022-04-24 21:11+0200\n"
 "PO-Revision-Date: 2021-06-15 07:32+0000\n"
 "Last-Translator: z-yurets <zaharchenko.yurij@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
@@ -58,17 +58,17 @@ msgstr "Крім того, модуль перевіряє, чи має відп
 msgid "Administrative"
 msgstr ""
 
-#: FunctionsGov.php:661 FunctionsGov.php:664 FunctionsGov.php:667
-#: FunctionsGov.php:670 FunctionsGov.php:673 FunctionsGov.php:676
+#: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
+#: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:679
+#: FunctionsGov.php:663
 msgid "Administrative (other)"
 msgstr ""
 
-#: Gov4WebtreesModule.php:1191
+#: Gov4WebtreesModule.php:1361
 msgid "Administrative levels"
 msgstr "Адміністративні рівні"
 
@@ -149,6 +149,10 @@ msgstr ""
 msgid "From"
 msgstr ""
 
+#: Gov4WebtreesModule.php:576
+msgid "GOV Hierarchies"
+msgstr ""
+
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
 msgid "GOV Id Management"
@@ -213,12 +217,12 @@ msgstr "Ідентифікатори GOV за замовчуванням збе�
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
 
-#: Gov4WebtreesModule.php:398
+#: Gov4WebtreesModule.php:407
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr "Ієрархію місця GOV для %1$s перезавантажено із сервера GOV."
 
-#: Gov4WebtreesModule.php:400
+#: Gov4WebtreesModule.php:409
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr "Ієрархію місця GOV перезавантажено із сервера GOV."
 
@@ -301,7 +305,7 @@ msgstr "Рекомендується використовувати лише о�
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Він не буде замінений під час наступних оновлень."
 
-#: FunctionsGov.php:691
+#: FunctionsGov.php:675
 msgid "Judicial"
 msgstr ""
 
@@ -351,12 +355,12 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:682 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
-#: FunctionsGov.php:694
+#: FunctionsGov.php:678
 msgid "Other"
 msgstr ""
 
@@ -404,7 +408,7 @@ msgstr "Розмістіть текст та посилання"
 msgid "Please enter at least 10 characters."
 msgstr ""
 
-#: FunctionsGov.php:688
+#: FunctionsGov.php:672
 msgid "Religious"
 msgstr ""
 
@@ -426,7 +430,7 @@ msgstr ""
 msgid "Remove this GOV Parent?"
 msgstr ""
 
-#: Gov4WebtreesModule.php:504
+#: Gov4WebtreesModule.php:525
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "Скинути ідентифікатор GOV (поза GEDCOM) і перезавантажте ієрархію місць GOV"
 
@@ -446,7 +450,7 @@ msgstr "Збережіть поточний ідентифікатор, щоб �
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr ""
 
-#: Gov4WebtreesModule.php:502
+#: Gov4WebtreesModule.php:523
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "Встановити ідентифікатор GOV (поза GEDCOM)"
 
@@ -456,7 +460,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Встановити ідентифікатор GOV для %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:685 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:669 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
@@ -494,7 +498,7 @@ msgstr "Згодом усі дані знову отримуються із се
 msgid "The GOV server provides place names in different languages. However, there is no concept of an 'official language' for a place."
 msgstr "Сервер GOV надає назви місць різними мовами. Однак поняття \"офіційна мова\" місця не існує."
 
-#: Gov4WebtreesModule.php:150
+#: Gov4WebtreesModule.php:159
 #: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr "Сервер GOV тимчасово недоступний."
@@ -625,7 +629,7 @@ msgstr "мотивовано припущенням, що топоніми мі�
 msgid "present time"
 msgstr "теперішній час"
 
-#: Gov4WebtreesModule.php:441 Gov4WebtreesModule.php:486
+#: Gov4WebtreesModule.php:456 Gov4WebtreesModule.php:507
 msgid "reload the GOV place hierarchy"
 msgstr "перезавантажити ієрархію місця GOV"
 
@@ -634,19 +638,19 @@ msgstr "перезавантажити ієрархію місця GOV"
 msgid "reset all cached data once"
 msgstr "скинути всі кешовані дані один раз"
 
-#: Gov4WebtreesModule.php:1067
+#: Gov4WebtreesModule.php:1237
 msgid "this place does not exist at this point in time"
 msgstr "на даний момент цього місця не існує"
 
-#: Gov4WebtreesModule.php:614 Gov4WebtreesModule.php:837
+#: Gov4WebtreesModule.php:777 Gov4WebtreesModule.php:1000
 msgid "today"
 msgstr "сьогодні"
 
-#: FunctionsGov.php:1129
+#: FunctionsGov.php:1110
 msgid "unknown GOV type (newly introduced?)"
 msgstr "невідомий тип GOV (нещодавно введений?)"
 
-#: Gov4WebtreesModule.php:1181
+#: Gov4WebtreesModule.php:1351
 msgid "with local modifications"
 msgstr ""
 
