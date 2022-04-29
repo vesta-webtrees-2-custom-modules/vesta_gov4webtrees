@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2022-04-24 21:11+0200\n"
-"PO-Revision-Date: 2022-01-17 08:56+0000\n"
+"PO-Revision-Date: 2022-04-29 10:10+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/vesta-webtrees-"
-"custom-modules/vesta-gov4webtrees/sk/>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -218,7 +218,7 @@ msgstr "Od"
 
 #: Gov4WebtreesModule.php:576
 msgid "GOV Hierarchies"
-msgstr ""
+msgstr "GOV hierarchie"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -256,7 +256,7 @@ msgstr "GOV údaje"
 #: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
 #, php-format
 msgid "GOV data for %1$s"
-msgstr "Údaje GOV lokality"
+msgstr "Údaje GOV lokality %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 #: resources/views/edit/gov-id-edit-control_20.phtml:16
