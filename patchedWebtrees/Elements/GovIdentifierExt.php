@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Cissee\WebtreesExt\Elements;
 
-use Cissee\WebtreesExt\Http\RequestHandlers\CreateSharedPlaceModal;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Elements\GovIdentifier;
-use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\View;
 use Vesta\Hook\HookInterfaces\GovIdEditControlsInterface;
 use Vesta\Hook\HookInterfaces\GovIdEditControlsUtils;
-use function route;
-use function view;
 
 //[RC] replace GovIdentifier because we
 //- use a different edit control (select-location, but that's swapped elsewhere)

@@ -13,7 +13,6 @@ use Vesta\Model\DateUtils;
  * @var array<string,string> $breadcrumbs
  * etc
  */
-
 ?>
 
 <?= view('components/breadcrumbs', ['links' => $breadcrumbs]) ?>
@@ -21,7 +20,7 @@ use Vesta\Model\DateUtils;
 <h1><?= $titlePlus ?></h1>
 
 <p class="small">
-        <?= I18n::translate('Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server.') ?>
+    <?= I18n::translate('Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server.') ?>
 </p>    
 
 <table class="table table-bordered table-striped table-sm table-hover wt-table-locations">
@@ -37,58 +36,59 @@ use Vesta\Model\DateUtils;
     </thead>
 
     <tbody>
-    <?php foreach ($gov->getLabels() as $prop) : ?>
-        
-        <?php   
-          $from = $prop->getFrom();
-          if ($from !== null) {
-            $from = DateUtils::toDate(new GregorianDate($from))->display();
-          }
-          
-          $to = $prop->getTo();
-          if ($to !== null) {
-            $to = DateUtils::toDate(new GregorianDate($to))->display();
-          }
-        ?>
-        
-        <tr class="">            
-            <td dir="ltr">
-                <?= $prop->getProp() ?>
-            </td>
+        <?php foreach ($gov->getLabels() as $prop) : ?>
 
-            <td dir="ltr">
-                <?= $prop->getLanguage() ?>
-            </td>
+            <?php
+            $from = $prop->getFrom();
+            if ($from !== null) {
+                $from = DateUtils::toDate(new GregorianDate($from))->display();
+            }
 
-            <td dir="ltr">
-                <?= $from ?>
-            </td>
+            $to = $prop->getTo();
+            if ($to !== null) {
+                //to is exclusively - we display inclusively!
+                $to = DateUtils::toDate(new GregorianDate($to-1))->display();
+            }
+            ?>
 
-            <td dir="ltr">
-                <?= $to ?>
-            </td>
+            <tr class="">            
+                <td dir="ltr">
+                    <?= $prop->getProp() ?>
+                </td>
 
-            <td>
-                <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
-                    <?= view('icons/edit') ?>
-                    <span class="visually-hidden">
-                        <?= MoreI18N::xlate('Edit') ?>
-                    </span>
-                </a>
-            </td>
+                <td dir="ltr">
+                    <?= $prop->getLanguage() ?>
+                </td>
 
-            <td>
-                <?php if ($prop->getSticky()): ?>
-                    <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>">
-                        <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Name?') ?>">
-                            <?= view('icons/delete') ?>
-                        </button>
-                    </form>
-                <?php endif ?>
-            </td>
-        </tr>
-    <?php endforeach ?>
+                <td dir="ltr">
+                    <?= $from ?>
+                </td>
+
+                <td dir="ltr">
+                    <?= $to ?>
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
+                        <?= view('icons/edit') ?>
+                        <span class="visually-hidden">
+                            <?= MoreI18N::xlate('Edit') ?>
+                        </span>
+                    </a>
+                </td>
+
+                <td>
+                    <?php if ($prop->getSticky()): ?>
+                        <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Name?') ?>">
+                                <?= view('icons/delete') ?>
+                            </button>
+                        </form>
+                    <?php endif ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 
@@ -104,61 +104,62 @@ use Vesta\Model\DateUtils;
     </thead>
 
     <tbody>
-    <?php foreach ($gov->getTypes() as $prop) : ?>
-        
-        <?php   
-          $resolvedType = FunctionsGov::resolveTypeDescription(
-                  $module, 
-                  $prop->getProp(), 
-                  $languagesForTypes);
-        ?>
-        
-        <?php   
-          $from = $prop->getFrom();
-          if ($from !== null) {
-            $from = DateUtils::toDate(new GregorianDate($from))->display();
-          }
-          
-          $to = $prop->getTo();
-          if ($to !== null) {
-            $to = DateUtils::toDate(new GregorianDate($to))->display();
-          }
-        ?>
-        
-        <tr class="">            
-            <td dir="ltr">
-                <?= $resolvedType . ' (' . $prop->getProp() . ')' ?>
-            </td>
+        <?php foreach ($gov->getTypes() as $prop) : ?>
 
-            <td dir="ltr">
-                <?= $from ?>
-            </td>
+            <?php
+            $resolvedType = FunctionsGov::resolveTypeDescription(
+                    $module,
+                    $prop->getProp(),
+                    $languagesForTypes);
+            ?>
 
-            <td dir="ltr">
-                <?= $to ?>
-            </td>
+            <?php
+            $from = $prop->getFrom();
+            if ($from !== null) {
+                $from = DateUtils::toDate(new GregorianDate($from))->display();
+            }
 
-            <td>
-                <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
-                    <?= view('icons/edit') ?>
-                    <span class="visually-hidden">
-                        <?= MoreI18N::xlate('Edit') ?>
-                    </span>
-                </a>
-            </td>
+            $to = $prop->getTo();
+            if ($to !== null) {
+                //to is exclusively - we display inclusively!
+                $to = DateUtils::toDate(new GregorianDate($to-1))->display();
+            }
+            ?>
 
-            <td>
-                <?php if ($prop->getSticky()): ?>
-                    <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>">
-                        <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Object Type?') ?>">
-                            <?= view('icons/delete') ?>
-                        </button>
-                    </form>
-                <?php endif ?>
-            </td>
-        </tr>
-    <?php endforeach ?>
+            <tr class="">            
+                <td dir="ltr">
+                    <?= $resolvedType . ' (' . $prop->getProp() . ')' ?>
+                </td>
+
+                <td dir="ltr">
+                    <?= $from ?>
+                </td>
+
+                <td dir="ltr">
+                    <?= $to ?>
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
+                        <?= view('icons/edit') ?>
+                        <span class="visually-hidden">
+                            <?= MoreI18N::xlate('Edit') ?>
+                        </span>
+                    </a>
+                </td>
+
+                <td>
+                    <?php if ($prop->getSticky()): ?>
+                        <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Object Type?') ?>">
+                                <?= view('icons/delete') ?>
+                            </button>
+                        </form>
+                    <?php endif ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 
@@ -174,59 +175,60 @@ use Vesta\Model\DateUtils;
     </thead>
 
     <tbody>
-    <?php foreach ($gov->getParents() as $prop) : ?>
-        <?php
-          $label = $prop->getProp();
-          $gov = FunctionsGov::retrieveGovObject($module, $prop->getProp());
-          if ($gov !== null) {
-            $label = $gov->formatForAdminView($module, $languages);
-          } //else inconsistency
+        <?php foreach ($gov->getParents() as $prop) : ?>
+            <?php
+            $label = $prop->getProp();
+            $gov = FunctionsGov::retrieveGovObject($module, $prop->getProp());
+            if ($gov !== null) {
+                $label = $gov->formatForAdminView($module, $languages);
+            } //else inconsistency
 
-          $from = $prop->getFrom();
-          if ($from !== null) {
-            $from = DateUtils::toDate(new GregorianDate($from))->display();
-          }
-          
-          $to = $prop->getTo();
-          if ($to !== null) {
-            $to = DateUtils::toDate(new GregorianDate($to))->display();
-          }
-        ?>
-        
-        <tr class="">            
-            <td dir="ltr">
-                <?= $label ?>
-            </td>
+            $from = $prop->getFrom();
+            if ($from !== null) {
+                $from = DateUtils::toDate(new GregorianDate($from))->display();
+            }
 
-            <td dir="ltr">
-                <?= $from ?>
-            </td>
+            $to = $prop->getTo();
+            if ($to !== null) {
+                //to is exclusively - we display inclusively!
+                $to = DateUtils::toDate(new GregorianDate($to-1))->display();
+            }
+            ?>
 
-            <td dir="ltr">
-                <?= $to ?>
-            </td>
+            <tr class="">            
+                <td dir="ltr">
+                    <?= $label ?>
+                </td>
 
-            <td>
-                <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type'  => 'parent', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
-                    <?= view('icons/edit') ?>
-                    <span class="visually-hidden">
-                        <?= MoreI18N::xlate('Edit') ?>
-                    </span>
-                </a>
-            </td>
+                <td dir="ltr">
+                    <?= $from ?>
+                </td>
 
-            <td>
-                <?php if ($prop->getSticky()): ?>
-                    <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'parent', 'key' => $prop->getKey()])) ?>">
-                        <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Parent?') ?>">
-                            <?= view('icons/delete') ?>
-                        </button>
-                    </form>
-                <?php endif ?>
-            </td>
-        </tr>
-    <?php endforeach ?>
+                <td dir="ltr">
+                    <?= $to ?>
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" href="<?= e(route(GovDataEdit::class, ['type' => 'parent', 'key' => $prop->getKey()])) ?>" title="<?= MoreI18N::xlate('Edit') ?>">
+                        <?= view('icons/edit') ?>
+                        <span class="visually-hidden">
+                            <?= MoreI18N::xlate('Edit') ?>
+                        </span>
+                    </a>
+                </td>
+
+                <td>
+                    <?php if ($prop->getSticky()): ?>
+                        <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'parent', 'key' => $prop->getKey()])) ?>">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Parent?') ?>">
+                                <?= view('icons/delete') ?>
+                            </button>
+                        </form>
+                    <?php endif ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 

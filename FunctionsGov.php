@@ -251,6 +251,10 @@ class GovObject {
     private $labels;
     private $parents;
 
+    public function getId() {
+        return $this->id;
+    }
+    
     public function getLat() {
         return $this->lat;
     }
@@ -588,7 +592,7 @@ class FunctionsGov {
     //where only select adms are used
 
     public static function admTypes(): array {
-        return array_merge(
+        $merged = array_merge(
             FunctionsGov::$TYPES_ADM0,
             FunctionsGov::$TYPES_ADM1,
             FunctionsGov::$TYPES_ADM2,
@@ -596,35 +600,53 @@ class FunctionsGov {
             FunctionsGov::$TYPES_ADM4,
             FunctionsGov::$TYPES_ADM5,
             FunctionsGov::$TYPES_WITHOUT_ADM);
+        
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function orgTypes(): array {
-        return array_merge(
+        $merged = array_merge(
             FunctionsGov::$TYPES_ADM6,
             FunctionsGov::$TYPES_ORGANIZATIONAL);
+        
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function settlementTypes(): array {
-        return FunctionsGov::$TYPES_SETTLEMENT;
+        $merged = FunctionsGov::$TYPES_SETTLEMENT;
+        
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function religiousTypes(): array {
-        return FunctionsGov::$TYPES_RELIGIOUS;
+        $merged = FunctionsGov::$TYPES_RELIGIOUS;
+        
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function judicialTypes(): array {
-        return FunctionsGov::$TYPES_JUDICIAL;
+        $merged = FunctionsGov::$TYPES_JUDICIAL;
+        
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function otherTypes(): array {
-        return array_merge(
+        $merged = array_merge(
             FunctionsGov::$TYPES_GEOGRAPHIC,
             FunctionsGov::$TYPES_PLACE,
             FunctionsGov::$TYPES_TRANSPORTATION);
+        
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function allTypes(): array {
-        $ret = array_merge(
+        $merged = array_merge(
             FunctionsGov::admTypes(),
             FunctionsGov::orgTypes(),
             FunctionsGov::settlementTypes(),
@@ -632,7 +654,8 @@ class FunctionsGov {
             FunctionsGov::judicialTypes(),
             FunctionsGov::otherTypes());
 
-        return $ret;
+        //values also as keys
+        return array_combine($merged, $merged);
     }
 
     public static function getAllGovTypeIds($module, LocaleInterface $locale): array {
@@ -1038,7 +1061,7 @@ class FunctionsGov {
      * @return array key: type, value: array of languageTag:value
      */
     public static function getTypeDescriptions($module): array {
-        return Registry::cache()->array()->remember('types.owl', function () use ($module): array {
+        return Registry::cache()->array()->remember(FunctionsGov::class . 'types.owl', function () use ($module): array {
                 return FunctionsGov::loadTypeDescriptionsFromFile($module);
             });
     }
@@ -1146,16 +1169,31 @@ class FunctionsGov {
     public static function retrieveGovObject(
         $module,
         $id,
-        bool $forceReload = false): ?GovObject {
-
-        if (!$forceReload) {
-            $gov = FunctionsGov::getGovObject($id);
-            if ($gov != null) {
+        int $version = -1): ?GovObject {
+    
+        $cacheKey = FunctionsGov::class . 'GovObject_' . $id . '_' . $version;
+    
+        $ret = Registry::cache()->array()->remember($cacheKey, static function () use ($module, $id, $version): ?GovObject {
+            return FunctionsGov::retrieveGovObjectActual($module, $id, $version);
+        });
+        
+        return $ret;
+    }
+    
+    public static function retrieveGovObjectActual(
+        $module,
+        $id,
+        int $version = -1): ?GovObject {
+        
+        $gov = FunctionsGov::getGovObject($id);
+        if ($gov != null) {
+            if ($gov->getVersion() >= $version) {
                 return $gov;
             }
-        }
 
-        //not loaded at all, or force reload
+        }        
+
+        //not loaded at all, or force reload via older version
         $gov = FunctionsGov::loadGovObject($module, $id);
         if ($gov == null) {
             return null;
@@ -1968,8 +2006,9 @@ class FunctionsGov {
             return GovIdPlus::empty();
         }
 
-        //disregard ids with a non-matching (sticky) type (non-matching non-sticky aren't returned at all),
+        //completely disregard ids with a non-matching (sticky) type (non-matching non-sticky aren't returned at all),
         //even if there are other entries for this id
+        //(this is done so we can actually override the parent via sticky type)
 
         $disregardedIds = [];
         foreach ($rows as $row) {
@@ -2178,71 +2217,5 @@ class FunctionsGov {
     }
     
     ////////////////////////////////////////////////////////////////////////////
-    
-    public static function getIntervals(
-        GovObject $gov,
-        ?int $from,
-        ?int $to): Collection {
-        
-        //every from starts an interval
-        //every to+1 starts an interval
-        
-        //return:
-        //int $start        
-        //array<int> $other
-        //bool openEnd
-        
-        $retOpenStart = false;
-        $retFroms = [];
-        $retOpenEnd = false;
-        
-        foreach ($gov->getTypes() as $prop) {
-            $propFrom = $prop -> getFrom();
-            if ($propFrom === null) {
-                if ($from === null) {
-                    $retOpenStart = true;
-                } else {
-                    //confirm given start
-                    $retFroms []= $from;
-                }
-            } else {
-                if ($from === null) {
-                    $retFroms []= $propFrom;
-                } else {
-                    //maybe adjust to given start 
-                    $retFroms []= max($from, $propFrom);
-                }
-            }
-            
-            $propTo = $prop -> getTo();
-            if ($propTo === null) {
-                if ($to === null) {
-                    $retOpenEnd = true;
-                } else {
-                    //confirm given end
-                    $retFroms []= $to+1;
-                }
-            } else {
-                if ($to === null) {
-                    $retFroms []= $propTo+1;
-                } else {
-                    //maybe adjust to given end 
-                    $retFroms []= min($to+1, $propTo+1);
-                }
-            }
-        }
-        
-        foreach ($gov->getLabels() as $prop) {
-            //same
-        }
-        
-        foreach ($gov->getParents() as $prop) {
-            $govId = $prop->getProp();
-            
-            //tricky because we have to filter parent by type , as in get hierarchy
-            
-            //then, recurse into parent
-        }
-    }
 
 }
