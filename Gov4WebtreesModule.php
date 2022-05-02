@@ -708,7 +708,8 @@ class Gov4WebtreesModule extends AbstractModule implements
             
             $gedcom .= $hierarchy->interval()->asGedcomDateInterval()->toGedcomString(2, true);
             
-            $gov = new VirtualFact($gedcom, $record, 'gov');
+            //id must match styleadds key in hFactsTabGetStyleadds
+            $gov = new VirtualFact($gedcom, $record, 'gov-history');
             $facts[] = $gov;
         }
         
