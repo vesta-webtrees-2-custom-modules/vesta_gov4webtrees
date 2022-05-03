@@ -706,11 +706,15 @@ class Gov4WebtreesModule extends AbstractModule implements
             $gedcom .= "\n2 TYPE GOV Hierarchy";
             $gedcom .= "\n2 PLAC " . $placeName;
             
+            //we know the _GOV already, more efficient this way than to re-resolve it
+            //(resolving via plac2gov anyway isn't certain to succeed if _GOV originates from _LOC)
+            $gedcom .= "\n3 _GOV " . $gov->getId();
+            
             $gedcom .= $hierarchy->interval()->asGedcomDateInterval()->toGedcomString(2, true);
             
             //id must match styleadds key in hFactsTabGetStyleadds
-            $gov = new VirtualFact($gedcom, $record, 'gov-history');
-            $facts[] = $gov;
+            $fact = new VirtualFact($gedcom, $record, 'gov-history');
+            $facts[] = $fact;
         }
         
         return $facts;
