@@ -2,7 +2,6 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
-use Aura\Router\RouterContainer;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataDelete;
@@ -68,7 +67,6 @@ use Vesta\Model\Trace;
 use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
 use const CAL_GREGORIAN;
-use function app;
 use function cal_to_jd;
 use function response;
 use function route;
@@ -118,9 +116,13 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 6);
 
+        /*
         $router_container = app(RouterContainer::class);
         assert($router_container instanceof RouterContainer);
         $router = $router_container->getMap();
+        */
+
+        $router = Registry::routeFactory()->routeMap();
 
         //http://localhost/dev/webtrees_releases/webtrees/admin/gov-data/object_156114
 
@@ -268,7 +270,8 @@ class Gov4WebtreesModule extends AbstractModule implements
     public function govIdEditControlSelectScriptSnippetInternal(bool $withinModal): string {
         if (str_starts_with(Webtrees::VERSION, '2.1')) {
             $html = view($this->name() . '::script/tom-select-initializer-gov', [
-                'withinModal' => $withinModal]);
+                //'withinModal' => $withinModal
+            ]);
         } else {
             $html = view($this->name() . '::script/select2-initializer-gov', [
                 'withinModal' => $withinModal]);

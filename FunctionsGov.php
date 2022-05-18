@@ -486,7 +486,7 @@ class FunctionsGov {
 
     protected static $TYPES_ADM0 = array(31, 50, 56, /* 71, */ 72, 214);
     protected static $TYPES_ADM1 = array(7, 16, 25, 33, 34, 58, 59, 130, 133, 142, 160, 168, 221, 256);
-    protected static $TYPES_ADM2 = array(5, 10, 45, 46, 100, 101, 138, 161, 201, 211, 217, 222, 225);
+    protected static $TYPES_ADM2 = array(5, 10, 45, 100, 101, 138, 161, 201, 211, 217, 222, 225);
     protected static $TYPES_ADM3 = array(32, 36, 37, 53, 57, 63, 75, 78, 88, 99, 110, 126, 134, 146, 149, 171, 185, 186, 203, 204, 207, 212, 223, 241, 239, 270);
     protected static $TYPES_ADM4 = array(1, 2, /* 48, */ /* 94, */ 97, 122, /* 127, */ 152, 205, 226, 259, 264, 266);
     protected static $TYPES_ADM5 = array(4, 14, 18, 76, 83, 85, 95, 108, 109, 136, 140, 143, 145, /* 148, */ 150, 154, 162, 163, 165, 169, 180, 213, 218, 227, 246, 255, 257, 258, 267, 268, 269, 271, 272, 273, 274, 275, 278);
@@ -571,7 +571,9 @@ class FunctionsGov {
     //184 no adm_ Kammerschreiberei
     //
     //plus all from adm6
-    protected static $TYPES_ORGANIZATIONAL = array(48, 71, 77, 94, 115, 116, 117, 127, 148, 177, 178, 179, 184);
+    //
+    //[2022/05] moved Regierungsbezirk 46 here, which at least in Germany is no Gebietskörperschaft, according to https://de.wikipedia.org/wiki/Gebietsk%C3%B6rperschaft_(Deutschland)
+    protected static $TYPES_ORGANIZATIONAL = array(46, 48, 71, 77, 94, 115, 116, 117, 127, 148, 177, 178, 179, 184);
     //http://gov.genealogy.net/types.owl#group_3
     protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
     //http://gov.genealogy.net/types.owl#group_8
