@@ -116,13 +116,13 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 6);
 
-        /*
-        $router_container = app(RouterContainer::class);
-        assert($router_container instanceof RouterContainer);
-        $router = $router_container->getMap();
-        */
-
-        $router = Registry::routeFactory()->routeMap();
+        if (str_starts_with(Webtrees::VERSION, '2.1')) {
+            $router = Registry::routeFactory()->routeMap();
+        } else {
+            $router_container = app(RouterContainer::class);
+            assert($router_container instanceof RouterContainer);
+            $router = $router_container->getMap();            
+        }
 
         //http://localhost/dev/webtrees_releases/webtrees/admin/gov-data/object_156114
 
@@ -483,8 +483,7 @@ class Gov4WebtreesModule extends AbstractModule implements
         if ($readonly) {
             
             if (str_starts_with(Webtrees::VERSION, '2.1')) {
-                //TODO better replacement?
-                $placerec = ReportParserGenerate::getSubRecord(2, '2 PLAC', $fact->gedcom());
+                $placerec = '2 PLAC ' . $fact->attribute('PLAC');
             } else {
                 $placerec = Functions::getSubRecord(2, '2 PLAC', $fact->gedcom());
             }
@@ -652,7 +651,6 @@ class Gov4WebtreesModule extends AbstractModule implements
             
             //dummy record, should at least have PLAC
             //
-            //cf PlaceStructure
             $placerec = ReportParserGenerate::getSubRecord(1, '1 PLAC', $location->gedcom());
             
             //strip the '1 PLAC '
