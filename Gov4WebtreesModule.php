@@ -485,7 +485,9 @@ class Gov4WebtreesModule extends AbstractModule implements
         if ($readonly) {
             
             if (str_starts_with(Webtrees::VERSION, '2.1')) {
-                $placerec = '2 PLAC ' . $fact->attribute('PLAC');
+                //cannot use this - skips levels 3 tags
+                //$placerec = '2 PLAC ' . $event->attribute('PLAC');
+                $placerec = ReportParserGenerate::getSubRecord(2, '2 PLAC', $fact->gedcom());
             } else {
                 $placerec = Functions::getSubRecord(2, '2 PLAC', $fact->gedcom());
             }
