@@ -19,7 +19,6 @@ use Fisharebest\Webtrees\View;
 <h1><?= $titlePlus ?></h1>
 
 <form method="post" action="<?= e(route(GovDataSave::class)) ?>">
-    <?= csrf_field() ?>
     <input type="hidden" name="type" value="<?= e($type) ?>">
     <input type="hidden" name="key" value="<?= e($prop->getKey()) ?>">
     <input type="hidden" name="govId" value="<?= e($prop->getGovId()) ?>">
@@ -116,5 +115,6 @@ use Fisharebest\Webtrees\View;
             </a>
         </div>
     </div>
+    <?= csrf_field() ?>
 </form>
 

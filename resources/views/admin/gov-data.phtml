@@ -80,10 +80,10 @@ use Vesta\Model\DateUtils;
                 <td>
                     <?php if ($prop->getSticky()): ?>
                         <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'label', 'key' => $prop->getKey()])) ?>">
-                            <?= csrf_field() ?>
                             <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Name?') ?>">
                                 <?= view('icons/delete') ?>
                             </button>
+                            <?= csrf_field() ?>
                         </form>
                     <?php endif ?>
                 </td>
@@ -151,10 +151,10 @@ use Vesta\Model\DateUtils;
                 <td>
                     <?php if ($prop->getSticky()): ?>
                         <form method="post" action="<?= e(route(GovDataDelete::class, ['type' => 'type', 'key' => $prop->getKey()])) ?>">
-                            <?= csrf_field() ?>
                             <button type="submit" class="btn btn-danger" aria-label="<?= MoreI18N::xlate('delete') ?>" data-wt-confirm="<?= /* I18N: Module Configuration */I18N::translate('Remove this GOV Object Type?') ?>">
                                 <?= view('icons/delete') ?>
                             </button>
+                            <?= csrf_field() ?>
                         </form>
                     <?php endif ?>
                 </td>

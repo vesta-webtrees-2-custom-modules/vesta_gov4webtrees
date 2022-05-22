@@ -10,7 +10,6 @@ use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Http\ViewResponseTrait;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Tree;
-use Fisharebest\Webtrees\Webtrees;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Swoole\Http\Request;
@@ -61,11 +60,7 @@ class EditGovMappingController {
       $title = I18N::translate('Reset GOV id for %1$s', $placeName);
     }
     
-    if (str_starts_with(Webtrees::VERSION, '2.1')) {
-        $viewName = $this->module->name() . '::modals/edit-gov-mapping';
-    } else {
-        $viewName = $this->module->name() . '::modals/edit-gov-mapping_20';
-    }
+    $viewName = $this->module->name() . '::modals/edit-gov-mapping';
     
     $html = view($viewName, [
                 'moduleName' => $this->module->name(),

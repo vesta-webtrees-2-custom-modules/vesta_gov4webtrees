@@ -13,7 +13,6 @@ use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Module\ModuleInterface;
 use Fisharebest\Webtrees\Tree;
-use Fisharebest\Webtrees\Webtrees;
 use Illuminate\Support\Collection;
 use Vesta\Hook\HookInterfaces\FunctionsPlaceUtils;
 use Vesta\Model\GenericViewElement;
@@ -1048,16 +1047,9 @@ class GovHierarchyUtils {
         string $title, 
         string $url): string {
         
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
-                view($view) .
-                '<span class="visually-hidden">' . $title . '</span>' .
-                '</a>';
-        }
-        
         return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
-                view($view) .
-                '<span class="sr-only">' . $title . '</span>' .
-                '</a>';
+            view($view) .
+            '<span class="visually-hidden">' . $title . '</span>' .
+            '</a>';
     }
 }

@@ -9,7 +9,6 @@ e(route('module', [
     'action' => "EditGovMapping"
 ]))
 ?>" id="wt-modal-form" method="POST">
-    <?= csrf_field() ?>
     <input type="hidden" name="place-name" value="<?= e($placeName) ?>">
 
     <?= view('modals/header', ['title' => $title]) ?>
@@ -30,6 +29,7 @@ e(route('module', [
     </div>
 
     <?= view('modals/footer-save-cancel') ?>
+    <?= csrf_field() ?>
 </form>
 
 <?php /* get script from child view (gov-id-edit-control has adjustment for select2) */ ?>

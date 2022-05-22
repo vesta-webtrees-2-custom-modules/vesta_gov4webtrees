@@ -2,7 +2,6 @@
 
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
-use Aura\Router\RouterContainer;
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataDelete;
@@ -28,7 +27,6 @@ use Fisharebest\ExtCalendar\GregorianCalendar;
 use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\FlashMessages;
-use Fisharebest\Webtrees\Functions\Functions;
 use Fisharebest\Webtrees\GedcomRecord;
 use Fisharebest\Webtrees\Http\Middleware\AuthAdministrator;
 use Fisharebest\Webtrees\I18N;
@@ -68,7 +66,6 @@ use Vesta\Model\Trace;
 use Vesta\VestaAdminController;
 use Vesta\VestaModuleTrait;
 use const CAL_GREGORIAN;
-use function app;
 use function cal_to_jd;
 use function response;
 use function route;
@@ -118,13 +115,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 6);
 
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            $router = Registry::routeFactory()->routeMap();
-        } else {
-            $router_container = app(RouterContainer::class);
-            assert($router_container instanceof RouterContainer);
-            $router = $router_container->getMap();            
-        }
+        $router = Registry::routeFactory()->routeMap();
 
         //http://localhost/dev/webtrees_releases/webtrees/admin/gov-data/object_156114
 
@@ -143,24 +134,21 @@ class Gov4WebtreesModule extends AbstractModule implements
         $router->post(GovDataDelete::class, '/admin/gov-data-delete/{type}/{key}', GovDataDelete::class)
                 ->extras(['middleware' => [AuthAdministrator::class]]);
         
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            
-            //replace GovIdentifier (change its edit control)
-            $ef = Registry::elementFactory();
-            
-            //note: hopefully no other _custom_ module after this one registers the same tags,
-            //otherwise we lose
-            $ef->registerTags([
-                //these would require a different edit control (to get the PLAC name)
-                //'FAM:*:PLAC:_GOV'  => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
-                //'INDI:*:PLAC:_GOV' => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
-                
-                '_LOC:_GOV'        => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
-            ]);
-            
-            //do we want to make _GOV available everywhere for editing though?
-            //for now, no. otherwise cf SharedPlacesModule customSubTags
-        }
+        //replace GovIdentifier (change its edit control)
+        $ef = Registry::elementFactory();
+
+        //note: hopefully no other _custom_ module after this one registers the same tags,
+        //otherwise we lose
+        $ef->registerTags([
+            //these would require a different edit control (to get the PLAC name)
+            //'FAM:*:PLAC:_GOV'  => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
+            //'INDI:*:PLAC:_GOV' => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
+
+            '_LOC:_GOV'        => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
+        ]);
+
+        //do we want to make _GOV available everywhere for editing though?
+        //for now, no. otherwise cf SharedPlacesModule customSubTags
     }
 
     public function messageGovServerUnavailable(): string {
@@ -270,14 +258,9 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
 
     public function govIdEditControlSelectScriptSnippetInternal(bool $withinModal): string {
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            $html = view($this->name() . '::script/tom-select-initializer-gov', [
-                //'withinModal' => $withinModal
-            ]);
-        } else {
-            $html = view($this->name() . '::script/select2-initializer-gov', [
-                'withinModal' => $withinModal]);
-        }
+        $html = view($this->name() . '::script/tom-select-initializer-gov', [
+            //'withinModal' => $withinModal
+        ]);
 
         return $html;
     }
@@ -300,8 +283,7 @@ class Gov4WebtreesModule extends AbstractModule implements
         //now loaded globally
         //$html .= '<link href="' . $this->assetUrl('css/'.$this->getThemeForCss().'.css') . '" type="text/css" rel="stylesheet" />';
 
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            $html .= view($this->name() . '::edit/gov-id-edit-control', [
+        $html .= view($this->name() . '::edit/gov-id-edit-control', [
                 'moduleName' => $this->name(),
                 'withLabel' => $withLabel,
                 'id' => $id,
@@ -311,20 +293,6 @@ class Gov4WebtreesModule extends AbstractModule implements
                 'internal' => false,
                 'selectInitializer' => $forModal ? null : $this->govIdEditControlSelectScriptSnippetInternal(false),
                 'govId' => $govId]);
-        } else {
-            $html .= view($this->name() . '::edit/gov-id-edit-control_20', [
-                'moduleName' => $this->name(),
-                'withLabel' => $withLabel,
-                'id' => $id,
-                'name' => $name,
-                'placeName' => $placeName,
-                'placeNameInputSelector' => $placeNameSelector,
-                'internal' => false,
-                'select2Initializer' => $forModal ? null : $this->govIdEditControlSelectScriptSnippetInternal(false),
-                'govId' => $govId]);
-        }
-
-
 
         $script = View::stack('javascript');
 
@@ -372,15 +340,6 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-
-    public function postSelect2GovIdAction(ServerRequestInterface $request): ResponseInterface {
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            throw new \Exception;
-        }
-
-        $controller = new EditGovMappingController($this);
-        return $controller->select2GovId($request);
-    }
 
     public function getTomSelectGovIdAction(ServerRequestInterface $request): ResponseInterface {
         if (!str_starts_with(Webtrees::VERSION, '2.1')) {
@@ -453,11 +412,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
             $govReference = new GovReference($fact->value(), new Trace(""));
 
-            if (str_starts_with(Webtrees::VERSION, '2.1')) {
-                $viewName = $this->name() . '::edit/icon-fact-reload-gov';
-            } else {
-                $viewName = $this->name() . '::edit/icon-fact-reload-gov_20';
-            }
+            $viewName = $this->name() . '::edit/icon-fact-reload-gov';
         
             //allow to reload the gov hierarchy
             $html = view($viewName, [
@@ -484,13 +439,9 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         if ($readonly) {
             
-            if (str_starts_with(Webtrees::VERSION, '2.1')) {
-                //cannot use this - skips levels 3 tags
-                //$placerec = '2 PLAC ' . $event->attribute('PLAC');
-                $placerec = ReportParserGenerate::getSubRecord(2, '2 PLAC', $fact->gedcom());
-            } else {
-                $placerec = Functions::getSubRecord(2, '2 PLAC', $fact->gedcom());
-            }
+            //cannot use this - skips levels 3 tags
+            //$placerec = '2 PLAC ' . $event->attribute('PLAC');
+            $placerec = ReportParserGenerate::getSubRecord(2, '2 PLAC', $fact->gedcom());
                         
             if (empty($placerec)) {
                 //nothing to offer here
@@ -505,11 +456,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                 return GenericViewElement::createEmpty();
             }
 
-            if (str_starts_with(Webtrees::VERSION, '2.1')) {
-                $viewName = $this->name() . '::edit/icon-fact-reload-gov';
-            } else {
-                $viewName = $this->name() . '::edit/icon-fact-reload-gov_20';
-            }
+            $viewName = $this->name() . '::edit/icon-fact-reload-gov';
             
             //allow to reload the gov hierarchy
             $html = view($viewName, [
@@ -535,11 +482,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             $title = I18N::translate('Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy');
         }
 
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            $viewName = $this->name() . '::edit/icon-fact-map-gov';
-        } else {
-            $viewName = $this->name() . '::edit/icon-fact-map-gov_20';
-        }
+        $viewName = $this->name() . '::edit/icon-fact-map-gov';
 
         $html = view($viewName, [
             'fact' => $fact,
@@ -1083,16 +1026,9 @@ class Gov4WebtreesModule extends AbstractModule implements
 
     //obsolete here after completion of hierarchies refactoring
     public function linkIcon($view, $title, $url) {
-        if (str_starts_with(Webtrees::VERSION, '2.1')) {
-            return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
-                view($view) .
-                '<span class="visually-hidden">' . $title . '</span>' .
-                '</a>';
-        }
-        
         return '<a href="' . $url . '" rel="nofollow" title="' . $title . '">' .
                 view($view) .
-                '<span class="sr-only">' . $title . '</span>' .
+                '<span class="visually-hidden">' . $title . '</span>' .
                 '</a>';
     }
 
