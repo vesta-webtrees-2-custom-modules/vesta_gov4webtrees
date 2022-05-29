@@ -6,6 +6,7 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\Gov4WebtreesModule;
+use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchyUtils;
 use Cissee\WebtreesExt\MoreI18N;
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
@@ -55,8 +56,8 @@ class GovData implements RequestHandlerInterface
         }
 
         $locale = I18N::locale();        
-        $languages = $this->module->getResolvedLanguages($locale, $govId);
-        $languagesForTypes = $this->module->getResolvedLanguagesForTypes($locale);
+        $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govId);
+        $languagesForTypes =  GovHierarchyUtils::getResolvedLanguagesForTypes($this->module, $locale);
         $label = $gov->getResolvedLabel($languages)->getProp();
 
         $breadcrumbs = [];

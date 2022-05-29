@@ -60,7 +60,7 @@ class GovDataEdit implements RequestHandlerInterface
         }
         
         $locale = I18N::locale();
-        $languages = $this->module->getResolvedLanguages($locale, $govId);
+        $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govId);
         $label = $gov->getResolvedLabel($languages)->getProp();
 
         $breadcrumbs = [];
@@ -79,7 +79,7 @@ class GovDataEdit implements RequestHandlerInterface
           $govIdParent = $prop->getProp();
           $gov = FunctionsGov::retrieveGovObject($this->module, $govIdParent);
           if ($gov !== null) {
-            $languages = $this->module->getResolvedLanguages($locale, $govIdParent);
+            $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govIdParent);
             $placename = $gov->getResolvedLabel($languages)->getProp();
           } //else inconsistency
         }

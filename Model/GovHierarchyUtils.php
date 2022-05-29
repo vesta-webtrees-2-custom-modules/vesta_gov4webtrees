@@ -244,7 +244,7 @@ class GovHierarchyUtils {
         
         //$returnNullInCaseOfNoOverrides: preserve any higher level overrides 
         //(without this param would revert to defaults)
-        $languagesAdjusted = $this->getResolvedLanguages($args->locale(), $ref, true);
+        $languagesAdjusted = GovHierarchyUtils::getResolvedLanguages($this->module, $args->locale(), $ref, true);
         
         //1. determine intervals for parent ids
         $parentRequests = $this->parentIntervals($gov, $request->interval());
@@ -313,7 +313,7 @@ class GovHierarchyUtils {
         //(usually max one sticky and max one non-sticky expected, 
         //but safer to account for all cases)
 
-        $bestMatchTypeLevel = 0;        
+        $bestMatchTypeLevel = -1;        
         $bestMatchType = null;
         
         /** @var GovProperty $typeProp */
@@ -346,6 +346,11 @@ class GovHierarchyUtils {
                     }
                 }
             }
+        }
+        
+        //normalize
+        if ($bestMatchTypeLevel === -1) {
+            $bestMatchTypeLevel = 0;
         }
         
         return [
@@ -780,7 +785,10 @@ class GovHierarchyUtils {
             //also occurs if types.owl isn't up-to-date unfortunately (misleading).
             $nullType = I18N::translate('this place does not exist at this point in time');
             
-            $resolvedType = FunctionsGov::resolveTypeDescription($this->module, $type, $args->languagesForTypes());
+            $resolvedType = FunctionsGov::resolveTypeDescription(
+                $this->module, 
+                $type, 
+                $args->languagesForTypes());
             
             ////////////////////////////////////////////////////////////////////
             //////// formatting 
@@ -965,20 +973,21 @@ class GovHierarchyUtils {
         
         return new GovHierarchyRequestArgs(
             $locale,
-            $this->getResolvedLanguages($locale),
-            $this->getResolvedLanguagesForTypes($locale),
+            GovHierarchyUtils::getResolvedLanguages($this->module, $locale),
+            GovHierarchyUtils::getResolvedLanguagesForTypes($this->module, $locale),
             $compactDisplay,
             $withInternalLinks,
             $showSettlements,
             $showOrganizational);
     }
         
-    public function getResolvedLanguages(
+    public static function getResolvedLanguages(
+            Gov4WebtreesModule $module,
             LocaleInterface $locale,
             string $govId = '', //empty key = global
             bool $returnNullInCaseOfNoOverrides = false): ?array {
 
-        $overridesFilename = $this->module->resourcesFolder() . 'gov/languages.csv';
+        $overridesFilename = $module->resourcesFolder() . 'gov/languages.csv';
 
         $languageOverrides = FunctionsGov::getGovObjectLanguageOverrides(
                         $overridesFilename,
@@ -998,7 +1007,7 @@ class GovHierarchyUtils {
             $languages = array_merge($languages, $languageOverrides);
         }
 
-        $fallbackPreferDeu = boolval($this->module->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
+        $fallbackPreferDeu = boolval($module->getPreference('FALLBACK_LANGUAGE_PREFER_DEU', '1'));
 
         if ($fallbackPreferDeu) {
             $languages []= 'deu';
@@ -1007,10 +1016,11 @@ class GovHierarchyUtils {
         return $languages;
     }
 
-    public function getResolvedLanguagesForTypes(
-            LocaleInterface $locale): array {
-
-        $overridesFilename = $this->module->resourcesFolder() . 'gov/languages.csv';
+    public static function getResolvedLanguagesForTypes(
+        Gov4WebtreesModule $module,
+        LocaleInterface $locale): array {
+        
+        $overridesFilename = $module->resourcesFolder() . 'gov/languages.csv';
 
         $languageOverrides = FunctionsGov::getGovObjectLanguageOverrides(
                         $overridesFilename,

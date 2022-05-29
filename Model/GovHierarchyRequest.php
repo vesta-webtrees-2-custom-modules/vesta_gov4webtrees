@@ -12,15 +12,15 @@ class GovHierarchyRequest {
     public function govId(): ?string {
         return $this->govId;
     }
-    
+
     public function type(): ?int {
         return $this->type;
     }
-    
+
     public function hasLocalModifications(): bool {
         return $this->hasLocalModifications;
     }
-    
+
     public function interval(): JulianDayInterval {
         return $this->interval;
     }
@@ -36,4 +36,5 @@ class GovHierarchyRequest {
         $this->hasLocalModifications = $hasLocalModifications;
         $this->interval = $interval;
     }
+
 }

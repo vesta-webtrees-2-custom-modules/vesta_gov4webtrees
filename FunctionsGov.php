@@ -3,6 +3,7 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
+use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchyUtils;
 use DateInterval;
 use DateTime;
 use Exception;
@@ -18,6 +19,7 @@ use Throwable;
 use const CAL_GREGORIAN;
 use function cal_from_jd;
 use function cal_to_jd;
+use function microtime;
 use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 use function route;
@@ -710,7 +712,7 @@ class FunctionsGov {
         LocaleInterface $locale,
         array $typeIds): array {
 
-        $languagesForTypes = $module->getResolvedLanguagesForTypes($locale);
+        $languagesForTypes = GovHierarchyUtils::getResolvedLanguagesForTypes($module, $locale);
 
         $types = new Collection($typeIds);
 
@@ -1119,7 +1121,7 @@ class FunctionsGov {
         $module,
         ?int $type,
         array $languages): ?string {
-
+        
         if ($type === null) {
             return null;
         }
@@ -1157,7 +1159,7 @@ class FunctionsGov {
                 return reset($values);
             }
         }
-
+        
         return null;
     }
 
@@ -1566,6 +1568,12 @@ class FunctionsGov {
                 $lat = $position->lat;
                 $lon = $position->lon;
 
+                //more than 7 decimal digits is just meaningless in any case!
+                //https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
+                $lat = round($lat, 7);
+                $lon = round($lon, 7);
+                
+                //apparently not avalable consistently for calculated values!
                 if (property_exists($position, "type")) {
                     $type = $position->type;
                     if ('c' == $type) {

@@ -59,7 +59,7 @@ class GovDataList implements RequestHandlerInterface
           $gov = FunctionsGov::retrieveGovObject($this->module, $govId);
     
           if ($gov != null) {
-            $languages = $this->module->getResolvedLanguages($locale, $govId);
+            $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govId);
             $sortBy = $gov->getResolvedLabel($languages)->getProp();
             $label = $gov->formatForAdminView($this->module, $languages);
             $lat = $gov->getLat();
