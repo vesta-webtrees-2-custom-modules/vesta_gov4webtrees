@@ -1468,12 +1468,27 @@ class FunctionsGov {
         //probably redundant, see UseTransaction! 
         DB::connection()->beginTransaction();
 
+        /*
         DB::table('gov_objects')->updateOrInsert([
             'gov_id' => $id,
             ], [
             'lat' => $govObject->getLat(),
             'lon' => $govObject->getLon(),
             'version' => $govObject->getVersion()
+        ]);
+        */
+        
+        //TODO use this everywhere rather than updateOrInsert
+        //which isn't atomic and leads to
+        //Integrity constraint violation: 1062 Duplicate entry
+        //errors
+        DB::table('gov_objects')->upsert([
+            'gov_id' => $id,
+            'lat' => $govObject->getLat(),
+            'lon' => $govObject->getLon(),
+            'version' => $govObject->getVersion()
+        ], [            
+            'gov_id' => $id
         ]);
 
         DB::table('gov_types')
