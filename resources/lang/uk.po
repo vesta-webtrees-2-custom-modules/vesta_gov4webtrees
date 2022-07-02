@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2022-04-24 21:11+0200\n"
-"PO-Revision-Date: 2022-07-02 19:19+0000\n"
+"PO-Revision-Date: 2022-07-02 21:18+0000\n"
 "Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
@@ -396,7 +396,7 @@ msgstr "Ієрархії місць відображаються історич�
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Place hierarchy"
-msgstr ""
+msgstr "Ієрархія місця"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:206
