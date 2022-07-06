@@ -6,6 +6,7 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
 use Cissee\Webtrees\Module\Gov4Webtrees\Gov4WebtreesModule;
+use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchyUtils;
 use Cissee\WebtreesExt\MoreI18N;
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 use Fisharebest\Webtrees\Http\RequestHandlers\ModulesAllPage;
