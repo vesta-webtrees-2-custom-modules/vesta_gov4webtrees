@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2022-04-24 21:11+0200\n"
-"PO-Revision-Date: 2021-06-15 07:32+0000\n"
-"Last-Translator: z-yurets <zaharchenko.yurij@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
+"PO-Revision-Date: 2022-07-03 13:16+0000\n"
+"Last-Translator: Artem <artem@molotov.work>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -56,17 +58,17 @@ msgstr "Крім того, модуль перевіряє, чи має відп
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Administrative"
-msgstr ""
+msgstr "Адміністративний"
 
 #: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
 #: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
 #, php-format
 msgid "Administrative (level %1$s)"
-msgstr ""
+msgstr "Адміністративний (рівень %1$s)"
 
 #: FunctionsGov.php:663
 msgid "Administrative (other)"
-msgstr ""
+msgstr "Адміністративний (інше)"
 
 #: Gov4WebtreesModule.php:1361
 msgid "Administrative levels"
@@ -117,7 +119,7 @@ msgstr "Відобразіть підказку із зазначенням дж
 #: Http/RequestHandlers/GovDataEdit.php:90
 #, php-format
 msgid "Edit %1$s for %2$s"
-msgstr ""
+msgstr "Змінити %1$s для %2$s"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:237
@@ -147,11 +149,11 @@ msgstr ""
 #: resources/views/admin/gov-data_20.phtml:99
 #: resources/views/admin/gov-data_20.phtml:169
 msgid "From"
-msgstr ""
+msgstr "З"
 
 #: Gov4WebtreesModule.php:576
 msgid "GOV Hierarchies"
-msgstr ""
+msgstr "Ієрархії GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -162,34 +164,34 @@ msgstr "Управління ідентифікаторами GOV"
 #: resources/views/admin/gov-data.phtml:30
 #: resources/views/admin/gov-data_20.phtml:30
 msgid "GOV Name"
-msgstr ""
+msgstr "Назва GOV"
 
 #: Http/RequestHandlers/GovDataEdit.php:70
 #: resources/views/admin/gov-data.phtml:98
 #: resources/views/admin/gov-data_20.phtml:98
 msgid "GOV Object Type"
-msgstr ""
+msgstr "Тип GOV-об'єкта"
 
 #: Http/RequestHandlers/GovDataEdit.php:74
 #: resources/views/admin/gov-data.phtml:168
 #: resources/views/admin/gov-data_20.phtml:168
 msgid "GOV Parent"
-msgstr ""
+msgstr "GOV Батько"
 
 #: Http/RequestHandlers/GovData.php:74 Http/RequestHandlers/GovDataEdit.php:95
 #: Http/RequestHandlers/GovDataList.php:47
 msgid "GOV data"
-msgstr ""
+msgstr "Дані GOV"
 
 #: resources/views/admin/gov-data-list.phtml:33
 #: resources/views/admin/gov-data-list_20.phtml:33
 msgid "GOV data for"
-msgstr ""
+msgstr "Дані GOV для"
 
 #: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
 #, php-format
 msgid "GOV data for %1$s"
-msgstr ""
+msgstr "Дані GOV для %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 #: resources/views/edit/gov-id-edit-control_20.phtml:16
@@ -234,7 +236,7 @@ msgstr ""
 #: resources/views/admin/gov-data-list.phtml:27
 #: resources/views/admin/gov-data-list_20.phtml:27
 msgid "Hide data without local modifications"
-msgstr ""
+msgstr "Приховати дані без локальних змін"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -294,6 +296,8 @@ msgstr "Недійсний ідентифікатор GOV! Приклад дій
 #: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
 msgstr ""
+"Неприйнятний ідентифікатор GOV! До прийнятних належать, наприклад, \\'"
+"EITTZE_W3091\\', \\'object_1086218\\'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -307,7 +311,7 @@ msgstr "Він не буде замінений під час наступних
 
 #: FunctionsGov.php:675
 msgid "Judicial"
-msgstr ""
+msgstr "Судовий"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
@@ -317,7 +321,7 @@ msgstr "Місцеві дані GOV"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:80
 msgid "Local modifications are preserved."
-msgstr ""
+msgstr "Збережено локальні зміни."
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
@@ -358,11 +362,11 @@ msgstr ""
 #: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
-msgstr ""
+msgstr "Організаційна"
 
 #: FunctionsGov.php:678
 msgid "Other"
-msgstr ""
+msgstr "Інший"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:179
@@ -392,7 +396,7 @@ msgstr "Ієрархії місць відображаються історич�
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Place hierarchy"
-msgstr ""
+msgstr "Ієрархія місця"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:206
@@ -406,17 +410,17 @@ msgstr "Розмістіть текст та посилання"
 
 #: resources/views/script/tom-select-initializer-gov.phtml:41
 msgid "Please enter at least 10 characters."
-msgstr ""
+msgstr "Будь ласка, введіть принаймні 10 символів."
 
 #: FunctionsGov.php:672
 msgid "Religious"
-msgstr ""
+msgstr "Релігійний"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:84
 #: resources/views/admin/gov-data_20.phtml:84
 msgid "Remove this GOV Name?"
-msgstr ""
+msgstr "Видалити це ім'я GOV?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
