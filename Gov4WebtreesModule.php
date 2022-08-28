@@ -12,6 +12,7 @@ use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchy;
 use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchyUtils;
 use Cissee\Webtrees\Module\Gov4Webtrees\Model\JulianDayInterval;
 use Cissee\WebtreesExt\AbstractModule;
+use Cissee\WebtreesExt\Elements\GovIdTypeExt;
 use Cissee\WebtreesExt\Elements\GovIdentifierExt;
 use Cissee\WebtreesExt\Http\RequestHandlers\FunctionsPlaceProvidersAction;
 use Cissee\WebtreesExt\Module\ModuleExtGlobalInterface;
@@ -145,6 +146,9 @@ class Gov4WebtreesModule extends AbstractModule implements
             //'INDI:*:PLAC:_GOV' => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
 
             '_LOC:_GOV'        => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
+            
+            //(see also SharedPlaces, and webtrees core)
+            '_LOC:TYPE:_GOVTYPE' => new GovIdTypeExt($this, I18N::translate('GOV id for type of location')),
         ]);
 
         //do we want to make _GOV available everywhere for editing though?
