@@ -414,8 +414,10 @@ class GovHierarchyUtils {
         
         foreach ($filledIntervals as $filledInterval) {
             
+            //error_log("build for interval " . $filledInterval->asGedcomDateInterval()->toGedcomString(2, true));
+            
             //hasLocalModifications doesn't only depend on stickyness of best match:
-            //a non-sticky match may only be best due to  invalidations,
+            //a non-sticky match may only be best due to invalidations,
             //and a sticky match may have matched anyway
             //
             //so we have to determine second match, ignoring all stickies,
@@ -429,7 +431,11 @@ class GovHierarchyUtils {
             
             /** @var GovProperty $parentProp */
             foreach ($gov->getParents() as $parentProp) {
+                
                 $id = $parentProp->getProp();
+                
+                //error_log("check parent " . $id);
+                
                 $parent = $this->retrieveGovObject($id);
                 
                 $invalidated = !$parentProp->getSticky() && array_key_exists($id, $stickyParents);
@@ -439,6 +445,17 @@ class GovHierarchyUtils {
                 //'overlaps' actually implies the respective prop's interval fully encloses $interval)
                 if (!$invalidated && ($parent !== null)) {
                     if ($parentProp->getInterval()->overlaps($filledInterval)) {
+                        
+                        /*
+                        if (!$parentProp->getInterval()->includes($filledInterval)) {
+                            throw new \Exception("error in algorithm!");
+                        }
+                        */
+                        
+                        /*
+                        error_log("parent overlaps!");
+                        error_log("parent interval: " . $parentProp->getInterval()->asGedcomDateInterval()->toGedcomString(2, true));
+                         */
                         
                         //determine best matching type in this interval
 

@@ -40,7 +40,7 @@ class JulianDayInterval {
     
     public function asGedcomDateInterval(): GedcomDateInterval {
         $toExclusively = $this->getToExclusively();
-        return new GedcomDateInterval($this->getFrom(),  ($toExclusively === null)?null:$toExclusively-1);
+        return new GedcomDateInterval($this->getFrom(), ($toExclusively === null)?null:$toExclusively-1);
     }
     
     /**
@@ -76,5 +76,18 @@ class JulianDayInterval {
         }
         
         return $otherToExclusively > $thisFrom;
+    }
+    
+    public function includes(
+        JulianDayInterval $other): bool {
+        
+        $thisFrom = $this->getFrom() ?? PHP_INT_MIN;
+        $thisToExclusively = $this->getToExclusively() ?? PHP_INT_MAX;
+        
+        $otherFrom = $other->getFrom() ?? PHP_INT_MIN;
+        $otherToExclusively = $other->getToExclusively() ?? PHP_INT_MAX;
+        
+        return ($thisFrom <= $otherFrom) &&
+            ($thisToExclusively >= $otherToExclusively);
     }
 }

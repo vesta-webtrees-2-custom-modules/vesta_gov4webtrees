@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cissee\WebtreesExt\Elements;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\FunctionsGov;
-use Fisharebest\Webtrees\Elements\AbstractElement;
+use Fisharebest\Webtrees\Elements\GovIdType;
 use Fisharebest\Webtrees\Html;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Tree;
@@ -14,7 +14,7 @@ use function view;
 /**
  * GOV ID, for TYPE_OF_LOCATION
  */
-class GovIdTypeExt extends AbstractElement
+class GovIdTypeExt extends GovIdType //extend GovIdType in order to display via values()
 {    
     protected $module;
     

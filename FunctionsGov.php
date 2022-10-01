@@ -1675,6 +1675,8 @@ class FunctionsGov {
         }
 
         foreach ($rawParents as $parent) {
+            //error_log("get parent range for " . $parent->ref);
+            //error_log("get parent range for " . print_r($parent, true));
             $from = FunctionsGov::getBeginAsJulianDate($parent);
             $to = FunctionsGov::getEndAsJulianDateExclusively($parent);
             $parents[] = new GovProperty(-1, $id, $parent->ref, null, $from, $to, false);
@@ -2112,7 +2114,44 @@ class FunctionsGov {
                 $begin = $timespan->begin;
                 if (property_exists($begin, "jd")) {
                     $jd = $begin->jd;
-                    return $jd;
+                    
+                    $precision = 2; //fallback
+                    if (property_exists($begin, "precision")) {
+                        $precision = $begin->precision;
+                    }
+                    if ($precision == 2) {
+                        return $jd;
+                    }
+
+                    if ($precision == 1) {
+                        //GOV server does NOT necessarily return yyyy-mm-01 in this case!
+                        //therefore we set first of day ourselves
+
+                        //what a mess
+                        $ymd = cal_from_jd($jd, CAL_GREGORIAN);
+                        $dateTime = new DateTime();
+                        $dateTime->setDate($ymd["year"], $ymd["month"], 1);
+                        $dateTime->format('Y-m-d');
+                        $jd = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
+
+                        return $jd;
+                    }
+
+                    if ($precision == 0) {
+                        //GOV server does NOT necessarily return yyyy-01-01 in this case!
+                        //therefore we set first of day, first of month ourselves
+                        
+                        //what a mess
+                        $ymd = cal_from_jd($jd, CAL_GREGORIAN);
+                        $dateTime = new DateTime();
+                        $dateTime->setDate($ymd["year"], 1, 1);
+                        $dateTime->format('Y-m-d');
+                        $jd = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
+
+                        return $jd;
+                    }
+
+                    //unexpected = fall-through
                 }
             }
         }
@@ -2149,10 +2188,13 @@ class FunctionsGov {
                     }
 
                     if ($precision == 1) {
+                        //GOV server does NOT necessarily return yyyy-mm-01 in this case!
+                        //therefore we set first of day ourselves
+
                         //what a mess
                         $ymd = cal_from_jd($jd, CAL_GREGORIAN);
                         $dateTime = new DateTime();
-                        $dateTime->setDate($ymd["year"], $ymd["month"], $ymd["day"]);
+                        $dateTime->setDate($ymd["year"], $ymd["month"], 1);
                         $dateTime->add(new DateInterval("P1M")); //next month
                         $dateTime->format('Y-m-d');
                         $jd = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
@@ -2161,10 +2203,13 @@ class FunctionsGov {
                     }
 
                     if ($precision == 0) {
+                        //GOV server does NOT necessarily return yyyy-01-01 in this case!
+                        //therefore we set first of day, first of month ourselves
+                        
                         //what a mess
                         $ymd = cal_from_jd($jd, CAL_GREGORIAN);
                         $dateTime = new DateTime();
-                        $dateTime->setDate($ymd["year"], $ymd["month"], $ymd["day"]);
+                        $dateTime->setDate($ymd["year"], 1, 1);
                         $dateTime->add(new DateInterval("P1Y")); //next year
                         $dateTime->format('Y-m-d');
                         $jd = cal_to_jd(CAL_GREGORIAN, $dateTime->format("m"), $dateTime->format("d"), $dateTime->format("Y"));
