@@ -90,4 +90,26 @@ class GovIdTypeExt extends GovIdType //extend GovIdType in order to display via 
 
         return $values;
     }
+    
+    /**
+     * A list of controlled values for this element
+     *
+     * @return array<int|string,string>
+     */
+    public function values(): array {
+        
+        $valuesGrouped = $this->valuesGrouped();
+        
+        //does not preserve int keys argh
+        //$values = array_merge(...array_values($valuesGrouped));
+        
+        $values = [];
+        foreach ($valuesGrouped as $valuesInGroup) {
+            foreach ($valuesInGroup as $key => $value) {
+                $values[$key] = $value;
+            }
+        }
+
+        return $values;
+    }
 }
