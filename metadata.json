@@ -266,5 +266,11 @@
 		"version": "2.1.7.1.0",
 		"from": "2.1.4",
 		"to": "2.1.8"
+	},
+	{
+		"version": "2.1.7.1.1",
+		"from": "2.1.4",
+		"to": "2.1.8",
+		"changelog": ["Some GOV types moved to organizational hierarchy.","Fixed localization of GOV id type."]
 	}
 ]
