@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2022-04-24 21:11+0200\n"
-"PO-Revision-Date: 2021-10-05 18:04+0000\n"
+"PO-Revision-Date: 2022-11-30 18:47+0000\n"
 "Last-Translator: Josef Prause <josef.prause@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -107,6 +108,11 @@ msgstr "Tudíž informace o hierarchii místa lze měnit pouze nepřímo, přes 
 #: resources/views/admin/gov-data_20.phtml:24
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
 msgstr ""
+"Údaje získané ze serveru GOV. Upravené údaje jsou uloženy jako lokální "
+"modifikace (mimo GEDCOM, stejně jako původní údaje). Upravené údaje mají "
+"vždy přednost před původními. V případě, že se hierarchie nahrává nanovo, "
+"údaje nebudou smazány, ale dají se smazat zde. Žádné údaje se nepřenášejí na "
+"server GOV."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
@@ -117,7 +123,7 @@ msgstr "Zobrazit tooltip naznačující pramen GOV idu. Hlavně pro účely debu
 #: Http/RequestHandlers/GovDataEdit.php:90
 #, php-format
 msgid "Edit %1$s for %2$s"
-msgstr ""
+msgstr "Upravit %1$s pro %2$s"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:237
@@ -147,11 +153,11 @@ msgstr "Chcete-li provést jemnější úpravy a zobrazit seznam typů a skupin 
 #: resources/views/admin/gov-data_20.phtml:99
 #: resources/views/admin/gov-data_20.phtml:169
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 #: Gov4WebtreesModule.php:576
 msgid "GOV Hierarchies"
-msgstr ""
+msgstr "Hierarchie GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -162,34 +168,34 @@ msgstr "Správa GOV id"
 #: resources/views/admin/gov-data.phtml:30
 #: resources/views/admin/gov-data_20.phtml:30
 msgid "GOV Name"
-msgstr ""
+msgstr "Jméno GOV"
 
 #: Http/RequestHandlers/GovDataEdit.php:70
 #: resources/views/admin/gov-data.phtml:98
 #: resources/views/admin/gov-data_20.phtml:98
 msgid "GOV Object Type"
-msgstr ""
+msgstr "Typ objektu GOV"
 
 #: Http/RequestHandlers/GovDataEdit.php:74
 #: resources/views/admin/gov-data.phtml:168
 #: resources/views/admin/gov-data_20.phtml:168
 msgid "GOV Parent"
-msgstr ""
+msgstr "Nadřazený objekt GOV"
 
 #: Http/RequestHandlers/GovData.php:74 Http/RequestHandlers/GovDataEdit.php:95
 #: Http/RequestHandlers/GovDataList.php:47
 msgid "GOV data"
-msgstr ""
+msgstr "Údaje GOV"
 
 #: resources/views/admin/gov-data-list.phtml:33
 #: resources/views/admin/gov-data-list_20.phtml:33
 msgid "GOV data for"
-msgstr ""
+msgstr "Údaje GOV pro"
 
 #: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
 #, php-format
 msgid "GOV data for %1$s"
-msgstr ""
+msgstr "Údaje GOV pro %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 #: resources/views/edit/gov-id-edit-control_20.phtml:16
@@ -234,7 +240,7 @@ msgstr "Skrýt objekt a zastavit hierarchii míst v daném bodě jeho přesunut�
 #: resources/views/admin/gov-data-list.phtml:27
 #: resources/views/admin/gov-data-list_20.phtml:27
 msgid "Hide data without local modifications"
-msgstr ""
+msgstr "Skrýt údaje bez lokální úpravy"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -294,6 +300,8 @@ msgstr "Neplatný GOV id! Platné GOV idy jsou např. 'EITTZE_W3091', 'object_10
 #: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
 msgstr ""
+"Neplatný id GOV! Platné idy GOV jsou např. \\'EITTZE_W3091\\', \\'"
+"object_1086218\\'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -406,7 +414,7 @@ msgstr "Text a propojení místa"
 
 #: resources/views/script/tom-select-initializer-gov.phtml:41
 msgid "Please enter at least 10 characters."
-msgstr ""
+msgstr "Zadejte nejméně 10 znaků."
 
 #: FunctionsGov.php:672
 msgid "Religious"
@@ -416,19 +424,19 @@ msgstr "Náboženský"
 #: resources/views/admin/gov-data.phtml:84
 #: resources/views/admin/gov-data_20.phtml:84
 msgid "Remove this GOV Name?"
-msgstr ""
+msgstr "Odstranit toto jméno GOV?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
 #: resources/views/admin/gov-data_20.phtml:154
 msgid "Remove this GOV Object Type?"
-msgstr ""
+msgstr "Odstranit tento typ objektu GOV?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:222
 #: resources/views/admin/gov-data_20.phtml:222
 msgid "Remove this GOV Parent?"
-msgstr ""
+msgstr "Odstranit tento nadřazený objekt GOV?"
 
 #: Gov4WebtreesModule.php:525
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -531,7 +539,7 @@ msgstr "Tato zásada však nebyla striktně dodržována. Tuto možnost zaškrtn
 #: resources/views/admin/gov-data_20.phtml:100
 #: resources/views/admin/gov-data_20.phtml:170
 msgid "To"
-msgstr ""
+msgstr "Do"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
