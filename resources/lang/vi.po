@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-24 21:11+0200\n"
+"POT-Creation-Date: 2023-01-13 18:17+0100\n"
 "PO-Revision-Date: 2021-07-21 03:32+0000\n"
 "Last-Translator: ngohuuthuanfc9865b89dde4baf <ngohuuthuan@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/vi/>\n"
@@ -58,17 +58,17 @@ msgstr "Ngoài ra, mô-đun sẽ kiểm tra xem id GOV tương ứng hoặc bấ
 msgid "Administrative"
 msgstr ""
 
-#: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
-#: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
+#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
+#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:663
+#: FunctionsGov.php:692
 msgid "Administrative (other)"
 msgstr ""
 
-#: Gov4WebtreesModule.php:1361
+#: Model/GovHierarchyUtils.php:108
 msgid "Administrative levels"
 msgstr "Các cấp quản trị"
 
@@ -102,9 +102,7 @@ msgid "Consequently, place hierarchy information can only be changed indirectly,
 msgstr "Do đó, thông tin phân cấp địa điểm chỉ có thể được thay đổi một cách gián tiếp, thông qua trang web của Chính phủ."
 
 #: resources/views/admin/gov-data-list.phtml:21
-#: resources/views/admin/gov-data-list_20.phtml:21
-#: resources/views/admin/gov-data.phtml:24
-#: resources/views/admin/gov-data_20.phtml:24
+#: resources/views/admin/gov-data.phtml:23
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
 msgstr ""
 
@@ -113,8 +111,8 @@ msgstr ""
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr "Hiển thị chú giải công cụ cho biết nguồn của id GOV. Đây là mục đích chủ yếu để gỡ lỗi."
 
-#: Http/RequestHandlers/GovDataEdit.php:89
 #: Http/RequestHandlers/GovDataEdit.php:90
+#: Http/RequestHandlers/GovDataEdit.php:91
 #, php-format
 msgid "Edit %1$s for %2$s"
 msgstr ""
@@ -139,17 +137,14 @@ msgstr "Đối với các sự kiện có phạm vi ngày, hãy sử dụng ngà
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
 msgstr ""
 
-#: resources/views/admin/gov-data-edit.phtml:89
-#: resources/views/admin/gov-data.phtml:32
+#: resources/views/admin/gov-data-edit.phtml:88
+#: resources/views/admin/gov-data.phtml:31
 #: resources/views/admin/gov-data.phtml:99
-#: resources/views/admin/gov-data.phtml:169
-#: resources/views/admin/gov-data_20.phtml:32
-#: resources/views/admin/gov-data_20.phtml:99
-#: resources/views/admin/gov-data_20.phtml:169
+#: resources/views/admin/gov-data.phtml:170
 msgid "From"
 msgstr ""
 
-#: Gov4WebtreesModule.php:576
+#: Gov4WebtreesModule.php:535
 msgid "GOV Hierarchies"
 msgstr ""
 
@@ -158,53 +153,52 @@ msgstr ""
 msgid "GOV Id Management"
 msgstr "Quản lý Id GOV"
 
-#: Http/RequestHandlers/GovDataEdit.php:72
-#: resources/views/admin/gov-data.phtml:30
-#: resources/views/admin/gov-data_20.phtml:30
+#: Http/RequestHandlers/GovDataEdit.php:73
+#: resources/views/admin/gov-data.phtml:29
 msgid "GOV Name"
 msgstr ""
 
-#: Http/RequestHandlers/GovDataEdit.php:70
+#: Http/RequestHandlers/GovDataEdit.php:71
 #: resources/views/admin/gov-data.phtml:98
-#: resources/views/admin/gov-data_20.phtml:98
 msgid "GOV Object Type"
 msgstr ""
 
-#: Http/RequestHandlers/GovDataEdit.php:74
-#: resources/views/admin/gov-data.phtml:168
-#: resources/views/admin/gov-data_20.phtml:168
+#: Http/RequestHandlers/GovDataEdit.php:75
+#: resources/views/admin/gov-data.phtml:169
 msgid "GOV Parent"
 msgstr ""
 
-#: Http/RequestHandlers/GovData.php:74 Http/RequestHandlers/GovDataEdit.php:95
-#: Http/RequestHandlers/GovDataList.php:47
+#: Http/RequestHandlers/GovData.php:73 Http/RequestHandlers/GovDataEdit.php:96
+#: Http/RequestHandlers/GovDataList.php:46
 msgid "GOV data"
 msgstr ""
 
 #: resources/views/admin/gov-data-list.phtml:33
-#: resources/views/admin/gov-data-list_20.phtml:33
 msgid "GOV data for"
 msgstr ""
 
-#: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
+#: Http/RequestHandlers/GovData.php:67 Http/RequestHandlers/GovData.php:68
 #, php-format
 msgid "GOV data for %1$s"
 msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
-#: resources/views/edit/gov-id-edit-control_20.phtml:16
 msgid "GOV id"
 msgstr ""
 
-#: EditGovMappingController.php:94
+#: EditGovMappingController.php:89
 #, php-format
 msgid "GOV id for %1$s has been removed."
 msgstr "GOV id cho %1$s đã bị xóa."
 
-#: EditGovMappingController.php:121
+#: EditGovMappingController.php:116
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr "GO id cho %1$s đã được đặt thành %2$s."
+
+#: Gov4WebtreesModule.php:151
+msgid "GOV id for type of location"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:40
@@ -217,12 +211,12 @@ msgstr "Id GOV được lưu trữ bên ngoài dữ liệu GEDCOM theo mặc đ�
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
 
-#: Gov4WebtreesModule.php:407
+#: Gov4WebtreesModule.php:379
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr "Hệ thống phân cấp địa điểm GOV cho %1$s đã được tải lại từ máy chủ GOV."
 
-#: Gov4WebtreesModule.php:409
+#: Gov4WebtreesModule.php:381
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr "Hệ thống phân cấp địa điểm GOV đã được tải lại từ máy chủ GOV."
 
@@ -232,7 +226,6 @@ msgid "Hide an object and stop the place hierarchy at that point by moving it to
 msgstr ""
 
 #: resources/views/admin/gov-data-list.phtml:27
-#: resources/views/admin/gov-data-list_20.phtml:27
 msgid "Hide data without local modifications"
 msgstr ""
 
@@ -286,14 +279,10 @@ msgstr "Trong trường hợp này, các id GOV được lưu trữ trong một 
 msgid "Internals (adjusted automatically if necessary)"
 msgstr "Nội bộ (được điều chỉnh tự động nếu cần)"
 
-#: EditGovMappingController.php:111
-#: resources/views/script/select2-initializer-gov.phtml:15
+#: EditGovMappingController.php:106
+#: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
 msgstr "GOV id không hợp lệ! Id GOV hợp lệ ví dụ: 'EITTZE_W3091', 'object_1086218'."
-
-#: resources/views/script/tom-select-initializer-gov.phtml:42
-msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
-msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -305,7 +294,7 @@ msgstr "Bạn chỉ nên sử dụng một trong các tùy chọn sau. Bạn cũ
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Nó sẽ không bị ghi đè bởi các bản cập nhật tiếp theo."
 
-#: FunctionsGov.php:675
+#: FunctionsGov.php:704
 msgid "Judicial"
 msgstr ""
 
@@ -321,8 +310,6 @@ msgstr ""
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
-#: resources/views/edit/gov-id-edit-control_20.phtml:27
-#: resources/views/edit/gov-id-edit-control_20.phtml:29
 msgid "Look up a matching GOV id on the GOV server"
 msgstr "Tra cứu id GOV phù hợp trên máy chủ GOV"
 
@@ -332,7 +319,6 @@ msgid "Mappings of places to GOV ids are not affected."
 msgstr "Ánh xạ địa điểm sang id GOV không bị ảnh hưởng."
 
 #: resources/views/edit/gov-id-edit-control.phtml:33
-#: resources/views/edit/gov-id-edit-control_20.phtml:33
 msgid "Note: The mapping from place to GOV id is stored outside the gedcom data."
 msgstr "Lưu ý: Ánh xạ từ địa điểm đến id GOV được lưu trữ bên ngoài dữ liệu gedcom."
 
@@ -355,12 +341,12 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
-#: FunctionsGov.php:678
+#: FunctionsGov.php:707
 msgid "Other"
 msgstr ""
 
@@ -408,39 +394,35 @@ msgstr "Đặt văn bản và liên kết"
 msgid "Please enter at least 10 characters."
 msgstr ""
 
-#: FunctionsGov.php:672
+#: FunctionsGov.php:701
 msgid "Religious"
 msgstr ""
 
 #. I18N: Module Configuration
-#: resources/views/admin/gov-data.phtml:84
-#: resources/views/admin/gov-data_20.phtml:84
+#: resources/views/admin/gov-data.phtml:83
 msgid "Remove this GOV Name?"
 msgstr ""
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
-#: resources/views/admin/gov-data_20.phtml:154
 msgid "Remove this GOV Object Type?"
 msgstr ""
 
 #. I18N: Module Configuration
-#: resources/views/admin/gov-data.phtml:222
-#: resources/views/admin/gov-data_20.phtml:222
+#: resources/views/admin/gov-data.phtml:224
 msgid "Remove this GOV Parent?"
 msgstr ""
 
-#: Gov4WebtreesModule.php:525
+#: Gov4WebtreesModule.php:486
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "Đặt lại id GOV (bên ngoài GEDCOM) và tải lại hệ thống phân cấp địa điểm của GOV"
 
-#: EditGovMappingController.php:61
+#: EditGovMappingController.php:60
 #, php-format
 msgid "Reset GOV id for %1$s"
 msgstr "Đặt lại id GOV cho %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:34
-#: resources/views/edit/gov-id-edit-control_20.phtml:34
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
 msgstr "Lưu id hiện tại để tải lại dữ liệu phân cấp địa điểm từ máy chủ GOV."
 
@@ -450,17 +432,17 @@ msgstr "Lưu id hiện tại để tải lại dữ liệu phân cấp địa đ
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr ""
 
-#: Gov4WebtreesModule.php:523
+#: Gov4WebtreesModule.php:484
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "Đặt id GOV (bên ngoài GEDCOM)"
 
-#: EditGovMappingController.php:59
+#: EditGovMappingController.php:58
 #, php-format
 msgid "Set GOV id for %1$s"
 msgstr "Thiết lập id GOV cho %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:669 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
@@ -499,7 +481,6 @@ msgid "The GOV server provides place names in different languages. However, ther
 msgstr "Máy chủ GOV cung cấp tên địa điểm bằng các ngôn ngữ khác nhau. Tuy nhiên, không có khái niệm về 'ngôn ngữ chính thức' cho một địa điểm."
 
 #: Gov4WebtreesModule.php:159
-#: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr "Máy chủ GOV tạm thời không khả dụng."
 
@@ -523,13 +504,10 @@ msgstr "Tùy chọn này chủ yếu tồn tại cho các máy chủ demo và kh
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
 msgstr ""
 
-#: resources/views/admin/gov-data-edit.phtml:100
-#: resources/views/admin/gov-data.phtml:33
+#: resources/views/admin/gov-data-edit.phtml:99
+#: resources/views/admin/gov-data.phtml:32
 #: resources/views/admin/gov-data.phtml:100
-#: resources/views/admin/gov-data.phtml:170
-#: resources/views/admin/gov-data_20.phtml:33
-#: resources/views/admin/gov-data_20.phtml:100
-#: resources/views/admin/gov-data_20.phtml:170
+#: resources/views/admin/gov-data.phtml:171
 msgid "To"
 msgstr ""
 
@@ -584,7 +562,6 @@ msgid "You can create and modify this csv file according to your personal prefer
 msgstr "Bạn có thể tạo và sửa đổi tệp csv này theo sở thích cá nhân của mình, hãy xem '%1$s' để làm ví dụ."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
-#: resources/views/edit/gov-id-edit-control_20.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
 msgstr "Bạn cũng có thể lưu một id trống để xóa ánh xạ."
 
@@ -629,7 +606,7 @@ msgstr "được thúc đẩy bởi giả định rằng địa danh bằng ngô
 msgid "present time"
 msgstr "thời điểm hiện tại"
 
-#: Gov4WebtreesModule.php:456 Gov4WebtreesModule.php:507
+#: Gov4WebtreesModule.php:424 Gov4WebtreesModule.php:468
 msgid "reload the GOV place hierarchy"
 msgstr "tải lại hệ thống phân cấp địa điểm của GOV"
 
@@ -638,19 +615,19 @@ msgstr "tải lại hệ thống phân cấp địa điểm của GOV"
 msgid "reset all cached data once"
 msgstr "đặt lại tất cả dữ liệu đã lưu trong bộ nhớ cache một lần"
 
-#: Gov4WebtreesModule.php:1237
+#: Model/GovHierarchyUtils.php:803
 msgid "this place does not exist at this point in time"
 msgstr "nơi này không tồn tại vào thời điểm này"
 
-#: Gov4WebtreesModule.php:777 Gov4WebtreesModule.php:1000
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
 msgid "today"
 msgstr "hôm nay"
 
-#: FunctionsGov.php:1110
+#: FunctionsGov.php:1133
 msgid "unknown GOV type (newly introduced?)"
 msgstr "loại GOV không xác định (mới được giới thiệu?)"
 
-#: Gov4WebtreesModule.php:1351
+#: Model/GovHierarchyUtils.php:98
 msgid "with local modifications"
 msgstr ""
 

@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2022-04-24 21:11+0200\n"
+"POT-Creation-Date: 2023-01-13 18:17+0100\n"
 "PO-Revision-Date: 2022-06-07 07:09+0000\n"
 "Last-Translator: Олег <uolega@yandex.ru>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.13-dev\n"
 
 #. I18N: Module Configuration
@@ -60,17 +58,17 @@ msgstr "Кроме того, модуль проверяет, есть ли у �
 msgid "Administrative"
 msgstr "Административный"
 
-#: FunctionsGov.php:645 FunctionsGov.php:648 FunctionsGov.php:651
-#: FunctionsGov.php:654 FunctionsGov.php:657 FunctionsGov.php:660
+#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
+#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "Административный (уровень %1$s)"
 
-#: FunctionsGov.php:663
+#: FunctionsGov.php:692
 msgid "Administrative (other)"
 msgstr "Административное (другое)"
 
-#: Gov4WebtreesModule.php:1361
+#: Model/GovHierarchyUtils.php:108
 msgid "Administrative levels"
 msgstr "Административные уровни"
 
@@ -104,9 +102,7 @@ msgid "Consequently, place hierarchy information can only be changed indirectly,
 msgstr "Следовательно, информация об иерархии мест может быть изменена только косвенно, через веб-сайт GOV."
 
 #: resources/views/admin/gov-data-list.phtml:21
-#: resources/views/admin/gov-data-list_20.phtml:21
-#: resources/views/admin/gov-data.phtml:24
-#: resources/views/admin/gov-data_20.phtml:24
+#: resources/views/admin/gov-data.phtml:23
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
 msgstr "Данные, полученные с сервера GOV. Отредактированные данные будут храниться как локальные модификации (вне GEDCOM, как и оригинальные данные). Отредактированные данные всегда имеют приоритет над оригинальными данными. Они не будут удалены при перезагрузке иерархий, но могут быть удалены явно здесь. Никакие данные не передаются на сервер GOV."
 
@@ -115,8 +111,8 @@ msgstr "Данные, полученные с сервера GOV. Отредак
 msgid "Display a tooltip indicating the source of the GOV id. This is intended mainly for debugging."
 msgstr "Отобразите всплывающую подсказку с указанием источника идентификатора GOV. Это предназначено в основном для отладки."
 
-#: Http/RequestHandlers/GovDataEdit.php:89
 #: Http/RequestHandlers/GovDataEdit.php:90
+#: Http/RequestHandlers/GovDataEdit.php:91
 #, php-format
 msgid "Edit %1$s for %2$s"
 msgstr "Изменить %1$s для %2$s"
@@ -141,17 +137,14 @@ msgstr "Для событий с диапазоном дат используй�
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
 msgstr "Для более тонких настроек и просмотра списка типов и групп типов отредактируйте данные GOV локально."
 
-#: resources/views/admin/gov-data-edit.phtml:89
-#: resources/views/admin/gov-data.phtml:32
+#: resources/views/admin/gov-data-edit.phtml:88
+#: resources/views/admin/gov-data.phtml:31
 #: resources/views/admin/gov-data.phtml:99
-#: resources/views/admin/gov-data.phtml:169
-#: resources/views/admin/gov-data_20.phtml:32
-#: resources/views/admin/gov-data_20.phtml:99
-#: resources/views/admin/gov-data_20.phtml:169
+#: resources/views/admin/gov-data.phtml:170
 msgid "From"
 msgstr "С сайта"
 
-#: Gov4WebtreesModule.php:576
+#: Gov4WebtreesModule.php:535
 msgid "GOV Hierarchies"
 msgstr "Иерархии GOV"
 
@@ -160,53 +153,52 @@ msgstr "Иерархии GOV"
 msgid "GOV Id Management"
 msgstr "Управление идентификаторами GOV"
 
-#: Http/RequestHandlers/GovDataEdit.php:72
-#: resources/views/admin/gov-data.phtml:30
-#: resources/views/admin/gov-data_20.phtml:30
+#: Http/RequestHandlers/GovDataEdit.php:73
+#: resources/views/admin/gov-data.phtml:29
 msgid "GOV Name"
 msgstr "Название GOV"
 
-#: Http/RequestHandlers/GovDataEdit.php:70
+#: Http/RequestHandlers/GovDataEdit.php:71
 #: resources/views/admin/gov-data.phtml:98
-#: resources/views/admin/gov-data_20.phtml:98
 msgid "GOV Object Type"
 msgstr "Тип объекта GOV"
 
-#: Http/RequestHandlers/GovDataEdit.php:74
-#: resources/views/admin/gov-data.phtml:168
-#: resources/views/admin/gov-data_20.phtml:168
+#: Http/RequestHandlers/GovDataEdit.php:75
+#: resources/views/admin/gov-data.phtml:169
 msgid "GOV Parent"
 msgstr "GOV Родитель"
 
-#: Http/RequestHandlers/GovData.php:74 Http/RequestHandlers/GovDataEdit.php:95
-#: Http/RequestHandlers/GovDataList.php:47
+#: Http/RequestHandlers/GovData.php:73 Http/RequestHandlers/GovDataEdit.php:96
+#: Http/RequestHandlers/GovDataList.php:46
 msgid "GOV data"
 msgstr "данные GOV"
 
 #: resources/views/admin/gov-data-list.phtml:33
-#: resources/views/admin/gov-data-list_20.phtml:33
 msgid "GOV data for"
 msgstr "данные GOV для"
 
-#: Http/RequestHandlers/GovData.php:68 Http/RequestHandlers/GovData.php:69
+#: Http/RequestHandlers/GovData.php:67 Http/RequestHandlers/GovData.php:68
 #, php-format
 msgid "GOV data for %1$s"
 msgstr "Данные GOV для %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
-#: resources/views/edit/gov-id-edit-control_20.phtml:16
 msgid "GOV id"
 msgstr "Идентификатор правительства"
 
-#: EditGovMappingController.php:94
+#: EditGovMappingController.php:89
 #, php-format
 msgid "GOV id for %1$s has been removed."
 msgstr "Идентификатор GOV для %1$s был удален."
 
-#: EditGovMappingController.php:121
+#: EditGovMappingController.php:116
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr "Идентификатор GOV для %1$s был установлен на %2$s."
+
+#: Gov4WebtreesModule.php:151
+msgid "GOV id for type of location"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:40
@@ -219,12 +211,12 @@ msgstr "Идентификаторы GOV по умолчанию хранятс�
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr "Объекты GOV принадлежат к разным группам типов. Иерархия мест GOV основана на объектах группы типов \" %1$s\"."
 
-#: Gov4WebtreesModule.php:407
+#: Gov4WebtreesModule.php:379
 #, php-format
 msgid "GOV place hierarchy for %1$s has been reloaded from GOV server."
 msgstr "Иерархия мест GOV для %1$s была перезагружена с сервера GOV."
 
-#: Gov4WebtreesModule.php:409
+#: Gov4WebtreesModule.php:381
 msgid "GOV place hierarchy has been reloaded from GOV server."
 msgstr "Иерархия мест GOV была перезагружена с сервера GOV."
 
@@ -234,7 +226,6 @@ msgid "Hide an object and stop the place hierarchy at that point by moving it to
 msgstr "Скройте объект и остановите иерархию места в этой точке, переместив его в группу нерелевантных типов."
 
 #: resources/views/admin/gov-data-list.phtml:27
-#: resources/views/admin/gov-data-list_20.phtml:27
 msgid "Hide data without local modifications"
 msgstr "Скрытие данных без локальных модификаций"
 
@@ -288,14 +279,10 @@ msgstr "В этом случае идентификаторы GOV хранятс
 msgid "Internals (adjusted automatically if necessary)"
 msgstr "Внутреннее устройство (при необходимости настраивается автоматически)"
 
-#: EditGovMappingController.php:111
-#: resources/views/script/select2-initializer-gov.phtml:15
+#: EditGovMappingController.php:106
+#: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
 msgstr "Недействительный идентификатор GOV! Допустимые идентификаторы GOV: 'EITTZE_W3091', 'объект_1086218'."
-
-#: resources/views/script/tom-select-initializer-gov.phtml:42
-msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
-msgstr "Неверный идентификатор GOV! Действительными идентификаторами GOV являются, например, \\'EITTZE_W3091\\', \\'object_1086218\\'."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:248
@@ -307,7 +294,7 @@ msgstr "Рекомендуется использовать только оди�
 msgid "It will not be overwritten by subsequent updates."
 msgstr "При последующих обновлениях он не будет перезаписан."
 
-#: FunctionsGov.php:675
+#: FunctionsGov.php:704
 msgid "Judicial"
 msgstr "Судебный"
 
@@ -323,8 +310,6 @@ msgstr "Сохранены локальные модификации."
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
-#: resources/views/edit/gov-id-edit-control_20.phtml:27
-#: resources/views/edit/gov-id-edit-control_20.phtml:29
 msgid "Look up a matching GOV id on the GOV server"
 msgstr "Найдите соответствующий идентификатор GOV на сервере GOV"
 
@@ -334,7 +319,6 @@ msgid "Mappings of places to GOV ids are not affected."
 msgstr "Сопоставление мест с идентификаторами GOV не затрагивается."
 
 #: resources/views/edit/gov-id-edit-control.phtml:33
-#: resources/views/edit/gov-id-edit-control_20.phtml:33
 msgid "Note: The mapping from place to GOV id is stored outside the gedcom data."
 msgstr "Примечание. Сопоставление места с идентификатором GOV хранится вне данных gedcom."
 
@@ -357,12 +341,12 @@ msgstr "Очевидные ошибки следует исправлять на
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:666 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Организационная"
 
-#: FunctionsGov.php:678
+#: FunctionsGov.php:707
 msgid "Other"
 msgstr "Другой"
 
@@ -410,39 +394,35 @@ msgstr "Поместите текст и ссылки"
 msgid "Please enter at least 10 characters."
 msgstr "Пожалуйста, введите не менее 10 символов."
 
-#: FunctionsGov.php:672
+#: FunctionsGov.php:701
 msgid "Religious"
 msgstr "Религиозный"
 
 #. I18N: Module Configuration
-#: resources/views/admin/gov-data.phtml:84
-#: resources/views/admin/gov-data_20.phtml:84
+#: resources/views/admin/gov-data.phtml:83
 msgid "Remove this GOV Name?"
 msgstr "Удалить это имя GOV?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
-#: resources/views/admin/gov-data_20.phtml:154
 msgid "Remove this GOV Object Type?"
 msgstr "Удалить этот тип объекта GOV?"
 
 #. I18N: Module Configuration
-#: resources/views/admin/gov-data.phtml:222
-#: resources/views/admin/gov-data_20.phtml:222
+#: resources/views/admin/gov-data.phtml:224
 msgid "Remove this GOV Parent?"
 msgstr "Удалить этого родителя GOV?"
 
-#: Gov4WebtreesModule.php:525
+#: Gov4WebtreesModule.php:486
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
 msgstr "Сбросить идентификатор GOV (вне GEDCOM) и перезагрузить иерархию мест GOV"
 
-#: EditGovMappingController.php:61
+#: EditGovMappingController.php:60
 #, php-format
 msgid "Reset GOV id for %1$s"
 msgstr "Сбросить идентификатор GOV для %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:34
-#: resources/views/edit/gov-id-edit-control_20.phtml:34
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
 msgstr "Сохраните текущий идентификатор, чтобы перезагрузить данные иерархии мест с сервера GOV."
 
@@ -452,17 +432,17 @@ msgstr "Сохраните текущий идентификатор, чтобы
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr "См. Также %1$s для ознакомления с исходным списком типов и описанием типов."
 
-#: Gov4WebtreesModule.php:523
+#: Gov4WebtreesModule.php:484
 msgid "Set GOV id (outside GEDCOM)"
 msgstr "Установить идентификатор GOV (вне GEDCOM)"
 
-#: EditGovMappingController.php:59
+#: EditGovMappingController.php:58
 #, php-format
 msgid "Set GOV id for %1$s"
 msgstr "Установить идентификатор GOV для %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:669 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Поселок"
 
@@ -501,7 +481,6 @@ msgid "The GOV server provides place names in different languages. However, ther
 msgstr "Сервер GOV предоставляет географические названия на разных языках. Однако для места не существует понятия «официальный язык»."
 
 #: Gov4WebtreesModule.php:159
-#: resources/views/script/select2-initializer-gov.phtml:19
 msgid "The GOV server seems to be temporarily unavailable."
 msgstr "Сервер GOV временно недоступен."
 
@@ -525,13 +504,10 @@ msgstr "Эта опция в основном существует для дем
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
 msgstr "Однако эта политика не соблюдалась строго. Установите этот флажок, если вы по-прежнему хотите отображать поселения в иерархиях."
 
-#: resources/views/admin/gov-data-edit.phtml:100
-#: resources/views/admin/gov-data.phtml:33
+#: resources/views/admin/gov-data-edit.phtml:99
+#: resources/views/admin/gov-data.phtml:32
 #: resources/views/admin/gov-data.phtml:100
-#: resources/views/admin/gov-data.phtml:170
-#: resources/views/admin/gov-data_20.phtml:33
-#: resources/views/admin/gov-data_20.phtml:100
-#: resources/views/admin/gov-data_20.phtml:170
+#: resources/views/admin/gov-data.phtml:171
 msgid "To"
 msgstr "Кому"
 
@@ -586,7 +562,6 @@ msgid "You can create and modify this csv file according to your personal prefer
 msgstr "Вы можете создать и изменить этот CSV-файл в соответствии с вашими личными предпочтениями, см. Пример «%1$s»."
 
 #: resources/views/edit/gov-id-edit-control.phtml:35
-#: resources/views/edit/gov-id-edit-control_20.phtml:35
 msgid "You may also save an empty id in order to remove the mapping."
 msgstr "Вы также можете сохранить пустой идентификатор, чтобы удалить сопоставление."
 
@@ -631,7 +606,7 @@ msgstr "мотивировано предположением, что геогр
 msgid "present time"
 msgstr "настоящее время"
 
-#: Gov4WebtreesModule.php:456 Gov4WebtreesModule.php:507
+#: Gov4WebtreesModule.php:424 Gov4WebtreesModule.php:468
 msgid "reload the GOV place hierarchy"
 msgstr "перезагрузить иерархию мест GOV"
 
@@ -640,19 +615,19 @@ msgstr "перезагрузить иерархию мест GOV"
 msgid "reset all cached data once"
 msgstr "сбросить все кэшированные данные один раз"
 
-#: Gov4WebtreesModule.php:1237
+#: Model/GovHierarchyUtils.php:803
 msgid "this place does not exist at this point in time"
 msgstr "это место не существует на данный момент"
 
-#: Gov4WebtreesModule.php:777 Gov4WebtreesModule.php:1000
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
 msgid "today"
 msgstr "Cегодня"
 
-#: FunctionsGov.php:1110
+#: FunctionsGov.php:1133
 msgid "unknown GOV type (newly introduced?)"
 msgstr "неизвестный тип GOV (недавно введенный?)"
 
-#: Gov4WebtreesModule.php:1351
+#: Model/GovHierarchyUtils.php:98
 msgid "with local modifications"
 msgstr "с местными изменениями"
 
@@ -664,6 +639,9 @@ msgstr "с местными изменениями"
 
 #~ msgid "For a given place, this modules displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 #~ msgstr "Для данного места эти модули отображают одно или несколько имен путем сопоставления доступных имен со списком языков в соответствии со следующей стратегией:"
+
+#~ msgid "Invalid GOV id! Valid GOV ids are e.g. \\'EITTZE_W3091\\', \\'object_1086218\\'."
+#~ msgstr "Неверный идентификатор GOV! Действительными идентификаторами GOV являются, например, \\'EITTZE_W3091\\', \\'object_1086218\\'."
 
 #~ msgid "Objects of this type arguably do not strictly belong to the administrative hierarchy."
 #~ msgstr "Возможно, объекты этого типа не принадлежат строго к административной иерархии."
