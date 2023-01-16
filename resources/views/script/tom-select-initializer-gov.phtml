@@ -27,7 +27,7 @@ webtrees.initializeTomSelectGov = function (element) {
     }
 
     let options = {};
-
+    
     options = {
       <?php
         //MUST be set, otherwise we always end up in no_results
@@ -38,8 +38,8 @@ webtrees.initializeTomSelectGov = function (element) {
       render: {
         item: (data, escape) => '<div>' + data.text + '</div>',
         option: (data, escape) => '<div>' + data.text + '</div>',
-        not_loading: (data, escape) => '<div class="no-results"><?= I18N::translate("Please enter at least 10 characters.")?></div>',
-        no_results: (data, escape) => '<div class="no-results"><?= I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.') ?></div>',
+        not_loading: (data, escape) => '<div class="no-results">'+ <?= json_encode(I18N::translate("Please enter at least 10 characters.")) ?> + '</div>',
+        no_results: (data, escape) => '<div class="no-results">'+ <?= json_encode(I18N::translate("Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'.")) ?> + '</div>',
       },
       shouldLoad: function (query) {
         <?php

@@ -49,7 +49,7 @@ class GovData implements RequestHandlerInterface
         $gov = FunctionsGov::retrieveGovObject($this->module, $govId);
     
         if ($gov == null) {
-          //$error = I18N::translate('Invalid GOV id! Valid GOV ids are e.g. \'EITTZE_W3091\', \'object_1086218\'.');      
+          //$error = I18N::translate("Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'.");      
           //return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
 
           return redirect(route(GovDataList::class));
