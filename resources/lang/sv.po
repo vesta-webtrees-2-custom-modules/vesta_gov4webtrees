@@ -8,48 +8,53 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2023-01-13 18:17+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-01-18 09:49+0000\n"
+"Last-Translator: tygyh <jonis9898@hotmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: EditGovMappingController.php:58
 #, php-format
 msgid "Set GOV id for %1$s"
-msgstr ""
+msgstr "Ange GOV-id för %1$s"
 
 #: EditGovMappingController.php:60
 #, php-format
 msgid "Reset GOV id for %1$s"
-msgstr ""
+msgstr "Återställ GOV-id för %1$s"
 
 #: EditGovMappingController.php:89
 #, php-format
 msgid "GOV id for %1$s has been removed."
-msgstr ""
+msgstr "GOV-id för %1$s har tagits bort."
 
 #: EditGovMappingController.php:106
 #: resources/views/script/tom-select-initializer-gov.phtml:42
 msgid "Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'."
 msgstr ""
+"Ogiltigt GOV-id! Giltiga GOV-id:n är t.ex. \"EITTZE_W3091\", \"object_1086218"
+"\"."
 
 #: EditGovMappingController.php:116
 #, php-format
 msgid "GOV id for %1$s has been set to %2$s."
-msgstr ""
+msgstr "GOV-id för %1$s har angetts till %2$s."
 
 #: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
 #: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
 #, php-format
 msgid "Administrative (level %1$s)"
-msgstr ""
+msgstr "Administrativ (nivå %1$s)"
 
 #: FunctionsGov.php:692
 msgid "Administrative (other)"
-msgstr ""
+msgstr "Administrativ (övrigt)"
 
 #. I18N: Module Configuration
 #. I18N: Module Configuration
@@ -58,16 +63,16 @@ msgstr ""
 #: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
-msgstr ""
+msgstr "Organisatorisk"
 
 #. I18N: Module Configuration
 #: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
-msgstr ""
+msgstr "Avräkning"
 
 #: FunctionsGov.php:701
 msgid "Religious"
-msgstr ""
+msgstr "Religiös"
 
 #: FunctionsGov.php:704
 msgid "Judicial"
