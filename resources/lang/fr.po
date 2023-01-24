@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2023-01-13 18:17+0100\n"
-"PO-Revision-Date: 2022-09-01 09:21+0000\n"
+"PO-Revision-Date: 2023-01-24 16:49+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -198,7 +199,7 @@ msgstr "L'identifiant GOV pour %1$s a été défini sur %2$s."
 
 #: Gov4WebtreesModule.php:151
 msgid "GOV id for type of location"
-msgstr ""
+msgstr "Identifiant GOV pour le type d'emplacement"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:40
