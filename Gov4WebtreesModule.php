@@ -786,19 +786,25 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $str2 = GenericViewElement::createEmpty();
         $julianDayText = I18N::translate('today');
-        $str2 = $this->getHierarchy(
-                $compactDisplay,
-                $withInternalLinks,
-                $showSettlements,
-                $showOrganizational,
-                $locale,
-                $julianDay2,
-                $julianDayText,
-                $govReference,
-                $tree,
-                $tooltip);
-
-        return $str2;
+        try {
+            $str2 = $this->getHierarchy(
+                    $compactDisplay,
+                    $withInternalLinks,
+                    $showSettlements,
+                    $showOrganizational,
+                    $locale,
+                    $julianDay2,
+                    $julianDayText,
+                    $govReference,
+                    $tree,
+                    $tooltip);
+            
+            return $str2;
+            
+        } catch (GOVServerUnavailableException $ex) {            
+            $this->flashGovServerUnavailable();
+            return null;
+        }    
     }
 
     public function govPgov(
@@ -1017,22 +1023,27 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $julianDayTextCombined = $julianDayText1 . "–" . $julianDayText2;
 
-        $gve = $this->getHierarchyMaybeCombined(
-                $compactDisplay,
-                $julianDayText1,
-                $julianDayText2,
-                $julianDayTextCombined,
-                $tooltip,
-                $julianDay1,
-                $julianDay2,
-                $withInternalLinks,
-                $showSettlements,
-                $showOrganizational,
-                $locale,
-                $govReference,
-                $tree);
+        try {
+            $gve = $this->getHierarchyMaybeCombined(
+                    $compactDisplay,
+                    $julianDayText1,
+                    $julianDayText2,
+                    $julianDayTextCombined,
+                    $tooltip,
+                    $julianDay1,
+                    $julianDay2,
+                    $withInternalLinks,
+                    $showSettlements,
+                    $showOrganizational,
+                    $locale,
+                    $govReference,
+                    $tree);
 
-        return $gve;
+            return $gve;
+        } catch (GOVServerUnavailableException $ex) {            
+            $this->flashGovServerUnavailable();
+            return null;
+        }
     }
 
     protected function getHierarchy(
@@ -1046,24 +1057,6 @@ class Gov4WebtreesModule extends AbstractModule implements
             GovReference $govReference,
             Tree $tree,
             ?string $tooltip): GenericViewElement {
-
-        /*
-        $hierarchiesLegacy = $this->getHierarchies(
-                $compactDisplay,
-                $withInternalLinks,
-                $showSettlements,
-                $showOrganizational,
-                $locale,
-                $julianDay,
-                $govReference,
-                $tree);
-
-        return $this->getHierarchyGVE(
-                        $compactDisplay,
-                        $julianDayText,
-                        $tooltip,
-                        $hierarchiesLegacy);
-        */
         
         $hierarchies = GovHierarchyUtils::hierarchy(
                 $this, 
