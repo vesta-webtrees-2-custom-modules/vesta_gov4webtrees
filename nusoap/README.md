@@ -24,8 +24,8 @@ NuSOAP is a rewrite of SOAPx4, provided by NuSphere and Dietrich Ayala. It is a 
 
 ## Info
 
-- Supported PHP: [5.4 - 8.0](https://travis-ci.org/pwnlabs/nusoap)
-- Latest version: [0.9.10](https://github.com/pwnlabs/nusoap/releases/tag/v0.9.10)
+- Supported PHP: [5.4 - 8.2](https://travis-ci.org/pwnlabs/nusoap)
+- Latest version: [0.9.11](https://github.com/pwnlabs/nusoap/releases/tag/v0.9.11)
 - Dev version: [develop](https://github.com/pwnlabs/nusoap/tree/develop)
 - Official project: https://sourceforge.net/projects/nusoap/
 
@@ -67,7 +67,7 @@ $result = $client->call($action, $data);
 
 See [how to contribute](https://contributte.org/contributing.html) to this package.
 
-This package is currently maintaining by these authors.
+This package is currently maintained by these authors.
 
 <a href="https://github.com/f3l1x">
     <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">

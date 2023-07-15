@@ -25,7 +25,7 @@ use function GuzzleHttp\json_encode;
 use function route;
 use function str_starts_with;
 
-require_once __DIR__ . '/nusoap/lib/nusoap.php';
+require_once __DIR__ . '/nusoap/src/nusoap.php';
 
 class SoapWrapper {
 
