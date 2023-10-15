@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-01-13 18:17+0100\n"
+"POT-Creation-Date: 2023-09-10 17:56+0200\n"
 "PO-Revision-Date: 2023-01-14 06:48+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,13 +58,13 @@ msgstr "Bovendien controleert de module of de betreffende GOV-ID, of een van de 
 msgid "Administrative"
 msgstr "Bestuurlijk"
 
-#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
-#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
+#: FunctionsGov.php:682 FunctionsGov.php:685 FunctionsGov.php:688
+#: FunctionsGov.php:691 FunctionsGov.php:694 FunctionsGov.php:697
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "Bestuurlijk (niveau %1$s)"
 
-#: FunctionsGov.php:692
+#: FunctionsGov.php:700
 msgid "Administrative (other)"
 msgstr "Bestuurlijk (overig)"
 
@@ -91,6 +90,10 @@ msgstr "Als laatste terugval bepaalt u de plaatsnaam volgens dit selectievakje:"
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr "Schakel deze optie in als u nog steeds wilt dat organisaties in hiërarchieën worden weergegeven, bijvoorbeeld de Verenigde Naties als een object op een hoger niveau van soevereine entiteiten."
+
+#: FunctionsGov.php:715
+msgid "Civil"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -295,7 +298,7 @@ msgstr "Het wordt aanbevolen om slechts één van de volgende opties te gebruike
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Het wordt niet overschreven door latere updates."
 
-#: FunctionsGov.php:704
+#: FunctionsGov.php:712
 msgid "Judicial"
 msgstr "Gerechtelijk"
 
@@ -342,12 +345,12 @@ msgstr "Kennelijke fouten moeten worden gecorrigeerd op de GOV-server zelf, maar
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:703 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Organisatorisch"
 
-#: FunctionsGov.php:707
+#: FunctionsGov.php:718
 msgid "Other"
 msgstr "Overige"
 
@@ -395,7 +398,7 @@ msgstr "Plaatstekst en koppelingen"
 msgid "Please enter at least 10 characters."
 msgstr "Voer ten minste 10 tekens in."
 
-#: FunctionsGov.php:701
+#: FunctionsGov.php:709
 msgid "Religious"
 msgstr "Religieus"
 
@@ -443,7 +446,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Stel GOV-ID in voor %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:706 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Nederzetting"
 
@@ -620,11 +623,11 @@ msgstr "reset alle gegevens in de cache één keer"
 msgid "this place does not exist at this point in time"
 msgstr "deze plaats bestaat niet op dit moment"
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
 msgid "today"
 msgstr "vandaag"
 
-#: FunctionsGov.php:1133
+#: FunctionsGov.php:1144
 msgid "unknown GOV type (newly introduced?)"
 msgstr "onbekend GOV-type (nieuw geïntroduceerd?)"
 

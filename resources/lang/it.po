@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-01-13 18:17+0100\n"
+"POT-Creation-Date: 2023-09-10 17:56+0200\n"
 "PO-Revision-Date: 2020-11-22 12:28+0000\n"
 "Last-Translator: Luca Bighi <luca74@email.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/it/>\n"
@@ -58,13 +58,13 @@ msgstr ""
 msgid "Administrative"
 msgstr ""
 
-#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
-#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
+#: FunctionsGov.php:682 FunctionsGov.php:685 FunctionsGov.php:688
+#: FunctionsGov.php:691 FunctionsGov.php:694 FunctionsGov.php:697
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:692
+#: FunctionsGov.php:700
 msgid "Administrative (other)"
 msgstr ""
 
@@ -89,6 +89,10 @@ msgstr ""
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
+msgstr ""
+
+#: FunctionsGov.php:715
+msgid "Civil"
 msgstr ""
 
 #. I18N: Module Configuration
@@ -294,7 +298,7 @@ msgstr "E' raccomando l'uso di una sola delle seguenti opzioni. Puoi anche (temp
 msgid "It will not be overwritten by subsequent updates."
 msgstr ""
 
-#: FunctionsGov.php:704
+#: FunctionsGov.php:712
 msgid "Judicial"
 msgstr ""
 
@@ -341,12 +345,12 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:703 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
-#: FunctionsGov.php:707
+#: FunctionsGov.php:718
 msgid "Other"
 msgstr ""
 
@@ -394,7 +398,7 @@ msgstr "Testo e link del luogo"
 msgid "Please enter at least 10 characters."
 msgstr ""
 
-#: FunctionsGov.php:701
+#: FunctionsGov.php:709
 msgid "Religious"
 msgstr ""
 
@@ -442,7 +446,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Imposta il GOV-id per %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:706 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
@@ -619,11 +623,11 @@ msgstr "Reimposta una volta tutti i dati nella cache"
 msgid "this place does not exist at this point in time"
 msgstr ""
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
 msgid "today"
 msgstr "oggi"
 
-#: FunctionsGov.php:1133
+#: FunctionsGov.php:1144
 msgid "unknown GOV type (newly introduced?)"
 msgstr ""
 

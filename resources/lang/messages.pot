@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-01-13 18:17+0100\n"
+"POT-Creation-Date: 2023-09-10 17:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,13 +42,13 @@ msgstr ""
 msgid "GOV id for %1$s has been set to %2$s."
 msgstr ""
 
-#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
-#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
+#: FunctionsGov.php:682 FunctionsGov.php:685 FunctionsGov.php:688
+#: FunctionsGov.php:691 FunctionsGov.php:694 FunctionsGov.php:697
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr ""
 
-#: FunctionsGov.php:692
+#: FunctionsGov.php:700
 msgid "Administrative (other)"
 msgstr ""
 
@@ -56,29 +56,33 @@ msgstr ""
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:703 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr ""
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:706 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr ""
 
-#: FunctionsGov.php:701
+#: FunctionsGov.php:709
 msgid "Religious"
 msgstr ""
 
-#: FunctionsGov.php:704
+#: FunctionsGov.php:712
 msgid "Judicial"
 msgstr ""
 
-#: FunctionsGov.php:707
+#: FunctionsGov.php:715
+msgid "Civil"
+msgstr ""
+
+#: FunctionsGov.php:718
 msgid "Other"
 msgstr ""
 
-#: FunctionsGov.php:1133
+#: FunctionsGov.php:1144
 msgid "unknown GOV type (newly introduced?)"
 msgstr ""
 
@@ -115,7 +119,7 @@ msgstr ""
 msgid "GOV Hierarchies"
 msgstr ""
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
 msgid "today"
 msgstr ""
 

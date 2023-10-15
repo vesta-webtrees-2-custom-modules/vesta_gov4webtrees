@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-01-13 18:17+0100\n"
+"POT-Creation-Date: 2023-09-10 17:56+0200\n"
 "PO-Revision-Date: 2023-03-03 07:51+0000\n"
 "Last-Translator: Олег <uolega@yandex.ru>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.16.2-dev\n"
 
 #. I18N: Module Configuration
@@ -60,13 +58,13 @@ msgstr "Кроме того, модуль проверяет, есть ли у �
 msgid "Administrative"
 msgstr "Административный"
 
-#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
-#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
+#: FunctionsGov.php:682 FunctionsGov.php:685 FunctionsGov.php:688
+#: FunctionsGov.php:691 FunctionsGov.php:694 FunctionsGov.php:697
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "Административный (уровень %1$s)"
 
-#: FunctionsGov.php:692
+#: FunctionsGov.php:700
 msgid "Administrative (other)"
 msgstr "Административное (другое)"
 
@@ -92,6 +90,10 @@ msgstr "В качестве последнего запасного вариан
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr "Установите этот флажок, если вы по-прежнему хотите, чтобы организации отображались в иерархиях, например Организация Объединенных Наций как объект суверенных образований более высокого уровня."
+
+#: FunctionsGov.php:715
+msgid "Civil"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -296,7 +298,7 @@ msgstr "Рекомендуется использовать только оди�
 msgid "It will not be overwritten by subsequent updates."
 msgstr "При последующих обновлениях он не будет перезаписан."
 
-#: FunctionsGov.php:704
+#: FunctionsGov.php:712
 msgid "Judicial"
 msgstr "Судебный"
 
@@ -343,12 +345,12 @@ msgstr "Очевидные ошибки следует исправлять на
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:703 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Организационная"
 
-#: FunctionsGov.php:707
+#: FunctionsGov.php:718
 msgid "Other"
 msgstr "Другой"
 
@@ -396,7 +398,7 @@ msgstr "Поместите текст и ссылки"
 msgid "Please enter at least 10 characters."
 msgstr "Пожалуйста, введите не менее 10 символов."
 
-#: FunctionsGov.php:701
+#: FunctionsGov.php:709
 msgid "Religious"
 msgstr "Религиозный"
 
@@ -444,7 +446,7 @@ msgid "Set GOV id for %1$s"
 msgstr "Установить идентификатор GOV для %1$s"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:706 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Поселок"
 
@@ -621,11 +623,11 @@ msgstr "сбросить все кэшированные данные один �
 msgid "this place does not exist at this point in time"
 msgstr "это место не существует на данный момент"
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
 msgid "today"
 msgstr "Cегодня"
 
-#: FunctionsGov.php:1133
+#: FunctionsGov.php:1144
 msgid "unknown GOV type (newly introduced?)"
 msgstr "неизвестный тип GOV (недавно введенный?)"
 

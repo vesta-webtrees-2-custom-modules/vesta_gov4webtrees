@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-01-13 18:17+0100\n"
+"POT-Creation-Date: 2023-09-10 17:56+0200\n"
 "PO-Revision-Date: 2023-01-17 18:49+0000\n"
 "Last-Translator: Markus Hemprich <hemprich@gmx.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,13 +58,13 @@ msgstr "Zusätzlich überprüft das Modul, ob für die entsprechende GOV id, ode
 msgid "Administrative"
 msgstr "administrativ"
 
-#: FunctionsGov.php:674 FunctionsGov.php:677 FunctionsGov.php:680
-#: FunctionsGov.php:683 FunctionsGov.php:686 FunctionsGov.php:689
+#: FunctionsGov.php:682 FunctionsGov.php:685 FunctionsGov.php:688
+#: FunctionsGov.php:691 FunctionsGov.php:694 FunctionsGov.php:697
 #, php-format
 msgid "Administrative (level %1$s)"
 msgstr "administrativ (Stufe %1$s)"
 
-#: FunctionsGov.php:692
+#: FunctionsGov.php:700
 msgid "Administrative (other)"
 msgstr "Administrativ (andere)"
 
@@ -91,6 +90,10 @@ msgstr "Als letzte Rückfallebene können Sie den Ortsnamen anhand dieses Kontro
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr "Aktivieren Sie diese Option, wenn Sie möchten, dass Organisationen weiterhin in Hierarchien erscheinen, z. B. die Vereinten Nationen als übergeordnetes Objekt souveräner Einheiten."
+
+#: FunctionsGov.php:715
+msgid "Civil"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -295,7 +298,7 @@ msgstr "Es wird empfohlen eine der folgenden Optionen zu nutzen. Man kann auch z
 msgid "It will not be overwritten by subsequent updates."
 msgstr "Es wird durch spätere Aktualisierungen nicht überschrieben."
 
-#: FunctionsGov.php:704
+#: FunctionsGov.php:712
 msgid "Judicial"
 msgstr "Justiziell"
 
@@ -342,12 +345,12 @@ msgstr "Offensichtliche Fehler sollten auf dem GOV-Server selbst korrigiert werd
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
 #. I18N: Module Configuration
-#: FunctionsGov.php:695 Gov4WebtreesModuleTrait.php:139
+#: FunctionsGov.php:703 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
 msgstr "Organisatorisch"
 
-#: FunctionsGov.php:707
+#: FunctionsGov.php:718
 msgid "Other"
 msgstr "Sonstige"
 
@@ -395,7 +398,7 @@ msgstr "Orts-Text und -Verknüpfung"
 msgid "Please enter at least 10 characters."
 msgstr "Bitte mindestens 10 Zeichen eingeben."
 
-#: FunctionsGov.php:701
+#: FunctionsGov.php:709
 msgid "Religious"
 msgstr "Religiös"
 
@@ -443,7 +446,7 @@ msgid "Set GOV id for %1$s"
 msgstr "GOV-ID für %1$s setzen"
 
 #. I18N: Module Configuration
-#: FunctionsGov.php:698 Gov4WebtreesModuleTrait.php:148
+#: FunctionsGov.php:706 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
 msgstr "Siedlung"
 
@@ -620,11 +623,11 @@ msgstr "Zurücksetzen aller zwischengespeicherten Daten auf einmal"
 msgid "this place does not exist at this point in time"
 msgstr "diesen Ort gibt es zu diesem Zeitpunkt nicht"
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1011
+#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
 msgid "today"
 msgstr "heute"
 
-#: FunctionsGov.php:1133
+#: FunctionsGov.php:1144
 msgid "unknown GOV type (newly introduced?)"
 msgstr "unbekannter GOV-Typ (neu eingeführt?)"
 
