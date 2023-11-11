@@ -614,6 +614,7 @@ class Gov4WebtreesModule extends AbstractModule implements
       
         $loc = $location->xref();
         if ($loc === '') {
+            $locReference = null;
             
             //dummy record, should at least have PLAC
             //
@@ -644,13 +645,18 @@ class Gov4WebtreesModule extends AbstractModule implements
             return [];
         }
         
-        return $this->govHierarchiesAsFactsViaGov($gov, $location, $plac);
+        return $this->govHierarchiesAsFactsViaGov(
+            $gov, 
+            $location,
+            $plac, 
+            $locReference);
     }
     
     protected function govHierarchiesAsFactsViaGov(
         GovReference $gov,
         GedcomRecord $record,
-        string $placeName) {        
+        string $placeName,
+        ?LocReference $locReference) {        
         
         /*
         error_log("--------------------------------------------------------------------------------------");
@@ -671,13 +677,27 @@ class Gov4WebtreesModule extends AbstractModule implements
         foreach ($hierarchies as $hierarchy) {
             $gedcom = "1 FACT";
             $gedcom .= "\n2 TYPE GOV Hierarchy";
-            $gedcom .= "\n2 PLAC " . $placeName;
+            
+            $interval = $hierarchy->interval()->asGedcomDateInterval();            
+            $placeNameAt = $placeName;
+            
+            if ($locReference === null) {
+                //keep fallback $placeNameAt
+            } else {
+                //use interval-based placename here (if based on actual _LOC record)            
+                $placeAt = FunctionsPlaceUtils::loc2placAt($this, $locReference, $interval);
+                if ($placeAt !== null) {
+                    $placeNameAt = $placeAt->getGedcomName();
+                }
+            }
+            
+            $gedcom .= "\n2 PLAC " . $placeNameAt;
             
             //we know the _GOV already, more efficient this way than to re-resolve it
             //(resolving via plac2gov anyway isn't certain to succeed if _GOV originates from _LOC)
             $gedcom .= "\n3 _GOV " . $gov->getId();
             
-            $gedcom .= $hierarchy->interval()->asGedcomDateInterval()->toGedcomString(2, true);
+            $gedcom .= $interval->toGedcomString(2, true);
             
             //id must match styleadds key in hFactsTabGetStyleadds
             $fact = new VirtualFact($gedcom, $record, 'gov-history');

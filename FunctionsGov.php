@@ -490,7 +490,7 @@ class FunctionsGov {
     protected static $TYPES_ADM4 = array(2, /* 48, */ /* 94, */ 97, 122, /* 127, */ 152, 205, 226, 259, 264, 266);
     protected static $TYPES_ADM5 = array(4, 14, 18, 76, 83, 85, 95, 108, 109, 136, 140, 143, 145, /* 148, */ 150, 154, 162, 163, 165, 169, 180, 213, 218, 227, 246, 255, 257, 258, 267, 268, 269, 271, 272, 273, 274, 275, 278);
     protected static $TYPES_ADM6 = array(144, 156, 164, 181, 247, 262);
-    protected static $TYPES_WITHOUT_ADM = array(20, 22, 23, 38, 60, 61, 62, 73, /* 77, */ 80, 81, 82, 84, 86, 93, 112, 113, /* 115, 116, 117, */ 125, 128, 131, 135, 137, 157, 167, 170, 173, 174, 175, 176, /* 177, 178, 179, */ 182, 183, /* 184, */ 188, 189, 190, 191, 192, 194, 215, 216, 234, 235, 237, 240, 248, 251, 252, 254, 265, 276, 277);
+    protected static $TYPES_WITHOUT_ADM = array(20, 22, 23, 38, 60, 61, 62, /* 77, */ 80, 81, 82, 84, 86, 93, 112, 113, /* 115, 116, 117, */ 125, 128, 131, 135, 137, 157, 167, 170, 173, 174, 175, 176, /* 177, 178, 179, */ 182, 183, /* 184, */ 188, 189, 190, 191, 192, 194, 215, 216, 234, 235, 237, 240, 248, 251, 252, 254, 265, 276, 277);
     //20 countship adm0 (adm1)
     //22 dominion adm4?
     //23 duchy adm0 (adm1)
@@ -574,9 +574,10 @@ class FunctionsGov {
     //plus all from adm6
     //
     //[2022/05] moved Regierungsbezirk 46 here, which at least in Germany is no Gebietskörperschaft, according to https://de.wikipedia.org/wiki/Gebietsk%C3%B6rperschaft_(Deutschland)
+    //[2023/10] moved Landdrostei (73) here, which is largely equivalent to Regierungsbezirk
     //[2022/10] moved Stadtbezirk 52 here, which at least in Berlin is no Gebietskörperschaft, according to https://de.wikipedia.org/wiki/Verwaltungsgliederung_Berlins
     //[2023/10] moved Amt (Verwaltung) here, which is no Gebietskörperschaft, according to https://wiki.genealogy.net/Amt_(innerhalb_eines_Kreises_oder_Landkreises)
-    protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 77, 94, 115, 116, 117, 127, 148, 177, 178, 179, 184);
+    protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 73, 77, 94, 115, 116, 117, 127, 148, 177, 178, 179, 184);
     //http://gov.genealogy.net/types.owl#group_3
     protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
     //http://gov.genealogy.net/types.owl#group_8
