@@ -346,10 +346,7 @@ class GovObject {
         //ok to use internal function here
         $snapshot = FunctionsGov::getGovObjectSnapshot($julianDay, $this->id);
 
-        $label = FunctionsGov::getResolvedLabel(
-                $snapshot->getLabels(),
-                $languages,
-                $this->getLabels());
+        $label = $this->getResolvedLabel($languages);
 
         $type = $snapshot->getType();
         if (($type === null) && (sizeof($this->types) > 0)) {
@@ -485,7 +482,7 @@ class FunctionsGov {
 
     protected static $TYPES_ADM0 = array(31, 50, 56, /* 71, */ 72, 214);
     protected static $TYPES_ADM1 = array(7, 16, 25, 33, 34, 58, 59, 130, 133, 142, 160, 168, 221, 256);
-    protected static $TYPES_ADM2 = array(5, 10, 45, 100, 101, 138, 161, 201, 211, 217, 222, 225);
+    protected static $TYPES_ADM2 = array(5, 10, 45, 100, 101, 138, 201, 211, 217, 222, 225);
     protected static $TYPES_ADM3 = array(32, 36, 37, 53, 57, 63, 75, 78, 88, 99, 110, 126, 134, 146, 149, 171, 185, 186, 203, 204, 207, 212, 223, 241, 239, 270);
     protected static $TYPES_ADM4 = array(2, /* 48, */ /* 94, */ 97, 122, /* 127, */ 152, 205, 226, 259, 264, 266);
     protected static $TYPES_ADM5 = array(4, 14, 18, 76, 83, 85, 95, 108, 109, 136, 140, 143, 145, /* 148, */ 150, 154, 162, 163, 165, 169, 180, 213, 218, 227, 246, 255, 257, 258, 267, 268, 269, 271, 272, 273, 274, 275, 278);
@@ -577,7 +574,8 @@ class FunctionsGov {
     //[2023/10] moved Landdrostei (73) here, which is largely equivalent to Regierungsbezirk
     //[2022/10] moved Stadtbezirk 52 here, which at least in Berlin is no Gebietskörperschaft, according to https://de.wikipedia.org/wiki/Verwaltungsgliederung_Berlins
     //[2023/10] moved Amt (Verwaltung) here, which is no Gebietskörperschaft, according to https://wiki.genealogy.net/Amt_(innerhalb_eines_Kreises_oder_Landkreises)
-    protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 73, 77, 94, 115, 116, 117, 127, 148, 177, 178, 179, 184);
+    //[2023/11] moved Verwaltungsbezirk here
+    protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 73, 77, 94, 115, 116, 117, 127, 148, 161, 177, 178, 179, 184);
     //http://gov.genealogy.net/types.owl#group_3
     protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
     //http://gov.genealogy.net/types.owl#group_8
@@ -1819,14 +1817,48 @@ class FunctionsGov {
 
         $retrieved = [];
 
-        //pick any, per language
+        //pick shortest, per language
+        //(in order to align with GovHierarchyUtils::myHierarchies())
         foreach ($rows as $row) {
+            
+            //this block cf GovHierarchyUtils::myHierarchies()
+            
+            $language = $row->language; //may be null!
+            $label = $row->label;
+            $sticky = (bool)$row->sticky;
+
+            if (!array_key_exists($language, $retrieved)) {
+                $replace = true;                        
+            } else {
+                $currLabel = $retrieved[$language]->getProp();
+                $currSticky = $retrieved[$language]->getSticky();
+
+                if ($sticky === $currSticky) {
+                    
+                    if (strlen($label) === strlen($currLabel)) {
+                        //replace if 'lower' (this is just in order to have deterministic outcome)
+                        $replace = (strcmp($label, $currLabel) < 0);
+                    } else {
+                        //prefer shorter texts ('Germany' vs 'Federal Republic of Germany')
+                        $replace = (strlen($label) < strlen($currLabel));
+                    }                            
+                } else {
+                    $replace = $sticky; //in which case !$currSticky
+                }
+            }
+
+            if ($replace) {
+                $retrieved[$language] = new ResolvedProperty($label, $sticky);
+            }
+
+            /*
             //but prefer stickies
             if (!array_key_exists($row->language, $retrieved) || $row->sticky) {
                 $retrieved[$row->language] = new ResolvedProperty($row->label, $row->sticky);
             }
+            */
         }
-
+        
         return $retrieved;
     }
 
@@ -1840,8 +1872,9 @@ class FunctionsGov {
         array $labels,
         array $languages,
         array $fallbackLabels = null): ResolvedProperty {
-
+        
         $resolvedLabels = FunctionsGov::resolveLabels($labels, $languages, $fallbackLabels);
+        
         $label = array_shift($resolvedLabels);
 
         if (sizeof($resolvedLabels) === 0) {

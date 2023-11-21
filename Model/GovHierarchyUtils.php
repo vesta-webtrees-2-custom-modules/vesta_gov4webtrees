@@ -763,6 +763,8 @@ class GovHierarchyUtils {
                 
                 if ($labelProp->getInterval()->overlaps($interval)) {
                     
+                    //this block cf FunctionsGov::retrieveLabels()
+                    
                     $label = $labelProp->getProp();
                     $language = $labelProp->getLanguage(); //may be null!
                     $sticky = $labelProp->getSticky();
