@@ -652,6 +652,12 @@ class Gov4WebtreesModule extends AbstractModule implements
             $locReference);
     }
     
+    public static function customTypeEven(): void {
+        //this is just to get this string into *.po,
+        //actual translation is done via Fact::label
+        /* I18N: custom type for virtual EVEN */ I18N::translate("GOV Hierarchy");
+    }
+    
     protected function govHierarchiesAsFactsViaGov(
         GovReference $gov,
         GedcomRecord $record,

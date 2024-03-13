@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-09-10 17:56+0200\n"
+"POT-Creation-Date: 2024-03-13 19:51+0100\n"
 "PO-Revision-Date: 2023-01-18 09:49+0000\n"
 "Last-Translator: tygyh <jonis9898@hotmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/sv/>\n"
@@ -150,6 +150,11 @@ msgstr ""
 
 #: Gov4WebtreesModule.php:535
 msgid "GOV Hierarchies"
+msgstr ""
+
+#. I18N: custom type for virtual EVEN
+#: Gov4WebtreesModule.php:658
+msgid "GOV Hierarchy"
 msgstr ""
 
 #. I18N: Module Configuration
@@ -619,11 +624,11 @@ msgstr ""
 msgid "reset all cached data once"
 msgstr ""
 
-#: Model/GovHierarchyUtils.php:803
+#: Model/GovHierarchyUtils.php:805
 msgid "this place does not exist at this point in time"
 msgstr ""
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
+#: Gov4WebtreesModule.php:814 Gov4WebtreesModule.php:1043
 msgid "today"
 msgstr ""
 

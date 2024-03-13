@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2023-09-10 17:56+0200\n"
+"POT-Creation-Date: 2024-03-13 19:51+0100\n"
 "PO-Revision-Date: 2024-03-04 17:01+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/"
-"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,6 +151,11 @@ msgstr "Depuis"
 #: Gov4WebtreesModule.php:535
 msgid "GOV Hierarchies"
 msgstr "Hiérarchies GOV"
+
+#. I18N: custom type for virtual EVEN
+#: Gov4WebtreesModule.php:658
+msgid "GOV Hierarchy"
+msgstr ""
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -620,11 +624,11 @@ msgstr "recharger la hiérarchie des lieux GOV"
 msgid "reset all cached data once"
 msgstr "réinitialiser une fois toutes les données mises en cache"
 
-#: Model/GovHierarchyUtils.php:803
+#: Model/GovHierarchyUtils.php:805
 msgid "this place does not exist at this point in time"
 msgstr "cet endroit n'existe pas pour le moment"
 
-#: Gov4WebtreesModule.php:788 Gov4WebtreesModule.php:1017
+#: Gov4WebtreesModule.php:814 Gov4WebtreesModule.php:1043
 msgid "today"
 msgstr "aujourd'hui"
 
