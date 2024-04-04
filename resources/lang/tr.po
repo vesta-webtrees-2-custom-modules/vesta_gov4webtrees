@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2024-03-13 19:51+0100\n"
-"PO-Revision-Date: 2021-06-02 21:35+0000\n"
-"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/tr/>\n"
+"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"Last-Translator: Semih <semihbrn10@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -56,17 +57,17 @@ msgstr "Ek olarak modül, ilgili GOV kimliğinin veya hiyerarşi içindeki üstl
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:158
 msgid "Administrative"
-msgstr ""
+msgstr "İdari"
 
 #: FunctionsGov.php:682 FunctionsGov.php:685 FunctionsGov.php:688
 #: FunctionsGov.php:691 FunctionsGov.php:694 FunctionsGov.php:697
 #, php-format
 msgid "Administrative (level %1$s)"
-msgstr ""
+msgstr "İdari (seviye %1$s)"
 
 #: FunctionsGov.php:700
 msgid "Administrative (other)"
-msgstr ""
+msgstr "İdari (diğer)"
 
 #: Model/GovHierarchyUtils.php:108
 msgid "Administrative levels"
@@ -90,10 +91,13 @@ msgstr "Son bir yedek olarak, yer adını bu onay kutusuna göre belirle:"
 #: Gov4WebtreesModuleTrait.php:142
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
 msgstr ""
+"Kuruluşların hala hiyerarşilerde görünmesini istiyorsanız bu seçeneği "
+"işaretleyin, örneğin Birleşmiş Milletler egemen varlıkların daha üst düzey "
+"bir nesnesi olarak."
 
 #: FunctionsGov.php:715
 msgid "Civil"
-msgstr ""
+msgstr "Sivil"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:172
@@ -109,6 +113,11 @@ msgstr "Sonuç olarak, yer hiyerarşi bilgileri yalnızca dolaylı olarak GOV we
 #: resources/views/admin/gov-data.phtml:23
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
 msgstr ""
+"GOV sunucusundan elde edilen veriler. Düzenlenen veriler yerel değişiklikler "
+"olarak saklanacaktır (GEDCOM dışında, tıpkı orijinal veriler gibi). "
+"Düzenlenmiş veriler her zaman orijinal verilere göre önceliğe sahiptir. "
+"Hiyerarşiler yeniden yüklendiğinde silinmez, ancak burada açıkça "
+"silinebilir. GOV sunucusuna hiçbir veri aktarılmaz."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:130
@@ -119,7 +128,7 @@ msgstr "GOV kimliğinin kaynağını gösteren bir araç ipucu görüntüler. Bu
 #: Http/RequestHandlers/GovDataEdit.php:91
 #, php-format
 msgid "Edit %1$s for %2$s"
-msgstr ""
+msgstr "%2$s için %1$s'yi düzenleyin"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:237
@@ -130,6 +139,8 @@ msgstr "Yerel php SoapClient kullanmak yerine, NuSOAP aracılığıyla GOV sunuc
 #: Gov4WebtreesModuleTrait.php:219
 msgid "For a given place, this module displays one or more names by matching the available names against a list of languages, according to the following strategy:"
 msgstr ""
+"Belirli bir yer için bu modül, aşağıdaki stratejiye göre mevcut isimleri bir "
+"dil listesiyle eşleştirerek bir veya daha fazla isim görüntüler:"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:178
@@ -140,22 +151,24 @@ msgstr "Tarih aralığı olan etkinlikler için medyan tarihi kullanın"
 #: Gov4WebtreesModuleTrait.php:161
 msgid "For more fine-grained adjustments, and to view the list of the types and type groups, edit the GOV data locally."
 msgstr ""
+"Daha ayrıntılı ayarlamalar yapmak ve türlerin ve tür gruplarının listesini "
+"görüntülemek için GOV verilerini yerel olarak düzenleyin."
 
 #: resources/views/admin/gov-data-edit.phtml:88
 #: resources/views/admin/gov-data.phtml:31
 #: resources/views/admin/gov-data.phtml:99
 #: resources/views/admin/gov-data.phtml:170
 msgid "From"
-msgstr ""
+msgstr "Kimden"
 
 #: Gov4WebtreesModule.php:535
 msgid "GOV Hierarchies"
-msgstr ""
+msgstr "GOV Hiyerarşileri"
 
 #. I18N: custom type for virtual EVEN
 #: Gov4WebtreesModule.php:658
 msgid "GOV Hierarchy"
-msgstr ""
+msgstr "GOV Hiyerarşisi"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
@@ -165,22 +178,22 @@ msgstr "GOV Kimlik Yönetimi"
 #: Http/RequestHandlers/GovDataEdit.php:73
 #: resources/views/admin/gov-data.phtml:29
 msgid "GOV Name"
-msgstr ""
+msgstr "GOV Adı"
 
 #: Http/RequestHandlers/GovDataEdit.php:71
 #: resources/views/admin/gov-data.phtml:98
 msgid "GOV Object Type"
-msgstr ""
+msgstr "GOV Nesne Türü"
 
 #: Http/RequestHandlers/GovDataEdit.php:75
 #: resources/views/admin/gov-data.phtml:169
 msgid "GOV Parent"
-msgstr ""
+msgstr "GOV Sahibi"
 
 #: Http/RequestHandlers/GovData.php:73 Http/RequestHandlers/GovDataEdit.php:96
 #: Http/RequestHandlers/GovDataList.php:46
 msgid "GOV data"
-msgstr ""
+msgstr "GOV veri"
 
 #: resources/views/admin/gov-data-list.phtml:33
 msgid "GOV data for"
