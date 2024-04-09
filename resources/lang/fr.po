@@ -8,9 +8,10 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2024-03-13 19:51+0100\n"
-"PO-Revision-Date: 2024-03-04 17:01+0000\n"
+"PO-Revision-Date: 2024-04-09 10:02+0000\n"
 "Last-Translator: Vincent DENIS <vincent.denis06@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"vesta-webtrees-custom-modules/vesta-gov4webtrees/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,7 +156,7 @@ msgstr "Hiérarchies GOV"
 #. I18N: custom type for virtual EVEN
 #: Gov4WebtreesModule.php:658
 msgid "GOV Hierarchy"
-msgstr ""
+msgstr "GOV Hiérarchie"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:247
