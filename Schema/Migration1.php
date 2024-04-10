@@ -12,7 +12,7 @@ use Fisharebest\Webtrees\Schema\MigrationInterface;
 class Migration1 implements MigrationInterface {
 
   //TODO: Migration2: remove obsolete table gov_descriptions!
-   
+
   public function upgrade(): void {
 
     if (DB::schema()->hasColumn('gov_ids', 'type') || DB::schema()->hasColumn('gov_ids', 'version')) {
@@ -29,8 +29,8 @@ class Migration1 implements MigrationInterface {
       $datas = DB::table('gov_ids')->select(['id', 'name', 'gov_id'])->get();
       $inserts = array();
       foreach ($datas as $data) {
-        $inserts[] = ['id' => $data->id, 
-                 'name' => $data->name, 
+        $inserts[] = ['id' => $data->id,
+                 'name' => $data->name,
                  'gov_id' => $data->gov_id];
       }
       DB::table('gov_ids_temp')->insert($inserts);

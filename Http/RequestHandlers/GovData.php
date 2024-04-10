@@ -42,20 +42,20 @@ class GovData implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $govId = $request->getAttribute('gov_id');
-        
+
         //TODO force reload while we're at it?
         //but perhaps not after each single edit?
         //add 'reload' button?
         $gov = FunctionsGov::retrieveGovObject($this->module, $govId);
-    
+
         if ($gov == null) {
-          //$error = I18N::translate("Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'.");      
+          //$error = I18N::translate("Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'.");
           //return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
 
           return redirect(route(GovDataList::class));
         }
 
-        $locale = I18N::locale();        
+        $locale = I18N::locale();
         $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govId);
         $languagesForTypes =  GovHierarchyUtils::getResolvedLanguagesForTypes($this->module, $locale);
         $label = $gov->getResolvedLabel($languages)->getProp();
@@ -63,7 +63,7 @@ class GovData implements RequestHandlerInterface
         $breadcrumbs = [];
 
         $icon = '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
-        
+
         $title = I18N::translate('GOV data for %1$s', $label);
         $titlePlus = I18N::translate('GOV data for %1$s', $icon . FunctionsGov::aToGovServer($govId, $label));
 
@@ -72,11 +72,11 @@ class GovData implements RequestHandlerInterface
         $breadcrumbs[$this->module->getConfigLink()] = $this->module->title();
         $breadcrumbs[route(GovDataList::class)] = I18N::translate('GOV data');
         $breadcrumbs[] = $label;
-        
+
         $this->layout = 'layouts/administration';
 
         $view = $this->module->name() . '::admin/gov-data';
-        
+
         return $this->viewResponse($this->module->name() . '::admin/gov-data', [
             'title'             => $title,
             'breadcrumbs'       => $breadcrumbs,
@@ -84,7 +84,7 @@ class GovData implements RequestHandlerInterface
             'titlePlus'         => $titlePlus,
             'gov'               => $gov,
             'languages'         => $languages,
-            'languagesForTypes' => $languagesForTypes,            
+            'languagesForTypes' => $languagesForTypes,
         ]);
     }
 }

@@ -1,7 +1,7 @@
 #First column: informational only for easier editing, not actually evaluated
 #Second column: GOV id
 #Third and other columns: language code as used within the GOV system (see http://wiki-de.genealogy.net/GOV/FAQ#fremdsprachige_Namen)
-#a lower-cased code indicates a fallback language 
+#a lower-cased code indicates a fallback language
 #an upper-cased code indicates that the name in the respective language is to be displayed unconditionally (if necessary as an additional name in parentheses)
 #
 #An empty GOV id indicates a global fallback which is also used for the GOV type names

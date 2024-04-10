@@ -42,11 +42,11 @@ $icon = '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden=
 
             <td dir="ltr">
                 <?= $row['label']
-            
-            //$icon . FunctionsGov::aToGovServer($govId, $row['label']) 
+
+            //$icon . FunctionsGov::aToGovServer($govId, $row['label'])
             ?>
             </td>
-            
+
             <td dir="ltr">
                 <?php if ($row['lat'] === null) : ?>
                     <?= view('icons/warning') ?>

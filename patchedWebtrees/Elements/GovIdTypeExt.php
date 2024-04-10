@@ -15,19 +15,19 @@ use function view;
  * GOV ID, for TYPE_OF_LOCATION
  */
 class GovIdTypeExt extends GovIdType //extend GovIdType in order to display via values()
-{    
+{
     protected $module;
-    
+
     public function __construct($module, string $label, array $subtags = null)
     {
         parent::__construct($label, $subtags);
         $this->module = $module;
     }
-    
+
     public function edit(string $id, string $name, string $value, Tree $tree): string
     {
         $values = $this->valuesGrouped();
-        
+
         if ($values !== []) {
             $value = $this->canonical($value);
 
@@ -69,7 +69,7 @@ class GovIdTypeExt extends GovIdType //extend GovIdType in order to display via 
 
         return '<input ' . Html::attributes($attributes) . ' />';
     }
-    
+
     /**
      * A list of controlled values for this element
      *
@@ -85,24 +85,24 @@ class GovIdTypeExt extends GovIdType //extend GovIdType in order to display via 
             if (is_int($key)) {
                 $value .= ' — ... ' . I18N::number($key);
             }
-        });        
+        });
         */
 
         return $values;
     }
-    
+
     /**
      * A list of controlled values for this element
      *
      * @return array<int|string,string>
      */
     public function values(): array {
-        
+
         $valuesGrouped = $this->valuesGrouped();
-        
+
         //does not preserve int keys argh
         //$values = array_merge(...array_values($valuesGrouped));
-        
+
         $values = [];
         foreach ($valuesGrouped as $valuesInGroup) {
             foreach ($valuesInGroup as $key => $value) {

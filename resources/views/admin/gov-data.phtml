@@ -21,7 +21,7 @@ use Vesta\Model\DateUtils;
 
 <p class="small">
     <?= I18n::translate('Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server.') ?>
-</p>    
+</p>
 
 <table class="table table-bordered table-striped table-sm table-hover wt-table-locations">
     <thead class="thead-dark">
@@ -51,7 +51,7 @@ use Vesta\Model\DateUtils;
             }
             ?>
 
-            <tr class="">            
+            <tr class="">
                 <td dir="ltr">
                     <?= $prop->getProp() ?>
                 </td>
@@ -126,7 +126,7 @@ use Vesta\Model\DateUtils;
             }
             ?>
 
-            <tr class="">            
+            <tr class="">
                 <td dir="ltr">
                     <?= $resolvedType . ' (' . $prop->getProp() . ')' ?>
                 </td>
@@ -195,7 +195,7 @@ use Vesta\Model\DateUtils;
             }
             ?>
 
-            <tr class="">            
+            <tr class="">
                 <td dir="ltr">
                     <?= $label ?>
                 </td>
@@ -231,4 +231,3 @@ use Vesta\Model\DateUtils;
         <?php endforeach ?>
     </tbody>
 </table>
-

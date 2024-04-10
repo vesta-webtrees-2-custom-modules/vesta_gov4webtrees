@@ -1,9 +1,9 @@
-<button 
-    class="btn btn-link btn-sm" 
-    type="button" 
-    data-bs-toggle="modal" 
+<button
+    class="btn btn-link btn-sm"
+    type="button"
+    data-bs-toggle="modal"
     data-bs-backdrop="static"
-    data-bs-target="#wt-ajax-modal-vesta" 
+    data-bs-target="#wt-ajax-modal-vesta"
     data-wt-href="<?=
     e(route('module', [
         'module' => $moduleName,
@@ -11,10 +11,9 @@
         'place-name' => $fact->place()->gedcomName(),
         'tree' => $fact->record()->tree()->name()
     ]));
-    ?>" 
-    data-wt-select-id="<?= 'UNUSED' ?>" 
+    ?>"
+    data-wt-select-id="<?= 'UNUSED' ?>"
     title="<?= $title ?>">
         <?= view($moduleName . '::icons/map-gov') ?>
         <span class="visually-hidden"><?= $title ?></span>
 </button>
-

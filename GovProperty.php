@@ -39,10 +39,10 @@ class GovProperty extends ResolvedProperty {
         return $this->to;
     }
 
-    public function getInterval(): JulianDayInterval {        
+    public function getInterval(): JulianDayInterval {
         return new JulianDayInterval($this->from, $this->to);
     }
-    
+
     public function getSticky(): bool {
         return $this->sticky;
     }
@@ -57,14 +57,14 @@ class GovProperty extends ResolvedProperty {
         bool $sticky) {
 
         parent::__construct($prop, $sticky);
-        
+
         if ($from !== null) {
             if ($to <= $from) {
                 //invalid, ignore!
                 $to = null;
             }
         }
-            
+
         $this->key = $key;
         $this->govId = $govId;
         $this->prop = $prop;

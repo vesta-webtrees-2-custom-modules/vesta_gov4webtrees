@@ -23,7 +23,7 @@ use function view;
 class EditGovMappingController {
 
   use ViewResponseTrait;
-  
+
   protected $module;
 
   public function __construct($module) {
@@ -36,22 +36,22 @@ class EditGovMappingController {
    * @return Response
    */
   public function editGovMapping(
-          ServerRequestInterface $request, 
+          ServerRequestInterface $request,
           Tree $tree): ResponseInterface {
-      
+
     //set delay here to mimic slow servers and to test whether select2 is properly initialized (issue #9)
     //sleep(2);
 
     $govId = null;
-    
+
     $placeName = Requests::getString($request, 'place-name');
     $ps = PlaceStructure::fromName($placeName, $tree);
-    
+
     if ($ps != null) {
       //do not use plac2gov here - we're only interested in actual direct mappings at this point!
-      $govId = Gov4WebtreesModule::plac2govViaMappingTable($ps);      
+      $govId = Gov4WebtreesModule::plac2govViaMappingTable($ps);
     }
-    
+
     //'cleanup' use case (multiple GOV ids mapped): handled silently now
     //should we address this explicitly? E.g. show warning icon next to edit control?
     if ($govId === null) {
@@ -59,16 +59,16 @@ class EditGovMappingController {
     } else {
       $title = I18N::translate('Reset GOV id for %1$s', $placeName);
     }
-    
+
     $viewName = $this->module->name() . '::modals/edit-gov-mapping';
-    
+
     $html = view($viewName, [
                 'moduleName' => $this->module->name(),
                 'placeName' => $placeName,
                 'title' => $title,
                 'govId' => $govId,
     ]);
-            
+
     return response($html);
   }
 
@@ -91,30 +91,30 @@ class EditGovMappingController {
       //no need to return data, we'll just close the modal from which this has been called
       return response();
     }
-    
+
     //test whether id is valid
     try {
         $gov = FunctionsGov::loadGovObject($this->module, $govId);
     } catch (GOVServerUnavailableException $e) {
         $error = $this->module->messageGovServerUnavailable();
-      
+
         return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
     }
-    
+
     //unexpected to occur anymore now that we validate via select2GovId (where the same I18N string is used)
     if ($gov == null) {
       $error = I18N::translate("Invalid GOV id! Valid GOV ids are e.g. 'EITTZE_W3091', 'object_1086218'.");
-      
+
       return response(['html' => $error], StatusCodeInterface::STATUS_CONFLICT);
     }
-    
+
     //reset in order to reload hierarchy
     FunctionsGov::deleteGovObject($govId);
-    
+
     FunctionsGov::setGovId($placeName, $govId);
-    
+
     FlashMessages::addMessage(I18N::translate('GOV id for %1$s has been set to %2$s.', $placeName, $govId));
-    
+
     //no need to return data, we'll just close the modal from which this has been called
     return response();
   }
@@ -122,11 +122,11 @@ class EditGovMappingController {
   //webtrees 2.0
   public function select2GovId(
           ServerRequestInterface $request): ResponseInterface {
-      
+
       //$page  = (int) ($request->getParsedBody()['page'] ?? 1);
       $govId = $request->getParsedBody()['q'] ?? '';
 
-      try {  
+      try {
         $ret = FunctionsGov::checkGovId($this->module, $govId);
 
         $results = ($ret !== null)?collect([[

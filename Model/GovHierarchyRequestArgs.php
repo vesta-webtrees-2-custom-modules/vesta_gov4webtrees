@@ -17,15 +17,15 @@ class GovHierarchyRequestArgs {
     public function locale(): LocaleInterface {
         return $this->locale;
     }
-    
+
     public function languages(): array {
         return $this->languages;
     }
-    
+
     public function languagesForTypes(): array {
         return $this->languagesForTypes;
     }
-    
+
     public function compactDisplay(): bool {
         return $this->compactDisplay;
     }

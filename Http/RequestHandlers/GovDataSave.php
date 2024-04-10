@@ -52,7 +52,7 @@ class GovDataSave implements RequestHandlerInterface {
             $toJD = gregoriantojd(
                     (int) $dateTime->format('m'),
                     (int) $dateTime->format('d'),
-                    (int) $dateTime->format('Y')) + 1; //exclusively!            
+                    (int) $dateTime->format('Y')) + 1; //exclusively!
         }
 
         $prop = null;
