@@ -53,12 +53,12 @@ class GovDataList implements RequestHandlerInterface
         $this->layout = 'layouts/administration';
 
         $locale = I18N::locale();
-        
+
         $rows = [];
-        
+
         foreach (FunctionsGov::allGovIds() as $govId) {
           $gov = FunctionsGov::retrieveGovObject($this->module, $govId);
-    
+
           if ($gov != null) {
             $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govId);
             $sortBy = $gov->getResolvedLabel($languages)->getProp();
@@ -66,7 +66,7 @@ class GovDataList implements RequestHandlerInterface
             $lat = $gov->getLat();
             $lon = $gov->getLon();
             $hasStickyProp = $gov->hasStickyProp();
-            
+
             $rows[$govId] = [
                 'sortBy'        => $sortBy,
                 'label'         => $label,
@@ -76,13 +76,13 @@ class GovDataList implements RequestHandlerInterface
             ];
           }
         }
-        
+
         uasort($rows, static function (array $x, array $y): int {
             return I18N::comparator()($x['sortBy'], $y['sortBy']);
         });
-        
+
         $view = $this->module->name() . '::admin/gov-data-list';
-        
+
         return $this->viewResponse($view, [
             'title'       => $title,
             'breadcrumbs' => $breadcrumbs,

@@ -29,14 +29,14 @@ class GovDataDelete implements RequestHandlerInterface {
         if (($type != null) && ($key != null)) {
           $prop = FunctionsGov::getProp($type, $key);
         }
-        
+
         if ($prop === null) {
           return redirect(route(GovDataList::class));
-        } 
-        
+        }
+
         FunctionsGov::deletePropIfSticky($type, $key);
-        
-        $govId = $prop->getGovId();        
+
+        $govId = $prop->getGovId();
         $url = route(GovData::class, ['gov_id' => $govId]);
         return redirect($url);
     }

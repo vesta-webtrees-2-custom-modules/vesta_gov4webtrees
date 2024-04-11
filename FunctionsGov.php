@@ -255,7 +255,7 @@ class GovObject {
     public function getId() {
         return $this->id;
     }
-    
+
     public function getLat() {
         return $this->lat;
     }
@@ -408,7 +408,7 @@ class GovObjectSnapshot {
     }
 
     /**
-     * 
+     *
      * @return array<ResolvedProperty>
      */
     public function getLabels(): array {
@@ -521,7 +521,7 @@ class FunctionsGov {
     //174 general district adm2
     //175 Kreisgebiet adm3 or adm4
     //176 protectorate adm1
-    //177 Reichsritterschaft vgl. Reichskreis, org! 
+    //177 Reichsritterschaft vgl. Reichskreis, org!
     //178 Ritterkanton org!
     //179 Ritterkreis org!
     //182 Erzstift adm0/1
@@ -546,7 +546,7 @@ class FunctionsGov {
     //265 sultanate adm0
     //276 ???
     //277 colony (territory) adm0
-    //extra 
+    //extra
     //223 Landgericht (älterer Ordnung) - primarily in Judicial
     //154 Honschaft - primarily in Judicial
     //181 Rotte - primarily settlement
@@ -606,7 +606,7 @@ class FunctionsGov {
             FunctionsGov::$TYPES_ADM4,
             FunctionsGov::$TYPES_ADM5,
             FunctionsGov::$TYPES_WITHOUT_ADM);
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
@@ -615,45 +615,45 @@ class FunctionsGov {
         $merged = array_merge(
             FunctionsGov::$TYPES_ADM6,
             FunctionsGov::$TYPES_ORGANIZATIONAL);
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
 
     public static function settlementTypes(): array {
         $merged = FunctionsGov::$TYPES_SETTLEMENT;
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
 
     public static function religiousTypes(): array {
         $merged = FunctionsGov::$TYPES_RELIGIOUS;
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
 
     public static function judicialTypes(): array {
         $merged = FunctionsGov::$TYPES_JUDICIAL;
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
 
     public static function civilTypes(): array {
         $merged = FunctionsGov::$TYPES_CIVIL;
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
-    
+
     public static function otherTypes(): array {
         $merged = array_merge(
             FunctionsGov::$TYPES_GEOGRAPHIC,
             FunctionsGov::$TYPES_PLACE,
             FunctionsGov::$TYPES_TRANSPORTATION);
-        
+
         //values also as keys
         return array_combine($merged, $merged);
     }
@@ -802,7 +802,7 @@ class FunctionsGov {
     }
 
     /**
-     * 
+     *
      * @param Collection<string> $ids
      * @return Collection<string>
      */
@@ -1068,7 +1068,7 @@ class FunctionsGov {
     }
 
     /**
-     * 
+     *
      * @return array key: type, value: array of languageTag:value
      */
     public static function getTypeDescriptions($module): array {
@@ -1135,7 +1135,7 @@ class FunctionsGov {
         $module,
         ?int $type,
         array $languages): ?string {
-        
+
         if ($type === null) {
             return null;
         }
@@ -1173,7 +1173,7 @@ class FunctionsGov {
                 return reset($values);
             }
         }
-        
+
         return null;
     }
 
@@ -1181,28 +1181,28 @@ class FunctionsGov {
         $module,
         $id,
         int $version = -1): ?GovObject {
-    
+
         $cacheKey = FunctionsGov::class . 'GovObject_' . $id . '_' . $version;
-    
+
         $ret = Registry::cache()->array()->remember($cacheKey, static function () use ($module, $id, $version): ?GovObject {
             return FunctionsGov::retrieveGovObjectActual($module, $id, $version);
         });
-        
+
         return $ret;
     }
-    
+
     public static function retrieveGovObjectActual(
         $module,
         $id,
         int $version = -1): ?GovObject {
-        
+
         $gov = FunctionsGov::getGovObject($id);
         if ($gov != null) {
             if ($gov->getVersion() >= $version) {
                 return $gov;
             }
 
-        }        
+        }
 
         //not loaded at all, or force reload via older version
         $gov = FunctionsGov::loadGovObject($module, $id);
@@ -1479,7 +1479,7 @@ class FunctionsGov {
     public static function setGovObject($id, GovObject $govObject) {
 
         // Run in a transaction (to prevent concurrent access of delete data)
-        //probably redundant, see UseTransaction! 
+        //probably redundant, see UseTransaction!
         DB::connection()->beginTransaction();
 
         /*
@@ -1491,7 +1491,7 @@ class FunctionsGov {
             'version' => $govObject->getVersion()
         ]);
         */
-        
+
         //TODO use this everywhere rather than updateOrInsert
         //which isn't atomic and leads to
         //Integrity constraint violation: 1062 Duplicate entry
@@ -1501,7 +1501,7 @@ class FunctionsGov {
             'lat' => $govObject->getLat(),
             'lon' => $govObject->getLon(),
             'version' => $govObject->getVersion()
-        ], [            
+        ], [
             'gov_id' => $id
         ]);
 
@@ -1601,7 +1601,7 @@ class FunctionsGov {
                 //https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
                 $lat = round($lat, 7);
                 $lon = round($lon, 7);
-                
+
                 //apparently not avalable consistently for calculated values!
                 if (property_exists($position, "type")) {
                     $type = $position->type;
@@ -1657,7 +1657,7 @@ class FunctionsGov {
 
         $rawParents = array();
 
-        //we currently do not distinguish between the different kinds of relation!    
+        //we currently do not distinguish between the different kinds of relation!
         if (property_exists($place, 'part-of')) {
             if (is_array($place->{'part-of'})) {
                 foreach ($place->{'part-of'} as $parent) {
@@ -1735,7 +1735,7 @@ class FunctionsGov {
         return [];
     }
 
-    //should only be used internally (or if you're certain the $id is loaded)! 
+    //should only be used internally (or if you're certain the $id is loaded)!
     //otherwise use retrieveGovObjectSnapshot instead!
     public static function getGovObjectSnapshot(
         $julianDay,
@@ -1794,7 +1794,7 @@ class FunctionsGov {
     }
 
     /**
-     * 
+     *
      * @param type $julianDay
      * @param type $id
      * @param bool $restrictToSticky
@@ -1820,28 +1820,28 @@ class FunctionsGov {
         //pick shortest, per language
         //(in order to align with GovHierarchyUtils::myHierarchies())
         foreach ($rows as $row) {
-            
+
             //this block cf GovHierarchyUtils::myHierarchies()
-            
+
             $language = $row->language; //may be null!
             $label = $row->label;
             $sticky = (bool)$row->sticky;
 
             if (!array_key_exists($language, $retrieved)) {
-                $replace = true;                        
+                $replace = true;
             } else {
                 $currLabel = $retrieved[$language]->getProp();
                 $currSticky = $retrieved[$language]->getSticky();
 
                 if ($sticky === $currSticky) {
-                    
+
                     if (strlen($label) === strlen($currLabel)) {
                         //replace if 'lower' (this is just in order to have deterministic outcome)
                         $replace = (strcmp($label, $currLabel) < 0);
                     } else {
                         //prefer shorter texts ('Germany' vs 'Federal Republic of Germany')
                         $replace = (strlen($label) < strlen($currLabel));
-                    }                            
+                    }
                 } else {
                     $replace = $sticky; //in which case !$currSticky
                 }
@@ -1858,12 +1858,12 @@ class FunctionsGov {
             }
             */
         }
-        
+
         return $retrieved;
     }
 
     /**
-     * 
+     *
      * @param array<string => ResolvedProperty> $labels (keyed by language)
      * @param array $languages
      * @return ResolvedProperty
@@ -1872,9 +1872,9 @@ class FunctionsGov {
         array $labels,
         array $languages,
         array $fallbackLabels = null): ResolvedProperty {
-        
+
         $resolvedLabels = FunctionsGov::resolveLabels($labels, $languages, $fallbackLabels);
-        
+
         $label = array_shift($resolvedLabels);
 
         if (sizeof($resolvedLabels) === 0) {
@@ -1895,14 +1895,14 @@ class FunctionsGov {
     }
 
     /**
-     * 
+     *
      * @param array<string => ResolvedProperty> $labelsIn (keyed by language)
-     * @param array $languages return label in first language from this list. 
+     * @param array $languages return label in first language from this list.
      * Additionally return any other labels matching upper cased languages from this list.
      * As a final fallback, return any non-german label
-     * 
+     *
      * @return array<ResolvedProperty>
-     * 
+     *
      */
     public static function resolveLabels(
         array $labelsIn,
@@ -2163,7 +2163,7 @@ class FunctionsGov {
                 $begin = $timespan->begin;
                 if (property_exists($begin, "jd")) {
                     $jd = $begin->jd;
-                    
+
                     $precision = 2; //fallback
                     if (property_exists($begin, "precision")) {
                         $precision = $begin->precision;
@@ -2189,7 +2189,7 @@ class FunctionsGov {
                     if ($precision == 0) {
                         //GOV server does NOT necessarily return yyyy-01-01 in this case!
                         //therefore we set first of day, first of month ourselves
-                        
+
                         //what a mess
                         $ymd = cal_from_jd($jd, CAL_GREGORIAN);
                         $dateTime = new DateTime();
@@ -2254,7 +2254,7 @@ class FunctionsGov {
                     if ($precision == 0) {
                         //GOV server does NOT necessarily return yyyy-01-01 in this case!
                         //therefore we set first of day, first of month ourselves
-                        
+
                         //what a mess
                         $ymd = cal_from_jd($jd, CAL_GREGORIAN);
                         $dateTime = new DateTime();
@@ -2295,7 +2295,7 @@ class FunctionsGov {
                     return $x->endonymSortable() <=> $y->endonymSortable();
                 })
 
-                //TODO should merge multiple endonyms here (AE/BE etc) 
+                //TODO should merge multiple endonyms here (AE/BE etc)
                 ->mapWithKeys(static function (LocaleInterface $locale): array {
                     $lang = FunctionsGov::toLang($locale->languageTag());
                     $endonym = $locale->endonym();
@@ -2327,7 +2327,7 @@ class FunctionsGov {
             $dateTime->format("d"),
             $dateTime->format("Y"));
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
 
 }

@@ -9,26 +9,26 @@ if (!$thePlace) {
   $thePlace = $placeName;
 }
 ?>
-    
+
 <div class="form-group">
     <?php if ($withLabel): ?>
       <label class="col-form-label" for="<?= $id ?>">
           <?= I18N::translate('GOV id') ?>
       </label>
     <?php endif ?>
-    <?php 
+    <?php
       //we'd like to use far fa-compass but we'd have to import explicitly
     ?>
-    
-    <?php 
+
+    <?php
       //TODO we should cutoff, for href, at first comma
     ?>
     <?php if ($placeNameSelector !== null): ?>
         <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/extended" onclick="var REF = $('<?= $placeNameSelector ?>'); var VAL = (REF[0].tagName.toLowerCase() === 'input'?REF.val():REF.text()); window.open((VAL !== '')?'http://gov.genealogy.net/search/name/?name='+VAL:'http://gov.genealogy.net/search/extended'); return false;" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     <?php else: ?>
         <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
-    <?php endif ?>    
-    
+    <?php endif ?>
+
     <?php if ($internal): ?>
       <div><?= I18N::translate('Note: The mapping from place to GOV id is stored outside the gedcom data.') ?></div>
       <div><?= ($govId === null)?'':I18N::translate('Save the current id in order to reload the place hierarchy data from the GOV server.') ?></div>
@@ -39,9 +39,9 @@ if (!$thePlace) {
 
 <?php
   //data-minimum-input-length: usually 12, but there are some shorter ones, such as adm_368372
-  //moved to tom-select-initializer-gov.html  
+  //moved to tom-select-initializer-gov.html
 
-  //TODO handle in tom-select  
+  //TODO handle in tom-select
   //data-ajax--delay="350"
 ?>
 
@@ -68,8 +68,8 @@ if (!$thePlace) {
 <?php View::push('javascript') ?>
 <?php if ($selectInitializer === null): /* cf ajax.phtml (in case this is used as a modal, or part thereof) */
 //nothing to do, handled elsewhere
- 
-//this fixes issue #9.  
+
+//this fixes issue #9.
 //apparently, there is no way to properly and consistently (fast vs slow servers) initialize select2 within modal via script loaded via ajax.
 //webtrees 2.1: not sure if this is also the case for tomselect? Probably not.
 //see also https://github.com/fisharebest/webtrees/commit/cc61421932b3c060d8f85d6de6a6086150074ec6

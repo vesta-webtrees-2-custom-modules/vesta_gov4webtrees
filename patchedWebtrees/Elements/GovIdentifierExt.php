@@ -34,25 +34,25 @@ class GovIdentifierExt extends GovIdentifier
         //except by using the title from rendered view, which is ok for _LOC:_GOV but not for others!
         //(such as _GOV under PLAC, so we'd require a different edit control there!)
         $placeNameSelector = 'h2 > span';
-        
+
         $html = '';
-        
+
         //this could be simplified now ($module is actually own module)
         //or move this to common? not easy to decide who's responsible for interselection (_LOC:_GOV)
         $additionalControls = GovIdEditControlsUtils::accessibleModules($tree, Auth::user())
               ->map(function (GovIdEditControlsInterface $module) use ($value, $id, $name, $placeNameSelector) {
                 //TODO
                 return $module->govIdEditControl(
-                    ($value === '')?null:$value, 
-                    $id, 
-                    $name, 
-                    '', 
-                    $placeNameSelector, 
-                    false, 
+                    ($value === '')?null:$value,
+                    $id,
+                    $name,
+                    '',
+                    $placeNameSelector,
+                    false,
                     false);
               })
               ->toArray();
-        
+
         foreach ($additionalControls as $additionalControl) {
             $html .= $additionalControl->getMain();
             //apparently handled properly
@@ -64,7 +64,7 @@ class GovIdentifierExt extends GovIdentifier
         if ($html !== '') {
             return $html;
         }
-        
+
         return parent::edit($id, $name, $value, $tree);
     }
 }

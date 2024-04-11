@@ -54,7 +54,7 @@ class GovHierarchy {
     public static function empty(
         JulianDayInterval $interval,
         array $adjustedLanguages): GovHierarchy {
-        
+
         return new GovHierarchy(null, $interval, $adjustedLanguages, '', '', false);
     }
 }

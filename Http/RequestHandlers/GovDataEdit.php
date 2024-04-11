@@ -43,29 +43,29 @@ class GovDataEdit implements RequestHandlerInterface
     {
         $type = $request->getAttribute('type');
         $key = (int)$request->getAttribute('key');
-    
-        
+
+
         if (($type != null) && ($key != null)) {
           $prop = FunctionsGov::getProp($type, $key);
         }
-        
+
         if ($prop === null) {
           return redirect(route(GovDataList::class));
-        } 
-        
+        }
+
         $govId = $prop->getGovId();
         $gov = FunctionsGov::retrieveGovObject($this->module, $govId);
-    
+
         if ($gov == null) {
           return redirect(route(GovDataList::class));
         }
-        
+
         $locale = I18N::locale();
         $languages = GovHierarchyUtils::getResolvedLanguages($this->module, $locale, $govId);
         $label = $gov->getResolvedLabel($languages)->getProp();
 
         $breadcrumbs = [];
-        
+
         $typeLabel = '';
         if ($type == 'type') {
           $typeLabel = I18N::translate('GOV Object Type');
@@ -84,9 +84,9 @@ class GovDataEdit implements RequestHandlerInterface
             $placename = $gov->getResolvedLabel($languages)->getProp();
           } //else inconsistency
         }
-        
+
         $icon = '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
-        
+
         $title = I18N::translate('Edit %1$s for %2$s', $typeLabel, $label);
         $titlePlus = I18N::translate('Edit %1$s for %2$s', $typeLabel, $icon . FunctionsGov::aToGovServer($govId, $label));
 
@@ -96,7 +96,7 @@ class GovDataEdit implements RequestHandlerInterface
         $breadcrumbs[route(GovDataList::class)] = I18N::translate('GOV data');
         $breadcrumbs[route(GovData::class, ['gov_id' => $govId])] = $label;
         $breadcrumbs[] = $typeLabel;
-        
+
         $this->layout = 'layouts/administration';
 
         return $this->viewResponse($this->module->name() . '::admin/gov-data-edit', [

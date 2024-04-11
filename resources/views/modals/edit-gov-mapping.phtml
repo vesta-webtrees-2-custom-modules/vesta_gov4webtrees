@@ -15,15 +15,15 @@ e(route('module', [
 
     <div class="modal-body">
         <div id="edit-gov-id-error"></div>
-        
+
         <?= view($moduleName . '::edit/gov-id-edit-control', [
-            'moduleName' => $moduleName, 
-            'withLabel' => true, 
+            'moduleName' => $moduleName,
+            'withLabel' => true,
             'id' => 'gov-id',
             'name' => 'gov-id',
-            'placeName' => $placeName, 
-            'placeNameSelector' => null, 
-            'internal' => true, 
+            'placeName' => $placeName,
+            'placeNameSelector' => null,
+            'internal' => true,
             'selectInitializer' => null, //we're within a modal: initialize elsewhere!
             'govId' => $govId]) ?>
     </div>
@@ -53,14 +53,14 @@ e(route('module', [
           processData: false,
           success: function () {
               $('#wt-ajax-modal-vesta').modal('hide'); //also hidden when reload is finished, but this is faster
-              
+
               //additionally scroll to top in order to show the flash message
               window.onbeforeunload = function () {
                 window.scrollTo(0, 0);
               };
               document.location.reload();
           },
-          
+
           //TODO: maybe not a good idea to use this for all kinds of errors?
           //we want to specifically handle only 409 'invalid gov id' here
           error: function (xhr) {

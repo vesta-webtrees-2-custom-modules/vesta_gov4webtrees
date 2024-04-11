@@ -3,12 +3,12 @@
 use Fisharebest\Webtrees\I18N;
 
   //a javascript block, within script tag
-  
+
   //ultimately inserted into ajax-modal-vesta (if used within modal)
   //or used directly, anyway:
   //
   //generalizes and replaces original script from ajax.phtml (modal) or as in e.g. trees-privacy.phtml (used directly):
-  
+
   /*
   // Activate autocomplete fields
   this.querySelectorAll('.tom-select').forEach(element => webtrees.initializeTomSelect(element));
@@ -21,19 +21,19 @@ use Fisharebest\Webtrees\I18N;
  * @returns {TomSelect}
  */
 webtrees.initializeTomSelectGov = function (element) {
-    
+
     if (element.tomselect) {
       return element.tomselect;
     }
 
     let options = {};
-    
+
     options = {
       <?php
         //MUST be set, otherwise we always end up in no_results
       ?>
       valueField: 'id',
-      
+
       plugins: ['dropdown_input','remove_button'],
       render: {
         item: (data, escape) => '<div>' + data.text + '</div>',
@@ -49,7 +49,7 @@ webtrees.initializeTomSelectGov = function (element) {
         return query.length >= 10;
       },
       load: function (query, callback) {
-        
+
         <?php
         //depending on whether 'pretty urls' are enabled,
         //the url may or may not already contain a query param
@@ -57,9 +57,9 @@ webtrees.initializeTomSelectGov = function (element) {
         ?>
         var url_ = new URL(element.dataset.url);
         url_.searchParams.set('query', query);
-        
+
         var url = url_.href;
-        
+
         fetch(url)
             .then(response => response.json())
             .then(json => {

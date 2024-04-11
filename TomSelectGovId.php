@@ -17,7 +17,7 @@ class TomSelectGovId implements RequestHandlerInterface
     public function __construct($module) {
         $this->module = $module;
     }
-    
+
     /**
      * @param ServerRequestInterface $request
      *
@@ -30,12 +30,12 @@ class TomSelectGovId implements RequestHandlerInterface
 
         //$at    = Validator::queryParams($request)->string('at');
         //$page  = Validator::queryParams($request)->integer('page') ?? 1;
-        
+
         $query = Validator::queryParams($request)->string('query');
-        
+
         $govId = $query;
-        
-        try {  
+
+        try {
             $ret = FunctionsGov::checkGovId($this->module, $govId);
 
             $results = ($ret !== null)?collect([[
@@ -49,7 +49,7 @@ class TomSelectGovId implements RequestHandlerInterface
                 'incomplete_results' => false,
                 'items' => $results,
             ]);
-            
+
         } catch (GOVServerUnavailableException $ex) {
             $this->module->flashGovServerUnavailable();
             return response([

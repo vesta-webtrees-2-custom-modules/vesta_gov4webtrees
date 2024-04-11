@@ -892,8 +892,8 @@ class nusoap_base
             $sec = time();
             $usec = 0;
         }
-        $dtx = new DateTime("@$sec"); 
-	return
+        $dtx = new DateTime("@$sec");
+    return
           date_format($dtx, 'Y-m-d H:i:s') . '.' . sprintf('%06d', $usec);
     }
 
@@ -1098,7 +1098,7 @@ class nusoap_fault extends nusoap_base
         foreach ($this->namespaces as $k => $v) {
             $ns_string .= "\n  xmlns:$k=\"$v\"";
         }
-  
+
       return '<?xml version="1.0" encoding="' . $this->soap_defencoding . '"?>' .
        '<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"' . $ns_string . ">\n" .
        '<SOAP-ENV:Body>' .
@@ -1767,7 +1767,7 @@ class nusoap_xmlschema extends nusoap_base
         foreach (array_diff($this->usedNamespaces, $this->enclosingNamespaces) as $nsp => $ns) {
             $el .= " xmlns:$nsp=\"$ns\"";
         }
-  
+
       return $el . ">\n" . $xml . "</$schemaPrefix:schema>\n";
     }
 
@@ -1954,16 +1954,16 @@ class nusoap_xmlschema extends nusoap_base
                 $buffer .= '<table>';
                 foreach ($typeDef['elements'] as $childDef) {
                     $buffer .= "
-					<tr><td align='right'>$childDef[name] (type: " . $this->getLocalPart($childDef['type']) . "):</td>
-					<td><input type='text' name='parameters[" . $name . "][$childDef[name]]'></td></tr>";
+                    <tr><td align='right'>$childDef[name] (type: " . $this->getLocalPart($childDef['type']) . "):</td>
+                    <td><input type='text' name='parameters[" . $name . "][$childDef[name]]'></td></tr>";
                 }
                 $buffer .= '</table>';
                 // if array
             } elseif ($typeDef['phpType'] == 'array') {
                 $buffer .= '<table>';
               $buffer .= str_repeat ("
-					<tr><td align='right'>array item (type: $typeDef[arrayType]):</td>
-					<td><input type='text' name='parameters[" . $name . "][]'></td></tr>", 3);
+                    <tr><td align='right'>array item (type: $typeDef[arrayType]):</td>
+                    <td><input type='text' name='parameters[" . $name . "][]'></td></tr>", 3);
                 $buffer .= '</table>';
                 // if scalar
             } else {
@@ -2139,7 +2139,7 @@ class soapval extends nusoap_base
      * @access private
      */
     var $attributes;
-    
+
     /** @var false|resource */
     var $fp;
 
@@ -2238,7 +2238,7 @@ class soap_transport_http extends nusoap_base
     // certpassword: SSL certificate password
     // verifypeer: default is 1
     // verifyhost: default is 1
-    
+
     /** @var false|resource */
     var $fp;
     var $errno;
@@ -2620,7 +2620,7 @@ class soap_transport_http extends nusoap_base
     function send($data, $timeout = 0, $response_timeout = 30, $cookies = null)
     {
         $this->debug('entered send() with data of length: ' . strlen($data));
-    
+
         $respdata = "";
         $this->tryagain = true;
         $tries = 0;
@@ -2710,7 +2710,7 @@ class soap_transport_http extends nusoap_base
                 //                            ) <">
                 // if qop is missing,
                 // request-digest  = <"> < KD ( H(A1), unq(nonce-value) ":" H(A2) ) > <">
-    
+
                 $nonce = $digestRequest['nonce'];
                 $cnonce = $nonce;
                 if ($digestRequest['qop'] != '') {
@@ -3415,8 +3415,8 @@ class soap_transport_http extends nusoap_base
      * @access    private
      */
     /*
-	 * TODO: allow a Set-Cookie string to be parsed into multiple cookies
-	 */
+     * TODO: allow a Set-Cookie string to be parsed into multiple cookies
+     */
     function parseCookie($cookie_str)
     {
         $cookie_str = str_replace('; ', ';', $cookie_str) . ';';
@@ -3462,7 +3462,7 @@ class soap_transport_http extends nusoap_base
         if ($sep_pos) {
             $name = substr($value_str, 0, $sep_pos);
             $value = substr($value_str, $sep_pos + 1);
-  
+
           return array('name' => $name,
                      'value' => $value,
                      'domain' => $domain,
@@ -3721,7 +3721,7 @@ class nusoap_server extends nusoap_base
      * @access public
      */
     var $debug_flag = false;
-    
+
     /** @var array */
     var $opData;
 
@@ -4461,7 +4461,7 @@ class nusoap_server extends nusoap_base
             $this->methodURI = $parser->root_struct_namespace;
             $this->methodname = $parser->root_struct_name;
             $this->debug('methodname: ' . $this->methodname . ' methodURI: ' . $this->methodURI);
-            
+
             // get/set custom response tag name
             $outputMessage = $this->wsdl->getOperationData($this->methodname)['output']['message'];
             $this->responseTagName = $outputMessage;
@@ -4778,7 +4778,7 @@ class wsdl extends nusoap_base
     var $password = '';                // Password for HTTP authentication
     var $authtype = '';                // Type of HTTP authentication
     var $certRequest = array();        // Certificate for HTTP SSL authentication
-    
+
     /** @var mixed */
     var $currentPortOperation;
     /** @var string */
@@ -5085,10 +5085,10 @@ class wsdl extends nusoap_base
             } else {
                 $attrs = array();
             }
-		// Set default prefix and namespace
-		// to prevent error Undefined variable $prefix and $namespace if (preg_match('/:/', $name)) return 0 or FALSE
-		$prefix = '';
-		$namespace = '';
+        // Set default prefix and namespace
+        // to prevent error Undefined variable $prefix and $namespace if (preg_match('/:/', $name)) return 0 or FALSE
+        $prefix = '';
+        $namespace = '';
             // get element prefix, namespace and name
             if (preg_match('/:/', $name)) {
                 // get ns prefix
@@ -5518,93 +5518,93 @@ class wsdl extends nusoap_base
         }
 
         $b = '
-		<html><head><title>NuSOAP: ' . $this->serviceName . '</title>
-		<style type="text/css">
-		    body    { font-family: arial; color: #000000; background-color: #ffffff; margin: 0px 0px 0px 0px; }
-		    p       { font-family: arial; color: #000000; margin-top: 0px; margin-bottom: 12px; }
-		    pre { background-color: silver; padding: 5px; font-family: Courier New; font-size: x-small; color: #000000;}
-		    ul      { margin-top: 10px; margin-left: 20px; }
-		    li      { list-style-type: none; margin-top: 10px; color: #000000; }
-		    .content{
-			margin-left: 0px; padding-bottom: 2em; }
-		    .nav {
-			padding-top: 10px; padding-bottom: 10px; padding-left: 15px; font-size: .70em;
-			margin-top: 10px; margin-left: 0px; color: #000000;
-			background-color: #ccccff; width: 20%; margin-left: 20px; margin-top: 20px; }
-		    .title {
-			font-family: arial; font-size: 26px; color: #ffffff;
-			background-color: #999999; width: 100%;
-			margin-left: 0px; margin-right: 0px;
-			padding-top: 10px; padding-bottom: 10px;}
-		    .hidden {
-			position: absolute; visibility: hidden; z-index: 200; left: 250px; top: 100px;
-			font-family: arial; overflow: hidden; width: 600;
-			padding: 20px; font-size: 10px; background-color: #999999;
-			layer-background-color:#FFFFFF; }
-		    a,a:active  { color: charcoal; font-weight: bold; }
-		    a:visited   { color: #666666; font-weight: bold; }
-		    a:hover     { color: cc3300; font-weight: bold; }
-		</style>
-		<script language="JavaScript" type="text/javascript">
-		<!--
-		// POP-UP CAPTIONS...
-		function lib_bwcheck(){ //Browsercheck (needed)
-		    this.ver=navigator.appVersion
-		    this.agent=navigator.userAgent
-		    this.dom=document.getElementById?1:0
-		    this.opera5=this.agent.indexOf("Opera 5")>-1
-		    this.ie5=(this.ver.indexOf("MSIE 5")>-1 && this.dom && !this.opera5)?1:0;
-		    this.ie6=(this.ver.indexOf("MSIE 6")>-1 && this.dom && !this.opera5)?1:0;
-		    this.ie4=(document.all && !this.dom && !this.opera5)?1:0;
-		    this.ie=this.ie4||this.ie5||this.ie6
-		    this.mac=this.agent.indexOf("Mac")>-1
-		    this.ns6=(this.dom && parseInt(this.ver) >= 5) ?1:0;
-		    this.ns4=(document.layers && !this.dom)?1:0;
-		    this.bw=(this.ie6 || this.ie5 || this.ie4 || this.ns4 || this.ns6 || this.opera5)
-		    return this
-		}
-		var bw = new lib_bwcheck()
-		//Makes crossbrowser object.
-		function makeObj(obj){
-		    this.evnt=bw.dom? document.getElementById(obj):bw.ie4?document.all[obj]:bw.ns4?document.layers[obj]:0;
-		    if(!this.evnt) return false
-		    this.css=bw.dom||bw.ie4?this.evnt.style:bw.ns4?this.evnt:0;
-		    this.wref=bw.dom||bw.ie4?this.evnt:bw.ns4?this.css.document:0;
-		    this.writeIt=b_writeIt;
-		    return this
-		}
-		// A unit of measure that will be added when setting the position of a layer.
-		//var px = bw.ns4||window.opera?"":"px";
-		function b_writeIt(text){
-		    if (bw.ns4){this.wref.write(text);this.wref.close()}
-		    else this.wref.innerHTML = text
-		}
-		//Shows the messages
-		var oDesc;
-		function popup(divid){
-		    if(oDesc = new makeObj(divid)){
-			oDesc.css.visibility = "visible"
-		    }
-		}
-		function popout(){ // Hides message
-		    if(oDesc) oDesc.css.visibility = "hidden"
-		}
-		//-->
-		</script>
-		</head>
-		<body>
-		<div class=content>
-			<br><br>
-			<div class=title>' . $this->serviceName . '</div>
-			<div class=nav>
-				<p>View the <a href="' . $PHP_SELF . '?wsdl">WSDL</a> for the service.
-				Click on an operation name to view it&apos;s details.</p>
-				<ul>';
+        <html><head><title>NuSOAP: ' . $this->serviceName . '</title>
+        <style type="text/css">
+            body    { font-family: arial; color: #000000; background-color: #ffffff; margin: 0px 0px 0px 0px; }
+            p       { font-family: arial; color: #000000; margin-top: 0px; margin-bottom: 12px; }
+            pre { background-color: silver; padding: 5px; font-family: Courier New; font-size: x-small; color: #000000;}
+            ul      { margin-top: 10px; margin-left: 20px; }
+            li      { list-style-type: none; margin-top: 10px; color: #000000; }
+            .content{
+            margin-left: 0px; padding-bottom: 2em; }
+            .nav {
+            padding-top: 10px; padding-bottom: 10px; padding-left: 15px; font-size: .70em;
+            margin-top: 10px; margin-left: 0px; color: #000000;
+            background-color: #ccccff; width: 20%; margin-left: 20px; margin-top: 20px; }
+            .title {
+            font-family: arial; font-size: 26px; color: #ffffff;
+            background-color: #999999; width: 100%;
+            margin-left: 0px; margin-right: 0px;
+            padding-top: 10px; padding-bottom: 10px;}
+            .hidden {
+            position: absolute; visibility: hidden; z-index: 200; left: 250px; top: 100px;
+            font-family: arial; overflow: hidden; width: 600;
+            padding: 20px; font-size: 10px; background-color: #999999;
+            layer-background-color:#FFFFFF; }
+            a,a:active  { color: charcoal; font-weight: bold; }
+            a:visited   { color: #666666; font-weight: bold; }
+            a:hover     { color: cc3300; font-weight: bold; }
+        </style>
+        <script language="JavaScript" type="text/javascript">
+        <!--
+        // POP-UP CAPTIONS...
+        function lib_bwcheck(){ //Browsercheck (needed)
+            this.ver=navigator.appVersion
+            this.agent=navigator.userAgent
+            this.dom=document.getElementById?1:0
+            this.opera5=this.agent.indexOf("Opera 5")>-1
+            this.ie5=(this.ver.indexOf("MSIE 5")>-1 && this.dom && !this.opera5)?1:0;
+            this.ie6=(this.ver.indexOf("MSIE 6")>-1 && this.dom && !this.opera5)?1:0;
+            this.ie4=(document.all && !this.dom && !this.opera5)?1:0;
+            this.ie=this.ie4||this.ie5||this.ie6
+            this.mac=this.agent.indexOf("Mac")>-1
+            this.ns6=(this.dom && parseInt(this.ver) >= 5) ?1:0;
+            this.ns4=(document.layers && !this.dom)?1:0;
+            this.bw=(this.ie6 || this.ie5 || this.ie4 || this.ns4 || this.ns6 || this.opera5)
+            return this
+        }
+        var bw = new lib_bwcheck()
+        //Makes crossbrowser object.
+        function makeObj(obj){
+            this.evnt=bw.dom? document.getElementById(obj):bw.ie4?document.all[obj]:bw.ns4?document.layers[obj]:0;
+            if(!this.evnt) return false
+            this.css=bw.dom||bw.ie4?this.evnt.style:bw.ns4?this.evnt:0;
+            this.wref=bw.dom||bw.ie4?this.evnt:bw.ns4?this.css.document:0;
+            this.writeIt=b_writeIt;
+            return this
+        }
+        // A unit of measure that will be added when setting the position of a layer.
+        //var px = bw.ns4||window.opera?"":"px";
+        function b_writeIt(text){
+            if (bw.ns4){this.wref.write(text);this.wref.close()}
+            else this.wref.innerHTML = text
+        }
+        //Shows the messages
+        var oDesc;
+        function popup(divid){
+            if(oDesc = new makeObj(divid)){
+            oDesc.css.visibility = "visible"
+            }
+        }
+        function popout(){ // Hides message
+            if(oDesc) oDesc.css.visibility = "hidden"
+        }
+        //-->
+        </script>
+        </head>
+        <body>
+        <div class=content>
+            <br><br>
+            <div class=title>' . $this->serviceName . '</div>
+            <div class=nav>
+                <p>View the <a href="' . $PHP_SELF . '?wsdl">WSDL</a> for the service.
+                Click on an operation name to view it&apos;s details.</p>
+                <ul>';
         foreach ($this->getOperations() as $op => $data) {
             $b .= "<li><a href='#' onclick=\"popout();popup('$op')\">$op</a></li>";
             // create hidden div
             $b .= "<div id='$op' class='hidden'>
-				    <a href='#' onclick='popout()'><font color='#ffffff'>Close</font></a><br><br>";
+                    <a href='#' onclick='popout()'><font color='#ffffff'>Close</font></a><br><br>";
             foreach ($data as $donnie => $marie) { // loop through opdata
                 if ($donnie == 'input' || $donnie == 'output') { // show input/output data
                     $b .= "<font color='white'>" . ucfirst($donnie) . ':</font><br>';
@@ -5627,9 +5627,9 @@ class wsdl extends nusoap_base
             $b .= '</div>';
         }
         $b .= '
-				<ul>
-			</div>
-		</div></body></html>';
+                <ul>
+            </div>
+        </div></body></html>';
         return $b;
     }
 
@@ -6840,9 +6840,9 @@ class nusoap_parser extends nusoap_base
                 $substrXml = $xml;
                 foreach($this->attachments as $key => $attachment) {
                     $startPos = max(
-                        stripos($substrXml, $attachment['boundaryStr']), 
-                        (array_key_exists('Content-Type', $attachment) ? stripos($substrXml, $attachment['Content-Type']) : 0), 
-                        (array_key_exists('Content-Id', $attachment) ? stripos($substrXml, $attachment['Content-Id']) : 0), 
+                        stripos($substrXml, $attachment['boundaryStr']),
+                        (array_key_exists('Content-Type', $attachment) ? stripos($substrXml, $attachment['Content-Type']) : 0),
+                        (array_key_exists('Content-Id', $attachment) ? stripos($substrXml, $attachment['Content-Id']) : 0),
                         (array_key_exists('Content-Transfer-Encoding', $attachment) ? stripos($substrXml, $attachment['Content-Transfer-Encoding']) : 0)
                     );
                     $substrXml = substr($substrXml, $startPos);
@@ -6870,7 +6870,7 @@ class nusoap_parser extends nusoap_base
                     xml_set_object($this->parser, $this);
                     xml_set_element_handler($this->parser, 'start_element', 'end_element');
                     xml_set_character_data_handler($this->parser, 'character_data');
-                    
+
                     if(!empty($attachment['content'])) {
                         $content = $attachment['content'];
                         foreach(preg_split("/((\r?\n)|(\r\n?))/", $content) as $line){
@@ -7027,13 +7027,13 @@ class nusoap_parser extends nusoap_base
             } elseif ($key_localpart == 'arrayType') {
                 $this->message[$pos]['type'] = 'array';
                 /* do arrayType ereg here
-				[1]    arrayTypeValue    ::=    atype asize
-				[2]    atype    ::=    QName rank*
-				[3]    rank    ::=    '[' (',')* ']'
-				[4]    asize    ::=    '[' length~ ']'
-				[5]    length    ::=    nextDimension* Digit+
-				[6]    nextDimension    ::=    Digit+ ','
-				*/
+                [1]    arrayTypeValue    ::=    atype asize
+                [2]    atype    ::=    QName rank*
+                [3]    rank    ::=    '[' (',')* ']'
+                [4]    asize    ::=    '[' length~ ']'
+                [5]    length    ::=    nextDimension* Digit+
+                [6]    nextDimension    ::=    Digit+ ','
+                */
                 $expr = '/([A-Za-z0-9_]+):([A-Za-z]+[A-Za-z0-9_]+)\[([0-9]+),?([0-9]*)\]/';
                 if (preg_match($expr, $value, $regs)) {
                     $this->message[$pos]['typePrefix'] = $regs[1];
@@ -7158,15 +7158,15 @@ class nusoap_parser extends nusoap_base
                 }
 
                 /* add value to parent's result, if parent is struct/array
-				$parent = $this->message[$pos]['parent'];
-				if($this->message[$parent]['type'] != 'map'){
-					if(strtolower($this->message[$parent]['type']) == 'array'){
-						$this->message[$parent]['result'][] = $this->message[$pos]['result'];
-					} else {
-						$this->message[$parent]['result'][$this->message[$pos]['name']] = $this->message[$pos]['result'];
-					}
-				}
-				*/
+                $parent = $this->message[$pos]['parent'];
+                if($this->message[$parent]['type'] != 'map'){
+                    if(strtolower($this->message[$parent]['type']) == 'array'){
+                        $this->message[$parent]['result'][] = $this->message[$pos]['result'];
+                    } else {
+                        $this->message[$parent]['result'][$this->message[$pos]['name']] = $this->message[$pos]['result'];
+                    }
+                }
+                */
             }
         }
 
@@ -7427,7 +7427,7 @@ class nusoap_parser extends nusoap_base
             $ret = $this->message[$pos]['cdata'];
             $this->debug("in buildVal, return: $ret");
         }
-    
+
         return $ret;
     }
 }
@@ -7501,8 +7501,8 @@ class nusoap_client extends nusoap_base
     var $use_curl = false;            // whether to always try to use cURL
 
     /*
-	 * fault related variables
-	 */
+     * fault related variables
+     */
     /**
      * @var      bool
      * @access   public
@@ -7523,7 +7523,7 @@ class nusoap_client extends nusoap_base
      * @access   public
      */
     var $faultdetail;
-    
+
     /** @var wsdl|null */
     var $wsdl;
     /** @var mixed */
@@ -7722,19 +7722,19 @@ class nusoap_client extends nusoap_base
         }
 
         // wrap document/literal wrapped calls with operation element
-		if ($usewrapped) {
-			// (This code block was based on http://www.ibm.com/developerworks/webservices/library/ws-whichwsdl/
-			// and tailored to the needs of one specific SOAP server, where no nsPrefix was seen...
-			$this->debug("wrapping document request with literal method element");
+        if ($usewrapped) {
+            // (This code block was based on http://www.ibm.com/developerworks/webservices/library/ws-whichwsdl/
+            // and tailored to the needs of one specific SOAP server, where no nsPrefix was seen...
+            $this->debug("wrapping document request with literal method element");
 
-			if ($namespace) {
-				$payload = "<$operation xmlns=\"$namespace\">" .
-					$payload .
+            if ($namespace) {
+                $payload = "<$operation xmlns=\"$namespace\">" .
+                    $payload .
                     "</$operation>";
-			} else {
-				$payload = "<$operation>" . $payload . "</$operation>";
-			}
-		}
+            } else {
+                $payload = "<$operation>" . $payload . "</$operation>";
+            }
+        }
 
         // wrap RPC calls with method element
         if ($style == 'rpc') {
@@ -8257,7 +8257,7 @@ class nusoap_client extends nusoap_base
         if ($this->endpointType != 'wsdl') {
             $evalStr = 'A proxy can only be created for a WSDL client';
             $this->setError($evalStr);
-  
+
           return "echo \"$evalStr\";";
         }
         if (is_null($this->wsdl)) {
@@ -8287,16 +8287,16 @@ class nusoap_client extends nusoap_base
                 }
                 $opData['namespace'] = !isset($opData['namespace']) ? 'http://testuri.com' : $opData['namespace'];
                 $evalStr .= "// $paramCommentStr
-	function " . str_replace('.', '__', $operation) . "($paramStr) {
-		\$params = array($paramArrayStr);
-		return \$this->call('$operation', \$params, '" . $opData['namespace'] . "', '" . (isset($opData['soapAction']) ? $opData['soapAction'] : '') . "');
-	}
-	";
+    function " . str_replace('.', '__', $operation) . "($paramStr) {
+        \$params = array($paramArrayStr);
+        return \$this->call('$operation', \$params, '" . $opData['namespace'] . "', '" . (isset($opData['soapAction']) ? $opData['soapAction'] : '') . "');
+    }
+    ";
                 unset($paramStr);
                 unset($paramCommentStr);
             }
         }
-  
+
       return 'class nusoap_proxy_' . $r . ' extends nusoap_client {
 ' . $evalStr . '
 }';
@@ -8364,7 +8364,7 @@ class nusoap_client extends nusoap_base
     }
 
     /*
-	* whether or not parser should decode utf8 element content
+    * whether or not parser should decode utf8 element content
     *
     * @return   always returns true
     * @access   public

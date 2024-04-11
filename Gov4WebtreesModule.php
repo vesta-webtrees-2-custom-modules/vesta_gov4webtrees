@@ -73,13 +73,13 @@ use function route;
 use function view;
 
 class Gov4WebtreesModule extends AbstractModule implements
-    ModuleCustomInterface, 
-    ModuleMetaInterface, 
-    ModuleConfigInterface, 
-    ModuleExtGlobalInterface, 
-    IndividualFactsTabExtenderInterface, 
-    FunctionsPlaceInterface, 
-    PrintFunctionsPlaceInterface, 
+    ModuleCustomInterface,
+    ModuleMetaInterface,
+    ModuleConfigInterface,
+    ModuleExtGlobalInterface,
+    IndividualFactsTabExtenderInterface,
+    FunctionsPlaceInterface,
+    PrintFunctionsPlaceInterface,
     GovIdEditControlsInterface {
 
     //cannot use original AbstractModule because we override setPreference, setName
@@ -110,7 +110,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
 
     protected function onBoot(): void {
-        //cannot do this in constructor: module name not set yet!    
+        //cannot do this in constructor: module name not set yet!
         //migrate (we need the module name here to store the setting)
         $this->updateSchema('\Cissee\Webtrees\Module\Gov4Webtrees\Schema', 'SCHEMA_VERSION', 3);
 
@@ -134,7 +134,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $router->post(GovDataDelete::class, '/admin/gov-data-delete/{type}/{key}', GovDataDelete::class)
                 ->extras(['middleware' => [AuthAdministrator::class]]);
-        
+
         //replace GovIdentifier (change its edit control)
         $ef = Registry::elementFactory();
 
@@ -146,7 +146,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             //'INDI:*:PLAC:_GOV' => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
 
             '_LOC:_GOV'        => new GovIdentifierExt(MoreI18N::xlate('GOV identifier')),
-            
+
             //(see also SharedPlaces, and webtrees core)
             '_LOC:TYPE:_GOVTYPE' => new GovIdTypeExt($this, I18N::translate('GOV id for type of location')),
         ]);
@@ -158,7 +158,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     public function messageGovServerUnavailable(): string {
         return I18N::translate("The GOV server seems to be temporarily unavailable.");
     }
-    
+
     public function flashGovServerUnavailable() {
         //ongoing - error handling in case GOV server is unavailable
         //problematic: flash message aren't thead-safe, see webtrees issue #3138
@@ -349,7 +349,7 @@ class Gov4WebtreesModule extends AbstractModule implements
         if (!str_starts_with(Webtrees::VERSION, '2.1')) {
             throw new Exception;
         }
-        
+
         $requestHandler = new TomSelectGovId($this);
         return $requestHandler->handle($request);
     }
@@ -417,7 +417,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             $govReference = new GovReference($fact->value(), new Trace(""));
 
             $viewName = $this->name() . '::edit/icon-fact-reload-gov';
-        
+
             //allow to reload the gov hierarchy
             $html = view($viewName, [
                 'moduleName' => $this->name(),
@@ -442,11 +442,11 @@ class Gov4WebtreesModule extends AbstractModule implements
                 !boolval($this->getPreference('VISITORS_MAY_EDIT', '0'));
 
         if ($readonly) {
-            
+
             //cannot use this - skips levels 3 tags
             //$placerec = '2 PLAC ' . $event->attribute('PLAC');
             $placerec = ReportParserGenerate::getSubRecord(2, '2 PLAC', $fact->gedcom());
-                        
+
             if (empty($placerec)) {
                 //nothing to offer here
                 return GenericViewElement::createEmpty();
@@ -461,7 +461,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             }
 
             $viewName = $this->name() . '::edit/icon-fact-reload-gov';
-            
+
             //allow to reload the gov hierarchy
             $html = view($viewName, [
                 'moduleName' => $this->name(),
@@ -495,52 +495,52 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         return GenericViewElement::create($html);
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
 
     public function hFactsTabGetOutputBeforeTab(
         GedcomRecord $record): GenericViewElement {
-        
+
         //loadded uncondditionally anyway!
         //$pre = '<link href="' . $this->assetUrl('css/style.css') . '" type="text/css" rel="stylesheet" />';
-	//return new GenericViewElement($pre, '');
-        
+    //return new GenericViewElement($pre, '');
+
         return GenericViewElement::createEmpty();
     }
-  
+
     public function hFactsTabGetStyleadds(
         GedcomRecord $record,
         Fact $fact): array {
-        
+
         $styleadds = [];
-	if ($fact->id() === 'gov-history') {
+    if ($fact->id() === 'gov-history') {
             $styleadds[] = 'wt-gov-history-fact-pfh collapse'; //see style.css, and hFactsTabGetOutputInDBox
-        }	
-	return $styleadds;
+        }
+    return $styleadds;
     }
 
     public function hFactsTabGetOutputInDBox(
         GedcomRecord $record): GenericViewElement {
-        
+
         if (sizeof($this->hFactsTabGetAdditionalFacts($record)) === 0) {
             return GenericViewElement::createEmpty();
         }
-        
-	return $this->getOutputInDescriptionBox(
-            true, 
-            'show-gov-history-factstab', 
-            'wt-gov-history-fact-pfh', 
+
+    return $this->getOutputInDescriptionBox(
+            true,
+            'show-gov-history-factstab',
+            'wt-gov-history-fact-pfh',
             I18N::translate('GOV Hierarchies'));
     }
-  
+
     protected function getOutputInDescriptionBox(
-        bool $toggleable, 
-        string $id, 
-        string $targetClass,           
+        bool $toggleable,
+        string $id,
+        string $targetClass,
         string $label) {
-      
+
         ob_start();
         if ($toggleable) {
           ?>
@@ -553,27 +553,27 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         return new GenericViewElement(ob_get_clean(), '');
     }
-  
+
     public function hFactsTabGetOutputAfterTab(
         GedcomRecord $record,
         bool $ajax): GenericViewElement {
-        
+
         if (!$ajax) {
             //nothing to do - in fact must not initialize twice!
             return GenericViewElement::createEmpty();
         }
-        
+
         if (sizeof($this->hFactsTabGetAdditionalFacts($record)) === 0) {
             return GenericViewElement::createEmpty();
         }
-        
+
         return $this->getOutputAfterTab(true, 'show-gov-history-factstab');
     }
-  
+
     protected function getOutputAfterTab(
-        bool $toggleable, 
+        bool $toggleable,
         string $toggle): GenericViewElement {
-        
+
         $post = "";
 
         if ($toggleable) {
@@ -592,10 +592,10 @@ class Gov4WebtreesModule extends AbstractModule implements
         <?php
         return ob_get_clean();
     }
-    
+
     public function hFactsTabGetAdditionalFacts(
         GedcomRecord $record) {
-        
+
         $cacheKey = Gov4WebtreesModule::class . '_hFactsTabGetAdditionalFacts_' . $record->tree()->id() . $record->xref();
         $self = $this;
         $ret = Registry::cache()->array()->remember($cacheKey, static function () use ($self, $record): array {
@@ -605,29 +605,29 @@ class Gov4WebtreesModule extends AbstractModule implements
 
             return $self->govHierarchiesAsFacts($record);
         });
-        
+
         return $ret;
     }
-    
+
     protected function govHierarchiesAsFacts(
         Location $location) {
-      
+
         $loc = $location->xref();
         if ($loc === '') {
             $locReference = null;
-            
+
             //dummy record, should at least have PLAC
             //
             $placerec = ReportParserGenerate::getSubRecord(1, '1 PLAC', $location->gedcom());
-            
+
             //strip the '1 PLAC '
             $placerec = substr($placerec, 7);
-            
+
             $ps = PlaceStructure::fromName($placerec, $location->tree());
             if ($ps === null) {
                 return [];
             }
-            
+
             $gov = FunctionsPlaceUtils::plac2gov($this, $ps, false);
             $plac = $placerec;
         } else {
@@ -640,30 +640,30 @@ class Gov4WebtreesModule extends AbstractModule implements
                 $plac = '?'; //unexpected!
             }
         }
-        
+
         if ($gov === null) {
             return [];
         }
-        
+
         return $this->govHierarchiesAsFactsViaGov(
-            $gov, 
+            $gov,
             $location,
-            $plac, 
+            $plac,
             $locReference);
     }
-    
+
     public static function customTypeEven(): void {
         //this is just to get this string into *.po,
         //actual translation is done via Fact::label
         /* I18N: custom type for virtual EVEN */ I18N::translate("GOV Hierarchy");
     }
-    
+
     protected function govHierarchiesAsFactsViaGov(
         GovReference $gov,
         GedcomRecord $record,
         string $placeName,
-        ?LocReference $locReference) {        
-        
+        ?LocReference $locReference) {
+
         /*
         error_log("--------------------------------------------------------------------------------------");
         error_log("--------------------------------------------------------------------------------------");
@@ -676,43 +676,43 @@ class Gov4WebtreesModule extends AbstractModule implements
             $hierarchies = [];
             $this->flashGovServerUnavailable();
         }
-        
+
         $facts = [];
-        
+
         /** @var GovHierarchy $hierarchy */
         foreach ($hierarchies as $hierarchy) {
             $gedcom = "1 FACT";
             $gedcom .= "\n2 TYPE GOV Hierarchy";
-            
-            $interval = $hierarchy->interval()->asGedcomDateInterval();            
+
+            $interval = $hierarchy->interval()->asGedcomDateInterval();
             $placeNameAt = $placeName;
-            
+
             if ($locReference === null) {
                 //keep fallback $placeNameAt
             } else {
-                //use interval-based placename here (if based on actual _LOC record)            
+                //use interval-based placename here (if based on actual _LOC record)
                 $placeAt = FunctionsPlaceUtils::loc2placAt($this, $locReference, $interval);
                 if ($placeAt !== null) {
                     $placeNameAt = $placeAt->getGedcomName();
                 }
             }
-            
+
             $gedcom .= "\n2 PLAC " . $placeNameAt;
-            
+
             //we know the _GOV already, more efficient this way than to re-resolve it
             //(resolving via plac2gov anyway isn't certain to succeed if _GOV originates from _LOC)
             $gedcom .= "\n3 _GOV " . $gov->getId();
-            
+
             $gedcom .= $interval->toGedcomString(2, true);
-            
+
             //id must match styleadds key in hFactsTabGetStyleadds
             $fact = new VirtualFact($gedcom, $record, 'gov-history');
             $facts[] = $fact;
         }
-        
+
         return $facts;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
@@ -723,7 +723,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
         $placeId = $place->getPlace()->id();
 
-        //this occurs in case of new place names (respective change not approved yet) 
+        //this occurs in case of new place names (respective change not approved yet)
         if (!$placeId) {
             return null;
         }
@@ -737,7 +737,7 @@ class Gov4WebtreesModule extends AbstractModule implements
 
     //see Date.php
     //we're not supposed to use that in webtrees, nevermind
-    //we don't necessarily want the median year, so we have to use our own function 
+    //we don't necessarily want the median year, so we have to use our own function
     public static function gregorianYear($julianDay) {
         $gregorian_calendar = new GregorianCalendar;
         list($year) = $gregorian_calendar->jdToYmd($julianDay);
@@ -749,7 +749,7 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
 
     public function plac2gov(PlaceStructure $ps): ?GovReference {
-        //1. _GOV set directly?    
+        //1. _GOV set directly?
         $govId = $ps->getGov();
         if ($govId !== null) {
             $trace = new Trace('GOV-Id via Gov4Webtrees module (_GOV tag)');
@@ -790,9 +790,9 @@ class Gov4WebtreesModule extends AbstractModule implements
     }
 
     public function gov2html(
-        GovReference $govReference, 
+        GovReference $govReference,
         Tree $tree): ?GenericViewElement {
-        
+
         $locale = I18N::locale();
 
         $compactDisplay = boolval($this->getPreference('COMPACT_DISPLAY', '1'));
@@ -824,13 +824,13 @@ class Gov4WebtreesModule extends AbstractModule implements
                     $govReference,
                     $tree,
                     $tooltip);
-            
+
             return $str2;
-            
-        } catch (GOVServerUnavailableException $ex) {            
+
+        } catch (GOVServerUnavailableException $ex) {
             $this->flashGovServerUnavailable();
             return null;
-        }    
+        }
     }
 
     public function govPgov(
@@ -892,7 +892,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                 //if ($showOrganizational) {
                 //allways fallback, but perhaps don't show
                 $typesFallback2 = FunctionsGov::orgTypes();
-                //}        
+                //}
             } else if ("RELI" === $typeOfLocation) {
                 $types = FunctionsGov::religiousTypes();
             }
@@ -983,7 +983,7 @@ class Gov4WebtreesModule extends AbstractModule implements
             return null;
         }
 
-        //set the _GOV tag to make further operations on this object more efficient 
+        //set the _GOV tag to make further operations on this object more efficient
         //(we don't have to look it up again)
         return PlaceStructure::fromNameAndGov($valid_place_id, $gov->getId(), $tree);
     }
@@ -1066,7 +1066,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                     $tree);
 
             return $gve;
-        } catch (GOVServerUnavailableException $ex) {            
+        } catch (GOVServerUnavailableException $ex) {
             $this->flashGovServerUnavailable();
             return null;
         }
@@ -1083,13 +1083,13 @@ class Gov4WebtreesModule extends AbstractModule implements
             GovReference $govReference,
             Tree $tree,
             ?string $tooltip): GenericViewElement {
-        
+
         $hierarchies = GovHierarchyUtils::hierarchy(
-                $this, 
+                $this,
                 $tree,
                 $govReference,
                 (int)$julianDay);
-        
+
         return GovHierarchyUtils::getHierarchyGVE(
                         $compactDisplay,
                         $julianDayText,
@@ -1124,9 +1124,9 @@ class Gov4WebtreesModule extends AbstractModule implements
                     $govReference,
                     $tree);
             */
-            
+
             $hierarchies1m = GovHierarchyUtils::hierarchy(
-                $this, 
+                $this,
                 $tree,
                 $govReference,
                 (int)$julianDay1);
@@ -1144,39 +1144,39 @@ class Gov4WebtreesModule extends AbstractModule implements
                     $govReference,
                     $tree);
             */
-            
+
             $hierarchies2m = GovHierarchyUtils::hierarchy(
-                $this, 
+                $this,
                 $tree,
                 $govReference,
                 (int)$julianDay2);
         }
 
         if (
-            ($julianDay1 !== null) && 
-            ($julianDay2 !== null) && 
-            ($hierarchies1m->govId() === $hierarchies2m->govId()) && 
-            //($hierarchies1m->adjustedLanguages() === $hierarchies2m->adjustedLanguages()) && 
-            ($hierarchies1m->labelsHtml() === $hierarchies2m->labelsHtml()) && 
-            ($hierarchies1m->typesHtml() === $hierarchies2m->typesHtml()) && 
+            ($julianDay1 !== null) &&
+            ($julianDay2 !== null) &&
+            ($hierarchies1m->govId() === $hierarchies2m->govId()) &&
+            //($hierarchies1m->adjustedLanguages() === $hierarchies2m->adjustedLanguages()) &&
+            ($hierarchies1m->labelsHtml() === $hierarchies2m->labelsHtml()) &&
+            ($hierarchies1m->typesHtml() === $hierarchies2m->typesHtml()) &&
             ($hierarchies1m->hasLocalModifications() === $hierarchies2m->hasLocalModifications())) {
-            
+
             /*
             $gveLegacy = $this->getHierarchyGVE(
                             $compactDisplay,
                             $julianDayTextCombined,
                             $tooltip,
                             $hierarchies1);
-            
+
             return $gveLegacy;
             */
-            
+
             $gveModernized = GovHierarchyUtils::getHierarchyGVE(
                             $compactDisplay,
                             $julianDayTextCombined,
                             $tooltip,
                             $hierarchies1m);
-            
+
             return $gveModernized;
         }
 
@@ -1188,13 +1188,13 @@ class Gov4WebtreesModule extends AbstractModule implements
                     $tooltip,
                     $hierarchies1);
             */
-            
+
             $gve1modernized = GovHierarchyUtils::getHierarchyGVE(
                     $compactDisplay,
                     $julianDayText1,
                     $tooltip,
                     $hierarchies1m);
-            
+
         } else {
             //$gve1legacy = GenericViewElement::createEmpty();
             $gve1modernized = GenericViewElement::createEmpty();
@@ -1208,7 +1208,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                     $tooltip,
                     $hierarchies2);
             */
-            
+
             $gve2modernized = GovHierarchyUtils::getHierarchyGVE(
                     $compactDisplay,
                     $julianDayText2,
@@ -1282,7 +1282,7 @@ class Gov4WebtreesModule extends AbstractModule implements
                     </ul>
                 </div>
             </div>
-        </div>		
+        </div>
 
         <?php
     }

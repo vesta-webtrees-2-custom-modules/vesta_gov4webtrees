@@ -6,5 +6,5 @@ use Exception;
 
 class GOVServerUnavailableException extends Exception {
 
-  
+
 }

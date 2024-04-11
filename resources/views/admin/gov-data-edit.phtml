@@ -34,7 +34,7 @@ use Fisharebest\Webtrees\View;
                 ?>
                 <div class="input-group">
                     <input type="text" dir="ltr" id="prop" class="editable form-control" name="prop" value="<?= $prop->getProp() ?>">
-                </div>            
+                </div>
                 <?php
             } else if ($type === 'type') {
                 $gve = $module->govTypeIdEditControl($prop->getProp(), 'prop', 'prop');
@@ -117,4 +117,3 @@ use Fisharebest\Webtrees\View;
     </div>
     <?= csrf_field() ?>
 </form>
-

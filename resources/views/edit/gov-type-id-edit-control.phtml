@@ -1,7 +1,7 @@
 <?php
 
 $value = $govTypeId;
-        
+
 //cf FunctionsEdit:
 //-- Build the selector for the Media 'TYPE' Fact
 
@@ -12,7 +12,7 @@ $value = $govTypeId;
       $html .= '<option selected value="' . e($value) . '" >' . e($value) . '</option>';
   }
   */
-  //['' => ''] + 
+  //['' => ''] +
   foreach ($govTypeIdsByTypeGroup as $typeGroupName => $govTypeIds) {
     $html .= '<optgroup label="' . $typeGroupName . '">';
     foreach ($govTypeIds as $typeName => $typeValue) {
@@ -23,8 +23,8 @@ $value = $govTypeId;
       $html .= '>' . $typeValue . '</option>';
     }
     $html .= '</optgroup>';
-  }  
-  
+  }
+
   $html .= '</select>';
 
   echo $html;
