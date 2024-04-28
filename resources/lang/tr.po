@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2024-03-13 19:51+0100\n"
-"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"PO-Revision-Date: 2024-04-28 19:07+0000\n"
 "Last-Translator: Semih <semihbrn10@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -197,12 +197,12 @@ msgstr "GOV veri"
 
 #: resources/views/admin/gov-data-list.phtml:33
 msgid "GOV data for"
-msgstr ""
+msgstr "GOV verileri için"
 
 #: Http/RequestHandlers/GovData.php:67 Http/RequestHandlers/GovData.php:68
 #, php-format
 msgid "GOV data for %1$s"
-msgstr ""
+msgstr "%1$s için GOV verileri"
 
 #: resources/views/edit/gov-id-edit-control.phtml:16
 msgid "GOV id"
@@ -220,7 +220,7 @@ msgstr "%1$s için GOV kimliği %2$s olarak ayarlandı."
 
 #: Gov4WebtreesModule.php:151
 msgid "GOV id for type of location"
-msgstr ""
+msgstr "Konum türü için GOV kimliği"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:40
@@ -232,6 +232,8 @@ msgstr "GOV kimlikleri varsayılan olarak GEDCOM verilerinin dışında depolan�
 #, php-format
 msgid "GOV objects belong to different type groups. The GOV place hierarchy is based on objects of type group '%1$s'."
 msgstr ""
+"GOV nesneleri farklı tür gruplarına aittir. GOV yer hiyerarşisi '%1$s' tür "
+"grubundaki nesneleri temel alır."
 
 #: Gov4WebtreesModule.php:379
 #, php-format
@@ -246,10 +248,12 @@ msgstr "GOV yer hiyerarşisi GOV sunucusundan yeniden yüklendi."
 #: Gov4WebtreesModuleTrait.php:53
 msgid "Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group."
 msgstr ""
+"Bir nesneyi gizleyin ve ilgisiz bir tür grubuna taşıyarak yer hiyerarşisini "
+"o noktada durdurun."
 
 #: resources/views/admin/gov-data-list.phtml:27
 msgid "Hide data without local modifications"
-msgstr ""
+msgstr "Yerel değişiklikler olmadan veri gizleme"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:211
@@ -275,16 +279,23 @@ msgstr "İşaretlenmemişse, Almanca dışında herhangi bir dili tercih edin; "
 #: Gov4WebtreesModuleTrait.php:143 Gov4WebtreesModuleTrait.php:151
 msgid "In any case, they are still used as fallbacks to determine further higher-level objects."
 msgstr ""
+"Her durumda, daha üst düzey nesneleri belirlemek için hala yedek olarak "
+"kullanılırlar."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:52
 msgid "In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences)."
 msgstr ""
+"Genel olarak, bir nesneyi gizli bir tür grubuna taşıyarak genel yer "
+"hiyerarşisini korurken gizleyin (bkz. tercihler)."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:51
 msgid "In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire)."
 msgstr ""
+"Özellikle GOV sunucusunda yapılan bazı tartışmalı değişiklikleri (Kutsal "
+"Roma İmparatorluğu'nun nesne türü gibi) yerel olarak geri almak "
+"isteyebilirsiniz."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
@@ -318,7 +329,7 @@ msgstr "Sonraki güncelleştirmeler tarafından üzerine yazılmaz."
 
 #: FunctionsGov.php:712
 msgid "Judicial"
-msgstr ""
+msgstr "Adli"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:74
@@ -328,7 +339,7 @@ msgstr "Yerel GOV verileri"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:80
 msgid "Local modifications are preserved."
-msgstr ""
+msgstr "Yerel değişiklikler korunur."
 
 #: resources/views/edit/gov-id-edit-control.phtml:27
 #: resources/views/edit/gov-id-edit-control.phtml:29
@@ -353,11 +364,15 @@ msgstr "Not: Nihayetinde muhtemelen ilgili GOV verilerinin kendisinin düzeltilm
 #: Gov4WebtreesModuleTrait.php:140
 msgid "Objects of this type strictly do not belong to the administrative hierarchy in the sense that they are no territorial entities (Gebietskörperschaften)."
 msgstr ""
+"Bu tür nesneler, bölgesel varlıklar (Gebietskörperschaften) olmamaları "
+"anlamında kesinlikle idari hiyerarşiye ait değildir."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:50
 msgid "Obvious mistakes should be corrected on the GOV server itself, but there may be cases where this is not easily possible."
 msgstr ""
+"Bariz hatalar GOV sunucusunun kendisinde düzeltilmelidir, ancak bunun "
+"kolayca mümkün olmadığı durumlar olabilir."
 
 #. I18N: Module Configuration
 #. I18N: Module Configuration
@@ -366,11 +381,11 @@ msgstr ""
 #: FunctionsGov.php:703 Gov4WebtreesModuleTrait.php:139
 #: Gov4WebtreesModuleTrait.php:160
 msgid "Organizational"
-msgstr ""
+msgstr "Organizasyonel"
 
 #: FunctionsGov.php:718
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:179
@@ -400,7 +415,7 @@ msgstr "Yer hiyerarşileri tarihsel olarak, yani ilgili olayın tarihine göre g
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
 msgid "Place hierarchy"
-msgstr ""
+msgstr "Yer hiyerarşisi"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:206
@@ -414,26 +429,26 @@ msgstr "Metin ve bağlantılar yerleştirin"
 
 #: resources/views/script/tom-select-initializer-gov.phtml:41
 msgid "Please enter at least 10 characters."
-msgstr ""
+msgstr "Lütfen en az 10 karakter giriniz."
 
 #: FunctionsGov.php:709
 msgid "Religious"
-msgstr ""
+msgstr "Dini"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:83
 msgid "Remove this GOV Name?"
-msgstr ""
+msgstr "Bu GOV Adını kaldıralım mı?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:154
 msgid "Remove this GOV Object Type?"
-msgstr ""
+msgstr "Bu GOV Nesne Tipini kaldıralım mı?"
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:224
 msgid "Remove this GOV Parent?"
-msgstr ""
+msgstr "Bu GOV Ebeveynini kaldıralım mı?"
 
 #: Gov4WebtreesModule.php:486
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -453,6 +468,8 @@ msgstr "GOV sunucusundan yer hiyerarşi verilerini yeniden yüklemek için mevcu
 #, php-format
 msgid "See also %1$s for the original list of types and type descriptions."
 msgstr ""
+"Türlerin orijinal listesi ve tür açıklamaları için ayrıca %1$s bölümüne "
+"bakın."
 
 #: Gov4WebtreesModule.php:484
 msgid "Set GOV id (outside GEDCOM)"
@@ -466,7 +483,7 @@ msgstr "%1$s için GOV kimliğini ayarla"
 #. I18N: Module Configuration
 #: FunctionsGov.php:706 Gov4WebtreesModuleTrait.php:148
 msgid "Settlement"
-msgstr ""
+msgstr "Yerleşim"
 
 #. I18N: Module Configuration
 #. I18N::translate('Conceptually, this is similar to the hierarchies provided via $1$s', 'Mini-GOV') . ' ' .
@@ -475,6 +492,9 @@ msgstr ""
 #, php-format
 msgid "Several object types that are part of this type group in the original model can be seen as problematic in this context, and have been moved to a custom '%1$s' type group."
 msgstr ""
+"Orijinal modelde bu tip grubunun bir parçası olan birkaç nesne tipi bu "
+"bağlamda sorunlu olarak görülebilir ve özel bir '%1$s' tip grubuna "
+"taşınmıştır."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:108
@@ -490,7 +510,7 @@ msgstr "Ek bilgileri göster"
 #: Gov4WebtreesModuleTrait.php:139 Gov4WebtreesModuleTrait.php:148
 #, php-format
 msgid "Show objects of type group '%1$s' in hierarchy"
-msgstr ""
+msgstr "Hiyerarşide '%1$s' grup türündeki nesneleri göster"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:77
@@ -525,13 +545,15 @@ msgstr "Bu seçenek esas olarak demo sunucular için mevcuttur ve başka türlü
 #: Gov4WebtreesModuleTrait.php:150
 msgid "This policy hasn't been strictly followed though. Check this option if you still want to display settlements in hierarchies."
 msgstr ""
+"Yine de bu politika sıkı bir şekilde takip edilmemiştir. Yerleşim yerlerini "
+"hala hiyerarşiler halinde görüntülemek istiyorsanız bu seçeneği işaretleyin."
 
 #: resources/views/admin/gov-data-edit.phtml:99
 #: resources/views/admin/gov-data.phtml:32
 #: resources/views/admin/gov-data.phtml:100
 #: resources/views/admin/gov-data.phtml:171
 msgid "To"
-msgstr ""
+msgstr "için"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:236
@@ -591,7 +613,7 @@ msgstr "Eşlemeyi kaldırmak için boş bir kimlik de kaydedebilirsiniz."
 #: Gov4WebtreesModuleTrait.php:49
 #, php-format
 msgid "You may modify all data retrieved from the GOV server %1$s."
-msgstr ""
+msgstr "GOV sunucusu %1$s'den alınan tüm verileri değiştirebilirsiniz."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:122
@@ -616,7 +638,7 @@ msgstr "tarihi olmayan olaylar için, bu tercihe bakılmaksızın şimdiki zaman
 #. I18N: Module Configuration; a link target
 #: Gov4WebtreesModuleTrait.php:33 Gov4WebtreesModuleTrait.php:60
 msgid "here"
-msgstr ""
+msgstr "burada"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:213
@@ -651,7 +673,7 @@ msgstr "bilinmeyen GOV türü (yeni mi tanıtıldı?)"
 
 #: Model/GovHierarchyUtils.php:98
 msgid "with local modifications"
-msgstr ""
+msgstr "yerel değişikliklerle"
 
 #~ msgid "Allow objects of type 'confederation' in hierarchy"
 #~ msgstr "Hiyerarşide 'konfederasyon' türünde nesnelere izin ver"
