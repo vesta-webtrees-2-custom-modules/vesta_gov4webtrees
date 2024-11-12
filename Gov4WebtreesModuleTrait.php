@@ -57,7 +57,7 @@ trait Gov4WebtreesModuleTrait {
 
   protected function createPrefs() {
 
-    $linkTypes = '<a href="http://gov.genealogy.net/type/list">'./* I18N: Module Configuration; a link target */I18N::translate('here').'</a>';
+    $linkTypes = '<a href="https://gov.genealogy.net/type/list">'./* I18N: Module Configuration; a link target */I18N::translate('here').'</a>';
 
     $generalSub = array();
     /*

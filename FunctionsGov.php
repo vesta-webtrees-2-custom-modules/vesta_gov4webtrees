@@ -69,7 +69,7 @@ class SoapWrapper {
 
     //obsolete, descriptions now managed via owl file
     public static function getTypeDescription($module, $type, $lang) {
-        $wsdl = 'http://gov.genealogy.net/services/SimpleService?wsdl';
+        $wsdl = 'https://gov.genealogy.net/services/SimpleService?wsdl';
 
         $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
         if (!$nusoap) {
@@ -99,7 +99,7 @@ class SoapWrapper {
     }
 
     public static function checkObjectId($module, $id) {
-        $wsdl = 'http://gov.genealogy.net/services/ComplexService?wsdl';
+        $wsdl = 'https://gov.genealogy.net/services/ComplexService?wsdl';
 
         $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
         if (!$nusoap) {
@@ -129,7 +129,7 @@ class SoapWrapper {
     }
 
     public static function getObject($module, $id) {
-        $wsdl = 'http://gov.genealogy.net/services/ComplexService?wsdl';
+        $wsdl = 'https://gov.genealogy.net/services/ComplexService?wsdl';
 
         $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
         if (!$nusoap) {
@@ -459,25 +459,25 @@ class GovObjectSnapshot {
 
 class FunctionsGov {
 
-    //TODO update regularly! Last update: 2022/04. Source: http://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+    //TODO update regularly! Last update: 2022/04. Source: https://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
     //also update types.owl in resources!
     public static $MAX_KNOWN_TYPE = 278;
-    //http://gov.genealogy.net/types.owl#group_1
+    //https://gov.genealogy.net/types.owl#group_1
     //with subs:
     //adm0
-    //http://gov.genealogy.net/types.owl#group_26
+    //https://gov.genealogy.net/types.owl#group_26
     //adm1 Bundesländer u.ä.
-    //http://gov.genealogy.net/types.owl#group_27
+    //https://gov.genealogy.net/types.owl#group_27
     //adm2 Regierungsbezirke u.ä.
-    //http://gov.genealogy.net/types.owl#group_28
+    //https://gov.genealogy.net/types.owl#group_28
     //adm3 Kreise (wie Deutschland heute), Amtshauptmannschaften, historische (kreisähnliche) Ämter u.ä.
-    //http://gov.genealogy.net/types.owl#group_29
+    //https://gov.genealogy.net/types.owl#group_29
     //adm4 Ämter (Ebene zwischen Gemeinde und Kreis), Verwaltungsgemeinschaften, Verbandsgemeinden u.a.
-    //http://gov.genealogy.net/types.owl#group_30
+    //https://gov.genealogy.net/types.owl#group_30
     //adm5 Gemeinde
-    //http://gov.genealogy.net/types.owl#group_31
+    //https://gov.genealogy.net/types.owl#group_31
     //adm6 Strukturen unterhalb von Gemeinden
-    //http://gov.genealogy.net/types.owl#group_32
+    //https://gov.genealogy.net/types.owl#group_32
     //excluding organizational, see below
 
     protected static $TYPES_ADM0 = array(31, 50, 56, /* 71, */ 72, 214);
@@ -576,22 +576,22 @@ class FunctionsGov {
     //[2023/11] moved Verwaltungsbezirk here
     //[2024/05] moved Landesteil here (see e.g. Oldenburg)
     protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 73, 77, 94, 115, 116, 117, 127, 148, 161, 177, 178, 179, 184, 216);
-    //http://gov.genealogy.net/types.owl#group_3
+    //https://gov.genealogy.net/types.owl#group_3
     protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
-    //http://gov.genealogy.net/types.owl#group_8
+    //https://gov.genealogy.net/types.owl#group_8
     protected static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
-    //http://gov.genealogy.net/types.owl#group_6
+    //https://gov.genealogy.net/types.owl#group_6
     protected static $TYPES_JUDICIAL = array(3, 19, 70, 79, 105, 114, 151, 154, 202, 223, 224, 228);
-    //http://gov.genealogy.net/types.owl#group_4
+    //https://gov.genealogy.net/types.owl#group_4
     protected static $TYPES_GEOGRAPHIC = array(47, 107);
-    //http://gov.genealogy.net/types.owl#group_10
+    //https://gov.genealogy.net/types.owl#group_10
     protected static $TYPES_PLACE = array(15, 89, 90, 166);
-    //http://gov.genealogy.net/types.owl#group_9
+    //https://gov.genealogy.net/types.owl#group_9
     protected static $TYPES_TRANSPORTATION = array(118, 119);
-    //http://gov.genealogy.net/types.owl#group_2
+    //https://gov.genealogy.net/types.owl#group_2
     protected static $TYPES_CIVIL = array(103, 172, 242);
 
-    //http://gov.genealogy.net/types.owl#group_13
+    //https://gov.genealogy.net/types.owl#group_13
     //other (deprecated)
     //see also
     //http://wiki-de.genealogy.net/GOV/Mini-GOV
@@ -2315,7 +2315,7 @@ class FunctionsGov {
             $str = ' title="' . $title . '">';
         }
 
-        return '<a href="http://gov.genealogy.net/item/show/' . $id . '" target="_blank"' . $str . $label . '</a>';
+        return '<a href="https://gov.genealogy.net/item/show/' . $id . '" target="_blank"' . $str . $label . '</a>';
     }
 
     public static function todayAsJulianDay(): string {

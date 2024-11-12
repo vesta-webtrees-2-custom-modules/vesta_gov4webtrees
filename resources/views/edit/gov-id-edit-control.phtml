@@ -24,9 +24,9 @@ if (!$thePlace) {
       //TODO we should cutoff, for href, at first comma
     ?>
     <?php if ($placeNameSelector !== null): ?>
-        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/extended" onclick="var REF = $('<?= $placeNameSelector ?>'); var VAL = (REF[0].tagName.toLowerCase() === 'input'?REF.val():REF.text()); window.open((VAL !== '')?'http://gov.genealogy.net/search/name/?name='+VAL:'http://gov.genealogy.net/search/extended'); return false;" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="https://gov.genealogy.net/search/extended" onclick="var REF = $('<?= $placeNameSelector ?>'); var VAL = (REF[0].tagName.toLowerCase() === 'input'?REF.val():REF.text()); window.open((VAL !== '')?'https://gov.genealogy.net/search/name?name='+VAL:'https://gov.genealogy.net/search/extended'); return false;" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     <?php else: ?>
-        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="http://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name/?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
+        <div><span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span> <a href="https://gov.genealogy.net/search/<?= $thePlace === ''?'extended':'name?name='.$thePlace ?>" target="_blank"><?= I18N::translate('Look up a matching GOV id on the GOV server') ?></a></div>
     <?php endif ?>
 
     <?php if ($internal): ?>

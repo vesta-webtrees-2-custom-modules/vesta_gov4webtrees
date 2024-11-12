@@ -163,6 +163,10 @@ class Gov4WebtreesModule extends AbstractModule implements
         //ongoing - error handling in case GOV server is unavailable
         //problematic: flash message aren't thead-safe, see webtrees issue #3138
         //but we can live with the current fix
+
+        //$e = new \Exception();
+        //error_log("via: " . $e->getTraceAsString());
+
         $messages = Session::get('flash_messages', []);
         if (empty($messages)) {
             FlashMessages::addMessage($this->messageGovServerUnavailable());

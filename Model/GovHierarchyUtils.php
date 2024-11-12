@@ -77,10 +77,10 @@ class GovHierarchyUtils {
 
         if ($id !== null) {
             //Issue #11
-            $link = "http://gov.genealogy.net/item/show/" . $id;
+            $link = "https://gov.genealogy.net/item/show/" . $id;
         } else {
             //not sure what this fallback is good for
-            $link = "http://gov.genealogy.net/";
+            $link = "https://gov.genealogy.net/";
         }
 
         $span = '<div><span class="govText">';
@@ -826,7 +826,7 @@ class GovHierarchyUtils {
 
             switch ($args->withInternalLinks()) {
                 case 0: //classic
-                    $labelsHtml .= '<a href="http://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="' . $typeAndLabel . '">';
+                    $labelsHtml .= '<a href="https://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="' . $typeAndLabel . '">';
                     $labelsHtml .= $displayedLabel;
                     $labelsHtml .= '</a>';
                     break;
@@ -855,20 +855,20 @@ class GovHierarchyUtils {
                                 $pre = $this->plac2LinkIcon($ps);
                             }
                             $labelsHtml .= $pre;
-                            $labelsHtml .= '<a href="http://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="' . $typeAndLabel . '">';
+                            $labelsHtml .= '<a href="https://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="' . $typeAndLabel . '">';
                             $labelsHtml .= $displayedLabel;
                             $labelsHtml .= '</a>';
                             break;
                         case 2: //names and main links to place, plus gov icons
                             if ($ps !== null) {
-                                $labelsHtml .= '<a href="http://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
+                                $labelsHtml .= '<a href="https://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
                                 $labelsHtml .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
                                 $labelsHtml .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
                                 $labelsHtml .= '</a>';
                                 $labelsHtml .= $pre;
                                 $labelsHtml .= '<a dir="auto" href="' . e($ps->getPlace()->url()) . '">' . $ps->getPlace()->placeName() . '</a>';
                             } else {
-                                $labelsHtml .= '<a href="http://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
+                                $labelsHtml .= '<a href="https://gov.genealogy.net/item/show/' . $gov->getId() . '" target="_blank" title="GOV: ' . $typeAndLabel . '">';
                                 $labelsHtml .= '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden="true"></i></span>';
                                 $labelsHtml .= '&#8239;'; //meh (Narrow no-break space), should do this with css instead
                                 $labelsHtml .= '</a>';
