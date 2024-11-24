@@ -350,7 +350,8 @@ class Gov4WebtreesModule extends AbstractModule implements
     ////////////////////////////////////////////////////////////////////////////////
 
     public function getTomSelectGovIdAction(ServerRequestInterface $request): ResponseInterface {
-        if (!str_starts_with(Webtrees::VERSION, '2.1')) {
+        //hack, not sure what this was for
+        if (!version_compare(Webtrees::VERSION, '2.1', '>=')) {
             throw new Exception;
         }
 

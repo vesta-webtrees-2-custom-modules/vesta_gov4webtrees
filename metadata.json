@@ -393,5 +393,10 @@
 		"from": "2.1.17",
 		"to": "2.1.21",
 		"changelog": ["Adapt to GOV-Server URI changes."]
+	},
+	{
+		"version": "2.2.0.0.0",
+		"from": "2.1.17",
+		"to": "2.2.1"
 	}
 ]

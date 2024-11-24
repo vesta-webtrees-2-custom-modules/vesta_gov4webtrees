@@ -5,7 +5,6 @@ namespace Cissee\Webtrees\Module\Gov4Webtrees;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Webtrees;
 use Illuminate\Support\Collection;
-use function app;
 use function str_contains;
 
 //webtrees major version switch
@@ -50,5 +49,5 @@ if (!$ok) {
 
 //app/Application/Container isn't so much about IoC (we're calling 'app', after all, that's no inversion!)
 //but about autowiring dependencies (here: ModuleService)
-$placeholder = app(PlaceholderModule::class);
-return $placeholder->ifIncompatible() ?? app(Gov4WebtreesModule::class);
+$placeholder = \Vesta\VestaUtils::get(PlaceholderModule::class);
+return $placeholder->ifIncompatible() ?? \Vesta\VestaUtils::get(Gov4WebtreesModule::class);
