@@ -459,9 +459,9 @@ class GovObjectSnapshot {
 
 class FunctionsGov {
 
-    //TODO update regularly! Last update: 2022/04. Source: https://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+    //TODO update regularly! Last update: 2024/11. Source: https://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
     //also update types.owl in resources!
-    public static $MAX_KNOWN_TYPE = 278;
+    public static $MAX_KNOWN_TYPE = 281;
     //https://gov.genealogy.net/types.owl#group_1
     //with subs:
     //adm0
@@ -481,7 +481,7 @@ class FunctionsGov {
     //excluding organizational, see below
 
     protected static $TYPES_ADM0 = array(31, 50, 56, /* 71, */ 72, 214);
-    protected static $TYPES_ADM1 = array(7, 16, 25, 33, 34, 58, 59, 130, 133, 142, 160, 168, 221, 256);
+    protected static $TYPES_ADM1 = array(7, 16, 25, 33, 34, 58, 59, 130, 133, 142, 160, 168, 221, 256, 281);
     protected static $TYPES_ADM2 = array(5, 10, 45, 100, 101, 138, 201, 211, 217, 222, 225);
     protected static $TYPES_ADM3 = array(32, 36, 37, 53, 57, 63, 75, 78, 88, 99, 110, 126, 134, 146, 149, 171, 185, 186, 203, 204, 207, 212, 223, 241, 239, 270);
     protected static $TYPES_ADM4 = array(2, /* 48, */ /* 94, */ 97, 122, /* 127, */ 152, 205, 226, 259, 264, 266);
@@ -577,9 +577,9 @@ class FunctionsGov {
     //[2024/05] moved Landesteil here (see e.g. Oldenburg)
     protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 73, 77, 94, 115, 116, 117, 127, 148, 161, 177, 178, 179, 184, 216);
     //https://gov.genealogy.net/types.owl#group_3
-    protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263);
+    protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263, 279);
     //https://gov.genealogy.net/types.owl#group_8
-    protected static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261);
+    protected static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261, 280);
     //https://gov.genealogy.net/types.owl#group_6
     protected static $TYPES_JUDICIAL = array(3, 19, 70, 79, 105, 114, 151, 154, 202, 223, 224, 228);
     //https://gov.genealogy.net/types.owl#group_4

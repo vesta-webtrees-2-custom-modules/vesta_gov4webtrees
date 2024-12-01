@@ -1,10 +1,8 @@
 
-# ⚶ Vesta Gov4Webtrees (Webtrees 2 Custom Module)
+# ⚶ Vesta Gov4Webtrees (Webtrees Custom Module)
 
 This [webtrees](https://www.webtrees.net/) custom module provides data to an extended 'Facts and Events' tab, enhancing events with [GOV](http://gov.genealogy.net) (historic gazetteer) data.
 The project’s website is [cissee.de](https://cissee.de).
-
-This is a webtrees 2.x module - It cannot be used with webtrees 1.x. For its webtrees 1.x counterpart, see [here](https://github.com/ric2016/gov4webtrees). You can safely upgrade from the 1.x version and its database tables, all data will be preserved.
 
 See [here](https://github.com/vesta-webtrees-2-custom-modules/vesta_common/blob/master/docs/LocationData.md) for an overview of location data management in webtrees.
 
@@ -43,14 +41,10 @@ The module only uses these webservices to read data, the 'ChangeService', which 
 At no point any kind of personal information related to the webtrees user is transferred, nor the user's IP address.
 You may still prefer to point out the use of this third party in your website's privacy policy.
 
-### Demo<a name="demo"/>
-
-Access a demo of the module [here](https://cissee.de/gov4webtrees2Demo). Feel free to experiment with setting/resetting GOV Ids.
-
 ### Download<a name="download"/>
 
-* Current version: 2.2.0.0.0
-* Based on and tested with webtrees 2.2.0. Requires webtrees 2.1.17 or later.
+* Current version: 2.2.1.0.0
+* Based on and tested with webtrees 2.2.1. Requires webtrees 2.1.17 or later.
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
 * Provides location data to other custom modules.
