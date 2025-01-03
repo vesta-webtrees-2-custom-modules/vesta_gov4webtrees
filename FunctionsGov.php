@@ -1198,10 +1198,13 @@ class FunctionsGov {
 
         $gov = FunctionsGov::getGovObject($id);
         if ($gov != null) {
+            //adjusted [2024/12] -1 is a placeholder for 'unknown version', was never intended to trigger reloading
+            if ($version === -1) {
+                return $gov;
+            }
             if ($gov->getVersion() >= $version) {
                 return $gov;
             }
-
         }
 
         //not loaded at all, or force reload via older version
