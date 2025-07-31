@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2024-03-13 19:51+0100\n"
-"PO-Revision-Date: 2024-03-15 22:01+0000\n"
+"PO-Revision-Date: 2025-07-31 11:02+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/"
 "vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:195
@@ -277,7 +277,9 @@ msgstr "In het bijzonder kunt u lokaal enkele controversiële wijzigingen op de 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:41
 msgid "In particular, the Shared Places custom module may be used to manage GOV ids within GEDCOM data."
-msgstr "In het bijzonder kan de aangepaste module Gedeelde plaatsen worden gebruikt om GOV-ID's binnen GEDCOM-gegevens te beheren."
+msgstr ""
+"In het bijzonder kan de uitbreidingsmodule Gedeelde plaatsen worden gebruikt "
+"om GOV-ID's binnen GEDCOM-gegevens te beheren."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:96
@@ -563,7 +565,7 @@ msgstr "Waar moeten de GOV-ID's worden bewerkt en opgeslagen"
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:89
 msgid "Within GEDCOM data (via other custom modules). "
-msgstr "Binnen GEDCOM-gegevens (via andere aangepaste modules). "
+msgstr "Binnen GEDCOM-gegevens (via andere uitbreidingsmodules). "
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:223
