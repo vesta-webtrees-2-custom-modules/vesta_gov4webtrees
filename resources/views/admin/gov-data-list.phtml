@@ -67,10 +67,13 @@ $icon = '<span class="wt-icon-map-gov"><i class="fas fa-play fa-fw" aria-hidden=
     </tbody>
 </table>
 
-<?php View::push('javascript') ?>
-<script>
-  'use strict';
+<?php if (false) : ?>
+    /* _persistent_ toggle disabled, performance is problematic in large lists */
+    <?php View::push('javascript') ?>
+    <script>
+      'use strict';
 
-  webtrees.persistentToggle("hide-unmodified-data");
-</script>
-<?php View::endpush() ?>
+      webtrees.persistentToggle(document.querySelector('#hide-unmodified-data'));
+    </script>
+    <?php View::endpush() ?>
+<?php endif ?>
