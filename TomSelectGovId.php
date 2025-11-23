@@ -25,12 +25,6 @@ class TomSelectGovId implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        //$tree = $request->getAttribute('tree');
-        //assert($tree instanceof Tree);
-
-        //$at    = Validator::queryParams($request)->string('at');
-        //$page  = Validator::queryParams($request)->integer('page') ?? 1;
-
         $query = Validator::queryParams($request)->string('query');
 
         $govId = $query;
@@ -41,7 +35,7 @@ class TomSelectGovId implements RequestHandlerInterface
             $results = ($ret !== null)?collect([[
                           'id'    => $ret,
                           'text'  => $ret,
-                          'title' => ' ',
+                          'title' => $ret,
                       ]]):collect([]);
 
             return response([
@@ -52,9 +46,25 @@ class TomSelectGovId implements RequestHandlerInterface
 
         } catch (GOVServerUnavailableException $ex) {
             $this->module->flashGovServerUnavailable();
+
+            $results = collect([[
+                          'id'    => $govId,
+                          'text'  => $govId,
+                          'title' => $govId . " (". $this->module->messageGovServerUnavailable() . ")",
+                      ]]);
+
+            return response([
+                'total_count' => 1,
+                'incomplete_results' => true,
+                'items' => $results,
+            ]);
+
+            //cleaner but wasn't able to handle error case properly in tom select component
+            /*
             return response([
                 'error'    => 'GOVServerUnavailable',
             ], StatusCodeInterface::STATUS_SERVICE_UNAVAILABLE);
+            */
         }
     }
 }

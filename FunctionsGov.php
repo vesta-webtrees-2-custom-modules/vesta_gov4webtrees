@@ -6,199 +6,103 @@ use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovData;
 use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchyUtils;
 use DateInterval;
 use DateTime;
-use Exception;
+use Fig\Http\Message\StatusCodeInterface;
 use Fisharebest\Localization\Locale\LocaleInterface;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Registry;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Collection;
-use nusoap_client;
-use SoapClient;
 use stdClass;
-use Throwable;
 use const CAL_GREGORIAN;
 use function cal_from_jd;
 use function cal_to_jd;
-use function microtime;
 use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
+use function microtime;
 use function route;
 use function str_starts_with;
 
-require_once __DIR__ . '/nusoap/src/nusoap.php';
-
-class SoapWrapper {
-
-    public static function initSoapClient($wsdl) {
-        //libxml_disable_entity_loader(false); //this was experimental
-
-        /*
-          $params = array(
-          'trace' => 1,
-          'exceptions' => 1,
-          'cache_wsdl' => WSDL_CACHE_NONE
-          );
-         */
-
-        /*
-          try {
-          $file = file_get_contents($wsdl);
-          error_log("wsdl loaded: ".$file);
-          } catch (\Exception $ex) {
-          error_log("wsdl NOT loaded: ".$ex->getTraceAsString());
-          }
-         */
-
-        return new SoapClient($wsdl);
-    }
-
-    public static function initNusoapClient($wsdl) {
-        //timeouts: 10 seconds
-        $client = new nusoap_client($wsdl, 'wsdl', false, false, false, false, 10, 10);
-        //important:
-        $client->soap_defencoding = 'utf-8';
-        $client->encode_utf8 = false;
-        $client->decode_utf8 = false;
-
-        $err = $client->getError();
-        if ($err) {
-            throw new Exception("NuSOAP Constructor error: " . $err);
-        }
-        return $client;
-    }
-
-    //obsolete, descriptions now managed via owl file
-    public static function getTypeDescription($module, $type, $lang) {
-        $wsdl = 'https://gov.genealogy.net/services/SimpleService?wsdl';
-
-        $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
-        if (!$nusoap) {
-            if (!extension_loaded('soap')) {
-                //use NuSOAP, auto-adjust setting
-                $nusoap = true;
-                $module->setPreference('USE_NUSOAP', '1');
-            } else {
-                try {
-                    $readclient = SoapWrapper::initSoapClient($wsdl);
-                    return $readclient->getTypeDescription($type, $lang);
-                } catch (Throwable $ex) {
-                    //fall-through and retry with nusoap, in order to simplify error handling
-                }
-            }
-        }
-
-        $client = SoapWrapper::initNusoapClient($wsdl);
-        //$client->setGlobalDebugLevel(1);
-        $description = $client->call('getTypeDescription', array('typeId' => $type, 'language' => $lang));
-        $err = $client->getError();
-        if ($err) {
-            error_log("GOVServerUnavailable: " . print_r($err, TRUE));
-            throw new GOVServerUnavailableException($err);
-        }
-        return SoapWrapper::nusoapArrayToObject($description);
-    }
+class APIWrapper {
 
     public static function checkObjectId($module, $id) {
-        $wsdl = 'https://gov.genealogy.net/services/ComplexService?wsdl';
+        //error_log("GET https://gov.genealogy.net/api/checkObjectId?itemId=" . $id);
 
-        $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
-        if (!$nusoap) {
-            if (!extension_loaded('soap')) {
-                //use NuSOAP, auto-adjust setting
-                $nusoap = true;
-                $module->setPreference('USE_NUSOAP', '1');
-            } else {
-                try {
-                    $readclient = SoapWrapper::initSoapClient($wsdl);
-                    return $readclient->checkObjectId($id);
-                } catch (Throwable $ex) {
-                    //fall-through and retry with nusoap, in order to simplify error handling
+        try {
+            $client = $module->guzzleClient;
+            $response = $client->get("https://gov.genealogy.net/api/checkObjectId?itemId=" . $id);
+
+            if ($response->getStatusCode() === StatusCodeInterface::STATUS_OK) {
+                $ret = $response->getBody()->getContents();
+
+                if (strlen($ret) > 20) {
+                    //unexpected - anubis challenge etc
+                    error_log("getObject unexpected response data: '" . $ret . "'");
+                    throw new GOVServerUnavailableException("");
+                }
+
+                return $ret;
+            }
+            if ($response->getStatusCode() === StatusCodeInterface::STATUS_FOUND) {
+                $ret = $response->getBody()->getContents();
+
+                if (strlen($ret) > 20) {
+                    //unexpected - anubis challenge etc
+                    error_log("getObject unexpected response data: '" . $ret . "'");
+                    throw new GOVServerUnavailableException("");
                 }
             }
+            if ($response->getStatusCode() === StatusCodeInterface::STATUS_NOT_FOUND) {
+                return null;
+            }
+            error_log("checkObjectId unexpected response: " . $response->getStatusCode());
+            throw new GOVServerUnavailableException("");
+        } catch (GuzzleException $ex) {
+            error_log("checkObjectId GuzzleException: " . $ex->getTraceAsString());
+            throw new GOVServerUnavailableException("");
         }
-
-        $client = SoapWrapper::initNusoapClient($wsdl);
-        //$client->setGlobalDebugLevel(1);
-        $ret = $client->call('checkObjectId', array('itemId' => $id));
-        $err = $client->getError();
-        if ($err) {
-            error_log("GOVServerUnavailable: " . print_r($err, TRUE));
-            throw new GOVServerUnavailableException($err);
-        }
-        return $ret;
     }
 
     public static function getObject($module, $id) {
-        $wsdl = 'https://gov.genealogy.net/services/ComplexService?wsdl';
+        //error_log("GET https://gov.genealogy.net/api/getObject?itemId=" . $id);
 
-        $nusoap = boolval($module->getPreference('USE_NUSOAP', '0'));
-        if (!$nusoap) {
-            if (!extension_loaded('soap')) {
-                //use NuSOAP, auto-adjust setting
-                $nusoap = true;
-                $module->setPreference('USE_NUSOAP', '1');
-            } else {
+        try {
+            $client = $module->guzzleClient;
+
+            //very slow (0.6 seconds pretransfer) if client is re-created like this,
+            //much better to re-use client!
+            /*
+            $client = new Client([
+                'http_errors' => false,
+                'timeout' => 30,
+
+                //'debug' => fopen('debug.log', 'a'),
+                'verify' => false, //insecure!
+                //'on_stats' => function (TransferStats $stats) {
+                //    error_log("tt: " . $stats->getTransferTime());
+                //    error_log(print_r($stats->getHandlerStats(), true));
+                //}
+            ]);
+            */
+
+            //error_log("start ".microtime(true));
+            $response = $client->get("https://gov.genealogy.net/api/getObject?itemId=" . $id);
+            //error_log("end ".microtime(true));
+
+            if ($response->getStatusCode() === StatusCodeInterface::STATUS_OK) {
                 try {
-                    $readclient = SoapWrapper::initSoapClient($wsdl);
-                    return $readclient->getObject($id);
-                } catch (Throwable $ex) {
-                    //fall-through and retry with nusoap, in order to simplify error handling
+                    return json_decode($response->getBody()->getContents());
+                } catch (Exception $ex) {
+                    error_log("getObject unexpected response data: " . $response->getBody()->getContents());
+                    throw new GOVServerUnavailableException("");
                 }
             }
+            error_log("getObject unexpected response: " . $response->getStatusCode());
+            throw new GOVServerUnavailableException("");
+        } catch (GuzzleException $ex) {
+            error_log("getObject GuzzleException: " . $ex->getTraceAsString());
+            throw new GOVServerUnavailableException("");
         }
-
-        $client = SoapWrapper::initNusoapClient($wsdl);
-        $place = $client->call('getObject', array('itemId' => $id));
-        $err = $client->getError();
-        if ($err) {
-            error_log("GOVServerUnavailable: " . print_r($err, TRUE));
-            throw new GOVServerUnavailableException($err);
-        }
-        if ($place == null) {
-            return null;
-        }
-
-        return SoapWrapper::nusoapArrayToObject($place);
     }
-
-    //cannot use this - have to strip nusoap's '!' prefixes, and preserve some arrays
-    public static function arrayToObjectViaJson($array) {
-        $json = json_encode($array);
-        $object = json_decode($json);
-        return $object;
-    }
-
-    public static function nusoapArrayToObject($array) {
-        $obj = new stdClass;
-        $arr = [];
-
-        $asArray = false;
-        foreach ($array as $k => $v) {
-            if (strlen($k)) {
-                $key = $k;
-                if (is_int($key)) {
-                    $asArray = true; //must still use recursion
-                }
-
-                //strip nusoap's '!' prefixes
-                if (substr($key, 0, 1) === '!') {
-                    $key = substr($key, 1);
-                }
-                if (is_array($v)) {
-                    $obj->{$key} = SoapWrapper::nusoapArrayToObject($v);
-                    $arr[$key] = SoapWrapper::nusoapArrayToObject($v);
-                } else {
-                    $obj->{$key} = $v;
-                    $arr[$key] = $v;
-                }
-            }
-        }
-        if ($asArray) {
-            return $arr;
-        }
-        return $obj;
-    }
-
 }
 
 class GovIdPlus {
@@ -459,9 +363,9 @@ class GovObjectSnapshot {
 
 class FunctionsGov {
 
-    //TODO update regularly! Last update: 2024/11. Source: https://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
+    //TODO update regularly! Last update: 2025/11. Source: https://gov.genealogy.net/type/list and https://gov.genealogy.net/types.owl
     //also update types.owl in resources!
-    public static $MAX_KNOWN_TYPE = 281;
+    public static $MAX_KNOWN_TYPE = 282;
     //https://gov.genealogy.net/types.owl#group_1
     //with subs:
     //adm0
@@ -577,7 +481,7 @@ class FunctionsGov {
     //[2024/05] moved Landesteil here (see e.g. Oldenburg)
     protected static $TYPES_ORGANIZATIONAL = array(1, 46, 48, 52, 71, 73, 77, 94, 115, 116, 117, 127, 148, 161, 177, 178, 179, 184, 216);
     //https://gov.genealogy.net/types.owl#group_3
-    protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263, 279);
+    protected static $TYPES_RELIGIOUS = array(6, 9, 11, 12, 13, 26, 27, 28, 29, 30, 35, 41, 42, 43, 44, 82, 91, 92, 96, 124, 153, 155, 182, 183, 206, 219, 243, 244, 245, 249, 250, 253, 260, 263, 279, 282);
     //https://gov.genealogy.net/types.owl#group_8
     protected static $TYPES_SETTLEMENT = array(8, 17, 21, 24, 30, 39, 40, 51, 54, 55, 64, 65, 66, 67, 68, 69, 87, 102, 111, 120, 121, 129, 139, 158, 159, 181, 193, 229, 230, 231, 232, 233, 236, 238, 261, 280);
     //https://gov.genealogy.net/types.owl#group_6
@@ -1055,16 +959,6 @@ class FunctionsGov {
             ], [
             'description' => $description
         ]);
-    }
-
-    //obsolete, descriptions now managed via owl file
-    public static function loadTypeDescription($module, $type, $lang) {
-        if ($type == '...') {
-            //type may not be set for all dates (although it should be, in clean GOV)
-            return '...';
-        }
-        $description = SoapWrapper::getTypeDescription($module, $type, $lang);
-        return $description->item[0];
     }
 
     /**
@@ -1575,20 +1469,20 @@ class FunctionsGov {
 
     public static function checkGovId($module, $id) {
         //check for existence, maybe return replacement id
-        return SoapWrapper::checkObjectId($module, $id);
+        return APIWrapper::checkObjectId($module, $id);
     }
 
     public static function loadGovObject($module, $id): ?GovObject {
 
         //error_log("LOAD " . $id);
         //first check for existence, maybe use replacement id
-        $id = SoapWrapper::checkObjectId($module, $id);
-        if ($id === "") {
+        $id = APIWrapper::checkObjectId($module, $id);
+        if ($id === null) {
             //object doesn't exist
             return null;
         }
 
-        $place = SoapWrapper::getObject($module, $id);
+        $place = APIWrapper::getObject($module, $id);
 
         $lat = null;
         $lon = null;
@@ -1661,6 +1555,7 @@ class FunctionsGov {
         $rawParents = array();
 
         //we currently do not distinguish between the different kinds of relation!
+        //format via wsdl
         if (property_exists($place, 'part-of')) {
             if (is_array($place->{'part-of'})) {
                 foreach ($place->{'part-of'} as $parent) {
@@ -1671,6 +1566,18 @@ class FunctionsGov {
             }
         }
 
+        //format via rest
+        if (property_exists($place, 'partOf')) {
+            if (is_array($place->{'partOf'})) {
+                foreach ($place->{'partOf'} as $parent) {
+                    $rawParents[] = $parent;
+                }
+            } else if ($place->{'partOf'} != null) {
+                $rawParents[] = $place->{'partOf'};
+            }
+        }
+
+        //format via wsdl
         if (property_exists($place, 'located-in')) {
             if (is_array($place->{'located-in'})) {
                 foreach ($place->{'located-in'} as $parent) {
@@ -1678,6 +1585,17 @@ class FunctionsGov {
                 }
             } else if ($place->{'located-in'} != null) {
                 $rawParents[] = $place->{'located-in'};
+            }
+        }
+
+        //format via rest
+        if (property_exists($place, 'locatedIn')) {
+            if (is_array($place->{'locatedIn'})) {
+                foreach ($place->{'locatedIn'} as $parent) {
+                    $rawParents[] = $parent;
+                }
+            } else if ($place->{'locatedIn'} != null) {
+                $rawParents[] = $place->{'locatedIn'};
             }
         }
 
@@ -2208,8 +2126,16 @@ class FunctionsGov {
             }
         }
 
+        //format via wsdl
         if (property_exists($prop, "begin-year")) {
             $year = $prop->{'begin-year'};
+            $jd = cal_to_jd(CAL_GREGORIAN, 1, 1, $year);
+            return $jd;
+        }
+
+        //format via rest
+        if (property_exists($prop, "beginYear")) {
+            $year = $prop->{'beginYear'};
             $jd = cal_to_jd(CAL_GREGORIAN, 1, 1, $year);
             return $jd;
         }
@@ -2274,8 +2200,16 @@ class FunctionsGov {
             }
         }
 
+        //format via wsdl
         if (property_exists($prop, "end-year")) {
             $year = $prop->{'end-year'};
+            $jd = cal_to_jd(CAL_GREGORIAN, 1, 1, $year + 1); //+1!
+            return $jd;
+        }
+
+        //format via rest
+        if (property_exists($prop, "endYear")) {
+            $year = $prop->{'endYear'};
             $jd = cal_to_jd(CAL_GREGORIAN, 1, 1, $year + 1); //+1!
             return $jd;
         }

@@ -45,6 +45,7 @@ use Fisharebest\Webtrees\Session;
 use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Webtrees;
+use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -103,10 +104,19 @@ class Gov4WebtreesModule extends AbstractModule implements
 
     protected $module_service;
     protected $search_service;
+    public $guzzleClient;
 
     public function __construct(ModuleService $module_service, SearchService $search_service) {
         $this->module_service = $module_service;
         $this->search_service = $search_service;
+        //$debug = fopen("path_and_filename.txt", "a+");
+        $this->guzzleClient = new Client([
+            'http_errors' => false,
+            'timeout' => 30,
+            //[2025/11] now required in order to avoid Anubis challenge (misguided GOV server config)
+            'headers' => ["Accept" => "*/*"],
+            //'debug' => $debug,
+        ]);
     }
 
     protected function onBoot(): void {
