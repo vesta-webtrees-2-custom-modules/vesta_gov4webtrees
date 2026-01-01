@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2026-01-01 17:49+0100\n"
-"PO-Revision-Date: 2025-05-12 10:02+0000\n"
+"PO-Revision-Date: 2026-01-01 19:03+0000\n"
 "Last-Translator: BernatBanyuls <bernatbanyuls@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/vesta-webtrees-"
+"custom-modules/vesta-gov4webtrees/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:200
@@ -107,7 +108,7 @@ msgstr "En conseqüència, la informació de jerarquia de llocs només es pot ca
 
 #: resources/views/admin/gov-troubleshooting.phtml:32
 msgid "Curl"
-msgstr ""
+msgstr "Curl"
 
 #: resources/views/admin/gov-data-list.phtml:21
 #: resources/views/admin/gov-data.phtml:23
@@ -230,7 +231,7 @@ msgstr "La jerarquia de llocs GOV s'ha tornat a carregar des del servidor GOV."
 
 #: Http/RequestHandlers/GovTroubleshooting.php:45
 msgid "GOV troubleshooting"
-msgstr ""
+msgstr "Resolució de problemes del GOV"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:54
@@ -408,6 +409,7 @@ msgstr "Religiós"
 #: resources/views/admin/gov-troubleshooting.phtml:27
 msgid "Reloading this page executes the test request again."
 msgstr ""
+"Tornar a carregar aquesta pàgina i executa de nou la sol·licitud de prova."
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:83
@@ -426,7 +428,7 @@ msgstr "Elimineu aquest pare GOV?"
 
 #: resources/views/admin/gov-troubleshooting.phtml:41
 msgid "Request URL"
-msgstr ""
+msgstr "Sol·licitar URL"
 
 #: Gov4WebtreesModule.php:505
 msgid "Reset GOV id (outside GEDCOM) and reload the GOV place hierarchy"
@@ -449,15 +451,15 @@ msgstr "Vegeu també %1$s per a la llista original de tipus i descripcions de ti
 
 #: resources/views/admin/gov-troubleshooting.phtml:59
 msgid "Server response body"
-msgstr ""
+msgstr "Resposta del servidor"
 
 #: resources/views/admin/gov-troubleshooting.phtml:50
 msgid "Server response code"
-msgstr ""
+msgstr "Codi de resposta del servidor"
 
 #: resources/views/admin/gov-troubleshooting.phtml:68
 msgid "Server response headers"
-msgstr ""
+msgstr "Encapçalats de resposta del servidor"
 
 #: Gov4WebtreesModule.php:503
 msgid "Set GOV id (outside GEDCOM)"
@@ -505,7 +507,7 @@ msgstr "Posteriorment, totes les dades es recuperen de nou del servidor GOV. "
 #. I18N: Module Configuration; a link target
 #: Gov4WebtreesModuleTrait.php:56
 msgid "Test GOV server connection."
-msgstr ""
+msgstr "|18: Configuració del mòdul; enllaç de destí"
 
 #: resources/views/admin/gov-troubleshooting.phtml:25
 msgid "The GOV server may block API requests, e.g. from specific IP ranges."
