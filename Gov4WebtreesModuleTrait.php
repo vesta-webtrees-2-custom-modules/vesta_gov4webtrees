@@ -3,6 +3,7 @@
 namespace Cissee\Webtrees\Module\Gov4Webtrees;
 
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataList;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovTroubleshooting;
 use Fisharebest\Webtrees\I18N;
 use Vesta\CommonI18N;
 use Vesta\ControlPanelUtils\Model\ControlPanelCheckbox;
@@ -51,6 +52,10 @@ trait Gov4WebtreesModuleTrait {
             /* I18N: Module Configuration */I18N::translate('In particular you may want to revert locally some controversial changes made on the GOV server (such as the object type of the Holy Roman Empire).') . ' ' .
             /* I18N: Module Configuration */I18N::translate('In general, hide an object while preserving the overall place hierarchy by moving it to a hidden type group (see preferences).') . ' ' .
             /* I18N: Module Configuration */I18N::translate('Hide an object and stop the place hierarchy at that point by moving it to an irrelevant type group.');
+
+    $link4 = '<a href="' . e(route(GovTroubleshooting::class)) . '">'./* I18N: Module Configuration; a link target */I18N::translate('Test GOV server connection.').'</a>';
+
+    $description[] = $link4;
 
     return $description;
   }

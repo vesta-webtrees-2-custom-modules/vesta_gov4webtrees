@@ -1,0 +1,73 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array<string,string> $breadcrumbs
+ * @var string               $title
+ * @var string               $response1
+ * @var string               $response2
+ * @var string               $response3
+ */
+
+$request1 = "curl -X 'GET' \
+  'https://gov.genealogy.net/api/checkObjectId?itemId=SCHERGJO54EJ' \
+  -H 'accept: text/plain'";
+
+$request2 = "https://gov.genealogy.net/api/checkObjectId?itemId=SCHERGJO54EJ";
+?>
+
+<?= view('components/breadcrumbs', ['links' => $breadcrumbs]) ?>
+
+<h1><?= $title ?></h1>
+
+<p class="small">
+        <?= I18N::translate('The GOV server may block API requests, e.g. from specific IP ranges.') ?>
+        <?= I18N::translate('This test request, executed from your webtrees server, may be used to analyze these issues.') ?>
+        <?= I18N::translate('Reloading this page executes the test request again.') ?>
+</p>
+
+<div class="row mb-3">
+    <label class="col-sm-1 col-form-label">
+        <?= I18N::translate('Curl') ?>
+    </label>
+    <div class="col-sm-11">
+        <textarea readonly class="form-control font-monospace" dir="ltr" rows="3"><?= e($request1) ?></textarea>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label class="col-sm-1 col-form-label">
+        <?= I18N::translate('Request URL') ?>
+    </label>
+    <div class="col-sm-11">
+        <textarea readonly class="form-control font-monospace" dir="ltr" rows="1"><?= e($request2) ?></textarea>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label class="col-sm-1 col-form-label">
+        <?= I18N::translate('Server response code') ?>
+    </label>
+    <div class="col-sm-11">
+        <textarea readonly class="form-control font-monospace" dir="ltr" rows="1"><?= e($response1) ?></textarea>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label class="col-sm-1 col-form-label">
+        <?= I18N::translate('Server response body') ?>
+    </label>
+    <div class="col-sm-11">
+        <textarea readonly class="form-control font-monospace" dir="ltr" rows="5"><?= e($response2) ?></textarea>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label class="col-sm-1 col-form-label">
+        <?= I18N::translate('Server response headers') ?>
+    </label>
+    <div class="col-sm-11">
+        <textarea readonly class="form-control font-monospace" dir="ltr" rows="5"><?= e($response3) ?></textarea>
+    </div>
+</div>

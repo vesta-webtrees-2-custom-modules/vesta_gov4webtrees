@@ -24,6 +24,30 @@ use function str_starts_with;
 
 class APIWrapper {
 
+    public static function checkObjectIdRaw($module, $id) {
+        try {
+            $client = $module->guzzleClient;
+            $response = $client->get("https://gov.genealogy.net/api/checkObjectId?itemId=" . $id);
+
+            $ret1 = "".$response->getStatusCode();
+            $ret2 = "".$response->getBody()->getContents();
+            $ret3 = "";
+            foreach ($response->getHeaders() as $name => $values) {
+                $ret3 .= $name . ': ' . implode(', ', $values) . PHP_EOL;
+            }
+        } catch (GuzzleException $ex) {
+            $ret1 = "";
+            $ret2 = $ex->getTraceAsString();
+            $ret3 = "";
+        }
+
+        return [
+            'response1'    => $ret1,
+            'response2'    => $ret2,
+            'response3'    => $ret3,
+        ];
+    }
+
     public static function checkObjectId($module, $id) {
         //error_log("GET https://gov.genealogy.net/api/checkObjectId?itemId=" . $id);
 
@@ -1465,6 +1489,10 @@ class FunctionsGov {
 
         //conclude transaction
         DB::connection()->commit();
+    }
+
+    public static function checkGovIdRaw($module, $id) {
+        return APIWrapper::checkObjectIdRaw($module, $id);
     }
 
     public static function checkGovId($module, $id) {

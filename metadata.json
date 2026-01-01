@@ -449,5 +449,11 @@
 		"from": "2.2.1",
 		"to": "2.2.5",
 		"changelog": ["Switch to GOV Rest API."]
+	},
+	{
+		"version": "2.2.4.2.0",
+		"from": "2.2.1",
+		"to": "2.2.5",
+		"changelog": ["Add function to troubleshoot connection to GOV Rest API."]
 	}
 ]

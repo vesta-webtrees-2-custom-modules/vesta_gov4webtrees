@@ -8,12 +8,13 @@ use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataDelete;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataEdit;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataList;
 use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovDataSave;
+use Cissee\Webtrees\Module\Gov4Webtrees\Http\RequestHandlers\GovTroubleshooting;
 use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchy;
 use Cissee\Webtrees\Module\Gov4Webtrees\Model\GovHierarchyUtils;
 use Cissee\Webtrees\Module\Gov4Webtrees\Model\JulianDayInterval;
 use Cissee\WebtreesExt\AbstractModule;
-use Cissee\WebtreesExt\Elements\GovIdTypeExt;
 use Cissee\WebtreesExt\Elements\GovIdentifierExt;
+use Cissee\WebtreesExt\Elements\GovIdTypeExt;
 use Cissee\WebtreesExt\Http\RequestHandlers\FunctionsPlaceProvidersAction;
 use Cissee\WebtreesExt\Module\ModuleExtGlobalInterface;
 use Cissee\WebtreesExt\Module\ModuleExtGlobalTrait;
@@ -127,6 +128,9 @@ class Gov4WebtreesModule extends AbstractModule implements
         $this->flashWhatsNew('\Cissee\Webtrees\Module\Gov4Webtrees\WhatsNew', 6);
 
         $router = Registry::routeFactory()->routeMap();
+
+        $router->get(GovTroubleshooting::class, '/admin/gov-troubleshooting', new GovTroubleshooting($this))
+                ->extras(['middleware' => [AuthAdministrator::class]]);
 
         //http://localhost/dev/webtrees_releases/webtrees/admin/gov-data/object_156114
 

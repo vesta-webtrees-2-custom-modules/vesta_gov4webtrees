@@ -43,7 +43,7 @@ You may still prefer to point out the use of this third party in your website's 
 
 ### Download<a name="download"/>
 
-* Current version: 2.2.4.1.0
+* Current version: 2.2.4.2.0
 * Based on and tested with webtrees 2.2.4. Requires webtrees 2.2.1 or later.
 * Requires the ⚶ Vesta Common module ('vesta_common').
 * Displays data via the ⚶ Vesta Facts and events module ('vesta_personal_facts'). 
@@ -69,7 +69,7 @@ If you use GEDCOM data with _GOV tags for GOV ids (either directly or via the Sh
 ### License<a name="license"/>
 
 * **gov4webtrees: a webtrees custom module**
-* Copyright (C) 2019 – 2025 Richard Cissée
+* Copyright (C) 2019 – 2026 Richard Cissée
 * Derived from **webtrees** - Copyright 2022 webtrees development team.
 * Uses third-party libraries that are distributed under their own terms (see below)
 * Nutzt Daten des [Geschichtlichen Orts-Verzeichnisses GOV](http://gov.genealogy.net) des [Vereins für Computergenealogie e. V.](http://compgen.de), basierend auf einer [Creative Commons-Lizenz](http://wiki-de.genealogy.net/GOV/Webservice#Lizenz).
@@ -90,11 +90,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
-
-#### Third-party libraries
-
-gov4webtrees uses the following third-party libraries:
-
-| Software | Version | License |
-|---|---|---|
-| [NuSOAP](https://github.com/f00b4r/nusoap) | v0.9.15 | [LGPL-2.0-only](https://packagist.org/packages/econea/nusoap) |
