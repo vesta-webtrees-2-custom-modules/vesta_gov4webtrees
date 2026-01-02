@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2026-01-01 17:49+0100\n"
+"POT-Creation-Date: 2026-01-02 10:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -620,6 +620,7 @@ msgstr ""
 msgid "Reloading this page executes the test request again."
 msgstr ""
 
+#. I18N: label for field displaying a http request in curl format
 #: resources/views/admin/gov-troubleshooting.phtml:32
 msgid "Curl"
 msgstr ""

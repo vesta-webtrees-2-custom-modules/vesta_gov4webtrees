@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2026-01-01 17:49+0100\n"
+"POT-Creation-Date: 2026-01-02 10:07+0100\n"
 "PO-Revision-Date: 2026-01-02 08:12+0000\n"
 "Last-Translator: TheDutchJewel <thedutchjewel@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-"
-"custom-modules/vesta-gov4webtrees/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,6 +105,7 @@ msgstr "Compacte weergave (administratieve niveaus alleen als tooltips)"
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr "Daarom kan informatie over plaatshiërarchie alleen indirect worden gewijzigd via de GOV-website."
 
+#. I18N: label for field displaying a http request in curl format
 #: resources/views/admin/gov-troubleshooting.phtml:32
 msgid "Curl"
 msgstr "Krul"
@@ -510,9 +510,7 @@ msgstr "Test GOV-serververbinding."
 
 #: resources/views/admin/gov-troubleshooting.phtml:25
 msgid "The GOV server may block API requests, e.g. from specific IP ranges."
-msgstr ""
-"De GOV-server kan API-verzoeken blokkeren, bijvoorbeeld van specifieke IP-"
-"reeksen."
+msgstr "De GOV-server kan API-verzoeken blokkeren, bijvoorbeeld van specifieke IP-reeksen."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:223
@@ -545,9 +543,7 @@ msgstr "Dit beleid is echter niet strikt gevolgd. Schakel deze optie in als u no
 
 #: resources/views/admin/gov-troubleshooting.phtml:26
 msgid "This test request, executed from your webtrees server, may be used to analyze these issues."
-msgstr ""
-"Dit testverzoek, uitgevoerd vanaf uw webtreesserver, kan worden gebruikt om "
-"deze problemen te analyseren."
+msgstr "Dit testverzoek, uitgevoerd vanaf uw webtreesserver, kan worden gebruikt om deze problemen te analyseren."
 
 #: resources/views/admin/gov-data-edit.phtml:99
 #: resources/views/admin/gov-data.phtml:32

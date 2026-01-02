@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2026-01-01 17:49+0100\n"
+"POT-Creation-Date: 2026-01-02 10:07+0100\n"
 "PO-Revision-Date: 2025-03-27 05:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/ta/>\n"
@@ -105,6 +105,7 @@ msgstr "சிறிய காட்சி (நிர்வாக நிலை�
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr "இதன் விளைவாக, இடம் வரிசைமுறை தகவல்களை அரசு வலைத்தளம் வழியாக மறைமுகமாக மாற்ற முடியும்."
 
+#. I18N: label for field displaying a http request in curl format
 #: resources/views/admin/gov-troubleshooting.phtml:32
 msgid "Curl"
 msgstr ""

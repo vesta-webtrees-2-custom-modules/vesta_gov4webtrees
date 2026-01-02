@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2026-01-01 17:49+0100\n"
+"POT-Creation-Date: 2026-01-02 10:07+0100\n"
 "PO-Revision-Date: 2026-01-01 19:03+0000\n"
 "Last-Translator: BernatBanyuls <bernatbanyuls@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/vesta-webtrees-"
-"custom-modules/vesta-gov4webtrees/ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,6 +105,7 @@ msgstr "Pantalla compacta (nivells administratius només com a consells d'eina)"
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr "En conseqüència, la informació de jerarquia de llocs només es pot canviar indirectament, a través del lloc web de GOV."
 
+#. I18N: label for field displaying a http request in curl format
 #: resources/views/admin/gov-troubleshooting.phtml:32
 msgid "Curl"
 msgstr "Curl"
@@ -408,8 +408,7 @@ msgstr "Religiós"
 
 #: resources/views/admin/gov-troubleshooting.phtml:27
 msgid "Reloading this page executes the test request again."
-msgstr ""
-"Tornar a carregar aquesta pàgina i executa de nou la sol·licitud de prova."
+msgstr "Tornar a carregar aquesta pàgina i executa de nou la sol·licitud de prova."
 
 #. I18N: Module Configuration
 #: resources/views/admin/gov-data.phtml:83

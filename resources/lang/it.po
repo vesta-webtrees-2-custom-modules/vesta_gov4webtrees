@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vesta 1.0\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
-"POT-Creation-Date: 2026-01-01 17:49+0100\n"
+"POT-Creation-Date: 2026-01-02 10:07+0100\n"
 "PO-Revision-Date: 2020-11-22 12:28+0000\n"
 "Last-Translator: Luca Bighi <luca74@email.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/vesta-webtrees-custom-modules/vesta-gov4webtrees/it/>\n"
@@ -105,6 +105,7 @@ msgstr "Visualizzazione compatta (i livelli amministrativi appaiono come tooltip
 msgid "Consequently, place hierarchy information can only be changed indirectly, via the GOV website."
 msgstr "Di conseguenza le informazioni sulla gerarchia dei luoghi possono essere cambiate solo, indirettamente, tramite il sito GOV."
 
+#. I18N: label for field displaying a http request in curl format
 #: resources/views/admin/gov-troubleshooting.phtml:32
 msgid "Curl"
 msgstr ""
