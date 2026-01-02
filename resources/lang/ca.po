@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2026-01-02 10:07+0100\n"
 "PO-Revision-Date: 2026-01-02 09:20+0000\n"
-"Last-Translator: BernatBanyuls <bernatbanyuls@gmail.com>\n"
+"Last-Translator: Richard Cissée <ric@richard-cissee.de>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/vesta-webtrees-"
 "custom-modules/vesta-gov4webtrees/ca/>\n"
 "Language: ca\n"
@@ -506,8 +506,9 @@ msgstr "Posteriorment, totes les dades es recuperen de nou del servidor GOV. "
 
 #. I18N: Module Configuration; a link target
 #: Gov4WebtreesModuleTrait.php:56
+#, fuzzy
 msgid "Test GOV server connection."
-msgstr "|18: Configuració del mòdul; enllaç de destí"
+msgstr "Prova GOV connexió de servidor."
 
 #: resources/views/admin/gov-troubleshooting.phtml:25
 msgid "The GOV server may block API requests, e.g. from specific IP ranges."
