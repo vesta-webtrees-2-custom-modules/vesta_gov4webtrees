@@ -1174,6 +1174,8 @@ class Gov4WebtreesModule extends AbstractModule implements
         if (
             ($julianDay1 !== null) &&
             ($julianDay2 !== null) &&
+            ($hierarchies1m !== null) &&
+            ($hierarchies2m !== null) &&
             ($hierarchies1m->govId() === $hierarchies2m->govId()) &&
             //($hierarchies1m->adjustedLanguages() === $hierarchies2m->adjustedLanguages()) &&
             ($hierarchies1m->labelsHtml() === $hierarchies2m->labelsHtml()) &&
@@ -1199,7 +1201,10 @@ class Gov4WebtreesModule extends AbstractModule implements
             return $gveModernized;
         }
 
-        if ($julianDay1 !== null) {
+        if (
+            ($julianDay1 !== null) &&
+            ($hierarchies1m !== null)) {
+            
             /*
             $gve1legacy = $this->getHierarchyGVE(
                     $compactDisplay,
@@ -1219,7 +1224,10 @@ class Gov4WebtreesModule extends AbstractModule implements
             $gve1modernized = GenericViewElement::createEmpty();
         }
 
-        if ($julianDay2 !== null) {
+        if (
+            ($julianDay2 !== null) &&
+            ($hierarchies2m !== null)) {
+
             /*
             $gve2legacy = $this->getHierarchyGVE(
                     $compactDisplay,

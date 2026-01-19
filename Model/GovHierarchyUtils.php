@@ -50,7 +50,7 @@ class GovHierarchyUtils {
             $id,
             $this->version);
 
-        if ($this->version === -1) {
+        if (($this->version === -1) && ($gov !== null)) {
             //replace placeholder version:
             //in general, use version as set on initial object in hierarchy
             //after a reset, object is reloaded from server, and now() is used as version (triggering reloading of parents)
