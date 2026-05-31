@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2026-01-02 10:07+0100\n"
-"PO-Revision-Date: 2026-01-08 23:01+0000\n"
+"PO-Revision-Date: 2026-05-29 17:01+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/vesta-webtrees-"
 "custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:200
@@ -90,7 +90,10 @@ msgstr "Ako konečný záchytný bod použiť názov miesta podľa tohto checkbo
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:147
 msgid "Check this option if you still want organizations to appear in hierarchies, e.g. the United Nations as a higher-level object of sovereign entities."
-msgstr "Aktivujte túto voľbu, keď chcete, aby sa naďalej zobrazovali v hierarchii zobrazovali organizácie, napr. OSNS ako nadradený objekt suverénnych jednotiek."
+msgstr ""
+"Aktivujte túto voľbu, keď chcete, aby sa naďalej zobrazovali v hierarchii "
+"zobrazovali organizácie, napr. OSN ako nadradený objekt suverénnych "
+"jednotiek."
 
 #: FunctionsGov.php:643
 msgid "Civil"
