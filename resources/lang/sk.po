@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vesta 2\n"
 "Report-Msgid-Bugs-To: ric@richard-cissee.de\n"
 "POT-Creation-Date: 2026-01-02 10:07+0100\n"
-"PO-Revision-Date: 2026-08-05 13:02+0000\n"
+"PO-Revision-Date: 2026-08-05 13:16+0000\n"
 "Last-Translator: ro-la <lacoros@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/vesta-webtrees-"
 "custom-modules/vesta-gov4webtrees/sk/>\n"
@@ -117,7 +117,12 @@ msgstr "Curl"
 #: resources/views/admin/gov-data-list.phtml:21
 #: resources/views/admin/gov-data.phtml:23
 msgid "Data obtained from GOV server. Edited data will be stored as local modifications (outside GEDCOM, just like the original data). Edited data always has precedence over original data. It will not be deleted when hierarchies are reloaded, but can be deleted explicitly here. No data is transferred to the GOV server."
-msgstr "Údaje získané zo serveru GOV. Upravené údaje sú uložené ako lokálne modifikácie (mimo GEDCOM-u, takisto ako pôvodné údaje). Upravené údaje majú vždy prednosť pred originálnymi. V prípade, že načítate hierarchie nanovo, tak lokálne údaje zostanú zachované. Môžete ich zmazať tu. Žiadne údaje sa neprenášajú na GOV server."
+msgstr ""
+"Údaje získané zo servera GOV. Upravené údaje sú uložené ako lokálne "
+"modifikácie (mimo GEDCOM-u, takisto ako pôvodné údaje). Upravené údaje majú "
+"vždy prednosť pred originálnymi. V prípade, že načítate hierarchie nanovo, "
+"tak lokálne údaje zostanú zachované. Môžete ich zmazať tu. Žiadne údaje sa "
+"neprenášajú na GOV server."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:135
@@ -444,7 +449,9 @@ msgstr "Resetovať identifikátor GOV pre %1$s"
 
 #: resources/views/edit/gov-id-edit-control.phtml:34
 msgid "Save the current id in order to reload the place hierarchy data from the GOV server."
-msgstr "Uložte aktuálny identifikátor, aby sa znovunačítala hierarchia miesta z GOV serveru."
+msgstr ""
+"Uložte aktuálny identifikátor, aby sa znovunačítala hierarchia miesta z GOV "
+"servera."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:167
@@ -454,11 +461,11 @@ msgstr "%1$s si môžete pozrieť pôvodný zoznam typov a popis typov."
 
 #: resources/views/admin/gov-troubleshooting.phtml:59
 msgid "Server response body"
-msgstr "Odpoveď severa"
+msgstr "Odpoveď servera"
 
 #: resources/views/admin/gov-troubleshooting.phtml:50
 msgid "Server response code"
-msgstr "Stavový kód serveru"
+msgstr "Stavový kód servera"
 
 #: resources/views/admin/gov-troubleshooting.phtml:68
 msgid "Server response headers"
@@ -548,7 +555,7 @@ msgstr "Táto zásada však nebola strikte dodržiavaná. Zvoľte túto možnos�
 #: resources/views/admin/gov-troubleshooting.phtml:26
 msgid "This test request, executed from your webtrees server, may be used to analyze these issues."
 msgstr ""
-"Tento testovací dopyt, ktorý sa vykoná z vášho webtrees-serveru sa môže "
+"Tento testovací dopyt, ktorý sa vykoná z vášho webtrees-servera sa môže "
 "použiť na analýzu týchto problémov."
 
 #: resources/views/admin/gov-data-edit.phtml:99
@@ -611,7 +618,7 @@ msgstr "Môžete uložiť aj prázdny identifikátor aby ste zrušili prepojenie
 #: Gov4WebtreesModuleTrait.php:50
 #, php-format
 msgid "You may modify all data retrieved from the GOV server %1$s."
-msgstr "Môžete upravovať všetky údaje získané zo serveru GOV %1$s."
+msgstr "Môžete upravovať všetky údaje získané zo servera GOV %1$s."
 
 #. I18N: Module Configuration
 #: Gov4WebtreesModuleTrait.php:127
